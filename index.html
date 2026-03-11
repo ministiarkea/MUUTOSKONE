@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>MUUTOSKONE | GOD MODE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050507;
+            --card: #0f0f12;
+            --input-bg: #16161a;
+            --cyan: #00f2ff;
+            --purple: #7000ff;
+            --grad: linear-gradient(135deg, #7000ff 0%, #00f2ff 100%);
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg); color: #fff;
+            margin: 0; padding: 0; display: flex; justify-content: center;
+            min-height: 100vh; overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .container { max-width: 440px; width: 100%; padding: 20px; box-sizing: border-box; }
+
+        /* --- LOGO --- */
+        .logo-area { text-align: center; margin: 60px 0 40px; }
+        .neon-logo {
+            font-size: 3rem; font-weight: 900; text-transform: uppercase; font-style: italic;
+            letter-spacing: -3px; line-height: 0.8; margin: 0;
+            background: linear-gradient(to right, #fff, var(--cyan), var(--purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.5));
+            transform: skewX(-5deg);
+        }
+        .sub-logo { font-size: 9px; text-transform: uppercase; letter-spacing: 5px; color: #555; margin-top: 15px; font-weight: 900; }
+
+        /* --- SETUP CARD STYLE --- */
+        .setup-group { background: var(--card); border-radius: 20px; padding: 20px; margin-bottom: 15px; border: 1px solid var(--border); }
+        .setup-label { font-size: 10px; font-weight: 800; color: #444; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; display: block; }
+        .setup-indent { padding-left: 20px; border-left: 1px solid #1a1a25; margin-top: 10px; }
+        
+        .xp-row { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; background: var(--input-bg); border-radius: 14px; padding: 5px 15px; border: 1px solid var(--border); }
+        .xp-tag { font-weight: 900; color: var(--cyan); font-size: 14px; min-width: 50px; }
+        
+        input, select { background: transparent; border: none; color: #fff; font-size: 16px; padding: 10px 0; outline: none; font-family: inherit; width: 100%; }
+        input::placeholder { color: #333; }
+
+        /* --- BUTTONS --- */
+        .btn-main { background: #fff; color: #000; border: none; padding: 24px; border-radius: 24px; width: 100%; font-size: 18px; font-weight: 900; text-transform: uppercase; cursor: pointer; letter-spacing: 1px; }
+        .btn-sub { background: transparent; border: 1px solid #222; color: #444; padding: 12px; border-radius: 14px; font-size: 10px; text-transform: uppercase; cursor: pointer; font-weight: 800; }
+
+        /* --- GAME UI --- */
+        .status-box { background: var(--card); border-radius: 35px; padding: 35px 25px; border: 1px solid var(--border); text-align: center; margin-bottom: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.7); }
+        .m-val { font-size: 96px; font-weight: 900; font-style: italic; line-height: 0.8; letter-spacing: -6px; margin: 15px 0; }
+        .m-lbl { font-size: 11px; text-transform: uppercase; color: #444; letter-spacing: 2px; font-weight: 800; }
+        .bar-bg { height: 16px; background: #000; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0 10px; }
+        .bar-fill { height: 100%; width: 0%; background: var(--grad); transition: width 0.8s ease-out; }
+
+        .task-btn { background: var(--card); border: 1px solid var(--border); padding: 22px; border-radius: 25px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+
+        /* --- POPUPS --- */
+        #lvlOverlay, #victoryOverlay { position: fixed; inset: 0; z-index: 5000; display: none; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(25px); text-align: center; }
+        #lvlOverlay { background: rgba(0,0,0,0.98); }
+        #victoryOverlay { background: rgba(0,0,0,1); animation: fadeIn 0.8s ease; }
+        
+        .victory-title { font-size: 5rem; font-weight: 900; font-style: italic; text-transform: uppercase; background: linear-gradient(135deg, #0f0, #ff0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 20px rgba(0,255,0,0.5)); margin: 0; }
+        .victory-sub { font-size: 20px; color: var(--cyan); margin: 10px 0 50px; font-weight: 900; letter-spacing: 2px; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .xp-fly { position: absolute; font-weight: 900; color: var(--cyan); pointer-events: none; animation: fly 0.8s forwards; font-size: 28px; z-index: 7000; }
+        @keyframes fly { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-150px); opacity: 0; } }
+    </style>
+</head>
+<body>
+
+<div id="lvlOverlay">
+    <p style="letter-spacing: 10px; color: var(--cyan); font-weight: 900; margin-bottom: 0;">LEVEL UP!</p>
+    <h1 style="font-size: 4rem; font-weight: 900; font-style: italic; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0;">TASO NOUSI!</h1>
+    <h2 id="popLvlText" style="font-size: 32px; margin: 10px 0 50px;">LEVEL 2</h2>
+    <button class="btn-main" style="width: auto; padding: 18px 50px;" onclick="closeLvl()">JATKA PELIÄ! ⚔️</button>
+</div>
+
+<div id="victoryOverlay">
+    <h1 class="victory-title">VOITTO! 🎉</h1>
+    <p class="victory-sub">TAVOITE SAAVUTETTU.</p>
+    <button class="btn-main" style="width: auto; padding: 20px 60px; background: #0f0;" onclick="reset()">ALOITA UUSI PELI</button>
+</div>
+
+<div class="container">
+    <div id="viewSetup">
+        <div class="logo-area">
+            <h1 class="neon-logo">MUUTOSKONE</h1>
+            <div class="sub-logo">STRATEGINEN ANALYYSITYÖKALU</div>
+        </div>
+        
+        <div class="setup-group">
+            <label class="setup-label">MIKÄ ON TAVOITTEESI?</label>
+            <input type="text" id="inGoal" placeholder="esim. Kesäkuntoon">
+        </div>
+
+        <div class="setup-group">
+            <label class="setup-label">MÄÄRITÄ RUTIINIT (PILKUILLA)</label>
+            <div class="setup-indent">
+                <div class="xp-row"><span class="xp-tag">10 XP</span><input type="text" id="inR10" placeholder="Pienet (vesi, vitamiinit)"></div>
+                <div class="xp-row"><span class="xp-tag">20 XP</span><input type="text" id="inR20" placeholder="Keskisuuret (kävely, proteiini)"></div>
+                <div class="xp-row"><span class="xp-tag">40 XP</span><input type="text" id="inR40" placeholder="Kovat (treeni, juoksu)"></div>
+            </div>
+        </div>
+
+        <div class="setup-group">
+            <label class="setup-label">VAIKEUSASTE / TAVOITE XP</label>
+            <select id="inV">
+                <option value="300">Uusi rutiini (300 XP)</option>
+                <option value="1000">Kunto nousee / -1kg (1000 XP)</option>
+                <option value="5000" selected>Merkittävä (5000 XP)</option>
+                <option value="10000">Maraton / Elämänmuutos (10 000 XP)</option>
+                <option value="100000">GOD MODE / 10 000h Mestaruus (100 000 XP)</option>
+            </select>
+        </div>
+
+        <button class="btn-main" onclick="start()">KÄYNNISTÄ KONE</button>
+    </div>
+
+    <div id="viewGame" style="display:none;">
+        <div style="display: flex; justify-content: space-between; margin: 20px 0 10px; font-size: 11px; font-weight: 900; color: #444; text-transform: uppercase;">
+            <span id="txtGoal" style="color: var(--cyan);"></span>
+            <span id="txtV"></span>
+        </div>
+
+        <div class="status-box">
+            <div class="m-lbl">Päiviä maaliin (M)</div>
+            <div class="m-val" id="valM">--</div>
+            <div style="text-align: left; margin-top: 30px;">
+                <div style="font-size: 32px; font-weight: 900; font-style: italic;" id="valLvl">LEVEL 1</div>
+                <div class="bar-bg"><div class="bar-fill" id="barXP"></div></div>
+                <div style="display:flex; justify-content:space-between; font-size:10px; font-weight:900; color:#555;">
+                    <span>XP YHTEENSÄ: <span id="valTotal">0</span></span>
+                    <span>NEXT LEVEL: <span id="valNext">200</span></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="taskList"></div>
+        <button class="btn-main" style="background:transparent; border:1px solid #333; color:#fff; margin-top:10px;" onclick="nextDay()">☀️ SEURAAVA PÄIVÄ</button>
+        <button class="btn-sub" style="width:100%; margin-top:40px; border-color:#311; color:#522;" onclick="reset()">NOLLAA PELI</button>
+    </div>
+</div>
+
+<script>
+    let g = { active: false, goal: "", r10: "", r20: "", r40: "", v: 5000, total: 0, daily: 0, days: 1, lvl: 1 };
+
+    window.onload = () => {
+        const saved = localStorage.getItem('mk_v_final_1');
+        if (saved) { g = JSON.parse(saved); if (g.active) render(); }
+    };
+
+    function start() {
+        g.goal = document.getElementById('inGoal').value || "Muutos";
+        g.r10 = document.getElementById('inR10').value || "Pienet teot";
+        g.r20 = document.getElementById('inR20').value || "Keskisuuret teot";
+        g.r40 = document.getElementById('inR40').value || "Isot teot";
+        g.v = parseInt(document.getElementById('inV').value);
+        g.active = true;
+        save(); render();
+    }
+
+    function render() {
+        document.getElementById('viewSetup').style.display = 'none';
+        document.getElementById('viewGame').style.display = 'block';
+        document.getElementById('txtGoal').innerText = g.goal;
+        document.getElementById('txtV').innerText = `${g.v} V`;
+        document.getElementById('taskList').innerHTML = `
+            <div class="task-btn" onclick="addXP(10, event)"><span>💧 ${g.r10}</span><span style="font-weight:900; color:var(--cyan);">+10</span></div>
+            <div class="task-btn" onclick="addXP(20, event)"><span>🏃 ${g.r20}</span><span style="font-weight:900; color:var(--cyan);">+20</span></div>
+            <div class="task-btn" onclick="addXP(40, event)"><span>🔥 ${g.r40}</span><span style="font-weight:900; color:#ff007a;">+40</span></div>
+        `;
+        updateUI();
+    }
+
+    function addXP(amt, e) {
+        g.total += amt; g.daily += amt;
+        const pop = document.createElement('div');
+        pop.className = 'xp-fly'; pop.innerText = `+${amt}`;
+        pop.style.left = `${e.pageX - 20}px`; pop.style.top = `${e.pageY - 20}px`;
+        document.body.appendChild(pop); setTimeout(() => pop.remove(), 800);
+
+        let newLvl = Math.floor(g.total / 200) + 1;
+        if (newLvl > g.lvl) { g.lvl = newLvl; showPop(); }
+        if (g.total >= g.v) { document.getElementById('victoryOverlay').style.display = 'flex'; }
+        save(); updateUI();
+    }
+
+    function updateUI() {
+        const curXP = g.total % 200;
+        document.getElementById('barXP').style.width = `${(curXP / 200) * 100}%`;
+        document.getElementById('valTotal').innerText = g.total;
+        document.getElementById('valLvl').innerText = `LEVEL ${g.lvl}`;
+        document.getElementById('valNext').innerText = 200 - curXP;
+        let divisor = (g.daily === 0 && g.days > 1) ? g.days - 1 : g.days;
+        let avg = g.total / divisor;
+        if (avg > 0 && g.total < g.v) document.getElementById('valM').innerText = Math.ceil((g.v - g.total) / avg);
+        else document.getElementById('valM').innerText = g.total >= g.v ? "0" : "--";
+    }
+
+    function nextDay() { g.daily = 0; g.days++; save(); updateUI(); window.scrollTo(0,0); }
+    function save() { localStorage.setItem('mk_v_final_1', JSON.stringify(g)); }
+    function showPop() { document.getElementById('popLvlText').innerText = `LEVEL ${g.lvl}`; document.getElementById('lvlOverlay').style.display = 'flex'; }
+    function closeLvl() { document.getElementById('lvlOverlay').style.display = 'none'; }
+    function reset() { localStorage.clear(); location.reload(); }
+</script>
+
+</body>
+</html>
