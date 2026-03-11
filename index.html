@@ -27,7 +27,7 @@
 
         .container { max-width: 440px; width: 100%; padding: 20px; box-sizing: border-box; }
 
-        /* --- LOGO --- */
+        /* --- LOGO: YHDELLÄ RIVILLÄ --- */
         .logo-area { text-align: center; margin: 60px 0 40px; }
         .neon-logo {
             font-size: 3rem; font-weight: 900; text-transform: uppercase; font-style: italic;
@@ -39,7 +39,7 @@
         }
         .sub-logo { font-size: 9px; text-transform: uppercase; letter-spacing: 5px; color: #555; margin-top: 15px; font-weight: 900; }
 
-        /* --- SETUP CARD STYLE --- */
+        /* --- SETUP --- */
         .setup-group { background: var(--card); border-radius: 20px; padding: 20px; margin-bottom: 15px; border: 1px solid var(--border); }
         .setup-label { font-size: 10px; font-weight: 800; color: #444; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; display: block; }
         .setup-indent { padding-left: 20px; border-left: 1px solid #1a1a25; margin-top: 10px; }
@@ -50,11 +50,11 @@
         input, select { background: transparent; border: none; color: #fff; font-size: 16px; padding: 10px 0; outline: none; font-family: inherit; width: 100%; }
         input::placeholder { color: #333; }
 
-        /* --- BUTTONS --- */
+        /* --- PAINIKKEET --- */
         .btn-main { background: #fff; color: #000; border: none; padding: 24px; border-radius: 24px; width: 100%; font-size: 18px; font-weight: 900; text-transform: uppercase; cursor: pointer; letter-spacing: 1px; }
-        .btn-sub { background: transparent; border: 1px solid #222; color: #444; padding: 12px; border-radius: 14px; font-size: 10px; text-transform: uppercase; cursor: pointer; font-weight: 800; }
+        .btn-sub { background: transparent; border: 1px solid #222; color: #444; padding: 12px; border-radius: 14px; font-size: 10px; text-transform: uppercase; cursor: pointer; font-weight: 800; display: block; text-align: center; }
 
-        /* --- GAME UI --- */
+        /* --- STATUS BOX --- */
         .status-box { background: var(--card); border-radius: 35px; padding: 35px 25px; border: 1px solid var(--border); text-align: center; margin-bottom: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.7); }
         .m-val { font-size: 96px; font-weight: 900; font-style: italic; line-height: 0.8; letter-spacing: -6px; margin: 15px 0; }
         .m-lbl { font-size: 11px; text-transform: uppercase; color: #444; letter-spacing: 2px; font-weight: 800; }
@@ -63,7 +63,7 @@
 
         .task-btn { background: var(--card); border: 1px solid var(--border); padding: 22px; border-radius: 25px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
 
-        /* --- POPUPS --- */
+        /* --- VOITTO & LEVEL UP --- */
         #lvlOverlay, #victoryOverlay { position: fixed; inset: 0; z-index: 5000; display: none; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(25px); text-align: center; }
         #lvlOverlay { background: rgba(0,0,0,0.98); }
         #victoryOverlay { background: rgba(0,0,0,1); animation: fadeIn 0.8s ease; }
@@ -124,6 +124,8 @@
         </div>
 
         <button class="btn-main" onclick="start()">KÄYNNISTÄ KONE</button>
+        <button class="btn-sub" style="width:100%; margin-top:15px;" onclick="document.getElementById('fileIn').click()">TUO VANHA EDISTYS</button>
+        <input type="file" id="fileIn" style="display:none" onchange="importData(event)">
     </div>
 
     <div id="viewGame" style="display:none;">
@@ -147,7 +149,11 @@
 
         <div id="taskList"></div>
         <button class="btn-main" style="background:transparent; border:1px solid #333; color:#fff; margin-top:10px;" onclick="nextDay()">☀️ SEURAAVA PÄIVÄ</button>
-        <button class="btn-sub" style="width:100%; margin-top:40px; border-color:#311; color:#522;" onclick="reset()">NOLLAA PELI</button>
+        
+        <div style="margin-top: 50px; display:flex; gap:10px;">
+            <button class="btn-sub" style="flex:1" onclick="exportData()">LATAA VARMUUSKOPIO</button>
+            <button class="btn-sub" style="flex:1; border-color:#311; color:#522;" onclick="reset()">NOLLAA PELI</button>
+        </div>
     </div>
 </div>
 
@@ -155,7 +161,7 @@
     let g = { active: false, goal: "", r10: "", r20: "", r40: "", v: 5000, total: 0, daily: 0, days: 1, lvl: 1 };
 
     window.onload = () => {
-        const saved = localStorage.getItem('mk_v_final_1');
+        const saved = localStorage.getItem('mk_final_fixed');
         if (saved) { g = JSON.parse(saved); if (g.active) render(); }
     };
 
@@ -202,16 +208,26 @@
         document.getElementById('valLvl').innerText = `LEVEL ${g.lvl}`;
         document.getElementById('valNext').innerText = 200 - curXP;
         let divisor = (g.daily === 0 && g.days > 1) ? g.days - 1 : g.days;
-        let avg = g.total / divisor;
+        let avg = g.total / (divisor || 1);
         if (avg > 0 && g.total < g.v) document.getElementById('valM').innerText = Math.ceil((g.v - g.total) / avg);
         else document.getElementById('valM').innerText = g.total >= g.v ? "0" : "--";
     }
 
     function nextDay() { g.daily = 0; g.days++; save(); updateUI(); window.scrollTo(0,0); }
-    function save() { localStorage.setItem('mk_v_final_1', JSON.stringify(g)); }
+    function save() { localStorage.setItem('mk_final_fixed', JSON.stringify(g)); }
     function showPop() { document.getElementById('popLvlText').innerText = `LEVEL ${g.lvl}`; document.getElementById('lvlOverlay').style.display = 'flex'; }
     function closeLvl() { document.getElementById('lvlOverlay').style.display = 'none'; }
-    function reset() { localStorage.clear(); location.reload(); }
+    function reset() { if(confirm("Nollataanko kone? Kaikki tiedot häviävät.")){ localStorage.clear(); location.reload(); } }
+    
+    function exportData() {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(g));
+        const dl = document.createElement('a'); dl.setAttribute("href", dataStr); dl.setAttribute("download", "muutoskone_varmuuskopio.json"); dl.click();
+    }
+    function importData(event) {
+        const reader = new FileReader();
+        reader.onload = (e) => { g = JSON.parse(e.target.result); save(); render(); };
+        reader.readAsText(event.target.files[0]);
+    }
 </script>
 
 </body>
