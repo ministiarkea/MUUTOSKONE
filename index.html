@@ -96,7 +96,7 @@
         <div class="setup-group">
             <label class="setup-label">VAIKEUSASTE / TAVOITE XP</label>
             <select id="inV">
-                <option value="1000">Kunto nousee (1000 XP)</option>
+                <option value="1000">Uusi rutiini (1000 XP)</option>
                 <option value="5000" selected>Merkittävä (5000 XP)</option>
                 <option value="10000">Elämänmuutos (10 000 XP)</option>
                 <option value="100000">GOD MODE (100 000 XP)</option>
@@ -164,7 +164,6 @@
     }
 
     function getMultiplier() {
-        // Bonus kasvaa lineaarisesti päivästä 1 (1.0) päivään 84 (2.0)
         let bonus = 1 + (Math.min(g.days, 84) - 1) * (1 / 83);
         return bonus;
     }
