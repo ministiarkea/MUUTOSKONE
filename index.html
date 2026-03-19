@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>MUUTOSKONE | PROGRESSIVE GOD MODE</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22[w3.org](http://www.w3.org/2000/svg%22) viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
-    <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap)" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #06060a;
@@ -52,7 +52,6 @@
             padding: 20px;
         }
 
-        /* LOGO */
         .logo-area {
             text-align: center;
             margin: 50px 0 45px;
@@ -96,7 +95,6 @@
             font-weight: 600;
         }
 
-        /* GLASS CARDS */
         .glass-card {
             background: var(--card);
             backdrop-filter: blur(20px);
@@ -108,21 +106,6 @@
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
-        }
-
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-        }
-
-        .glass-card:hover {
-            border-color: var(--border-glow);
-            transform: translateY(-2px);
         }
 
         .setup-label {
@@ -160,19 +143,12 @@
             border-radius: 16px;
             padding: 6px 16px;
             border: 1px solid var(--border);
-            transition: all 0.2s ease;
-        }
-
-        .xp-row:focus-within {
-            border-color: var(--cyan);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
         }
 
         .xp-tag {
             font-weight: 800;
             font-size: 12px;
             min-width: 50px;
-            padding: 6px 0;
             background: var(--grad);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -186,29 +162,9 @@
             font-size: 15px;
             padding: 12px 0;
             outline: none;
-            font-family: inherit;
             width: 100%;
-            font-weight: 500;
         }
 
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.2);
-        }
-
-        select {
-            cursor: pointer;
-            background: var(--input-bg);
-            border-radius: 16px;
-            padding: 16px;
-            border: 1px solid var(--border);
-        }
-
-        select option {
-            background: #1a1a24;
-            color: #fff;
-        }
-
-        /* STATUS BOX */
         .status-box {
             background: linear-gradient(180deg, rgba(139, 92, 246, 0.08) 0%, rgba(0, 212, 255, 0.05) 100%);
             backdrop-filter: blur(20px);
@@ -221,27 +177,6 @@
             overflow: hidden;
         }
 
-        .status-box::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, transparent, rgba(139, 92, 246, 0.05), transparent 30%);
-            animation: rotate 20s linear infinite;
-            pointer-events: none;
-        }
-
-        @keyframes rotate {
-            100% { transform: rotate(360deg); }
-        }
-
-        .status-content {
-            position: relative;
-            z-index: 1;
-        }
-
         .m-val {
             font-size: 88px;
             font-weight: 900;
@@ -252,102 +187,19 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            filter: drop-shadow(0 4px 30px rgba(255,255,255,0.1));
         }
 
-        .m-lbl {
-            font-size: 11px;
-            text-transform: uppercase;
-            color: var(--text-dim);
-            letter-spacing: 3px;
-            font-weight: 700;
-        }
+        .m-lbl { font-size: 11px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 3px; font-weight: 700; }
 
-        .level-section {
-            text-align: left;
-            margin-top: 28px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border);
-        }
+        .level-display { font-size: 28px; font-weight: 900; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 16px; }
 
-        .level-display {
-            font-size: 28px;
-            font-weight: 900;
-            background: var(--grad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 16px;
-        }
+        .bar-bg { height: 12px; background: rgba(255, 255, 255, 0.05); border-radius: 20px; overflow: hidden; border: 1px solid var(--border); }
+        .bar-fill { height: 100%; width: 0%; background: var(--grad); transition: width 0.8s ease; box-shadow: 0 0 20px var(--cyan-glow); }
 
-        .bar-container {
-            position: relative;
-        }
+        .stats-row { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; color: var(--text-dim); margin-top: 12px; text-transform: uppercase; }
 
-        .bar-bg {
-            height: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-        }
+        .bonus-badge { position: absolute; top: 16px; right: 16px; background: linear-gradient(135deg, var(--pink), var(--purple)); color: white; padding: 8px 14px; border-radius: 50px; font-size: 11px; font-weight: 800; box-shadow: 0 4px 20px var(--pink-glow); }
 
-        .bar-fill {
-            height: 100%;
-            width: 0%;
-            background: var(--grad);
-            border-radius: 20px;
-            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            box-shadow: 0 0 20px var(--cyan-glow);
-        }
-
-        .bar-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .stats-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--text-dim);
-            margin-top: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .stats-row span:first-child { color: var(--cyan); }
-
-        /* BONUS BADGE */
-        .bonus-badge {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background: linear-gradient(135deg, var(--pink), var(--purple));
-            color: white;
-            padding: 8px 14px;
-            border-radius: 50px;
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 20px var(--pink-glow);
-            z-index: 2;
-        }
-
-        /* TASK BUTTONS */
         .task-btn {
             background: var(--card);
             border: 1px solid var(--border);
@@ -359,330 +211,44 @@
             align-items: center;
             cursor: pointer;
             transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
         }
 
-        .task-btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--grad);
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
+        .task-btn:active { transform: scale(0.98); }
 
-        .task-btn:hover {
-            transform: scale(1.02);
-            border-color: var(--border-glow);
-        }
+        .task-name { font-weight: 600; font-size: 15px; }
+        .task-xp { font-weight: 800; font-size: 14px; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .task-xp.highlight { background: linear-gradient(135deg, var(--pink), #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-        .task-btn:hover::before {
-            opacity: 0.05;
-        }
+        .btn-main { background: var(--grad); color: #000; border: none; padding: 20px; border-radius: 20px; width: 100%; font-size: 15px; font-weight: 800; text-transform: uppercase; cursor: pointer; }
+        .btn-secondary { background: var(--card); border: 1px solid var(--border); color: var(--text-medium); padding: 18px; border-radius: 18px; width: 100%; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 12px; }
+        .btn-sub { background: transparent; border: 1px solid var(--border); color: var(--text-dim); padding: 14px; border-radius: 14px; font-size: 11px; text-transform: uppercase; cursor: pointer; font-weight: 700; }
+        .btn-danger { border-color: rgba(239, 68, 68, 0.2); color: rgba(239, 68, 68, 0.5); }
 
-        .task-btn:active {
-            transform: scale(0.98);
-        }
+        #lvlOverlay, #victoryOverlay { position: fixed; inset: 0; z-index: 5000; display: none; flex-direction: column; align-items: center; justify-content: center; background: rgba(6,6,10,0.95); backdrop-filter: blur(20px); text-align: center; }
 
-        .task-btn span {
-            position: relative;
-            z-index: 1;
-        }
+        .xp-fly { position: absolute; font-weight: 900; font-size: 24px; pointer-events: none; animation: fly 0.8s forwards; z-index: 7000; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        @keyframes fly { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-100px); opacity: 0; } }
 
-        .task-btn .task-name {
-            font-weight: 600;
-            font-size: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .task-btn .task-xp {
-            font-weight: 800;
-            font-size: 14px;
-            background: var(--grad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .task-btn .task-xp.highlight {
-            background: linear-gradient(135deg, var(--pink), #ff6b6b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* BUTTONS */
-        .btn-main {
-            background: var(--grad);
-            color: #000;
-            border: none;
-            padding: 20px;
-            border-radius: 20px;
-            width: 100%;
-            font-size: 15px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-main::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, #fff, transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .btn-main:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px var(--cyan-glow);
-        }
-
-        .btn-main:hover::before {
-            opacity: 0.2;
-        }
-
-        .btn-main:active {
-            transform: scale(0.98);
-        }
-
-        .btn-secondary {
-            background: var(--card);
-            border: 1px solid var(--border);
-            color: var(--text-medium);
-            padding: 18px;
-            border-radius: 18px;
-            width: 100%;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin-top: 12px;
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--border-glow);
-            color: #fff;
-        }
-
-        .btn-sub {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text-dim);
-            padding: 14px;
-            border-radius: 14px;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            font-weight: 700;
-            transition: all 0.2s ease;
-        }
-
-        .btn-sub:hover {
-            border-color: var(--border-glow);
-            color: var(--text-medium);
-        }
-
-        .btn-danger {
-            border-color: rgba(239, 68, 68, 0.2);
-            color: rgba(239, 68, 68, 0.5);
-        }
-
-        .btn-danger:hover {
-            border-color: rgba(239, 68, 68, 0.4);
-            color: rgba(239, 68, 68, 0.8);
-        }
-
-        /* HEADER INFO */
-        .header-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 20px 0 16px;
-            padding: 0 4px;
-        }
-
-        .header-info span {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .header-info .goal {
-            color: var(--cyan);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .header-info .goal::before {
-            content: '◆';
-            font-size: 6px;
-        }
-
-        .header-info .target {
-            color: var(--text-dim);
-        }
-
-        /* POPUPS */
-        #lvlOverlay, #victoryOverlay {
-            position: fixed;
-            inset: 0;
-            z-index: 5000;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: rgba(6, 6, 10, 0.9);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            text-align: center;
-            padding: 20px;
-        }
-
-        .popup-content {
-            animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .popup-label {
-            letter-spacing: 8px;
-            color: var(--cyan);
-            font-weight: 800;
-            font-size: 12px;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-
-        .popup-title {
-            font-size: 3.5rem;
-            font-weight: 900;
-            background: var(--grad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 0;
-            filter: drop-shadow(0 0 40px var(--purple-glow));
-        }
-
-        .popup-level {
-            font-size: 28px;
-            font-weight: 800;
-            color: #fff;
-            margin: 16px 0 40px;
-        }
-
-        .victory-title {
-            font-size: 4rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #22c55e, #84cc16, #eab308);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 0 40px rgba(34, 197, 94, 0.5));
-            margin: 0;
-        }
-
-        .victory-sub {
-            font-size: 16px;
-            color: var(--cyan);
-            margin: 16px 0 50px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        .btn-popup {
-            background: var(--grad);
-            color: #000;
-            border: none;
-            padding: 18px 48px;
-            border-radius: 16px;
-            font-size: 14px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-popup:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 40px var(--cyan-glow);
-        }
-
-        .btn-victory {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-        }
-
-        .btn-victory:hover {
-            box-shadow: 0 10px 40px rgba(34, 197, 94, 0.4);
-        }
-
-        /* XP FLY */
-        .xp-fly {
-            position: absolute;
-            font-weight: 900;
-            font-size: 24px;
-            pointer-events: none;
-            animation: fly 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            z-index: 7000;
-            background: var(--grad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 0 10px var(--cyan-glow));
-        }
-
-        @keyframes fly {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-120px) scale(1.2); opacity: 0; }
-        }
-
-        /* FOOTER */
-        .footer-actions {
-            margin-top: 50px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .footer-actions .btn-sub {
-            flex: 1;
-        }
+        .footer-actions { margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .footer-full { grid-column: span 2; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <div id="lvlOverlay">
-    <div class="popup-content">
-        <p class="popup-label">LEVEL UP!</p>
-        <h1 class="popup-title">TASO NOUSI!</h1>
-        <h2 class="popup-level" id="popLvlText">LEVEL 2</h2>
-        <button class="btn-popup" onclick="closeLvl()">JATKA PELIÄ ⚔️</button>
+    <div style="padding: 20px;">
+        <p style="letter-spacing: 5px; color: var(--cyan); font-weight: 800;">LEVEL UP!</p>
+        <h1 style="font-size: 3rem; margin: 0;">TASO NOUSI!</h1>
+        <h2 id="popLvlText" style="margin-bottom: 30px;">LEVEL 2</h2>
+        <button class="btn-main" onclick="closeLvl()">JATKA ⚔️</button>
     </div>
 </div>
 
 <div id="victoryOverlay">
-    <div class="popup-content">
-        <h1 class="victory-title">VOITTO! 🎉</h1>
-        <p class="victory-sub">Tavoite saavutettu</p>
-        <button class="btn-popup btn-victory" onclick="reset()">ALOITA UUSI PELI</button>
+    <div>
+        <h1 style="font-size: 4rem; color: #22c55e;">VOITTO! 🎉</h1>
+        <p>Tavoite saavutettu</p>
+        <button class="btn-main" onclick="reset()">UUSI PELI</button>
     </div>
 </div>
 
@@ -695,23 +261,21 @@
         </div>
 
         <div class="glass-card">
-            <label class="setup-label">Mikä on tavoitteesi?</label>
-            <div class="xp-row" style="padding: 4px 16px;">
-                <input type="text" id="inGoal" placeholder="esim. Kesäkuntoon">
-            </div>
+            <label class="setup-label">Tavoitteesi</label>
+            <input type="text" id="inGoal" placeholder="esim. Taloudellinen vapaus">
         </div>
 
         <div class="glass-card">
-            <label class="setup-label">Määritä rutiinit</label>
+            <label class="setup-label">Rutiinit (10, 20, 40 XP)</label>
             <div class="setup-indent">
-                <div class="xp-row"><span class="xp-tag">10 XP</span><input type="text" id="inR10" placeholder="Vesi, vitamiinit..."></div>
-                <div class="xp-row"><span class="xp-tag">20 XP</span><input type="text" id="inR20" placeholder="Kävely, proteiini..."></div>
-                <div class="xp-row"><span class="xp-tag">40 XP</span><input type="text" id="inR40" placeholder="Treeni, juoksu..."></div>
+                <div class="xp-row"><span class="xp-tag">10 XP</span><input type="text" id="inR10" placeholder="Pieni teko"></div>
+                <div class="xp-row"><span class="xp-tag">20 XP</span><input type="text" id="inR20" placeholder="Perus suoritus"></div>
+                <div class="xp-row"><span class="xp-tag">40 XP</span><input type="text" id="inR40" placeholder="Kova panos"></div>
             </div>
         </div>
 
         <div class="glass-card">
-            <label class="setup-label">Vaikeusaste</label>
+            <label class="setup-label">Vaikeusaste (V)</label>
             <select id="inV">
                 <option value="1000">Uusi rutiini (1 000 XP)</option>
                 <option value="5000" selected>Merkittävä muutos (5 000 XP)</option>
@@ -720,32 +284,26 @@
             </select>
         </div>
 
-        <button class="btn-main" onclick="start()">KÄYNNISTÄ KONE ⚡</button>
-        <button class="btn-secondary" onclick="document.getElementById('fileIn').click()">📁 Tuo vanha edistys</button>
-        <input type="file" id="fileIn" style="display:none" onchange="importData(event)">
+        <button class="btn-main" onclick="start()">KÄYNNISTÄ ⚡</button>
     </div>
 
     <div id="viewGame" style="display:none;">
-        <div class="header-info">
-            <span class="goal" id="txtGoal"></span>
-            <span class="target" id="txtV"></span>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+            <span id="txtGoal" style="color: var(--cyan); font-weight: 800;"></span>
+            <span id="txtV" style="color: var(--text-dim); font-size: 12px;"></span>
         </div>
 
         <div class="status-box">
             <div id="bonusBadge" class="bonus-badge">×1.00</div>
-            <div class="status-content">
-                <div class="m-lbl">Päiviä maaliin</div>
-                <div class="m-val" id="valM">--</div>
-
-                <div class="level-section">
-                    <div class="level-display" id="valLvl">LEVEL 1</div>
-                    <div class="bar-container">
-                        <div class="bar-bg"><div class="bar-fill" id="barXP"></div></div>
-                    </div>
-                    <div class="stats-row">
-                        <span>XP: <span id="valTotal">0</span></span>
-                        <span>PÄIVÄ <span id="valDays">1</span></span>
-                    </div>
+            <div class="m-lbl">Päiviä maaliin</div>
+            <div class="m-val" id="valM">--</div>
+            
+            <div style="text-align: left; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 20px;">
+                <div class="level-display" id="valLvl">LEVEL 1</div>
+                <div class="bar-bg"><div class="bar-fill" id="barXP"></div></div>
+                <div class="stats-row">
+                    <span>XP: <span id="valTotal">0</span></span>
+                    <span>PÄIVÄ <span id="valDays">1</span></span>
                 </div>
             </div>
         </div>
@@ -755,25 +313,28 @@
         <button class="btn-secondary" onclick="nextDay()">☀️ Seuraava päivä</button>
 
         <div class="footer-actions">
+            <button class="btn-sub" onclick="modifyRoutines()">⚙️ Muokkaa rutiineja</button>
             <button class="btn-sub" onclick="exportData()">💾 Varmuuskopio</button>
+            <button class="btn-sub" onclick="document.getElementById('fileIn').click()">📁 Tuo</button>
             <button class="btn-sub btn-danger" onclick="reset()">🗑️ Nollaa</button>
+            <input type="file" id="fileIn" style="display:none" onchange="importData(event)">
         </div>
     </div>
 </div>
 
 <script>
-    let g = { active: false, goal: "", r10: "", r20: "", r40: "", v: 5000, total: 0, daily: 0, days: 1, lvl: 1 };
+    let g = { active: false, goal: "", r10: "", r20: "", r40: "", v: 5000, total: 0, days: 1, lvl: 1 };
 
     window.onload = () => {
-        const saved = localStorage.getItem('mk_god_v3');
+        const saved = localStorage.getItem('mk_god_v4');
         if (saved) { g = JSON.parse(saved); if (g.active) render(); }
     };
 
     function start() {
         g.goal = document.getElementById('inGoal').value || "Muutos";
-        g.r10 = document.getElementById('inR10').value || "Pienet teot";
-        g.r20 = document.getElementById('inR20').value || "Keskisuuret teot";
-        g.r40 = document.getElementById('inR40').value || "Isot teot";
+        g.r10 = document.getElementById('inR10').value || "Pieni teko";
+        g.r20 = document.getElementById('inR20').value || "Keskisuuri teko";
+        g.r40 = document.getElementById('inR40').value || "Suuri teko";
         g.v = parseInt(document.getElementById('inV').value);
         g.active = true; save(); render();
     }
@@ -786,18 +347,16 @@
         updateUI();
     }
 
-    function getMultiplier() {
-        return 1 + (Math.min(g.days, 84) - 1) * (1 / 83);
-    }
+    function getMultiplier() { return 1 + (Math.min(g.days, 84) - 1) * (1 / 83); }
 
     function addXP(baseAmt, e) {
         let multi = getMultiplier();
         let finalAmt = Math.round(baseAmt * multi);
-        g.total += finalAmt; g.daily += finalAmt;
+        g.total += finalAmt;
 
         const pop = document.createElement('div');
         pop.className = 'xp-fly'; pop.innerText = `+${finalAmt}`;
-        pop.style.left = `${e.pageX - 20}px`; pop.style.top = `${e.pageY - 20}px`;
+        pop.style.left = `${e.pageX}px`; pop.style.top = `${e.pageY}px`;
         document.body.appendChild(pop); setTimeout(() => pop.remove(), 800);
 
         let newLvl = Math.floor(g.total / 200) + 1;
@@ -806,19 +365,26 @@
         save(); updateUI();
     }
 
+    function modifyRoutines() {
+        const n10 = prompt("Uusi 10 XP rutiini:", g.r10);
+        if (n10 !== null) g.r10 = n10;
+        const n20 = prompt("Uusi 20 XP rutiini:", g.r20);
+        if (n20 !== null) g.r20 = n20;
+        const n40 = prompt("Uusi 40 XP rutiini:", g.r40);
+        if (n40 !== null) g.r40 = n40;
+        save(); updateUI();
+    }
+
     function updateUI() {
         let multi = getMultiplier();
         document.getElementById('bonusBadge').innerText = `×${multi.toFixed(2)}`;
         document.getElementById('valDays').innerText = g.days;
-
-        const curXP = g.total % 200;
-        document.getElementById('barXP').style.width = `${(curXP / 200) * 100}%`;
+        document.getElementById('barXP').style.width = `${((g.total % 200) / 200) * 100}%`;
         document.getElementById('valTotal').innerText = g.total.toLocaleString('fi-FI');
         document.getElementById('valLvl').innerText = `LEVEL ${g.lvl}`;
 
         let avg = g.total / g.days;
-        if (avg > 0 && g.total < g.v) document.getElementById('valM').innerText = Math.ceil((g.v - g.total) / avg);
-        else document.getElementById('valM').innerText = g.total >= g.v ? "0" : "--";
+        document.getElementById('valM').innerText = (avg > 0 && g.total < g.v) ? Math.ceil((g.v - g.total) / avg) : (g.total >= g.v ? "0" : "--");
 
         document.getElementById('taskList').innerHTML = `
             <div class="task-btn" onclick="addXP(10, event)">
@@ -836,14 +402,14 @@
         `;
     }
 
-    function nextDay() { g.daily = 0; g.days++; save(); updateUI(); window.scrollTo(0,0); }
-    function save() { localStorage.setItem('mk_god_v3', JSON.stringify(g)); }
+    function nextDay() { g.days++; save(); updateUI(); window.scrollTo(0,0); }
+    function save() { localStorage.setItem('mk_god_v4', JSON.stringify(g)); }
     function showPop() { document.getElementById('popLvlText').innerText = `LEVEL ${g.lvl}`; document.getElementById('lvlOverlay').style.display = 'flex'; }
     function closeLvl() { document.getElementById('lvlOverlay').style.display = 'none'; }
-    function reset() { if(confirm("Haluatko varmasti nollata kaiken edistyksen?")) { localStorage.clear(); location.reload(); } }
+    function reset() { if(confirm("Nollataanko kaikki?")) { localStorage.clear(); location.reload(); } }
     function exportData() {
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(g));
-        const dl = document.createElement('a'); dl.setAttribute("href", dataStr); dl.setAttribute("download", "muutoskone_backup.json"); dl.click();
+        const dl = document.createElement('a'); dl.setAttribute("href", dataStr); dl.setAttribute("download", "muutoskone_v4.json"); dl.click();
     }
     function importData(event) {
         const reader = new FileReader();
