@@ -266,11 +266,12 @@
         </div>
 
         <div class="glass-card">
-            <label class="setup-label">Rutiinit (10, 20, 40 XP)</label>
+            <label class="setup-label">Rutiinit (1, 5, 20, 50 XP)</label>
             <div class="setup-indent">
-                <div class="xp-row"><span class="xp-tag">10 XP</span><input type="text" id="inR10" placeholder="Pieni teko"></div>
-                <div class="xp-row"><span class="xp-tag">20 XP</span><input type="text" id="inR20" placeholder="Perus suoritus"></div>
-                <div class="xp-row"><span class="xp-tag">40 XP</span><input type="text" id="inR40" placeholder="Kova panos"></div>
+                <div class="xp-row"><span class="xp-tag">1 XP</span><input type="text" id="inR1" placeholder="Pieni tehtävä 1-10min"></div>
+                <div class="xp-row"><span class="xp-tag">5 XP</span><input type="text" id="inR5" placeholder="Perus suoritus 15-30min"></div>
+                <div class="xp-row"><span class="xp-tag">20 XP</span><input type="text" id="inR20" placeholder="Fokustehtävä 45-90min"></div>
+                <div class="xp-row"><span class="xp-tag">50 XP</span><input type="text" id="inR50" placeholder="Kova panostus 2-4h"></div>
             </div>
         </div>
 
@@ -323,7 +324,7 @@
 </div>
 
 <script>
-    let g = { active: false, goal: "", r10: "", r20: "", r40: "", v: 5000, total: 0, days: 1, lvl: 1 };
+    let g = { active: false, goal: "", r1: "", r5: "", r20: "", r50: "", v: 5000, total: 0, days: 1, lvl: 1 };
 
     window.onload = () => {
         const saved = localStorage.getItem('mk_god_v4');
@@ -332,9 +333,10 @@
 
     function start() {
         g.goal = document.getElementById('inGoal').value || "Muutos";
-        g.r10 = document.getElementById('inR10').value || "Pieni teko";
-        g.r20 = document.getElementById('inR20').value || "Keskisuuri teko";
-        g.r40 = document.getElementById('inR40').value || "Suuri teko";
+        g.r1 = document.getElementById('inR1').value || "Pieni tehtävä 1-10min";
+        g.r5 = document.getElementById('inR5').value || "Perus suoritus 15-30min";
+        g.r20 = document.getElementById('inR20').value || "Fokustehtävä 45-90min";
+        g.r50 = document.getElementById('inR50').value || "Kova panostus 2-4h";
         g.v = parseInt(document.getElementById('inV').value);
         g.active = true; save(); render();
     }
@@ -366,12 +368,14 @@
     }
 
     function modifyRoutines() {
-        const n10 = prompt("Uusi 10 XP rutiini:", g.r10);
-        if (n10 !== null) g.r10 = n10;
+        const n1 = prompt("Uusi 1 XP rutiini:", g.r1);
+        if (n1 !== null) g.r1 = n1;
+        const n5 = prompt("Uusi 5 XP rutiini:", g.r5);
+        if (n5 !== null) g.r5 = n5;
         const n20 = prompt("Uusi 20 XP rutiini:", g.r20);
         if (n20 !== null) g.r20 = n20;
-        const n40 = prompt("Uusi 40 XP rutiini:", g.r40);
-        if (n40 !== null) g.r40 = n40;
+        const n50 = prompt("Uusi 50 XP rutiini:", g.r50);
+        if (n50 !== null) g.r50 = n50;
         save(); updateUI();
     }
 
@@ -387,17 +391,21 @@
         document.getElementById('valM').innerText = (avg > 0 && g.total < g.v) ? Math.ceil((g.v - g.total) / avg) : (g.total >= g.v ? "0" : "--");
 
         document.getElementById('taskList').innerHTML = `
-            <div class="task-btn" onclick="addXP(10, event)">
-                <span class="task-name">💧 ${g.r10}</span>
-                <span class="task-xp">+${Math.round(10*multi)}</span>
+            <div class="task-btn" onclick="addXP(1, event)">
+                <span class="task-name">💧 ${g.r1}</span>
+                <span class="task-xp">+${Math.round(1*multi)}</span>
+            </div>
+            <div class="task-btn" onclick="addXP(5, event)">
+                <span class="task-name">🌱 ${g.r5}</span>
+                <span class="task-xp">+${Math.round(5*multi)}</span>
             </div>
             <div class="task-btn" onclick="addXP(20, event)">
                 <span class="task-name">🏃 ${g.r20}</span>
                 <span class="task-xp">+${Math.round(20*multi)}</span>
             </div>
-            <div class="task-btn" onclick="addXP(40, event)">
-                <span class="task-name">🔥 ${g.r40}</span>
-                <span class="task-xp highlight">+${Math.round(40*multi)}</span>
+            <div class="task-btn" onclick="addXP(50, event)">
+                <span class="task-name">🔥 ${g.r50}</span>
+                <span class="task-xp highlight">+${Math.round(50*multi)}</span>
             </div>
         `;
     }
