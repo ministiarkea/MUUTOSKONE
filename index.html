@@ -129,6 +129,27 @@
             box-shadow: 0 0 8px var(--cyan);
         }
 
+        /* AI Card Styling - Unified Gray Text */
+        .ai-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(0, 212, 255, 0.03));
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            margin-top: 25px;
+        }
+        
+        .ai-text, .ai-instruction, .ai-steps {
+            font-size: 14px;
+            color: var(--text-medium);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .ai-steps {
+            margin: 10px 0 20px 0;
+            padding-left: 20px;
+        }
+
+        .ai-steps li { margin-bottom: 8px; }
+
         .setup-indent {
             display: flex;
             flex-direction: column;
@@ -219,10 +240,12 @@
         .task-xp { font-weight: 800; font-size: 14px; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .task-xp.highlight { background: linear-gradient(135deg, var(--pink), #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-        .btn-main { background: var(--grad); color: #000; border: none; padding: 20px; border-radius: 20px; width: 100%; font-size: 15px; font-weight: 800; text-transform: uppercase; cursor: pointer; }
+        .btn-main { background: var(--grad); color: #000; border: none; padding: 20px; border-radius: 20px; width: 100%; font-size: 15px; font-weight: 800; text-transform: uppercase; cursor: pointer; margin-top: 10px; box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2); }
         .btn-secondary { background: var(--card); border: 1px solid var(--border); color: var(--text-medium); padding: 18px; border-radius: 18px; width: 100%; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 12px; }
         .btn-sub { background: transparent; border: 1px solid var(--border); color: var(--text-dim); padding: 14px; border-radius: 14px; font-size: 11px; text-transform: uppercase; cursor: pointer; font-weight: 700; }
         .btn-danger { border-color: rgba(239, 68, 68, 0.2); color: rgba(239, 68, 68, 0.5); }
+        .btn-ai { background: rgba(139, 92, 246, 0.2); border: 1px solid var(--purple); color: #fff; padding: 16px; border-radius: 16px; width: 100%; font-size: 13px; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+        .btn-ai:active { transform: scale(0.98); }
 
         #lvlOverlay, #victoryOverlay { position: fixed; inset: 0; z-index: 5000; display: none; flex-direction: column; align-items: center; justify-content: center; background: rgba(6,6,10,0.95); backdrop-filter: blur(20px); text-align: center; }
 
@@ -230,7 +253,6 @@
         @keyframes fly { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-100px); opacity: 0; } }
 
         .footer-actions { margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .footer-full { grid-column: span 2; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -285,7 +307,19 @@
             </select>
         </div>
 
-        <button class="btn-main" onclick="start()">KÄYNNISTÄ ⚡</button>
+        <button class="btn-main" onclick="start()">KÄYNNISTÄ PELI ⚡</button>
+
+        <div class="glass-card ai-card">
+            <label class="setup-label">Strategia-apuri (AI)</label>
+            <p class="ai-text">Epäröitkö vaikeusastetta tai rutiineja? Anna tekoälyn analysoida tilanteesi ja luoda valmis polku.</p>
+            <p class="ai-instruction">Toimi näin:</p>
+            <ol class="ai-steps">
+                <li>Kopioi alta <b>Strategia-kehote</b>.</li>
+                <li>Liitä se <a href="https://gemini.google.com" target="_blank" style="color:var(--cyan); text-decoration:none; font-weight:700;">Geminille tästä</a>.</li>
+                <li>Palaa takaisin ja täytä AI:n antamat arvot.</li>
+            </ol>
+            <button class="btn-ai" id="copyAiBtn" onclick="copyAiPrompt()">KOPIOI STRATEGIA-KEHOTE 📋</button>
+        </div>
     </div>
 
     <div id="viewGame" style="display:none;">
@@ -331,10 +365,52 @@
         if (saved) { g = JSON.parse(saved); if (g.active) render(); }
     };
 
+    function copyAiPrompt() {
+        const prompt = `Toimi MUUTOSKONE-metodin strategisena haastattelijana. Tehtäväsi on auttaa minua määrittämään tavoitteeni parametrit askel kerrallaan.
+Käytä analyysisi pohjana seuraavia laskennallisia periaatteita:
+1. VAIKEUSKERROIN (V):
+- 1 000 XP (Uusi rutiini): n. 100 h työtä. Tavoitteena tavan automatisointi.
+- 5 000 XP (Merkittävä muutos): n. 500 h työtä. Selkeä, mitattava tulos.
+- 10 000 XP (Elämänmuutos): n. 1 000 h työtä. Identiteetin ja elämäntavan muutos.
+- 100 000 XP (Mestari-taso): n. 10 000 h työtä. Maailmanluokan huippuosaaminen.
+
+2. RUTIINITASOT (T):
+- 1 XP (Pikkutehtävä): 1–10 min. (Matalin kynnys, ei voi sanoa ei).
+- 5 XP (Ryhtiliike): 15–30 min. (Arjen moottori).
+- 20 XP (Kunnon rutistus): 45–90 min. (Päivän tärkein suoritus).
+- 50 XP (Päivän uroteko): 2–4 h tai suuri henkinen voitto.
+
+ÄLÄ anna kaikkia vastauksia kerralla. Etene näin:
+1. TERVEHDYS: Tervehdi minua ja kerro lyhyesti, että autat minua määrittämään tavoitteeni Vaikeuskertoimen (V), Rutiinit (T) ja Ennusteen (M).
+2. KYSYMYS 1: Kysy, mikä on tavoitteeni. (Odota vastaustani).
+3. KYSYMYS 2: Kun olen vastannut, kysy mikä on lähtötilanteeni ja mahdolliset arjen rajoitteet. (Odota vastaustani).
+4. KYSYMYS 3: Kysy, kuinka paljon XP:tä haluaisin tavoitella päivittäin (esim. 20–50 XP). (Odota vastaustani).
+
+LOPPUTULOS: Kun olet saanut kaikki tiedot, tee analyysi:
+- Määritä Vaikeuskerroin (V) ja perustele se peilaten tavoitteen vaatimaan tuntimäärään.
+- Luo konkreettinen Rutiinikirjasto juuri minun tavoitteeseeni sopien (1, 5, 20 ja 50 XP tasoille).
+- Laske Ennuste (M) eli päivät maaliin (huomioi 84 päivän kertymäkerroin 1.0 -> 2.0).
+- Anna yksi Power-up -vinkki.
+
+Oletko valmis? Aloita tervehtimällä minua ja kysymällä ensimmäinen kysymys.`;
+
+        navigator.clipboard.writeText(prompt).then(() => {
+            const btn = document.getElementById('copyAiBtn');
+            btn.innerText = "KOPIOITU! ✅";
+            btn.style.borderColor = "var(--cyan)";
+            btn.style.color = "var(--cyan)";
+            setTimeout(() => {
+                btn.innerText = "KOPIOI STRATEGIA-KEHOTE 📋";
+                btn.style.borderColor = "var(--purple)";
+                btn.style.color = "#fff";
+            }, 2000);
+        });
+    }
+
     function start() {
         g.goal = document.getElementById('inGoal').value || "Muutos";
         g.r1 = document.getElementById('inR1').value || "Pikkutehtävä 1-10min";
-        g.r5 = document.getElementById('inR5').value || "Ryhtiliike  15-30min";
+        g.r5 = document.getElementById('inR5').value || "Ryhtiliike 15-30min";
         g.r20 = document.getElementById('inR20').value || "Kunnon rutistus 45-90min";
         g.r50 = document.getElementById('inR50').value || "Päivän uroteko 2-4h";
         g.v = parseInt(document.getElementById('inV').value);
