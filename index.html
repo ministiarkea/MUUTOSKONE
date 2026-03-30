@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>MUUTOSKONE </title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22[w3.org](http://www.w3.org/2000/svg%22) viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
-    <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap)" rel="stylesheet">
+    <title>MUUTOSKONE</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #06060a;
@@ -129,7 +129,6 @@
             box-shadow: 0 0 8px var(--cyan);
         }
 
-        /* AI Card Styling - Unified Gray Text */
         .ai-card {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(0, 212, 255, 0.03));
             border: 1px solid rgba(139, 92, 246, 0.2);
@@ -315,7 +314,7 @@
             <p class="ai-instruction">Toimi näin:</p>
             <ol class="ai-steps">
                 <li>Kopioi alta <b>Strategia-kehote</b>.</li>
-                <li>Liitä se <a href="[gemini.google.com](https://gemini.google.com)" target="_blank" style="color:var(--cyan); text-decoration:none; font-weight:700;">Geminille tästä</a>.</li>
+                <li>Liitä se <a href="https://gemini.google.com" target="_blank" style="color:var(--cyan); text-decoration:none; font-weight:700;">Geminille tästä</a>.</li>
                 <li>Palaa takaisin ja täytä AI:n antamat arvot.</li>
             </ol>
             <button class="btn-ai" id="copyAiBtn" onclick="copyAiPrompt()">KOPIOI STRATEGIA-KEHOTE 📋</button>
@@ -454,7 +453,6 @@ Oletko valmis? Aloita tervehtimällä minua ja kysymällä ensimmäinen kysymys.
         if (newLvl > g.lvl) { g.lvl = newLvl; showPop(); }
         if (g.total >= g.v) document.getElementById('victoryOverlay').style.display = 'flex';
         
-        // Päivitä alin arvio jos nykyinen on pienempi
         let currentEstimate = calculateDaysToGoal();
         if (currentEstimate !== null) {
             if (g.initialEstimate === null) {
@@ -488,7 +486,6 @@ Oletko valmis? Aloita tervehtimällä minua ja kysymällä ensimmäinen kysymys.
         document.getElementById('valTotal').innerText = g.total.toLocaleString('fi-FI');
         document.getElementById('valLvl').innerText = `LEVEL ${g.lvl}`;
 
-        // Näytä "Päiviä maaliin" - ei koskaan enempää kuin alin saavutettu arvio
         let currentEstimate = calculateDaysToGoal();
         let displayValue = "--";
         
@@ -496,7 +493,6 @@ Oletko valmis? Aloita tervehtimällä minua ja kysymällä ensimmäinen kysymys.
             displayValue = "0";
         } else if (currentEstimate !== null) {
             if (g.lowestEstimate !== null) {
-                // Näytä aina pienempi: joko nykyinen laskenta tai alin saavutettu
                 displayValue = Math.min(currentEstimate, g.lowestEstimate);
             } else {
                 displayValue = currentEstimate;
@@ -528,7 +524,6 @@ Oletko valmis? Aloita tervehtimällä minua ja kysymällä ensimmäinen kysymys.
     function nextDay() { 
         g.days++; 
         
-        // Päivitä alin arvio myös päivän vaihtuessa
         let currentEstimate = calculateDaysToGoal();
         if (currentEstimate !== null && g.lowestEstimate !== null) {
             if (currentEstimate < g.lowestEstimate) {
@@ -553,6 +548,5 @@ Oletko valmis? Aloita tervehtimällä minua ja kysymällä ensimmäinen kysymys.
         reader.readAsText(event.target.files[0]);
     }
 </script>
-
 </body>
 </html>
