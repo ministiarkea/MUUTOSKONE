@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>MUUTOSKONE</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #06060a;
@@ -64,26 +64,28 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 200px;
-            height: 100px;
+            height: 120px;
             background: radial-gradient(ellipse, var(--cyan-glow), transparent 70%);
             filter: blur(40px);
             pointer-events: none;
-            opacity: 0.6;
+            opacity: 0.5;
         }
 
+        /* SIRO TEKSTILOGO */
         .neon-logo {
-            font-size: 2.8rem;
-            font-weight: 900;
+            font-size: 1.8rem;
+            font-weight: 300;
             text-transform: uppercase;
-            letter-spacing: -2px;
+            letter-spacing: 10px;
             line-height: 1;
             margin: 0;
+            margin-left: 10px; /* Kompensoi letter-spacingiä keskityksessä */
             position: relative;
             background: linear-gradient(135deg, #fff 0%, var(--cyan) 50%, var(--purple) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            filter: drop-shadow(0 0 30px var(--cyan-glow));
+            filter: drop-shadow(0 0 20px var(--cyan-glow));
         }
 
         .sub-logo {
@@ -91,8 +93,8 @@
             text-transform: uppercase;
             letter-spacing: 4px;
             color: var(--text-dim);
-            margin-top: 12px;
-            font-weight: 600;
+            margin-top: 15px;
+            font-weight: 400;
         }
 
         .glass-card {
@@ -110,10 +112,10 @@
 
         .setup-label {
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--text-dim);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             margin-bottom: 16px;
             display: flex;
             align-items: center;
@@ -140,6 +142,7 @@
             color: var(--text-medium);
             line-height: 1.6;
             margin-bottom: 15px;
+            font-weight: 300;
         }
 
         .ai-steps {
@@ -166,7 +169,7 @@
         }
 
         .xp-tag {
-            font-weight: 800;
+            font-weight: 700;
             font-size: 12px;
             min-width: 50px;
             background: var(--grad);
@@ -180,6 +183,7 @@
             border: none;
             color: #fff;
             font-size: 15px;
+            font-weight: 300;
             padding: 12px 0;
             outline: none;
             width: 100%;
@@ -199,7 +203,7 @@
 
         .m-val {
             font-size: 88px;
-            font-weight: 900;
+            font-weight: 200;
             line-height: 0.85;
             letter-spacing: -5px;
             margin: 12px 0 8px;
@@ -209,16 +213,16 @@
             background-clip: text;
         }
 
-        .m-lbl { font-size: 11px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 3px; font-weight: 700; }
+        .m-lbl { font-size: 11px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 3px; font-weight: 600; }
 
-        .level-display { font-size: 28px; font-weight: 900; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 16px; }
+        .level-display { font-size: 28px; font-weight: 300; letter-spacing: 2px; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 16px; }
 
-        .bar-bg { height: 12px; background: rgba(255, 255, 255, 0.05); border-radius: 20px; overflow: hidden; border: 1px solid var(--border); }
+        .bar-bg { height: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 20px; overflow: hidden; border: 1px solid var(--border); }
         .bar-fill { height: 100%; width: 0%; background: var(--grad); transition: width 0.8s ease; box-shadow: 0 0 20px var(--cyan-glow); }
 
-        .stats-row { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; color: var(--text-dim); margin-top: 12px; text-transform: uppercase; }
+        .stats-row { display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; color: var(--text-dim); margin-top: 12px; text-transform: uppercase; letter-spacing: 1px; }
 
-        .bonus-badge { position: absolute; top: 16px; right: 16px; background: linear-gradient(135deg, var(--pink), var(--purple)); color: white; padding: 8px 14px; border-radius: 50px; font-size: 11px; font-weight: 800; box-shadow: 0 4px 20px var(--pink-glow); }
+        .bonus-badge { position: absolute; top: 16px; right: 16px; background: linear-gradient(135deg, var(--pink), var(--purple)); color: white; padding: 8px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; box-shadow: 0 4px 20px var(--pink-glow); }
 
         .task-btn {
             background: var(--card);
@@ -235,20 +239,39 @@
 
         .task-btn:active { transform: scale(0.98); }
 
-        .task-name { font-weight: 600; font-size: 15px; }
-        .task-xp { font-weight: 800; font-size: 14px; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .task-name { font-weight: 400; font-size: 15px; }
+        .task-xp { font-weight: 700; font-size: 14px; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .task-xp.highlight { background: linear-gradient(135deg, var(--pink), #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-        .btn-main { background: var(--grad); color: #000; border: none; padding: 20px; border-radius: 20px; width: 100%; font-size: 15px; font-weight: 800; text-transform: uppercase; cursor: pointer; margin-top: 10px; box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2); }
-        .btn-secondary { background: var(--card); border: 1px solid var(--border); color: var(--text-medium); padding: 18px; border-radius: 18px; width: 100%; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 12px; }
-        .btn-sub { background: transparent; border: 1px solid var(--border); color: var(--text-dim); padding: 14px; border-radius: 14px; font-size: 11px; text-transform: uppercase; cursor: pointer; font-weight: 700; }
+        /* YHTENEVÄ MAIN BUTTON SIROON LOGOON */
+        .btn-main { 
+            background: rgba(0, 212, 255, 0.05); 
+            color: #fff; 
+            border: 1px solid var(--cyan); 
+            padding: 20px; 
+            border-radius: 16px; 
+            width: 100%; 
+            font-size: 15px; 
+            font-weight: 300; 
+            letter-spacing: 4px;
+            text-transform: uppercase; 
+            cursor: pointer; 
+            margin-top: 10px; 
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.1), inset 0 0 10px rgba(0, 212, 255, 0.1); 
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        .btn-main:active { transform: scale(0.98); box-shadow: 0 0 10px rgba(0, 212, 255, 0.2); }
+
+        .btn-secondary { background: var(--card); border: 1px solid var(--border); color: var(--text-medium); padding: 18px; border-radius: 16px; width: 100%; font-size: 14px; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; margin-top: 12px; }
+        .btn-sub { background: transparent; border: 1px solid var(--border); color: var(--text-dim); padding: 14px; border-radius: 12px; font-size: 11px; text-transform: uppercase; cursor: pointer; font-weight: 600; letter-spacing: 1px; }
         .btn-danger { border-color: rgba(239, 68, 68, 0.2); color: rgba(239, 68, 68, 0.5); }
-        .btn-ai { background: rgba(139, 92, 246, 0.2); border: 1px solid var(--purple); color: #fff; padding: 16px; border-radius: 16px; width: 100%; font-size: 13px; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+        .btn-ai { background: rgba(139, 92, 246, 0.1); border: 1px solid var(--purple); color: #fff; padding: 16px; border-radius: 16px; width: 100%; font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; box-shadow: inset 0 0 10px rgba(139, 92, 246, 0.1); }
         .btn-ai:active { transform: scale(0.98); }
 
         #lvlOverlay, #victoryOverlay { position: fixed; inset: 0; z-index: 5000; display: none; flex-direction: column; align-items: center; justify-content: center; background: rgba(6,6,10,0.95); backdrop-filter: blur(20px); text-align: center; }
 
-        .xp-fly { position: absolute; font-weight: 900; font-size: 24px; pointer-events: none; animation: fly 0.8s forwards; z-index: 7000; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .xp-fly { position: absolute; font-weight: 700; font-size: 24px; pointer-events: none; animation: fly 0.8s forwards; z-index: 7000; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         @keyframes fly { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-100px); opacity: 0; } }
 
         .footer-actions { margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -258,17 +281,17 @@
 
 <div id="lvlOverlay">
     <div style="padding: 20px;">
-        <p style="letter-spacing: 5px; color: var(--cyan); font-weight: 800;">LEVEL UP!</p>
-        <h1 style="font-size: 3rem; margin: 0;">TASO NOUSI!</h1>
-        <h2 id="popLvlText" style="margin-bottom: 30px;">LEVEL 2</h2>
+        <p style="letter-spacing: 5px; color: var(--cyan); font-weight: 600; font-size: 12px;">LEVEL UP!</p>
+        <h1 style="font-size: 3rem; margin: 0; font-weight: 200;">TASO NOUSI!</h1>
+        <h2 id="popLvlText" style="margin-bottom: 30px; font-weight: 300; letter-spacing: 2px;">LEVEL 2</h2>
         <button class="btn-main" onclick="closeLvl()">JATKA ⚔️</button>
     </div>
 </div>
 
 <div id="victoryOverlay">
     <div>
-        <h1 style="font-size: 4rem; color: #22c55e;">VOITTO! 🎉</h1>
-        <p>Tavoite saavutettu</p>
+        <h1 style="font-size: 4rem; color: #22c55e; font-weight: 200;">VOITTO! 🎉</h1>
+        <p style="font-weight: 300; letter-spacing: 1px;">Tavoite saavutettu</p>
         <button class="btn-main" onclick="reset()">UUSI PELI</button>
     </div>
 </div>
@@ -306,7 +329,7 @@
             </select>
         </div>
 
-        <button class="btn-main" onclick="start()">KÄYNNISTÄ PELI ⚡</button>
+        <button class="btn-main" onclick="start()">KÄYNNISTÄ PELI</button>
 
         <div class="glass-card ai-card">
             <label class="setup-label">Strategia-apuri (AI)</label>
@@ -314,7 +337,7 @@
             <p class="ai-instruction">Toimi näin:</p>
             <ol class="ai-steps">
                 <li>Kopioi alta <b>Strategia-kehote</b>.</li>
-                <li>Liitä se <a href="https://gemini.google.com" target="_blank" style="color:var(--cyan); text-decoration:none; font-weight:700;">Geminille tästä</a>.</li>
+                <li>Liitä se <a href="https://gemini.google.com" target="_blank" style="color:var(--cyan); text-decoration:none; font-weight:600;">Geminille tästä</a>.</li>
                 <li>Palaa takaisin ja täytä AI:n antamat arvot.</li>
             </ol>
             <button class="btn-ai" id="copyAiBtn" onclick="copyAiPrompt()">KOPIOI STRATEGIA-KEHOTE 📋</button>
@@ -323,8 +346,8 @@
 
     <div id="viewGame" style="display:none;">
         <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-            <span id="txtGoal" style="color: var(--cyan); font-weight: 800;"></span>
-            <span id="txtV" style="color: var(--text-dim); font-size: 12px;"></span>
+            <span id="txtGoal" style="color: var(--cyan); font-weight: 600; letter-spacing: 1px;"></span>
+            <span id="txtV" style="color: var(--text-dim); font-size: 12px; font-weight: 600; letter-spacing: 1px;"></span>
         </div>
 
         <div class="status-box">
@@ -422,7 +445,7 @@ Oletko valmis? Aloita tervehtimällä minua ja kysymällä ensimmäinen kysymys.
     function render() {
         document.getElementById('viewSetup').style.display = 'none';
         document.getElementById('viewGame').style.display = 'block';
-        document.getElementById('txtGoal').innerText = g.goal;
+        document.getElementById('txtGoal').innerText = g.goal.toUpperCase();
         document.getElementById('txtV').innerText = `${g.v.toLocaleString('fi-FI')} XP`;
         updateUI();
     }
