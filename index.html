@@ -1,6 +1,3 @@
-
-Copy
-
 <!DOCTYPE html>
 <html lang="fi">
 <head>
@@ -18,16 +15,26 @@ Copy
             --bg: #07070d;
             --surface: rgba(255,255,255,0.042);
             --surface-2: rgba(255,255,255,0.07);
+            --surface-3: rgba(255,255,255,0.10);
             --cyan: #00c8f0;
             --cyan-dim: rgba(0,200,240,0.13);
             --cyan-line: rgba(0,200,240,0.24);
+            --cyan-soft: rgba(0,200,240,0.08);
             --purple: #7c5cbf;
             --purple-dim: rgba(124,92,191,0.13);
+            --purple-mid: rgba(124,92,191,0.22);
             --grad: linear-gradient(135deg,#7c5cbf 0%,#059fbf 60%,#00c8f0 100%);
             --grad-text: linear-gradient(135deg,#b09fe0 0%,#4dcce4 100%);
+            --grad-r1: linear-gradient(135deg,rgba(255,255,255,0.06) 0%,rgba(255,255,255,0.02) 100%);
+            --grad-r5: linear-gradient(135deg,rgba(124,92,191,0.18) 0%,rgba(124,92,191,0.06) 100%);
+            --grad-r20: linear-gradient(135deg,rgba(0,160,210,0.22) 0%,rgba(0,160,210,0.07) 100%);
+            --grad-r50: linear-gradient(135deg,rgba(0,200,240,0.28) 0%,rgba(0,200,240,0.08) 100%);
             --border: rgba(255,255,255,0.07);
             --border-2: rgba(255,255,255,0.11);
-            /* Kontrasti parannettu: text-1 lähes täysi valkoinen, text-2 selvästi luettava */
+            --border-r1: rgba(255,255,255,0.10);
+            --border-r5: rgba(124,92,191,0.35);
+            --border-r20: rgba(0,160,210,0.38);
+            --border-r50: rgba(0,200,240,0.45);
             --text-1: rgba(255,255,255,0.93);
             --text-2: rgba(255,255,255,0.62);
             --text-3: rgba(255,255,255,0.38);
@@ -50,252 +57,219 @@ Copy
             -webkit-tap-highlight-color: transparent;
             -webkit-font-smoothing: antialiased;
         }
-        .container { max-width: 430px; width: 100%; padding: 0 20px 80px; }
+        .container { max-width: 430px; width: 100%; padding: 0 18px 80px; }
  
         /* ── LOGO ── */
-        .logo-area { text-align: center; padding: 52px 0 40px; }
-        .neon-logo {
-            font-size: 1.6rem; font-weight: 200; text-transform: uppercase;
-            letter-spacing: 12px; margin-left: 12px;
-            background: var(--grad-text);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-        .sub-logo { font-size: 9px; text-transform: uppercase; letter-spacing: 5px; color: var(--text-3); margin-top: 10px; font-weight: 500; }
+        .logo-area { text-align: center; padding: 44px 0 32px; }
+        .neon-logo { font-size: 1.5rem; font-weight: 200; text-transform: uppercase; letter-spacing: 12px; margin-left: 12px; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .sub-logo { font-size: 9px; text-transform: uppercase; letter-spacing: 5px; color: var(--text-3); margin-top: 8px; font-weight: 500; }
  
         /* ── CARDS ── */
-        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 20px 22px; margin-bottom: 10px; }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; margin-bottom: 9px; }
         .card-accent { background: linear-gradient(135deg,rgba(124,92,191,0.06),rgba(0,200,240,0.022)); border-color: rgba(124,92,191,0.18); }
  
         /* ── LABELS ── */
-        .lbl { font-size: 10px; font-weight: 600; color: var(--text-2); text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+        .lbl { font-size: 10px; font-weight: 600; color: var(--text-2); text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
         .lbl-dot { width: 3px; height: 3px; background: var(--cyan); border-radius: 50%; flex-shrink: 0; }
  
         /* ── INPUTS ── */
-        .xp-row { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 11px; padding: 1px 14px; margin-bottom: 7px; }
+        .xp-row { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 0 14px; margin-bottom: 7px; }
         .xp-row:last-child { margin-bottom: 0; }
         .xp-tag { font-size: 10px; font-weight: 600; min-width: 38px; color: var(--text-2); letter-spacing: 0.5px; flex-shrink: 0; }
-        input, select { background: transparent; border: none; color: var(--text-1); font-size: 14px; font-weight: 300; padding: 12px 0; outline: none; width: 100%; font-family: inherit; }
+        input, select { background: transparent; border: none; color: var(--text-1); font-size: 14px; font-weight: 300; padding: 11px 0; outline: none; width: 100%; font-family: inherit; }
         select option { background: #12121e; color: #fff; }
         input::placeholder { color: var(--text-3); }
-        textarea { background: transparent; border: none; color: var(--text-1); font-size: 14px; font-weight: 300; outline: none; width: 100%; font-family: inherit; resize: none; line-height: 1.55; }
+        textarea { background: transparent; border: none; color: var(--text-1); font-size: 13px; font-weight: 300; outline: none; width: 100%; font-family: inherit; resize: none; line-height: 1.6; }
         textarea::placeholder { color: var(--text-3); }
  
         /* ── BUTTONS ── */
-        .btn-primary {
-            background: transparent; color: var(--text-1);
-            border: 1px solid var(--cyan-line);
-            padding: 17px 24px; border-radius: 13px; width: 100%;
-            font-size: 11px; font-weight: 500; letter-spacing: 4px;
-            text-transform: uppercase; cursor: pointer; margin-top: 10px;
-            font-family: inherit; transition: background 0.2s;
-        }
+        .btn-primary { background: transparent; color: var(--text-1); border: 1px solid var(--cyan-line); padding: 16px 24px; border-radius: 13px; width: 100%; font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; cursor: pointer; margin-top: 10px; font-family: inherit; transition: background 0.2s; }
         .btn-primary:active { background: var(--cyan-dim); transform: scale(0.99); }
-        .btn-ai {
-            background: var(--purple-dim); border: 1px solid rgba(124,92,191,0.3);
-            color: var(--text-1); padding: 14px; border-radius: 11px; width: 100%;
-            font-size: 10px; font-weight: 600; letter-spacing: 2.5px;
-            text-transform: uppercase; cursor: pointer; font-family: inherit;
-        }
+        .btn-ai { background: var(--purple-dim); border: 1px solid rgba(124,92,191,0.3); color: var(--text-1); padding: 14px; border-radius: 11px; width: 100%; font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; cursor: pointer; font-family: inherit; }
         .btn-ai:active { background: rgba(124,92,191,0.22); transform: scale(0.99); }
-        .btn-ghost {
-            background: transparent; border: 1px solid var(--border);
-            color: var(--text-2); padding: 11px; border-radius: 9px;
-            font-size: 10px; font-weight: 500; letter-spacing: 1.5px;
-            text-transform: uppercase; cursor: pointer; font-family: inherit;
-        }
+        .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text-2); padding: 11px; border-radius: 9px; font-size: 10px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; font-family: inherit; }
         .btn-ghost-danger { border-color: rgba(220,60,60,0.18); color: var(--danger); }
         .btn-ghost:active { opacity: 0.6; }
  
-        /* ── STATUS CARD ── */
-        .status-card {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 22px; padding: 26px 24px 22px;
-            margin-bottom: 10px; position: relative;
-        }
-        .sc-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 22px; }
-        .streak-block { display: flex; flex-direction: column; gap: 3px; }
-        .streak-num { font-size: 24px; font-weight: 200; color: var(--orange); line-height: 1; }
-        .streak-lbl { font-size: 9px; color: var(--text-2); letter-spacing: 2px; text-transform: uppercase; }
-        .mult-block { text-align: right; display: flex; flex-direction: column; gap: 3px; }
-        .mult-num { font-size: 24px; font-weight: 200; color: var(--cyan); line-height: 1; }
-        .mult-lbl { font-size: 9px; color: var(--text-2); letter-spacing: 2px; text-transform: uppercase; }
+        /* ── STATUS CARD — compact ── */
+        .status-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 18px 20px 16px; margin-bottom: 9px; }
  
-        /* PÄIVIÄ MAALIIN — iso numero */
-        .days-block { text-align: center; margin-bottom: 24px; }
-        .days-val { font-size: 86px; font-weight: 200; line-height: 0.88; letter-spacing: -4px; color: var(--text-1); }
-        .days-lbl { font-size: 9px; text-transform: uppercase; color: var(--text-2); letter-spacing: 3px; margin-top: 8px; }
+        /* top micro-stats: putki | kerroin */
+        .sc-micro { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+        .micro-item { display: flex; align-items: baseline; gap: 5px; }
+        .micro-val { font-size: 14px; font-weight: 300; }
+        .micro-val-orange { color: var(--orange); }
+        .micro-val-cyan { color: var(--cyan); }
+        .micro-lbl { font-size: 9px; color: var(--text-3); letter-spacing: 1.5px; text-transform: uppercase; }
+ 
+        /* PÄIVIÄ MAALIIN */
+        .days-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+        .days-val { font-size: 68px; font-weight: 200; line-height: 1; letter-spacing: -3px; color: var(--text-1); }
+        .days-right { display: flex; flex-direction: column; gap: 3px; justify-content: flex-end; padding-bottom: 6px; }
+        .days-lbl { font-size: 9px; text-transform: uppercase; color: var(--text-2); letter-spacing: 2.5px; }
+        .days-pct { font-size: 13px; font-weight: 400; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .days-xp { font-size: 11px; color: var(--text-3); }
  
         /* Virstanpylväät */
-        .milestones { display: flex; gap: 5px; margin-bottom: 5px; }
-        .ms { flex: 1; height: 3px; border-radius: 1.5px; background: rgba(255,255,255,0.07); transition: background 0.6s; }
+        .milestones { display: flex; gap: 4px; margin-bottom: 4px; }
+        .ms { flex: 1; height: 2px; border-radius: 1px; background: rgba(255,255,255,0.07); transition: background 0.6s; }
         .ms.done { background: var(--grad); }
         .ms.near { background: rgba(0,200,240,0.3); }
-        .ms-labels { display: flex; justify-content: space-between; margin-bottom: 18px; }
-        .ms-lbl { font-size: 8px; color: var(--text-3); letter-spacing: 0.5px; }
+        .ms-labels { display: flex; justify-content: space-between; margin-bottom: 14px; }
+        .ms-lbl { font-size: 8px; color: var(--text-3); }
         .ms-lbl.done-lbl { color: var(--text-2); }
  
-        /* Prosentti + XP */
-        .pct-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px; }
-        .pct-val { font-size: 15px; font-weight: 400; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .xp-display { font-size: 13px; color: var(--text-2); font-weight: 300; }
- 
         /* Level bar */
-        .lvl-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 7px; margin-top: 14px; }
-        .lvl-lbl { font-size: 9px; color: var(--text-2); letter-spacing: 2px; text-transform: uppercase; }
-        .lvl-val { font-size: 13px; font-weight: 400; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .bar-track { height: 2px; background: rgba(255,255,255,0.07); border-radius: 1px; overflow: hidden; margin-bottom: 16px; }
+        .lvl-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+        .lvl-lbl { font-size: 9px; color: var(--text-3); letter-spacing: 1.5px; text-transform: uppercase; }
+        .lvl-val { font-size: 11px; font-weight: 400; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .bar-track { height: 2px; background: rgba(255,255,255,0.07); border-radius: 1px; overflow: hidden; }
         .bar-fill { height: 100%; width: 0%; background: var(--grad); transition: width 0.7s ease; }
  
-        .stats3 { display: flex; justify-content: space-between; }
-        .stat-b { text-align: center; }
-        .stat-v { font-size: 17px; font-weight: 300; color: var(--text-1); }
-        .stat-l { font-size: 9px; color: var(--text-2); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 3px; }
+        /* bottom mini stats */
+        .sc-bottom { display: flex; justify-content: space-between; margin-top: 12px; }
+        .sb-item { text-align: center; }
+        .sb-val { font-size: 14px; font-weight: 300; color: var(--text-1); }
+        .sb-lbl { font-size: 8px; color: var(--text-3); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
  
-        /* ── INTENTIO (toggle) ── */
-        .intentio-toggle {
-            display: flex; justify-content: space-between; align-items: center;
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 13px; padding: 14px 18px; margin-bottom: 10px;
-            cursor: pointer;
+        /* ── RUTIININAPIT — houkuttelevat ── */
+        .routine-grid { display: flex; flex-direction: column; gap: 7px; margin-bottom: 9px; }
+ 
+        .rbtn {
+            border: none; border-radius: 14px; padding: 0;
+            cursor: pointer; width: 100%; font-family: inherit;
+            position: relative; overflow: hidden;
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
         }
+        .rbtn:active { transform: scale(0.97); }
+ 
+        .rbtn-inner { display: flex; justify-content: space-between; align-items: center; padding: 15px 18px; }
+ 
+        /* Taso 1 */
+        .rbtn-1 { background: var(--grad-r1); border: 1px solid var(--border-r1); box-shadow: none; }
+        .rbtn-1:active { box-shadow: 0 0 20px rgba(255,255,255,0.04); }
+ 
+        /* Taso 5 */
+        .rbtn-5 { background: var(--grad-r5); border: 1px solid var(--border-r5); box-shadow: 0 2px 12px rgba(124,92,191,0.12); }
+        .rbtn-5:active { box-shadow: 0 0 24px rgba(124,92,191,0.25); }
+ 
+        /* Taso 20 */
+        .rbtn-20 { background: var(--grad-r20); border: 1px solid var(--border-r20); box-shadow: 0 2px 14px rgba(0,160,210,0.14); }
+        .rbtn-20:active { box-shadow: 0 0 28px rgba(0,160,210,0.28); }
+ 
+        /* Taso 50 */
+        .rbtn-50 { background: var(--grad-r50); border: 1px solid var(--border-r50); box-shadow: 0 2px 18px rgba(0,200,240,0.18); }
+        .rbtn-50:active { box-shadow: 0 0 32px rgba(0,200,240,0.35); }
+ 
+        .rbtn-left { display: flex; align-items: center; gap: 13px; text-align: left; }
+        .rbtn-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+        .rdot-1  { background: rgba(255,255,255,0.28); }
+        .rdot-5  { background: rgba(168,139,220,0.9); box-shadow: 0 0 6px rgba(124,92,191,0.5); }
+        .rdot-20 { background: rgba(0,190,230,0.85); box-shadow: 0 0 6px rgba(0,160,210,0.5); }
+        .rdot-50 { background: var(--cyan); box-shadow: 0 0 8px rgba(0,200,240,0.7); }
+ 
+        .rbtn-text { display: flex; flex-direction: column; gap: 2px; }
+        .rbtn-name { font-size: 13px; font-weight: 400; color: var(--text-1); line-height: 1.3; }
+        .rbtn-min  { font-size: 10px; color: var(--text-3); }
+        .rbtn-50 .rbtn-name { font-weight: 500; }
+        .rbtn-50 .rbtn-min  { color: rgba(0,200,240,0.55); }
+ 
+        .rbtn-xp { font-size: 15px; font-weight: 600; white-space: nowrap; margin-left: 8px; }
+        .rxp-1  { color: var(--text-2); font-weight: 400; font-size: 14px; }
+        .rxp-5  { background: linear-gradient(135deg,#b09fe0,#8b70d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .rxp-20 { background: linear-gradient(135deg,#4dd4f0,#00a8d0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .rxp-50 { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 16px; }
+ 
+        /* ── INTENTIO TOGGLE ── */
+        .intentio-toggle { display: flex; justify-content: space-between; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 13px; padding: 13px 18px; margin-bottom: 9px; cursor: pointer; }
         .intentio-toggle-lbl { font-size: 10px; font-weight: 600; color: var(--text-2); text-transform: uppercase; letter-spacing: 2.5px; display: flex; align-items: center; gap: 8px; }
-        .intentio-arrow { font-size: 11px; color: var(--text-3); transition: transform 0.25s; }
+        .intentio-preview { font-size: 10px; color: var(--text-3); font-weight: 300; letter-spacing: 0; text-transform: none; margin-left: 4px; max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .intentio-arrow { font-size: 10px; color: var(--text-3); transition: transform 0.22s; }
         .intentio-arrow.open { transform: rotate(180deg); }
-        .intentio-body {
-            background: var(--surface); border: 1px solid var(--border);
-            border-top: none; border-radius: 0 0 13px 13px;
-            padding: 16px 18px 14px;
-            margin-top: -10px; margin-bottom: 10px;
-            display: none;
-        }
+        .intentio-body { background: var(--surface); border: 1px solid var(--border); border-top: none; border-radius: 0 0 13px 13px; padding: 14px 18px 12px; margin-top: -9px; margin-bottom: 9px; display: none; }
         .intentio-body.open { display: block; }
         .intentio-saved { font-size: 10px; color: var(--green); letter-spacing: 1px; margin-top: 8px; opacity: 0; transition: opacity 0.3s; }
         .intentio-saved.show { opacity: 1; }
  
         /* ── VIIKKOKAAVIO ── */
-        .week-card { margin-bottom: 10px; }
-        .week-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .week-best-lbl { font-size: 9px; color: var(--text-2); letter-spacing: 1px; }
+        .week-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 11px; }
+        .week-best-lbl { font-size: 9px; color: var(--text-2); }
         .week-best-val { color: var(--text-1); font-weight: 400; }
-        .week-bars { display: flex; align-items: flex-end; gap: 5px; height: 52px; margin-bottom: 6px; }
+        .week-bars { display: flex; align-items: flex-end; gap: 5px; height: 46px; margin-bottom: 5px; }
         .wbw { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
         .wb { width: 100%; border-radius: 2px 2px 0 0; min-height: 2px; transition: height 0.4s ease; }
         .wb-empty { background: rgba(255,255,255,0.06); }
-        .wb-done { background: rgba(124,92,191,0.45); }
-        .wb-today { background: linear-gradient(180deg,var(--cyan) 0%,rgba(0,200,240,0.3) 100%); }
-        .wdl { font-size: 8px; color: var(--text-3); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 4px; }
+        .wb-done  { background: rgba(124,92,191,0.42); }
+        .wb-today { background: linear-gradient(180deg,var(--cyan) 0%,rgba(0,200,240,0.28) 100%); }
+        .wdl { font-size: 8px; color: var(--text-3); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 3px; }
         .wdl-today { color: var(--cyan); }
  
-        /* ── RUTIINIT ── */
-        .section-lbl {
-            font-size: 10px; font-weight: 600; color: var(--text-2);
-            text-transform: uppercase; letter-spacing: 2.5px;
-            margin: 16px 0 8px; display: flex; align-items: center; gap: 8px;
-        }
+        /* ── SECTION LABEL ── */
+        .section-lbl { font-size: 10px; font-weight: 600; color: var(--text-2); text-transform: uppercase; letter-spacing: 2.5px; margin: 14px 0 8px; display: flex; align-items: center; gap: 8px; }
         .section-lbl::before { content:''; width:3px; height:3px; background:var(--cyan); border-radius:50%; }
  
-        .routine-btn {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 13px; padding: 15px 18px; margin-bottom: 7px;
-            display: flex; justify-content: space-between; align-items: center;
-            cursor: pointer; width: 100%;
-            transition: border-color 0.15s, background 0.15s;
-        }
-        .routine-btn:last-child { margin-bottom: 0; }
-        .routine-btn:active { background: var(--surface-2); transform: scale(0.99); }
-        .rl { display: flex; align-items: center; gap: 13px; }
-        .rdot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
-        .rdot-1  { background: rgba(255,255,255,0.22); }
-        .rdot-5  { background: rgba(124,92,191,0.6); }
-        .rdot-20 { background: rgba(0,180,220,0.7); }
-        .rdot-50 { background: var(--cyan); }
-        .rtext { display: flex; flex-direction: column; gap: 2px; text-align: left; }
-        .rname { font-size: 13px; font-weight: 300; color: var(--text-1); line-height: 1.3; }
-        .rmin  { font-size: 10px; color: var(--text-3); }
-        .rxp { font-size: 13px; font-weight: 500; color: var(--text-2); white-space: nowrap; margin-left: 10px; }
-        .rxp-50 { color: var(--cyan); }
- 
         /* ── UNDO ── */
-        .undo-bar {
-            display: none; align-items: center; justify-content: space-between;
-            background: rgba(255,255,255,0.03); border: 1px solid var(--border);
-            border-radius: 11px; padding: 11px 16px; margin-bottom: 9px;
-        }
+        .undo-bar { display: none; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 10px 15px; margin-bottom: 8px; }
         .undo-bar.visible { display: flex; }
         .undo-msg { font-size: 11px; color: var(--text-2); }
-        .btn-undo { font-size: 10px; font-weight: 600; color: var(--cyan); background: transparent; border: none; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; font-family: inherit; padding: 4px 0; }
+        .btn-undo { font-size: 10px; font-weight: 600; color: var(--cyan); background: transparent; border: none; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; font-family: inherit; padding: 3px 0; }
  
         /* ── AI CARD ── */
-        .ai-desc { font-size: 13px; color: var(--text-2); line-height: 1.68; margin-bottom: 14px; font-weight: 300; }
-        .ai-steps { font-size: 12px; color: var(--text-2); line-height: 1.72; margin: 0 0 16px 0; padding-left: 16px; font-weight: 300; }
-        .ai-steps li { margin-bottom: 5px; }
+        .ai-desc  { font-size: 12px; color: var(--text-2); line-height: 1.68; margin-bottom: 12px; font-weight: 300; }
+        .ai-steps { font-size: 12px; color: var(--text-2); line-height: 1.72; margin: 0 0 14px 0; padding-left: 15px; font-weight: 300; }
+        .ai-steps li { margin-bottom: 4px; }
         .ai-steps a { color: var(--cyan); text-decoration: none; }
  
         /* ── FOOTER ── */
-        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-top: 20px; padding-bottom: 24px; }
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-top: 18px; padding-bottom: 24px; }
  
         /* ── GOAL HEADER ── */
-        .goal-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin: 30px 0 12px; padding-bottom: 14px; border-bottom: 1px solid var(--border);
-        }
+        .goal-header { display: flex; justify-content: space-between; align-items: center; margin: 26px 0 10px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
         .goal-name { font-size: 11px; font-weight: 500; color: var(--text-1); letter-spacing: 2px; text-transform: uppercase; }
         .goal-target { font-size: 10px; color: var(--text-2); letter-spacing: 1px; }
  
         /* ── OVERLAYS ── */
-        #lvlOverlay, #victoryOverlay, #milestoneOverlay {
-            position: fixed; inset: 0; z-index: 5000;
-            display: none; flex-direction: column;
-            align-items: center; justify-content: center;
-            background: rgba(7,7,13,0.96); backdrop-filter: blur(24px);
-            text-align: center; padding: 40px;
-        }
+        #lvlOverlay,#victoryOverlay,#milestoneOverlay { position: fixed; inset: 0; z-index: 5000; display: none; flex-direction: column; align-items: center; justify-content: center; background: rgba(7,7,13,0.96); backdrop-filter: blur(24px); text-align: center; padding: 40px; }
         .ov-kicker { font-size: 9px; letter-spacing: 5px; color: var(--cyan); font-weight: 600; text-transform: uppercase; margin-bottom: 14px; }
-        .ov-title { font-size: 2.6rem; font-weight: 200; letter-spacing: -1px; margin-bottom: 10px; color: var(--text-1); }
-        .ov-sub { font-size: 14px; font-weight: 300; color: var(--text-2); letter-spacing: 0.5px; margin-bottom: 32px; line-height: 1.65; }
+        .ov-title  { font-size: 2.5rem; font-weight: 200; letter-spacing: -1px; margin-bottom: 10px; color: var(--text-1); }
+        .ov-sub    { font-size: 14px; font-weight: 300; color: var(--text-2); margin-bottom: 30px; line-height: 1.65; }
  
         /* ── XP FLY ── */
         .xp-fly { position: absolute; font-size: 14px; font-weight: 600; pointer-events: none; z-index: 7000; color: var(--cyan); animation: fly 0.7s ease-out forwards; letter-spacing: 1px; }
         @keyframes fly { 0%{transform:translateY(0);opacity:1;} 100%{transform:translateY(-70px);opacity:0;} }
  
-        /* ── DAY TOAST ── */
-        .day-toast {
-            position: fixed; top: 22px; left: 50%; transform: translateX(-50%);
-            background: rgba(255,255,255,0.06); border: 1px solid var(--border-2);
-            color: var(--text-2); padding: 11px 22px; border-radius: 40px;
-            font-size: 10px; font-weight: 500; letter-spacing: 3px;
-            text-transform: uppercase; z-index: 9000;
-            opacity: 0; transition: opacity 0.4s ease; pointer-events: none; white-space: nowrap;
-        }
+        /* ── TOASTS ── */
+        .day-toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.06); border: 1px solid var(--border-2); color: var(--text-2); padding: 10px 20px; border-radius: 40px; font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; z-index: 9000; opacity: 0; transition: opacity 0.4s ease; pointer-events: none; white-space: nowrap; }
         .day-toast.show { opacity: 1; }
+        #offlineBadge { position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); background: rgba(249,115,22,0.12); border: 1px solid rgba(249,115,22,0.28); color: rgba(249,115,22,0.85); padding: 7px 16px; border-radius: 30px; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; z-index: 8000; display: none; white-space: nowrap; }
  
-        /* offline badge */
-        #offlineBadge {
-            position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
-            background: rgba(249,115,22,0.15); border: 1px solid rgba(249,115,22,0.3);
-            color: rgba(249,115,22,0.9); padding: 8px 18px; border-radius: 30px;
-            font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-            font-weight: 500; z-index: 8000; display: none; white-space: nowrap;
-        }
+        /* ── TIETOSUOJAHUOMIO ── */
+        .privacy-note { font-size: 10px; color: var(--text-3); text-align: center; letter-spacing: 0.5px; line-height: 1.6; margin-top: 16px; padding: 0 8px; }
+ 
+        /* Lähtötilanne collapsible on sivulla 2 */
+        .baseline-toggle { display: flex; justify-content: space-between; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 13px; padding: 13px 18px; margin-bottom: 9px; cursor: pointer; }
+        .baseline-toggle-lbl { font-size: 10px; font-weight: 600; color: var(--text-2); text-transform: uppercase; letter-spacing: 2.5px; display: flex; align-items: center; gap: 8px; }
+        .baseline-arrow { font-size: 10px; color: var(--text-3); transition: transform 0.22s; }
+        .baseline-arrow.open { transform: rotate(180deg); }
+        .baseline-body { background: var(--surface); border: 1px solid var(--border); border-top: none; border-radius: 0 0 13px 13px; padding: 14px 18px 12px; margin-top: -9px; margin-bottom: 9px; display: none; }
+        .baseline-body.open { display: block; }
+        .baseline-text { font-size: 12px; color: var(--text-2); line-height: 1.6; font-style: italic; white-space: pre-wrap; }
     </style>
 </head>
 <body>
  
-<!-- OVERLAYS -->
 <div id="lvlOverlay">
     <div class="ov-kicker">Taso nousi</div>
     <div class="ov-title" id="popLvlText">Taso 2</div>
     <div class="ov-sub">Systemaattinen tekeminen toimii.</div>
     <button class="btn-primary" onclick="closeLvl()" style="max-width:180px;margin:0 auto;">Jatka</button>
 </div>
- 
 <div id="milestoneOverlay">
     <div class="ov-kicker" id="msKicker">Virstanpylväs</div>
     <div class="ov-title" id="msTitle">25 %</div>
     <div class="ov-sub" id="msSub">Neljäsosa matkasta takana.</div>
     <button class="btn-primary" onclick="closeMilestone()" style="max-width:180px;margin:0 auto;">Jatka</button>
 </div>
- 
 <div id="victoryOverlay">
     <div class="ov-kicker">Tavoite saavutettu</div>
     <div class="ov-title" style="color:var(--green);">Valmis.</div>
@@ -308,7 +282,7 @@ Copy
  
 <div class="container">
  
-<!-- ═══════════════════ SIVU 1: SETUP -->
+<!-- ══════════════════════════════ SIVU 1: SETUP -->
 <div id="viewSetup">
     <div class="logo-area">
         <h1 class="neon-logo">Muutoskone</h1>
@@ -321,6 +295,11 @@ Copy
     </div>
  
     <div class="card">
+        <div class="lbl"><span class="lbl-dot"></span>Lähtötilanne</div>
+        <textarea id="inBaseline" rows="4" placeholder="Kuvaile nykytilasi mahdollisimman tarkasti. Mistä lähdet liikkeelle? Mitkä ovat arjen rajoitteesi, vahvuutesi, aiemmat yritykset? Tämä auttaa AI-analyysiä ja toimii myöhemmin vertailukohtana."></textarea>
+    </div>
+ 
+    <div class="card">
         <div class="lbl"><span class="lbl-dot"></span>Rutiinit</div>
         <div class="xp-row"><span class="xp-tag">1 XP</span><input type="text" id="inR1" placeholder="Pienin teko — 1–10 min"></div>
         <div class="xp-row"><span class="xp-tag">5 XP</span><input type="text" id="inR5" placeholder="Päivittäinen toimenpide — 15–30 min"></div>
@@ -329,7 +308,7 @@ Copy
     </div>
  
     <div class="card">
-        <div class="lbl"><span class="lbl-dot"></span>Tavoitteen laajuus</div>
+        <div class="lbl"><span class="lbl-dot"></span>Vaikeuskerroin</div>
         <select id="inV">
             <option value="1000">1 000 XP — Uusi tapa</option>
             <option value="5000" selected>5 000 XP — Merkittävä muutos</option>
@@ -340,9 +319,9 @@ Copy
  
     <button class="btn-primary" onclick="start()">Käynnistä</button>
  
-    <div class="card card-accent" style="margin-top:18px;">
+    <div class="card card-accent" style="margin-top:16px;">
         <div class="lbl"><span class="lbl-dot"></span>Strategia-apuri</div>
-        <p class="ai-desc">Epävarma laajuudesta tai rutiineista? Tekoäly auttaa kalibroimaan parametrit tilanteesi pohjalta.</p>
+        <p class="ai-desc">Epävarma vaikeuskertoimesta tai rutiineista? Tekoäly auttaa kalibroimaan parametrit tilanteesi pohjalta.</p>
         <ol class="ai-steps">
             <li>Kopioi kehote alla olevasta napista.</li>
             <li>Avaa <a href="https://gemini.google.com" target="_blank">Gemini</a> ja liitä se sinne.</li>
@@ -350,9 +329,11 @@ Copy
         </ol>
         <button class="btn-ai" id="copyAiBtn" onclick="copyAiPrompt()">Kopioi strategiakehote</button>
     </div>
+ 
+    <p class="privacy-note">Kaikki data tallennetaan ainoastaan tällä laitteella.<br>Mitään tietoja ei lähetetä palvelimelle.</p>
 </div>
  
-<!-- ═══════════════════ SIVU 2: PELI -->
+<!-- ══════════════════════════════ SIVU 2: PELI -->
 <div id="viewGame" style="display:none;">
  
     <div class="goal-header">
@@ -360,23 +341,29 @@ Copy
         <span class="goal-target" id="txtV"></span>
     </div>
  
-    <!-- STATUS CARD -->
+    <!-- STATUS CARD — tiivistetty -->
     <div class="status-card">
-        <div class="sc-top">
-            <div class="streak-block">
-                <div class="streak-num" id="streakNum">0</div>
-                <div class="streak-lbl">pv putki</div>
+ 
+        <!-- Putki + Kerroin pienenä yläreunassa -->
+        <div class="sc-micro">
+            <div class="micro-item">
+                <span class="micro-val micro-val-orange" id="streakNum">0</span>
+                <span class="micro-lbl">pv putki</span>
             </div>
-            <div class="mult-block">
-                <div class="mult-num" id="multNum">×1.00</div>
-                <div class="mult-lbl">kerroin</div>
+            <div class="micro-item">
+                <span class="micro-lbl">kerroin</span>
+                <span class="micro-val micro-val-cyan" id="multNum">×1.00</span>
             </div>
         </div>
  
-        <!-- PÄIVIÄ MAALIIN -->
-        <div class="days-block">
+        <!-- PÄIVIÄ MAALIIN — iso -->
+        <div class="days-row">
             <div class="days-val" id="valM">—</div>
-            <div class="days-lbl">Päiviä maaliin</div>
+            <div class="days-right">
+                <div class="days-lbl">Päiviä<br>maaliin</div>
+                <div class="days-pct" id="pctVal">0%</div>
+                <div class="days-xp" id="xpDisplay">0 XP</div>
+            </div>
         </div>
  
         <!-- Virstanpylväät -->
@@ -395,12 +382,6 @@ Copy
             <span class="ms-lbl" id="mslbl100">100%</span>
         </div>
  
-        <!-- Prosentti + XP -->
-        <div class="pct-row">
-            <span class="pct-val" id="pctVal">0%</span>
-            <span class="xp-display" id="xpDisplay">0 XP</span>
-        </div>
- 
         <!-- Level bar -->
         <div class="lvl-row">
             <div class="lvl-lbl">Taso <span class="lvl-val" id="valLvl">1</span></div>
@@ -408,39 +389,62 @@ Copy
         </div>
         <div class="bar-track"><div class="bar-fill" id="barXP"></div></div>
  
-        <div class="stats3">
-            <div class="stat-b">
-                <div class="stat-v" id="statAvg">—</div>
-                <div class="stat-l">XP / pv</div>
+        <!-- Bottom stats: avg, paras, putki -->
+        <div class="sc-bottom">
+            <div class="sb-item">
+                <div class="sb-val" id="statAvg">—</div>
+                <div class="sb-lbl">XP / pv</div>
             </div>
-            <div class="stat-b">
-                <div class="stat-v" id="statStreak">0</div>
-                <div class="stat-l">Putki</div>
+            <div class="sb-item">
+                <div class="sb-val" id="statBest">—</div>
+                <div class="sb-lbl">Paras pv</div>
             </div>
-            <div class="stat-b">
-                <div class="stat-v" id="statBest">—</div>
-                <div class="stat-l">Paras pv</div>
+            <div class="sb-item">
+                <div class="sb-val" id="statStreak">0</div>
+                <div class="sb-lbl">Putki</div>
             </div>
         </div>
     </div>
  
-    <!-- PÄIVÄN INTENTIO — valinnainen toggle -->
+    <!-- RUTIININAPIT — heti status-kortin alla, mahtuu näyttöön -->
+    <div class="routine-grid" id="taskList"></div>
+ 
+    <!-- UNDO -->
+    <div class="undo-bar" id="undoBar">
+        <span class="undo-msg" id="undoMsg"></span>
+        <button class="btn-undo" onclick="undoXP()">Peruuta</button>
+    </div>
+ 
+    <!-- PÄIVÄN INTENTIO -->
     <div class="intentio-toggle" id="intentioToggle" onclick="toggleIntentio()">
         <div class="intentio-toggle-lbl">
-            <span class="lbl-dot" style="background:var(--cyan);width:3px;height:3px;border-radius:50%;flex-shrink:0;"></span>
+            <span class="lbl-dot"></span>
             Päivän intentio
-            <span id="intentioPreview" style="font-size:10px;color:var(--text-3);font-weight:300;letter-spacing:0;text-transform:none;margin-left:4px;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
+            <span class="intentio-preview" id="intentioPreview"></span>
         </div>
         <span class="intentio-arrow" id="intentioArrow">▾</span>
     </div>
     <div class="intentio-body" id="intentioBody">
-        <div style="font-size:10px;color:var(--text-2);letter-spacing:1px;margin-bottom:10px;">Tänään aion</div>
+        <div style="font-size:10px;color:var(--text-2);letter-spacing:1px;margin-bottom:8px;">Tänään aion</div>
         <textarea id="intentioInput" rows="2" placeholder="Kirjoita yksi konkreettinen asia, jonka teet tänään…"></textarea>
         <div class="intentio-saved" id="intentioSaved">Tallennettu</div>
     </div>
  
+    <!-- LÄHTÖTILANNE (vain luku, collapsible) -->
+    <div class="baseline-toggle" onclick="toggleBaseline()">
+        <div class="baseline-toggle-lbl">
+            <span class="lbl-dot"></span>
+            Lähtötilanne
+        </div>
+        <span class="baseline-arrow" id="baselineArrow">▾</span>
+    </div>
+    <div class="baseline-body" id="baselineBody">
+        <div class="baseline-text" id="baselineText"></div>
+        <div style="font-size:10px;color:var(--text-3);margin-top:10px;letter-spacing:0.5px;">Nollaa peli muokataksesi lähtötilannetta.</div>
+    </div>
+ 
     <!-- VIIKKOKAAVIO -->
-    <div class="card week-card">
+    <div class="card" style="margin-bottom:9px;">
         <div class="week-header">
             <div class="lbl" style="margin-bottom:0;"><span class="lbl-dot"></span>Aktiivisuus — 7 pv</div>
             <div class="week-best-lbl">Paras: <span class="week-best-val" id="weekBestVal">—</span> XP</div>
@@ -449,23 +453,13 @@ Copy
         <div style="display:flex;gap:5px;" id="weekLabels"></div>
     </div>
  
-    <!-- UNDO -->
-    <div class="undo-bar" id="undoBar">
-        <span class="undo-msg" id="undoMsg"></span>
-        <button class="btn-undo" onclick="undoXP()">Peruuta</button>
-    </div>
- 
-    <!-- RUTIINIT -->
-    <div class="section-lbl">Rutiinit</div>
-    <div id="taskList" style="margin-bottom:8px;"></div>
- 
     <!-- TILANNEKATSAUS -->
-    <div class="section-lbl" style="margin-top:18px;">Tilannekatsaus</div>
+    <div class="section-lbl">Tilannekatsaus</div>
     <div class="card card-accent">
-        <p class="ai-desc">Onko vauhtisi riittävä? Kopioi kehote Geminille — datasi on mukana valmiiksi. Saat suoran analyyttisen arvion ja konkreettisen ehdotuksen seuraavalle 24 tunnille.</p>
+        <p class="ai-desc">Onko vauhtisi riittävä? Kopioi kehote Geminille — datasi ja lähtötilanteesi ovat mukana valmiiksi.</p>
         <ol class="ai-steps">
             <li>Kopioi kehote alta.</li>
-            <li>Avaa <a href="https://gemini.google.com" target="_blank">Gemini</a> ja liitä kehote.</li>
+            <li>Avaa <a href="https://gemini.google.com" target="_blank">Gemini</a> ja liitä se.</li>
             <li>Vastaa Geminin kysymyksiin yksi kerrallaan.</li>
         </ol>
         <button class="btn-ai" id="copyMentorBtn" onclick="copyMentorPrompt()">Kopioi tilannekatsauskehote</button>
@@ -478,44 +472,40 @@ Copy
         <button class="btn-ghost btn-ghost-danger" onclick="reset()">Nollaa</button>
         <input type="file" id="fileIn" style="display:none" onchange="importData(event)">
     </div>
+ 
+    <p class="privacy-note">Kaikki data tallennetaan ainoastaan tällä laitteella.</p>
 </div>
 </div>
  
 <script>
-// ═══════════════════════════════ TILA
 const MINS = { 1:'1–10 min', 5:'15–30 min', 20:'45–90 min', 50:'2–4 h' };
 const MILESTONES = [10,25,50,75,100];
 const MS_DATA = {
-    10:  { kicker:'Ensimmäinen virstanpylväs', title:'10 %', sub:'Järjestelmä toimii. Jatka samaan malliin.' },
-    25:  { kicker:'Virstanpylväs', title:'25 %', sub:'Neljäsosa matkasta suoritettu. Vauhti on kertynyt.' },
-    50:  { kicker:'Puoliväli', title:'50 %', sub:'Tässä kohtaa useimmat lopettavat. Sinä et.' },
-    75:  { kicker:'Virstanpylväs', title:'75 %', sub:'Kolme neljäsosaa tehty. Maali on jo näkyvissä.' },
-    100: { kicker:'Valmis', title:'100 %', sub:'Tavoite saavutettu.' }
+    10: { kicker:'Ensimmäinen virstanpylväs', title:'10 %', sub:'Järjestelmä toimii. Jatka samaan malliin.' },
+    25: { kicker:'Virstanpylväs', title:'25 %', sub:'Neljäsosa matkasta suoritettu. Vauhti on kertynyt.' },
+    50: { kicker:'Puoliväli', title:'50 %', sub:'Tässä kohtaa useimmat lopettavat. Sinä et.' },
+    75: { kicker:'Virstanpylväs', title:'75 %', sub:'Kolme neljäsosaa tehty. Maali on jo näkyvissä.' },
+    100:{ kicker:'Valmis', title:'100 %', sub:'Tavoite saavutettu.' }
 };
  
 let g = {
-    active:false, goal:'', r1:'', r5:'', r20:'', r50:'',
+    active:false, goal:'', baseline:'', r1:'', r5:'', r20:'', r50:'',
     v:5000, total:0, days:1, lvl:1,
     initialEstimate:null, lowestEstimate:null,
     startDate:null, streak:0, lastActivityDate:null,
     lastXP:null, lastXPLabel:null,
     weekLog:{}, passedMilestones:[], bestDay:0,
-    intentioDate:null, intentioText:'',
-    intentioOpen:false
+    intentioDate:null, intentioText:'', intentioOpen:false,
+    baselineOpen:false
 };
  
 let dayCheckInterval = null;
  
 window.onload = () => {
     installPWA();
-    const saved = localStorage.getItem('mk_v8');
+    const saved = localStorage.getItem('mk_v9');
     if (saved) {
-        try {
-            const p = JSON.parse(saved);
-            g = Object.assign(g, p);
-            if (!g.weekLog) g.weekLog = {};
-            if (!g.passedMilestones) g.passedMilestones = [];
-        } catch(e) {}
+        try { const p = JSON.parse(saved); g = Object.assign(g, p); if (!g.weekLog) g.weekLog = {}; if (!g.passedMilestones) g.passedMilestones = []; } catch(e){}
         if (g.active) { checkDayRollover(false); render(); }
     }
     startDayChecker();
@@ -523,135 +513,90 @@ window.onload = () => {
     window.addEventListener('offline', () => { document.getElementById('offlineBadge').style.display='block'; });
 };
  
-// ═══════════════════════════════ PWA / SERVICE WORKER
 function installPWA() {
-    const manifest = {
-        name: 'Muutoskone',
-        short_name: 'Muutoskone',
-        start_url: './',
-        display: 'standalone',
-        background_color: '#07070d',
-        theme_color: '#07070d',
-        icons: [{ src:"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>", sizes:'any', type:'image/svg+xml' }]
-    };
+    const manifest = { name:'Muutoskone', short_name:'Muutoskone', start_url:'./', display:'standalone', background_color:'#07070d', theme_color:'#07070d' };
     const blob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
-    const url = URL.createObjectURL(blob);
-    document.getElementById('manifestLink').href = url;
- 
+    document.getElementById('manifestLink').href = URL.createObjectURL(blob);
     if ('serviceWorker' in navigator) {
-        const swCode = `
-const CACHE = 'mk-v8';
-const ASSETS = [location.href];
-self.addEventListener('install', e => {
-    e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).catch(()=>{}));
-    self.skipWaiting();
-});
-self.addEventListener('activate', e => {
-    e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));
-    self.clients.claim();
-});
-self.addEventListener('fetch', e => {
-    e.respondWith(caches.match(e.request).then(r => r || fetch(e.request).catch(() => caches.match(e.request))));
-});`;
-        const swBlob = new Blob([swCode], {type:'application/javascript'});
-        const swUrl = URL.createObjectURL(swBlob);
+        const sw = `const C='mk-v9';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll([location.href])).catch(()=>{}));self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==C).map(k=>caches.delete(k)))));self.clients.claim();});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>caches.match(e.request))));});`;
+        const swUrl = URL.createObjectURL(new Blob([sw], {type:'application/javascript'}));
         navigator.serviceWorker.register(swUrl).catch(()=>{});
     }
 }
  
-// ═══════════════════════════════ PÄIVÄ
 function startDayChecker() {
     if (dayCheckInterval) clearInterval(dayCheckInterval);
     dayCheckInterval = setInterval(() => { if (g.active) checkDayRollover(true); }, 60000);
 }
-function getDateStr(d) {
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-}
+function getDateStr(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
 function getTodayStr() { return getDateStr(new Date()); }
  
 function checkDayRollover(animate) {
     if (!g.startDate) return;
-    const start = new Date(g.startDate);
-    const now = new Date();
+    const start = new Date(g.startDate), now = new Date();
     start.setHours(0,0,0,0); now.setHours(0,0,0,0);
-    const diffDays = Math.floor((now - start) / 86400000) + 1;
-    if (diffDays > g.days) {
+    const diff = Math.floor((now-start)/86400000)+1;
+    if (diff > g.days) {
         const today = getTodayStr();
         if (g.lastActivityDate !== today) {
             const yest = new Date(now); yest.setDate(yest.getDate()-1);
             if (g.lastActivityDate !== getDateStr(yest) && g.lastActivityDate !== null) g.streak = 0;
         }
-        // Resetoi intentio uudelle päivälle
         if (g.intentioDate !== today) { g.intentioText = ''; g.intentioDate = null; }
-        g.days = diffDays;
-        save();
+        g.days = diff; save();
         if (animate) { showToast(); updateUI(); }
     }
 }
  
-function showToast() {
-    const t = document.getElementById('dayToast');
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2800);
-}
+function showToast() { const t=document.getElementById('dayToast'); t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2800); }
  
-// ═══════════════════════════════ INTENTIO
+/* ── INTENTIO ── */
 function toggleIntentio() {
-    g.intentioOpen = !g.intentioOpen;
-    save();
-    const body = document.getElementById('intentioBody');
-    const arrow = document.getElementById('intentioArrow');
-    body.classList.toggle('open', g.intentioOpen);
-    arrow.classList.toggle('open', g.intentioOpen);
-    if (g.intentioOpen) {
-        document.getElementById('intentioInput').focus();
-    }
+    g.intentioOpen = !g.intentioOpen; save();
+    document.getElementById('intentioBody').classList.toggle('open', g.intentioOpen);
+    document.getElementById('intentioArrow').classList.toggle('open', g.intentioOpen);
+    if (g.intentioOpen) document.getElementById('intentioInput').focus();
+    updateIntentioPreview();
 }
- 
 function initIntentio() {
     const el = document.getElementById('intentioInput');
     const today = getTodayStr();
-    if (g.intentioDate === today && g.intentioText) {
-        el.value = g.intentioText;
-    } else {
-        el.value = '';
-    }
+    el.value = (g.intentioDate === today && g.intentioText) ? g.intentioText : '';
+    document.getElementById('intentioBody').classList.toggle('open', !!g.intentioOpen);
+    document.getElementById('intentioArrow').classList.toggle('open', !!g.intentioOpen);
     updateIntentioPreview();
- 
-    // Palauta toggle-tila
-    const body = document.getElementById('intentioBody');
-    const arrow = document.getElementById('intentioArrow');
-    body.classList.toggle('open', !!g.intentioOpen);
-    arrow.classList.toggle('open', !!g.intentioOpen);
- 
     el.addEventListener('input', () => {
-        g.intentioText = el.value;
-        g.intentioDate = getTodayStr();
+        g.intentioText = el.value; g.intentioDate = getTodayStr(); save();
         updateIntentioPreview();
-        save();
-        const saved = document.getElementById('intentioSaved');
-        saved.classList.add('show');
-        clearTimeout(window._iT);
-        window._iT = setTimeout(() => saved.classList.remove('show'), 1600);
+        const s = document.getElementById('intentioSaved');
+        s.classList.add('show'); clearTimeout(window._iT); window._iT = setTimeout(()=>s.classList.remove('show'),1600);
     });
 }
- 
 function updateIntentioPreview() {
     const prev = document.getElementById('intentioPreview');
     const today = getTodayStr();
-    if (g.intentioDate === today && g.intentioText && !g.intentioOpen) {
-        prev.innerText = '— ' + g.intentioText.slice(0, 30) + (g.intentioText.length > 30 ? '…' : '');
-    } else {
-        prev.innerText = '';
-    }
+    prev.innerText = (!g.intentioOpen && g.intentioDate===today && g.intentioText) ? '— '+g.intentioText.slice(0,28)+(g.intentioText.length>28?'…':'') : '';
 }
  
-// ═══════════════════════════════ KEHOTTEET
+/* ── LÄHTÖTILANNE ── */
+function toggleBaseline() {
+    g.baselineOpen = !g.baselineOpen; save();
+    document.getElementById('baselineBody').classList.toggle('open', g.baselineOpen);
+    document.getElementById('baselineArrow').classList.toggle('open', g.baselineOpen);
+}
+function initBaseline() {
+    document.getElementById('baselineText').innerText = g.baseline || '—';
+    document.getElementById('baselineBody').classList.toggle('open', !!g.baselineOpen);
+    document.getElementById('baselineArrow').classList.toggle('open', !!g.baselineOpen);
+}
+ 
+/* ── KEHOTTEET ── */
 function copyAiPrompt() {
+    const baselineTxt = g.baseline ? `\nLähtötilanne:\n${g.baseline}` : '';
     const txt = `Toimit MUUTOSKONE-järjestelmän strategisena suunnittelijana. Tehtäväsi on auttaa minua kalibroimaan tavoitteeni parametrit täsmällisesti.
  
 Järjestelmän logiikka:
-— Laajuus (V) heijastaa kokonaistyömäärää:
+— Vaikeuskerroin (V) heijastaa kokonaistyömäärää:
   · 1 000 XP ≈ 100 h — uuden tavan rakentaminen
   · 5 000 XP ≈ 500 h — selkeä, mitattava elämänmuutos
   · 10 000 XP ≈ 1 000 h — identiteettitason muutos
@@ -661,32 +606,29 @@ Järjestelmän logiikka:
   · 5 XP: päivittäinen toimenpide, 15–30 min
   · 20 XP: merkittävä suoritus, 45–90 min
   · 50 XP: päivän tärkein panostus, 2–4 h tai merkittävä henkinen läpimurto
-— Kertymäkerroin kasvaa päivästä 1 päivään 84 välillä 1.0 → 2.0
+— Kertymäkerroin kasvaa päivästä 1 päivään 84 välillä 1.0 → 2.0${baselineTxt}
  
 TÄRKEÄÄ: Etene dialogissa yksi askel kerrallaan. Esitä täsmälleen yksi kysymys kerrallaan ja odota vastaukseni.
  
-Vaihe 1 — Esittele itsesi lyhyesti (1–2 virkettä). Kysy sitten: mikä on tavoitteeni.
-Vaihe 2 — Kysy: mikä on lähtötilani ja arjen realistiset rajoitteeni.
+Vaihe 1 — Esittele itsesi lyhyesti. Kysy sitten: mikä on tavoitteeni.
+Vaihe 2 — Kysy: mitkä ovat arjen realistiset rajoitteeni (ellei jo selviä lähtötilanteesta).
 Vaihe 3 — Kysy: paljonko XP:tä voisin realistisesti kerryttää päivässä.
 Vaihe 4 — Tee kokonaisanalyysi:
-  a) Perustele valittu laajuus täsmällisesti työtuntilaskelmin.
+  a) Perustele valittu vaikeuskerroin täsmällisesti työtuntilaskelmin.
   b) Luo räätälöity rutiinikirjasto (1, 5, 20, 50 XP) juuri tähän tavoitteeseen.
   c) Laske arvioitu aikajana päivissä kertymäkerroin huomioiden.
-  d) Nimeä yksi kriittinen muuttuja — se yksi tekijä joka ratkaisee onnistumisen tai epäonnistumisen.
+  d) Nimeä yksi kriittinen muuttuja — se tekijä joka ratkaisee onnistumisen tai epäonnistumisen.
  
 Aloita vaiheesta 1.`;
-    navigator.clipboard.writeText(txt).then(() => {
-        const b = document.getElementById('copyAiBtn');
-        b.innerText = 'Kopioitu';
-        setTimeout(() => { b.innerText = 'Kopioi strategiakehote'; }, 2200);
-    });
+    navigator.clipboard.writeText(txt).then(() => { const b=document.getElementById('copyAiBtn'); b.innerText='Kopioitu'; setTimeout(()=>{b.innerText='Kopioi strategiakehote';},2200); });
 }
  
 function copyMentorPrompt() {
-    const avg = g.days > 0 ? Math.round(g.total / g.days) : 0;
-    const pct = g.v > 0 ? ((g.total/g.v)*100).toFixed(1) : '0';
+    const avg = g.days>0 ? Math.round(g.total/g.days) : 0;
+    const pct = g.v>0 ? ((g.total/g.v)*100).toFixed(1) : '0';
     const today = getTodayStr();
-    const intentioTxt = (g.intentioDate === today && g.intentioText) ? g.intentioText : 'ei asetettu';
+    const intentioTxt = (g.intentioDate===today && g.intentioText) ? g.intentioText : 'ei asetettu';
+    const baselinePart = g.baseline ? `\n· Lähtötilanne (alussa kirjattu): "${g.baseline}"` : '';
     const txt = `Toimit MUUTOSKONE-järjestelmän henkilökohtaisena analyytikkona. Tehtäväsi on antaa rehellinen, datalähtöinen tilannekatsaus ja ohjata minut seuraavaan konkreettiseen askeleeseen.
  
 Tämänhetkinen datani:
@@ -697,119 +639,92 @@ Tämänhetkinen datani:
 · Keskitahti: ${avg} XP / päivä
 · Paras yksittäinen päivä: ${g.bestDay} XP
 · Kertymäkerroin nyt: ×${getMultiplier().toFixed(2)} (max ×2.00 päivänä 84)
-· Tämän päivän intentio: "${intentioTxt}"
+· Tämän päivän intentio: "${intentioTxt}"${baselinePart}
  
-TÄRKEÄÄ: Etene yksi askel kerrallaan. Esitä yksi asia tai kysymys kerrallaan. Odota vastaukseni ennen kuin jatkat.
+TÄRKEÄÄ: Etene yksi askel kerrallaan. Odota vastaukseni ennen kuin jatkat.
  
-Etene näin:
-1. Laske ääneen: onko nykyinen tahtini riittävä, vai olenko jäljessä? Perustele luvuilla.
-2. Kysy sen jälkeen yksi tarkentava kysymys, jonka avulla voit antaa täsmällisemmän neuvon.
-3. Kun olet saanut vastaukseni, anna täsmälleen yksi toimintakelpoinen ehdotus seuraavalle 24 tunnille. Sisällytä siihen konkreettinen tapa ansaita 50 XP tänään.
-4. Lopuksi yksi suora havainto siitä, mitä datani paljastaa — sellainen, jota en ehkä ole itse ajatellut.
+1. Laske ääneen: onko nykyinen tahtini riittävä? Perustele luvuilla. Vertaa myös lähtötilanteeseen jos se on tiedossa.
+2. Kysy yksi tarkentava kysymys täsmällisemmän neuvon antamiseksi.
+3. Anna täsmälleen yksi toimintakelpoinen ehdotus seuraavalle 24 tunnille, mukaan lukien konkreettinen tapa ansaita 50 XP tänään.
+4. Yksi suora havainto siitä, mitä datani paljastaa — sellainen, jota en ehkä ole itse ajatellut.
  
 Puhu analyyttisesti ja suoraan. Ei motivaatiopuhetta.`;
-    navigator.clipboard.writeText(txt).then(() => {
-        const b = document.getElementById('copyMentorBtn');
-        b.innerText = 'Kopioitu';
-        setTimeout(() => { b.innerText = 'Kopioi tilannekatsauskehote'; }, 2200);
-    });
+    navigator.clipboard.writeText(txt).then(() => { const b=document.getElementById('copyMentorBtn'); b.innerText='Kopioitu'; setTimeout(()=>{b.innerText='Kopioi tilannekatsauskehote';},2200); });
 }
  
-// ═══════════════════════════════ PELILOGIIKKA
+/* ── START ── */
 function start() {
-    g.goal = document.getElementById('inGoal').value.trim() || 'Muutos';
-    g.r1   = document.getElementById('inR1').value.trim()  || 'Pienin teko';
-    g.r5   = document.getElementById('inR5').value.trim()  || 'Päivittäinen toimenpide';
-    g.r20  = document.getElementById('inR20').value.trim() || 'Merkittävä suoritus';
-    g.r50  = document.getElementById('inR50').value.trim() || 'Päivän tärkein teko';
-    g.v    = parseInt(document.getElementById('inV').value);
-    g.active = true; g.total = 0; g.days = 1; g.lvl = 1;
-    g.initialEstimate = null; g.lowestEstimate = null;
-    g.startDate = new Date().toISOString();
-    g.streak = 0; g.lastActivityDate = null;
-    g.lastXP = null; g.lastXPLabel = null;
-    g.weekLog = {}; g.passedMilestones = []; g.bestDay = 0;
-    g.intentioDate = null; g.intentioText = ''; g.intentioOpen = false;
+    g.goal     = document.getElementById('inGoal').value.trim()     || 'Muutos';
+    g.baseline = document.getElementById('inBaseline').value.trim() || '';
+    g.r1       = document.getElementById('inR1').value.trim()       || 'Pienin teko';
+    g.r5       = document.getElementById('inR5').value.trim()       || 'Päivittäinen toimenpide';
+    g.r20      = document.getElementById('inR20').value.trim()      || 'Merkittävä suoritus';
+    g.r50      = document.getElementById('inR50').value.trim()      || 'Päivän tärkein teko';
+    g.v        = parseInt(document.getElementById('inV').value);
+    g.active=true; g.total=0; g.days=1; g.lvl=1;
+    g.initialEstimate=null; g.lowestEstimate=null;
+    g.startDate=new Date().toISOString();
+    g.streak=0; g.lastActivityDate=null; g.lastXP=null; g.lastXPLabel=null;
+    g.weekLog={}; g.passedMilestones=[]; g.bestDay=0;
+    g.intentioDate=null; g.intentioText=''; g.intentioOpen=false; g.baselineOpen=false;
     save(); render();
 }
  
 function render() {
     document.getElementById('viewSetup').style.display = 'none';
-    document.getElementById('viewGame').style.display = 'block';
-    document.getElementById('txtGoal').innerText = g.goal.toUpperCase();
-    document.getElementById('txtV').innerText = `${g.v.toLocaleString('fi-FI')} XP`;
-    initIntentio();
-    updateUI();
+    document.getElementById('viewGame').style.display  = 'block';
+    document.getElementById('txtGoal').innerText  = g.goal.toUpperCase();
+    document.getElementById('txtV').innerText     = `${g.v.toLocaleString('fi-FI')} XP`;
+    initIntentio(); initBaseline(); updateUI();
 }
  
-function getMultiplier() { return 1 + (Math.min(g.days, 84) - 1) / 83; }
- 
+function getMultiplier() { return 1+(Math.min(g.days,84)-1)/83; }
 function calculateDaysToGoal() {
-    if (g.total >= g.v) return 0;
-    if (g.total === 0 || g.days === 0) return null;
-    const avg = g.total / g.days;
-    if (avg <= 0) return null;
-    return Math.ceil((g.v - g.total) / avg);
+    if (g.total>=g.v) return 0;
+    if (g.total===0||g.days===0) return null;
+    const avg=g.total/g.days; if (avg<=0) return null;
+    return Math.ceil((g.v-g.total)/avg);
 }
  
 function addXP(baseAmt, label, e) {
     if (navigator.vibrate) navigator.vibrate(25);
-    const multi = getMultiplier();
-    const finalAmt = Math.round(baseAmt * multi);
- 
-    g.lastXP = finalAmt; g.lastXPLabel = label;
-    g.total += finalAmt;
- 
-    const today = getTodayStr();
-    g.weekLog[today] = (g.weekLog[today] || 0) + finalAmt;
-    if (g.weekLog[today] > g.bestDay) g.bestDay = g.weekLog[today];
- 
-    if (g.lastActivityDate !== today) {
-        const yest = new Date(); yest.setDate(yest.getDate()-1);
-        const yStr = getDateStr(yest);
-        if (g.lastActivityDate === yStr || g.lastActivityDate === null) g.streak++;
-        else g.streak = 1;
-        g.lastActivityDate = today;
+    const multi=getMultiplier(), finalAmt=Math.round(baseAmt*multi);
+    g.lastXP=finalAmt; g.lastXPLabel=label; g.total+=finalAmt;
+    const today=getTodayStr();
+    g.weekLog[today]=(g.weekLog[today]||0)+finalAmt;
+    if (g.weekLog[today]>g.bestDay) g.bestDay=g.weekLog[today];
+    if (g.lastActivityDate!==today) {
+        const yest=new Date(); yest.setDate(yest.getDate()-1);
+        if (g.lastActivityDate===getDateStr(yest)||g.lastActivityDate===null) g.streak++;
+        else g.streak=1;
+        g.lastActivityDate=today;
     }
- 
-    const fly = document.createElement('div');
-    fly.className = 'xp-fly';
-    fly.innerText = `+${finalAmt}`;
-    fly.style.cssText = `left:${e.pageX}px;top:${e.pageY-10}px;`;
-    document.body.appendChild(fly);
-    setTimeout(() => fly.remove(), 700);
- 
-    const newLvl = Math.floor(g.total / 200) + 1;
-    if (newLvl > g.lvl) { g.lvl = newLvl; showLvlPop(); }
- 
+    const fly=document.createElement('div'); fly.className='xp-fly'; fly.innerText=`+${finalAmt}`;
+    fly.style.cssText=`left:${e.pageX}px;top:${e.pageY-10}px;`;
+    document.body.appendChild(fly); setTimeout(()=>fly.remove(),700);
+    const newLvl=Math.floor(g.total/200)+1;
+    if (newLvl>g.lvl){g.lvl=newLvl;showLvlPop();}
     checkMilestones();
-    if (g.total >= g.v) document.getElementById('victoryOverlay').style.display = 'flex';
- 
-    const est = calculateDaysToGoal();
-    if (est !== null) {
-        if (g.initialEstimate === null) { g.initialEstimate = est; g.lowestEstimate = est; }
-        else if (est < g.lowestEstimate) g.lowestEstimate = est;
-    }
- 
+    if (g.total>=g.v) document.getElementById('victoryOverlay').style.display='flex';
+    const est=calculateDaysToGoal();
+    if (est!==null){if(g.initialEstimate===null){g.initialEstimate=est;g.lowestEstimate=est;}else if(est<g.lowestEstimate)g.lowestEstimate=est;}
     save(); updateUI();
- 
-    const bar = document.getElementById('undoBar');
-    document.getElementById('undoMsg').innerText = `${label} · +${finalAmt} XP`;
-    bar.classList.add('visible');
-    clearTimeout(window._undoT);
-    window._undoT = setTimeout(() => bar.classList.remove('visible'), 6000);
+    const bar=document.getElementById('undoBar');
+    document.getElementById('undoMsg').innerText=`${label} · +${finalAmt} XP`;
+    bar.classList.add('visible'); clearTimeout(window._undoT);
+    window._undoT=setTimeout(()=>bar.classList.remove('visible'),6000);
 }
  
 function checkMilestones() {
-    const pct = (g.total / g.v) * 100;
+    const pct=(g.total/g.v)*100;
     for (const ms of MILESTONES) {
-        if (pct >= ms && !g.passedMilestones.includes(ms) && ms < 100) {
+        if (pct>=ms&&!g.passedMilestones.includes(ms)&&ms<100) {
             g.passedMilestones.push(ms);
-            const d = MS_DATA[ms];
-            document.getElementById('msKicker').innerText = d.kicker;
-            document.getElementById('msTitle').innerText  = d.title;
-            document.getElementById('msSub').innerText    = d.sub;
-            document.getElementById('milestoneOverlay').style.display = 'flex';
+            const d=MS_DATA[ms];
+            document.getElementById('msKicker').innerText=d.kicker;
+            document.getElementById('msTitle').innerText=d.title;
+            document.getElementById('msSub').innerText=d.sub;
+            document.getElementById('milestoneOverlay').style.display='flex';
             if (navigator.vibrate) navigator.vibrate([40,30,40]);
             break;
         }
@@ -817,144 +732,99 @@ function checkMilestones() {
 }
  
 function undoXP() {
-    if (g.lastXP === null) return;
+    if (g.lastXP===null) return;
     if (navigator.vibrate) navigator.vibrate([15,20,15]);
-    g.total = Math.max(0, g.total - g.lastXP);
-    const today = getTodayStr();
-    if (g.weekLog[today]) {
-        g.weekLog[today] = Math.max(0, g.weekLog[today] - g.lastXP);
-        if (g.weekLog[today] === 0) delete g.weekLog[today];
-    }
-    g.lvl = Math.floor(g.total / 200) + 1;
-    g.lastXP = null; g.lastXPLabel = null;
+    g.total=Math.max(0,g.total-g.lastXP);
+    const today=getTodayStr();
+    if (g.weekLog[today]){g.weekLog[today]=Math.max(0,g.weekLog[today]-g.lastXP);if(g.weekLog[today]===0)delete g.weekLog[today];}
+    g.lvl=Math.floor(g.total/200)+1; g.lastXP=null; g.lastXPLabel=null;
     document.getElementById('undoBar').classList.remove('visible');
     save(); updateUI();
 }
  
-// ═══════════════════════════════ UI
 function updateUI() {
-    const multi = getMultiplier();
-    const avg   = g.days > 0 ? Math.round(g.total / g.days) : 0;
-    const pct   = g.v > 0 ? (g.total / g.v) * 100 : 0;
-    const pctStr = pct < 10 ? pct.toFixed(1)+'%' : Math.round(pct)+'%';
- 
-    document.getElementById('multNum').innerText   = `×${multi.toFixed(2)}`;
-    document.getElementById('streakNum').innerText = g.streak;
-    document.getElementById('valLvl').innerText    = g.lvl;
-    document.getElementById('valDays').innerText   = g.days;
-    document.getElementById('pctVal').innerText    = pctStr;
-    document.getElementById('xpDisplay').innerText = `${g.total.toLocaleString('fi-FI')} XP`;
-    document.getElementById('barXP').style.width   = `${((g.total % 200) / 200) * 100}%`;
-    document.getElementById('statAvg').innerText   = avg || '—';
-    document.getElementById('statStreak').innerText= g.streak;
-    document.getElementById('statBest').innerText  = g.bestDay || '—';
- 
-    // Päiviä maaliin
-    let dv = '—';
-    if (g.total >= g.v) { dv = '0'; }
-    else {
-        const est = calculateDaysToGoal();
-        if (est !== null) dv = String(g.lowestEstimate !== null ? Math.min(est, g.lowestEstimate) : est);
-    }
-    document.getElementById('valM').innerText = dv;
- 
-    // Virstanpylväät
-    MILESTONES.forEach(ms => {
-        const el = document.getElementById(`ms${ms}`);
-        const lblEl = document.getElementById(`mslbl${ms}`);
-        if (!el) return;
-        if (g.passedMilestones.includes(ms) || (ms === 100 && g.total >= g.v)) {
-            el.className = 'ms done';
-            if (lblEl) lblEl.className = 'ms-lbl done-lbl';
-        } else if (pct >= ms * 0.75) {
-            el.className = 'ms near';
-        } else {
-            el.className = 'ms';
-        }
+    const multi=getMultiplier(), avg=g.days>0?Math.round(g.total/g.days):0;
+    const pct=g.v>0?(g.total/g.v)*100:0;
+    const pctStr=pct<10?pct.toFixed(1)+'%':Math.round(pct)+'%';
+    document.getElementById('multNum').innerText=`×${multi.toFixed(2)}`;
+    document.getElementById('streakNum').innerText=g.streak;
+    document.getElementById('valLvl').innerText=g.lvl;
+    document.getElementById('valDays').innerText=g.days;
+    document.getElementById('pctVal').innerText=pctStr;
+    document.getElementById('xpDisplay').innerText=`${g.total.toLocaleString('fi-FI')} XP`;
+    document.getElementById('barXP').style.width=`${((g.total%200)/200)*100}%`;
+    document.getElementById('statAvg').innerText=avg||'—';
+    document.getElementById('statBest').innerText=g.bestDay||'—';
+    document.getElementById('statStreak').innerText=g.streak;
+    let dv='—';
+    if (g.total>=g.v){dv='0';}else{const est=calculateDaysToGoal();if(est!==null)dv=String(g.lowestEstimate!==null?Math.min(est,g.lowestEstimate):est);}
+    document.getElementById('valM').innerText=dv;
+    MILESTONES.forEach(ms=>{
+        const el=document.getElementById(`ms${ms}`), lblEl=document.getElementById(`mslbl${ms}`);
+        if(!el)return;
+        if(g.passedMilestones.includes(ms)||(ms===100&&g.total>=g.v)){el.className='ms done';if(lblEl)lblEl.className='ms-lbl done-lbl';}
+        else if(pct>=ms*0.75){el.className='ms near';}else{el.className='ms';}
     });
- 
-    // Intentio preview (kun suljettu)
-    if (!g.intentioOpen) updateIntentioPreview();
- 
-    // Rutiinit
-    const levels = [
-        { base:1,  name:g.r1,  dot:'rdot-1',  xpCls:'' },
-        { base:5,  name:g.r5,  dot:'rdot-5',  xpCls:'' },
-        { base:20, name:g.r20, dot:'rdot-20', xpCls:'' },
-        { base:50, name:g.r50, dot:'rdot-50', xpCls:'rxp-50' }
+    // Rutiininapit
+    const levels=[
+        {base:1, name:g.r1, cls:'rbtn-1', dot:'rdot-1', xpCls:'rxp-1'},
+        {base:5, name:g.r5, cls:'rbtn-5', dot:'rdot-5', xpCls:'rxp-5'},
+        {base:20,name:g.r20,cls:'rbtn-20',dot:'rdot-20',xpCls:'rxp-20'},
+        {base:50,name:g.r50,cls:'rbtn-50',dot:'rdot-50',xpCls:'rxp-50'}
     ];
-    document.getElementById('taskList').innerHTML = levels.map(l => {
-        const xp = Math.round(l.base * multi);
-        return `<button class="routine-btn" onclick="addXP(${l.base},'${escQ(l.name)}',event)">
-            <div class="rl">
-                <span class="rdot ${l.dot}"></span>
-                <div class="rtext">
-                    <span class="rname">${l.name}</span>
-                    <span class="rmin">${MINS[l.base]}</span>
+    document.getElementById('taskList').innerHTML=levels.map(l=>{
+        const xp=Math.round(l.base*multi);
+        return `<button class="rbtn ${l.cls}" onclick="addXP(${l.base},'${escQ(l.name)}',event)">
+            <div class="rbtn-inner">
+                <div class="rbtn-left">
+                    <span class="rbtn-dot ${l.dot}"></span>
+                    <div class="rbtn-text">
+                        <span class="rbtn-name">${l.name}</span>
+                        <span class="rbtn-min">${MINS[l.base]}</span>
+                    </div>
                 </div>
+                <span class="rbtn-xp ${l.xpCls}">+${xp}</span>
             </div>
-            <span class="rxp ${l.xpCls}">+${xp}</span>
         </button>`;
     }).join('');
- 
     renderWeekChart();
 }
  
 function renderWeekChart() {
-    const today = new Date();
-    const days = [];
-    for (let i = 6; i >= 0; i--) { const d = new Date(today); d.setDate(d.getDate()-i); days.push(d); }
-    const vals   = days.map(d => g.weekLog[getDateStr(d)] || 0);
-    const maxVal = Math.max(...vals, 1);
-    const bestW  = Math.max(...vals);
-    document.getElementById('weekBestVal').innerText = bestW || '—';
- 
-    const DAY_NAMES = ['Su','Ma','Ti','Ke','To','Pe','La'];
-    const todayStr = getTodayStr();
- 
-    document.getElementById('weekBars').innerHTML = days.map((d,i) => {
-        const h = Math.max(2, Math.round((vals[i] / maxVal) * 46));
-        const isToday = getDateStr(d) === todayStr;
-        const cls = isToday ? 'wb wb-today' : (vals[i] > 0 ? 'wb wb-done' : 'wb wb-empty');
+    const today=new Date(), days=[];
+    for(let i=6;i>=0;i--){const d=new Date(today);d.setDate(d.getDate()-i);days.push(d);}
+    const vals=days.map(d=>g.weekLog[getDateStr(d)]||0);
+    const maxVal=Math.max(...vals,1), bestW=Math.max(...vals);
+    document.getElementById('weekBestVal').innerText=bestW||'—';
+    const DN=['Su','Ma','Ti','Ke','To','Pe','La'], todayStr=getTodayStr();
+    document.getElementById('weekBars').innerHTML=days.map((d,i)=>{
+        const h=Math.max(2,Math.round((vals[i]/maxVal)*42));
+        const isToday=getDateStr(d)===todayStr;
+        const cls=isToday?'wb wb-today':(vals[i]>0?'wb wb-done':'wb wb-empty');
         return `<div class="wbw"><div class="${cls}" style="height:${h}px;"></div></div>`;
     }).join('');
- 
-    document.getElementById('weekLabels').innerHTML = days.map((d,i) => {
-        const isToday = getDateStr(d) === todayStr;
-        return `<div style="flex:1;text-align:center;"><span class="wdl ${isToday?'wdl-today':''}">${DAY_NAMES[d.getDay()]}</span></div>`;
+    document.getElementById('weekLabels').innerHTML=days.map((d,i)=>{
+        const isToday=getDateStr(d)===todayStr;
+        return `<div style="flex:1;text-align:center;"><span class="wdl ${isToday?'wdl-today':''}">${DN[d.getDay()]}</span></div>`;
     }).join('');
 }
  
 function modifyRoutines() {
-    [['1 XP — pienin teko (1–10 min)','r1'],
-     ['5 XP — päivittäinen toimenpide (15–30 min)','r5'],
-     ['20 XP — merkittävä suoritus (45–90 min)','r20'],
-     ['50 XP — päivän tärkein teko (2–4 h)','r50']
-    ].forEach(([lbl,key]) => {
-        const v = prompt(lbl, g[key]);
-        if (v !== null) g[key] = v.trim() || g[key];
-    });
+    [['1 XP — pienin teko (1–10 min)','r1'],['5 XP — päivittäinen toimenpide (15–30 min)','r5'],
+     ['20 XP — merkittävä suoritus (45–90 min)','r20'],['50 XP — päivän tärkein teko (2–4 h)','r50']
+    ].forEach(([lbl,key])=>{const v=prompt(lbl,g[key]);if(v!==null)g[key]=v.trim()||g[key];});
     save(); updateUI();
 }
  
-function escQ(s) { return (s||'').replace(/'/g,"\\'"); }
-function save() { try { localStorage.setItem('mk_v8', JSON.stringify(g)); } catch(e){} }
-function showLvlPop() { document.getElementById('popLvlText').innerText = `Taso ${g.lvl}`; document.getElementById('lvlOverlay').style.display = 'flex'; }
-function closeLvl() { document.getElementById('lvlOverlay').style.display = 'none'; }
-function closeMilestone() { document.getElementById('milestoneOverlay').style.display = 'none'; }
-function reset() {
-    if (confirm('Nollataan kaikki data?')) { try { localStorage.removeItem('mk_v8'); } catch(e){} location.reload(); }
-}
-function exportData() {
-    const a = document.createElement('a');
-    a.href = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(g));
-    a.download = 'muutoskone_v8.json'; a.click();
-}
-function importData(ev) {
-    const r = new FileReader();
-    r.onload = e => { try { g = JSON.parse(e.target.result); save(); render(); } catch(err) { alert('Tiedoston lukeminen epäonnistui.'); } };
-    r.readAsText(ev.target.files[0]);
-}
+function escQ(s){return(s||'').replace(/'/g,"\\'");}
+function save(){try{localStorage.setItem('mk_v9',JSON.stringify(g));}catch(e){}}
+function showLvlPop(){document.getElementById('popLvlText').innerText=`Taso ${g.lvl}`;document.getElementById('lvlOverlay').style.display='flex';}
+function closeLvl(){document.getElementById('lvlOverlay').style.display='none';}
+function closeMilestone(){document.getElementById('milestoneOverlay').style.display='none';}
+function reset(){if(confirm('Nollataan kaikki data?')){try{localStorage.removeItem('mk_v9');}catch(e){}location.reload();}}
+function exportData(){const a=document.createElement('a');a.href='data:text/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(g));a.download='muutoskone_v9.json';a.click();}
+function importData(ev){const r=new FileReader();r.onload=e=>{try{g=JSON.parse(e.target.result);save();render();}catch(err){alert('Tiedoston lukeminen epäonnistui.');}};r.readAsText(ev.target.files[0]);}
 </script>
 </body>
 </html>
+ 
