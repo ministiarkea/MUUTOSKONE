@@ -145,11 +145,13 @@
         .signal-icon { font-size: 16px; flex-shrink: 0; }
  
         /* ── OMA LAINAUS ── */
-        .quote-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px 18px; margin-bottom: 9px; cursor: pointer; }
+        .quote-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px 18px; margin-bottom: 9px; cursor: pointer; transition: border-color 0.2s; }
+        .quote-card:active { border-color: var(--border-2); }
         .quote-text { font-size: 13px; font-weight: 300; color: var(--text-2); line-height: 1.6; font-style: italic; }
         .quote-placeholder { color: var(--text-3); }
         .quote-edit { display: none; width: 100%; background: transparent; border: none; color: var(--text-1); font-size: 13px; font-weight: 300; font-style: italic; outline: none; resize: none; font-family: inherit; line-height: 1.6; }
-        .quote-hint { font-size: 9px; color: var(--text-3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+        .quote-hint { font-size: 9px; color: var(--text-3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+        .quote-edit-icon { font-size: 10px; color: var(--text-3); }
  
         /* ── RUTIININAPIT ── */
         .routine-grid { display: flex; flex-direction: column; gap: 7px; margin-bottom: 9px; }
@@ -242,12 +244,27 @@
         .ov-sub    { font-size: 14px; font-weight: 300; color: var(--text-2); margin-bottom: 30px; line-height: 1.65; }
  
         /* New goal overlay */
-        #newGoalOverlay { z-index: 6000; }
-        .ng-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 24px; width: 100%; max-width: 380px; text-align: left; }
-        .ng-title { font-size: 14px; font-weight: 500; color: var(--text-1); letter-spacing: 1px; margin-bottom: 16px; }
-        .ng-input { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 11px 14px; margin-bottom: 8px; }
+        #newGoalOverlay { z-index: 6000; overflow-y: auto; padding: 20px; }
+        .ng-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 20px; padding: 24px; width: 100%; max-width: 390px;
+            text-align: left; max-height: 92vh; overflow-y: auto;
+            scrollbar-width: none;
+        }
+        .ng-card::-webkit-scrollbar { display: none; }
+        .ng-title { font-size: 13px; font-weight: 500; color: var(--text-1); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .ng-title::before { content:''; width:3px; height:3px; background:var(--cyan); border-radius:50%; }
+        .ng-section { margin-bottom: 16px; }
+        .ng-label { font-size: 10px; color: var(--text-2); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 6px; }
+        .ng-input { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 11px; padding: 11px 14px; margin-bottom: 7px; }
+        .ng-input:last-child { margin-bottom: 0; }
         .ng-input input, .ng-input select, .ng-input textarea { padding: 0; font-size: 13px; }
-        .ng-label { font-size: 9px; color: var(--text-3); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+        .ng-xp-row { display: flex; align-items: center; gap: 0; background: rgba(255,255,255,0.032); border: 1px solid var(--border); border-radius: 11px; margin-bottom: 7px; overflow: hidden; }
+        .ng-xp-row:last-child { margin-bottom: 0; }
+        .ng-xp-tag { font-size: 10px; font-weight: 700; min-width: 52px; color: var(--cyan); flex-shrink: 0; padding: 0 12px; align-self: stretch; display: flex; align-items: center; justify-content: center; }
+        .ng-xp-row input { padding: 12px 14px; font-size: 13px; }
+        .ng-divider { height: 1px; background: var(--border); margin: 16px 0; }
+        .ng-ai-hint { font-size: 11px; color: var(--text-3); font-weight: 300; margin-bottom: 10px; line-height: 1.6; }
  
         /* ── XP FLY ── */
         .xp-fly { position: absolute; font-size: 14px; font-weight: 600; pointer-events: none; z-index: 7000; color: var(--cyan); animation: fly 0.7s ease-out forwards; letter-spacing: 1px; }
@@ -293,30 +310,51 @@
 <div id="newGoalOverlay">
     <div class="ng-card">
         <div class="ng-title">Uusi tavoite</div>
-        <div class="ng-label">Tavoite</div>
-        <div class="ng-input" style="margin-bottom:10px;"><input type="text" id="ngGoal" placeholder="Mitä haluat saavuttaa?"></div>
-        <div class="ng-label">Lähtötilanne</div>
-        <div class="ng-input" style="margin-bottom:10px;"><textarea id="ngBaseline" rows="3" placeholder="Mistä lähdet?"></textarea></div>
-        <div class="ng-label">Rutiinit</div>
-        <div class="ng-input" style="margin-bottom:6px;"><input type="text" id="ngR1"  placeholder="1 XP — pienin teko (1–10 min)"></div>
-        <div class="ng-input" style="margin-bottom:6px;"><input type="text" id="ngR5"  placeholder="5 XP — päivittäinen (15–30 min)"></div>
-        <div class="ng-input" style="margin-bottom:6px;"><input type="text" id="ngR20" placeholder="20 XP — merkittävä (45–90 min)"></div>
-        <div class="ng-input" style="margin-bottom:10px;"><input type="text" id="ngR50" placeholder="50 XP — tärkein teko (2–4 h)"></div>
-        <div class="ng-label">Oma motivaatiolause</div>
-        <div class="ng-input" style="margin-bottom:10px;"><input type="text" id="ngQuote" placeholder="Mikä pitää sinut liikkeellä? (valinnainen)"></div>
-        <div class="ng-label">Vaikeuskerroin</div>
-        <div class="ng-input" style="margin-bottom:16px;">
-            <select id="ngV">
-                <option value="1000">1 000 XP — Uusi tapa</option>
-                <option value="5000" selected>5 000 XP — Merkittävä muutos</option>
-                <option value="10000">10 000 XP — Elämänmuutos</option>
-                <option value="100000">100 000 XP — Mestari</option>
-            </select>
+ 
+        <div class="ng-section">
+            <div class="ng-label">Tavoite</div>
+            <div class="ng-input"><input type="text" id="ngGoal" placeholder="Mitä haluat saavuttaa?"></div>
         </div>
-        <div style="display:flex;gap:8px;">
+ 
+        <div class="ng-section">
+            <div class="ng-label">Vaikeuskerroin</div>
+            <div class="ng-input">
+                <select id="ngV">
+                    <option value="1000">1 000 XP — Uusi tapa</option>
+                    <option value="5000" selected>5 000 XP — Merkittävä muutos</option>
+                    <option value="10000">10 000 XP — Elämänmuutos</option>
+                    <option value="100000">100 000 XP — Mestari</option>
+                </select>
+            </div>
+        </div>
+ 
+        <div class="ng-section">
+            <div class="ng-label">Rutiinit</div>
+            <div class="ng-xp-row"><span class="ng-xp-tag">1 XP</span><input type="text" id="ngR1" placeholder="Pienin teko — 1–10 min"></div>
+            <div class="ng-xp-row"><span class="ng-xp-tag">5 XP</span><input type="text" id="ngR5" placeholder="Päivittäinen toimenpide — 15–30 min"></div>
+            <div class="ng-xp-row"><span class="ng-xp-tag">20 XP</span><input type="text" id="ngR20" placeholder="Merkittävä suoritus — 45–90 min"></div>
+            <div class="ng-xp-row"><span class="ng-xp-tag">50 XP</span><input type="text" id="ngR50" placeholder="Päivän tärkein teko — 2–4 h"></div>
+        </div>
+ 
+        <div class="ng-section">
+            <div class="ng-label">Lähtötilanne <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div>
+            <div class="ng-input"><textarea id="ngBaseline" rows="2" placeholder="Mistä lähdet? Lyhyesti…"></textarea></div>
+        </div>
+ 
+        <div class="ng-section">
+            <div class="ng-label">Oma motivaatiolause <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div>
+            <div class="ng-input"><input type="text" id="ngQuote" placeholder="Mikä pitää sinut liikkeellä?"></div>
+        </div>
+ 
+        <div style="display:flex;gap:8px;margin-bottom:16px;">
             <button class="btn-ghost" onclick="closeNewGoal()" style="flex:1;">Peruuta</button>
             <button class="btn-primary" onclick="addNewGoal()" style="flex:2;margin-top:0;">Lisää tavoite</button>
         </div>
+ 
+        <div class="ng-divider"></div>
+        <div class="ng-label" style="margin-bottom:6px;">Epävarma vaikeuskertoimesta tai rutiineista?</div>
+        <p class="ng-ai-hint">Kopioi strategiakehote, avaa <a href="https://gemini.google.com" target="_blank" style="color:var(--cyan);text-decoration:none;">Gemini</a> ja anna tekoälyn kalibroida parametrit. Sinä päätät, mitä tietoja jaat.</p>
+        <button class="btn-ai" id="copyNgAiBtn" onclick="copyNewGoalPrompt()">Kopioi strategiakehote tälle tavoitteelle</button>
     </div>
 </div>
  
@@ -338,14 +376,13 @@
     </div>
  
     <div class="card">
-        <div class="lbl"><span class="lbl-dot"></span>Lähtötilanne</div>
-        <textarea id="inBaseline" rows="4" placeholder="Kuvaile nykytilasi. Mistä lähdet? Arjen rajoitteet, vahvuudet, aiemmat yritykset… Jos pyydät myöhemmin AI-analyysiä, voit halutessasi sisällyttää tämän mukaan — sinä päätät, mitä jaat."></textarea>
-        <div class="baseline-autosave" id="baselineAutosave">Tallennettu</div>
-    </div>
- 
-    <div class="card">
-        <div class="lbl"><span class="lbl-dot"></span>Oma motivaatiolause</div>
-        <input type="text" id="inQuote" placeholder="Mikä pitää sinut liikkeellä? (valinnainen)">
+        <div class="lbl"><span class="lbl-dot"></span>Vaikeuskerroin</div>
+        <select id="inV">
+            <option value="1000">1 000 XP — Uusi tapa</option>
+            <option value="5000" selected>5 000 XP — Merkittävä muutos</option>
+            <option value="10000">10 000 XP — Elämänmuutos</option>
+            <option value="100000">100 000 XP — Mestari</option>
+        </select>
     </div>
  
     <div class="card">
@@ -357,13 +394,14 @@
     </div>
  
     <div class="card">
-        <div class="lbl"><span class="lbl-dot"></span>Vaikeuskerroin</div>
-        <select id="inV">
-            <option value="1000">1 000 XP — Uusi tapa</option>
-            <option value="5000" selected>5 000 XP — Merkittävä muutos</option>
-            <option value="10000">10 000 XP — Elämänmuutos</option>
-            <option value="100000">100 000 XP — Mestari</option>
-        </select>
+        <div class="lbl"><span class="lbl-dot"></span>Lähtötilanne <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div>
+        <textarea id="inBaseline" rows="3" placeholder="Kuvaile nykytilasi. Mistä lähdet? Arjen rajoitteet, vahvuudet, aiemmat yritykset… Jos pyydät myöhemmin AI-analyysiä, voit halutessasi sisällyttää tämän mukaan — sinä päätät, mitä jaat."></textarea>
+        <div class="baseline-autosave" id="baselineAutosave">Tallennettu</div>
+    </div>
+ 
+    <div class="card">
+        <div class="lbl"><span class="lbl-dot"></span>Oma motivaatiolause <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div>
+        <input type="text" id="inQuote" placeholder="Mikä pitää sinut liikkeellä?">
     </div>
  
     <button class="btn-primary" onclick="start()">Käynnistä</button>
@@ -454,7 +492,10 @@
  
     <!-- OMA MOTIVAATIOLAUSE -->
     <div class="quote-card" id="quoteCard" onclick="editQuote()" style="display:none;">
-        <div class="quote-hint">Oma muistutuksesi</div>
+        <div class="quote-hint">
+            <span>Oma muistutuksesi</span>
+            <span class="quote-edit-icon">✎</span>
+        </div>
         <div class="quote-text" id="quoteDisplay"></div>
         <textarea class="quote-edit" id="quoteEdit" rows="2" placeholder="Kirjoita oma motivaatiolauseesi…"></textarea>
     </div>
@@ -484,7 +525,7 @@
     </div>
  
     <!-- LÄHTÖTILANNE -->
-    <div class="toggle-row" onclick="togglePanel('baseline')">
+    <div class="toggle-row" id="baselineToggleRow" onclick="togglePanel('baseline')">
         <div class="toggle-row-lbl"><span class="lbl-dot"></span>Lähtötilanne</div>
         <span class="toggle-arrow" id="baselineArrow">▾</span>
     </div>
@@ -504,15 +545,15 @@
     </div>
  
     <!-- TILANNEKATSAUS -->
-    <div class="section-lbl">Tilannekatsaus</div>
+    <div class="section-lbl">Sparrauskumppani</div>
     <div class="card card-accent">
-        <p class="ai-desc">Onko vauhtisi riittävä? Kopioi kehote Geminille — datasi on mukana valmiiksi. Sinä päätät, mitä tietoja jaat.</p>
+        <p class="ai-desc">Tarvitsetko ideoita seuraavaan askeleeseen? Uutta näkökulmaa tai motivaatiobuustia? Kopioi kehote Geminille — datasi on mukana valmiiksi. Sinä päätät, mitä tietoja jaat.</p>
         <ol class="ai-steps">
             <li>Kopioi kehote alta.</li>
             <li>Avaa <a href="https://gemini.google.com" target="_blank">Gemini</a> ja liitä se.</li>
             <li>Vastaa Geminin kysymyksiin yksi kerrallaan.</li>
         </ol>
-        <button class="btn-ai" id="copyMentorBtn" onclick="copyMentorPrompt()">Kopioi tilannekatsauskehote</button>
+        <button class="btn-ai" id="copyMentorBtn" onclick="copyMentorPrompt()">Kopioi sparrauskehote</button>
     </div>
  
     <div class="footer-grid">
@@ -520,7 +561,7 @@
         <button class="btn-ghost" onclick="modifyGoalSettings()">Muokkaa tavoitetta</button>
         <button class="btn-ghost" onclick="exportData()">Varmuuskopio</button>
         <button class="btn-ghost" onclick="document.getElementById('fileIn').click()">Tuo data</button>
-        <button class="btn-ghost btn-ghost-danger" onclick="resetCurrentGoal()">Nollaa</button>
+        <button class="btn-ghost btn-ghost-danger" onclick="resetCurrentGoal()" style="grid-column:1/-1;">Nollaa tämä tavoite</button>
         <input type="file" id="fileIn" style="display:none" onchange="importData(event)">
     </div>
     <p class="privacy-note">Kaikki data tallennetaan ainoastaan tällä laitteella.<br>Sinä päätät mitä jaat tekoälylle — sovellus ei tee sitä puolestasi.</p>
@@ -666,6 +707,11 @@ function openNewGoal() {
 }
 function closeNewGoal() {
     document.getElementById('newGoalOverlay').style.display = 'none';
+    ['ngGoal','ngR1','ngR5','ngR20','ngR50','ngBaseline','ngQuote'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
+    document.getElementById('ngV').value = '5000';
 }
 function addNewGoal() {
     const ng = GOAL_TEMPLATE();
@@ -762,26 +808,27 @@ function updateSignal() {
     const avg = g().days > 0 ? Math.round(g().total / g().days) : 0;
  
     card.className = 'signal-card';
-    // Streak juuri katkennut
+    icon.innerText = '';
+    text.innerText = '';
+ 
     if (g().streak === 0 && g().lastActivityDate && g().lastActivityDate !== today && g().total > 0) {
         card.classList.add('show','warning');
         icon.innerText = '—';
         text.innerText = 'Putki katkesi. Se käy kaikille. Tärkeintä on mitä teet seuraavaksi — ei se, mitä jäi tekemättä.';
-    }
-    // Iltapäivä/ilta ja 0 XP tänään
-    else if (hour >= 15 && todayXP === 0 && g().total > 0) {
+    } else if (hour >= 15 && todayXP === 0 && g().total > 0) {
         card.classList.add('show','warning');
         icon.innerText = '·';
         text.innerText = 'Ei vielä yhtään XP:tä tänään. Päivä on vielä kesken.';
-    }
-    // Hyvä tahti
-    else if (todayXP >= avg && todayXP > 0 && avg > 0) {
+    } else if (todayXP >= avg && todayXP > 0 && avg > 0) {
         card.classList.add('show','info');
         icon.innerText = '↑';
         text.innerText = `${todayXP} XP tänään — päivän tahti on yli keskiarvosi. Hyvä.`;
     }
-    else {
-        card.classList.remove('show');
+ 
+    // Piilota lähtötilanne-toggle jos ei ole sisältöä
+    const baselineToggle = document.getElementById('baselineToggleRow');
+    if (baselineToggle) {
+        baselineToggle.style.display = (g().baseline && g().baseline.trim()) ? '' : 'none';
     }
 }
  
@@ -789,6 +836,43 @@ function updateSignal() {
 function getBaselinePart() {
     const bl = state.goals.length > 0 ? g().baseline : draft.baseline;
     return bl ? `\n\nLähtötilanne (käyttäjän itsensä kirjaama):\n"${bl}"` : '';
+}
+ 
+function copyNewGoalPrompt() {
+    const goal     = document.getElementById('ngGoal').value.trim()     || '(ei vielä määritelty)';
+    const baseline = document.getElementById('ngBaseline').value.trim() || '';
+    const baselinePart = baseline ? `\n\nLähtötilanne:\n"${baseline}"` : '';
+    const txt = `Olet MUUTOSKONE-järjestelmän strateginen suunnittelija. Autan sinua kalibroimaan uuden tavoitteeni parametrit täsmällisesti.
+ 
+Järjestelmän logiikka:
+— Vaikeuskerroin (V):
+  · 1 000 XP ≈ 100 h — uuden tavan rakentaminen
+  · 5 000 XP ≈ 500 h — selkeä, mitattava elämänmuutos
+  · 10 000 XP ≈ 1 000 h — identiteettitason muutos
+  · 100 000 XP ≈ 10 000 h — maailmanluokan osaaminen
+— Rutiinit:
+  · 1 XP: minimaalinen teko, 1–10 min
+  · 5 XP: päivittäinen toimenpide, 15–30 min
+  · 20 XP: merkittävä suoritus, 45–90 min
+  · 50 XP: päivän tärkein panostus, 2–4 h
+— Kertymäkerroin kasvaa päivästä 1 päivään 84 välillä 1.0 → 2.0
+ 
+Tavoitteeni: ${goal}${baselinePart}
+ 
+Etene yksi askel kerrallaan — esitä yksi kysymys kerrallaan ja odota vastaustani.
+ 
+Vaihe 1 — Esittele itsesi lyhyesti. Kysy sitten tarkentavia kysymyksiä joita tarvitset (ellei jo selviä yllä olevasta tiedosta).
+Vaihe 2 — Tee kokonaisanalyysi:
+  a) Perustele vaikeuskerroin työtuntilaskelmin.
+  b) Luo räätälöity rutiinikirjasto (1, 5, 20, 50 XP) konkreettisin nimineen.
+  c) Laske arvioitu aikajana päivissä.
+  d) Nimeä yksi kriittinen muuttuja — se tekijä, joka todennäköisimmin ratkaisee onnistumisen.
+ 
+Aloita vaiheesta 1.`;
+    navigator.clipboard.writeText(txt).then(()=>{
+        const b=document.getElementById('copyNgAiBtn'); b.innerText='Kopioitu';
+        setTimeout(()=>{b.innerText='Kopioi strategiakehote tälle tavoitteelle';},2200);
+    });
 }
  
 function copyAiPrompt() {
@@ -834,7 +918,7 @@ function copyMentorPrompt() {
     const today = getTodayStr();
     const intentioTxt = (g().intentioDate===today && g().intentioText) ? g().intentioText : 'ei asetettu';
     const todayXP = g().weekLog[today] || 0;
-    const txt = `Olet MUUTOSKONE-järjestelmän henkilökohtainen analyytikko ja sparrauskumppani. Tehtäväsi on antaa rehellinen, datalähtöinen tilannekatsaus ja ohjata minut seuraavaan konkreettiseen askeleeseen.
+    const txt = `Olet MUUTOSKONE-järjestelmän sparrauskumppani. Tehtäväsi on auttaa minua löytämään seuraava askel, pitämään motivaation yllä ja näkemään tilanteeni uudessa valossa.
  
 Tämänhetkinen datani:
 · Tavoite: ${g().goal}
@@ -847,19 +931,19 @@ Tämänhetkinen datani:
 · Kertymäkerroin nyt: ×${getMultiplier().toFixed(2)} (max ×2.00 päivänä 84)
 · Tämän päivän intentio: "${intentioTxt}"${getBaselinePart()}
  
-Tyylisi: Ole suora ja rehellinen — puhu kuin valmentaja joka oikeasti välittää tuloksesta. Älä kaunistele, mutta älä myöskään jähmety kylmäksi datarobotiksi. Kannusta silloin kun se on ansaittua.
+Tyylisi: Ole lämmin mutta suora. Keskity ennen kaikkea siihen, mitä voin tehdä seuraavaksi — ei siihen, mitä olen jättänyt tekemättä. Kun data näyttää hyvältä, sano se suoraan. Kun on parannettavaa, ehdota konkreettinen ratkaisu ilman syyllistämistä.
  
 TÄRKEÄÄ: Etene yksi askel kerrallaan. Odota vastaukseni ennen kuin jatkat.
  
-1. Laske ääneen: onko nykyinen tahtini riittävä vai jäänkö jälkeen? Perustele luvuilla. Vertaa myös lähtötilanteeseen jos se on tiedossa. Ole rehellinen — ei lohduttelua.
-2. Kysy yksi tarkentava kysymys, jolla saat paremman kokonaiskuvan tilanteestani.
-3. Kun olet saanut vastaukseni, anna täsmälleen yksi toimintakelpoinen ehdotus seuraavalle 24 tunnille. Sisällytä siihen konkreettinen tapa ansaita 50 XP tänään.
-4. Yksi suora havainto siitä, mitä datani paljastaa minusta — sellainen jota en ehkä ole itse ajatellut. Tee tämä kannustavalla, ei lannistuvalla tavalla.
+1. Katso dataani ja kerro yksi asia, joka erottuu positiivisesti — jotain, jota en ehkä itse huomaa. Sen jälkeen kysy: mikä tällä hetkellä tuntuu haastavimmalta tai missä kaipaat eniten ideoita?
+2. Kun olet saanut vastaukseni, anna 2–3 konkreettista ideaa seuraavaan askeleeseen — erityisesti tapoja ansaita 50 XP huomenna. Räätälöi ehdotukset juuri tähän tavoitteeseen.
+3. Anna yksi näkökulma siihen, miltä matka näyttää tästä eteenpäin — tahdista, aikataulusta tai kertymäkertoimen vaikutuksesta — sellaisella sävyllä, joka motivoi jatkamaan.
+4. Lopeta yhdellä lauseella, joka jää mieleen.
  
 Aloita kohdasta 1.`;
     navigator.clipboard.writeText(txt).then(()=>{
         const b=document.getElementById('copyMentorBtn'); b.innerText='Kopioitu';
-        setTimeout(()=>{b.innerText='Kopioi tilannekatsauskehote';},2200);
+        setTimeout(()=>{b.innerText='Kopioi sparrauskehote';},2200);
     });
 }
  
