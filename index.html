@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fi">
 <head>
@@ -303,6 +302,8 @@
         <div class="ng-input" style="margin-bottom:6px;"><input type="text" id="ngR5"  placeholder="5 XP — päivittäinen (15–30 min)"></div>
         <div class="ng-input" style="margin-bottom:6px;"><input type="text" id="ngR20" placeholder="20 XP — merkittävä (45–90 min)"></div>
         <div class="ng-input" style="margin-bottom:10px;"><input type="text" id="ngR50" placeholder="50 XP — tärkein teko (2–4 h)"></div>
+        <div class="ng-label">Oma motivaatiolause</div>
+        <div class="ng-input" style="margin-bottom:10px;"><input type="text" id="ngQuote" placeholder="Mikä pitää sinut liikkeellä? (valinnainen)"></div>
         <div class="ng-label">Vaikeuskerroin</div>
         <div class="ng-input" style="margin-bottom:16px;">
             <select id="ngV">
@@ -338,7 +339,7 @@
  
     <div class="card">
         <div class="lbl"><span class="lbl-dot"></span>Lähtötilanne</div>
-        <textarea id="inBaseline" rows="4" placeholder="Kuvaile nykytilasi. Mistä lähdet? Arjen rajoitteet, vahvuudet, aiemmat yritykset… Jos pyydät myöhemmin AI-analyysiä, voit halutessasi sisällyttää tämän mukaan."></textarea>
+        <textarea id="inBaseline" rows="4" placeholder="Kuvaile nykytilasi. Mistä lähdet? Arjen rajoitteet, vahvuudet, aiemmat yritykset… Jos pyydät myöhemmin AI-analyysiä, voit halutessasi sisällyttää tämän mukaan — sinä päätät, mitä jaat."></textarea>
         <div class="baseline-autosave" id="baselineAutosave">Tallennettu</div>
     </div>
  
@@ -369,7 +370,7 @@
  
     <div class="card card-accent" style="margin-top:16px;">
         <div class="lbl"><span class="lbl-dot"></span>Strategia-apuri</div>
-        <p class="ai-desc">Epävarma vaikeuskertoimesta tai rutiineista? Tekoäly auttaa kalibroimaan parametrit tilanteesi pohjalta. Kopioit kehoten itse — sinä päätät mitä tietoja jaat.</p>
+        <p class="ai-desc">Epävarma vaikeuskertoimesta tai rutiineista? Tekoäly auttaa kalibroimaan parametrit tilanteesi pohjalta. Kopioit kehotteen itse — sinä päätät, mitä tietoja jaat.</p>
         <ol class="ai-steps">
             <li>Kopioi kehote alla olevasta napista.</li>
             <li>Avaa <a href="https://gemini.google.com" target="_blank">Gemini</a> ja liitä se sinne.</li>
@@ -505,7 +506,7 @@
     <!-- TILANNEKATSAUS -->
     <div class="section-lbl">Tilannekatsaus</div>
     <div class="card card-accent">
-        <p class="ai-desc">Onko vauhtisi riittävä? Kopioi kehote Geminille — datasi ja lähtötilanteesi ovat mukana valmiiksi.</p>
+        <p class="ai-desc">Onko vauhtisi riittävä? Kopioi kehote Geminille — datasi on mukana valmiiksi. Sinä päätät, mitä tietoja jaat.</p>
         <ol class="ai-steps">
             <li>Kopioi kehote alta.</li>
             <li>Avaa <a href="https://gemini.google.com" target="_blank">Gemini</a> ja liitä se.</li>
@@ -516,6 +517,7 @@
  
     <div class="footer-grid">
         <button class="btn-ghost" onclick="modifyRoutines()">Muokkaa rutiineja</button>
+        <button class="btn-ghost" onclick="modifyGoalSettings()">Muokkaa tavoitetta</button>
         <button class="btn-ghost" onclick="exportData()">Varmuuskopio</button>
         <button class="btn-ghost" onclick="document.getElementById('fileIn').click()">Tuo data</button>
         <button class="btn-ghost btn-ghost-danger" onclick="resetCurrentGoal()">Nollaa</button>
@@ -669,6 +671,7 @@ function addNewGoal() {
     const ng = GOAL_TEMPLATE();
     ng.goal     = document.getElementById('ngGoal').value.trim()  || 'Uusi tavoite';
     ng.baseline = document.getElementById('ngBaseline').value.trim();
+    ng.quote    = document.getElementById('ngQuote').value.trim();
     ng.r1       = document.getElementById('ngR1').value.trim()    || 'Pienin teko';
     ng.r5       = document.getElementById('ngR5').value.trim()    || 'Päivittäinen toimenpide';
     ng.r20      = document.getElementById('ngR20').value.trim()   || 'Merkittävä suoritus';
@@ -1036,6 +1039,23 @@ function renderWeekChart() {
         const isToday=getDateStr(d)===todayStr;
         return `<div style="flex:1;text-align:center;"><span class="wdl ${isToday?'wdl-today':''}">${DN[d.getDay()]}</span></div>`;
     }).join('');
+}
+ 
+function modifyGoalSettings() {
+    const newGoal = prompt('Tavoite:', g().goal);
+    if (newGoal !== null) g().goal = newGoal.trim() || g().goal;
+    const newQuote = prompt('Oma motivaatiolause:', g().quote || '');
+    if (newQuote !== null) g().quote = newQuote.trim();
+    const vOptions = {'1000':'1 000 XP — Uusi tapa','5000':'5 000 XP — Merkittävä muutos','10000':'10 000 XP — Elämänmuutos','100000':'100 000 XP — Mestari'};
+    const vCurrent = String(g().v);
+    const vList = Object.entries(vOptions).map(([k,v],i)=>`${i+1}. ${v}`).join('\n');
+    const vKeys = Object.keys(vOptions);
+    const vChoice = prompt(`Vaikeuskerroin (nykyinen: ${vOptions[vCurrent]}):\n\n${vList}\n\nSyötä numero 1–4:`, vKeys.indexOf(vCurrent)+1);
+    if (vChoice !== null) {
+        const idx = parseInt(vChoice) - 1;
+        if (idx >= 0 && idx < vKeys.length) g().v = parseInt(vKeys[idx]);
+    }
+    save(); render();
 }
  
 function modifyRoutines() {
