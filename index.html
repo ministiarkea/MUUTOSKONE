@@ -1,3 +1,7 @@
+Index · HTML
+Copy
+
+ 
 <!DOCTYPE html>
 <html lang="fi">
 <head>
@@ -338,7 +342,7 @@
  
         <div class="ng-section">
             <div class="ng-label">Lähtötilanne <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div>
-            <div class="ng-input"><textarea id="ngBaseline" rows="2" placeholder="Mistä lähdet? Lyhyesti…"></textarea></div>
+            <div class="ng-input"><textarea id="ngBaseline" rows="2" placeholder="Mistä lähdet?"></textarea></div>
         </div>
  
         <div class="ng-section">
@@ -595,7 +599,7 @@ const GOAL_TEMPLATE = () => ({
  
 // Koko sovellustila
 let state = {
-    goals: [],        // max 3 tavoitetta
+    goals: [],        // max 5 tavoitetta
     activeIdx: 0,
     quote: ''         // globaali motivaatiolause
 };
@@ -693,7 +697,7 @@ function renderTabs() {
         const short = goal.goal.length > 14 ? goal.goal.slice(0,13)+'…' : goal.goal;
         return `<button class="btn-tab${active?' active':''}" onclick="switchGoal(${i})">${short || 'Tavoite '+(i+1)}</button>`;
     }).join('');
-    if (state.goals.length < 3) {
+    if (state.goals.length < 5) {
         tabs.innerHTML += `<button class="btn-tab btn-tab-add" onclick="openNewGoal()">+ Uusi</button>`;
     }
 }
