@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="fi">
 <head>
@@ -83,7 +81,8 @@
         textarea::placeholder { color: var(--text-3); }
  
         /* ── BUTTONS ── */
-        .btn-primary { background: transparent; color: var(--text-1); border: 1px solid var(--cyan-line); padding: 16px 24px; border-radius: 13px; width: 100%; font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; cursor: pointer; margin-top: 10px; font-family: inherit; transition: background 0.2s; }
+        .btn-primary { background: transparent; color: var(--text-1); border: 1px solid var(--cyan-line); padding: 16px 24px; border-radius: 13px; width: 100%; font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; cursor: pointer; margin-top: 10px; font-family: inherit; transition: background 0.2s, box-shadow 0.2s; }
+        .btn-primary:hover { box-shadow: 0 0 20px rgba(0,200,240,0.12); }
         .btn-primary:active { background: var(--cyan-dim); transform: scale(0.99); }
         .btn-ai { background: var(--purple-dim); border: 1px solid rgba(124,92,191,0.3); color: var(--text-1); padding: 14px; border-radius: 11px; width: 100%; font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.2s; }
         .btn-ai:active { background: rgba(124,92,191,0.22); transform: scale(0.99); }
@@ -93,7 +92,7 @@
         .btn-tab { background: transparent; border: 1px solid var(--border); color: var(--text-3); padding: 8px 14px; border-radius: 8px; font-size: 10px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: all 0.2s; white-space: nowrap; }
         .btn-tab.active { border-color: var(--cyan-line); color: var(--cyan); background: var(--cyan-dim); }
  
-        /* ── TAVOITE-TABS ── */
+        /* ── GOAL TABS ── */
         .goal-tabs { display: flex; gap: 6px; margin-bottom: 10px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
         .goal-tabs::-webkit-scrollbar { display: none; }
         .btn-tab-add { border-style: dashed; }
@@ -106,7 +105,6 @@
         .micro-val-cyan   { font-size: 13px; font-weight: 400; color: var(--cyan); }
         .micro-lbl { font-size: 9px; color: var(--text-3); letter-spacing: 1.5px; text-transform: uppercase; }
  
-        /* PÄIVIÄ MAALIIN */
         .days-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 11px; }
         .days-val { font-size: 66px; font-weight: 200; line-height: 1; letter-spacing: -3px; color: var(--text-1); }
         .days-right { display: flex; flex-direction: column; gap: 3px; justify-content: flex-end; padding-bottom: 4px; }
@@ -114,7 +112,7 @@
         .days-pct { font-size: 13px; font-weight: 400; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .days-xp  { font-size: 11px; color: var(--text-3); }
  
-        /* Virstanpylväät */
+        /* Milestones */
         .milestones { display: flex; gap: 4px; margin-bottom: 3px; }
         .ms { flex: 1; height: 2px; border-radius: 1px; background: rgba(255,255,255,0.07); transition: background 0.6s; }
         .ms.done { background: var(--grad); }
@@ -134,12 +132,24 @@
         .sb-val { font-size: 14px; font-weight: 300; color: var(--text-1); }
         .sb-lbl { font-size: 8px; color: var(--text-3); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
  
-        /* ── MIKSI-MUISTUTUS ── */
-        .why-card { background: linear-gradient(135deg,rgba(124,92,191,0.08),rgba(0,200,240,0.03)); border: 1px solid rgba(124,92,191,0.22); border-radius: 12px; padding: 11px 16px; margin-bottom: 9px; display:none; }
-        .why-label { font-size: 8px; color: var(--purple); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
-        .why-text { font-size: 12px; color: var(--text-2); line-height: 1.55; font-style: italic; font-weight: 300; }
+        /* ── MOMENTUM SCORE ── */
+        .momentum-bar { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.025); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; margin-bottom: 9px; }
+        .momentum-label { font-size: 9px; color: var(--text-3); letter-spacing: 2px; text-transform: uppercase; flex-shrink: 0; }
+        .momentum-track { flex: 1; height: 3px; background: rgba(255,255,255,0.07); border-radius: 2px; overflow: hidden; }
+        .momentum-fill { height: 100%; border-radius: 2px; transition: width 0.8s ease, background 0.8s ease; }
+        .momentum-val { font-size: 12px; font-weight: 600; flex-shrink: 0; min-width: 36px; text-align: right; }
  
-        /* ── SIGNAALIKORTTI ── */
+        /* ── IDENTITY STATEMENT ── */
+        .identity-card { background: linear-gradient(135deg,rgba(124,92,191,0.10),rgba(0,200,240,0.04)); border: 1px solid rgba(124,92,191,0.28); border-radius: 14px; padding: 14px 18px; margin-bottom: 9px; cursor: pointer; position: relative; overflow: hidden; }
+        .identity-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background: var(--grad); opacity:0.4; }
+        .identity-kicker { font-size: 8px; color: var(--purple); letter-spacing: 3px; text-transform: uppercase; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+        .identity-kicker::before { content:''; width:4px; height:4px; background:var(--purple); border-radius:50%; box-shadow:0 0 6px var(--purple); }
+        .identity-text { font-size: 15px; font-weight: 300; color: var(--text-1); line-height: 1.5; }
+        .identity-text.placeholder { color: var(--text-3); font-size: 13px; }
+        .identity-edit { display: none; width: 100%; background: transparent; border: none; color: var(--text-1); font-size: 15px; font-weight: 300; outline: none; resize: none; font-family: inherit; line-height: 1.5; }
+        .identity-hint { font-size: 9px; color: var(--text-3); margin-top: 8px; letter-spacing: 1px; }
+ 
+        /* ── SIGNAL CARD ── */
         .signal-card { border-radius: 12px; padding: 11px 16px; margin-bottom: 9px; font-size: 12px; font-weight: 300; line-height: 1.5; display: none; align-items: center; gap: 10px; }
         .signal-card.show { display: flex; }
         .signal-card.warning { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); color: rgba(249,115,22,0.85); }
@@ -148,18 +158,31 @@
         .signal-card.grace   { background: rgba(124,92,191,0.08); border: 1px solid rgba(124,92,191,0.25); color: rgba(168,139,220,0.9); }
         .signal-icon { font-size: 16px; flex-shrink: 0; }
  
-        /* ── OMA LAINAUS ── */
-        .quote-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px 18px; margin-bottom: 9px; cursor: pointer; transition: border-color 0.2s; }
-        .quote-card:active { border-color: var(--border-2); }
-        .quote-text { font-size: 13px; font-weight: 300; color: var(--text-2); line-height: 1.6; font-style: italic; }
-        .quote-placeholder { color: var(--text-3); }
-        .quote-edit { display: none; width: 100%; background: transparent; border: none; color: var(--text-1); font-size: 13px; font-weight: 300; font-style: italic; outline: none; resize: none; font-family: inherit; line-height: 1.6; }
-        .quote-hint { font-size: 9px; color: var(--text-3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
-        .quote-edit-icon { font-size: 10px; color: var(--text-3); }
+        /* ── STREAK RECOVERY ── */
+        .recovery-card { background: linear-gradient(135deg,rgba(249,115,22,0.07),rgba(220,60,60,0.04)); border: 1px solid rgba(249,115,22,0.22); border-radius: 14px; padding: 16px 18px; margin-bottom: 9px; display: none; }
+        .recovery-card.show { display: block; }
+        .recovery-title { font-size: 10px; font-weight: 600; color: var(--orange); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+        .recovery-text { font-size: 12px; color: var(--text-2); line-height: 1.6; margin-bottom: 12px; }
+        .recovery-btn { background: rgba(249,115,22,0.12); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); padding: 10px 16px; border-radius: 9px; font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; font-family: inherit; width: 100%; }
+        .recovery-btn:active { background: rgba(249,115,22,0.22); }
  
-        /* ── RUTIININAPIT ── */
+        /* ── QUOTE ── */
+        .quote-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px 18px; margin-bottom: 9px; cursor: pointer; }
+        .quote-text { font-size: 13px; font-weight: 300; color: var(--text-2); line-height: 1.6; font-style: italic; }
+        .quote-edit { display: none; width: 100%; background: transparent; border: none; color: var(--text-1); font-size: 13px; font-weight: 300; font-style: italic; outline: none; resize: none; font-family: inherit; line-height: 1.6; }
+        .quote-hint { font-size: 9px; color: var(--text-3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; display: flex; justify-content: space-between; }
+ 
+        /* ── WHY CARD ── */
+        .why-card { background: linear-gradient(135deg,rgba(124,92,191,0.08),rgba(0,200,240,0.03)); border: 1px solid rgba(124,92,191,0.22); border-radius: 12px; padding: 11px 16px; margin-bottom: 9px; display:none; }
+        .why-label { font-size: 8px; color: var(--purple); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
+        .why-text { font-size: 12px; color: var(--text-2); line-height: 1.55; font-style: italic; font-weight: 300; }
+ 
+        /* ── ROUTINE BUTTONS ── */
         .routine-grid { display: flex; flex-direction: column; gap: 7px; margin-bottom: 9px; }
         .rbtn { border: none; border-radius: 14px; padding: 0; cursor: pointer; width: 100%; font-family: inherit; position: relative; overflow: hidden; transition: transform 0.12s ease, box-shadow 0.15s ease; }
+        .rbtn::after { content:''; position:absolute; inset:0; background:white; opacity:0; transition:opacity 0.3s; border-radius:14px; }
+        .rbtn.flash::after { animation: btnFlash 0.4s ease-out; }
+        @keyframes btnFlash { 0%{opacity:0.15} 100%{opacity:0} }
         .rbtn:active { transform: scale(0.965); }
         .rbtn-inner { display: flex; justify-content: space-between; align-items: center; padding: 15px 18px; }
         .rbtn-1  { background: var(--grad-r1);  border: 1px solid var(--border-r1); }
@@ -169,7 +192,7 @@
         .rbtn-1:active  { box-shadow: 0 0 18px rgba(255,255,255,0.06); }
         .rbtn-5:active  { box-shadow: 0 0 26px rgba(124,92,191,0.30); }
         .rbtn-20:active { box-shadow: 0 0 30px rgba(0,160,210,0.32); }
-        .rbtn-50:active { box-shadow: 0 0 36px rgba(0,200,240,0.40); }
+        .rbtn-50:active { box-shadow: 0 0 40px rgba(0,200,240,0.50); }
         .rbtn-left { display: flex; align-items: center; gap: 13px; text-align: left; }
         .rbtn-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
         .rdot-1  { background: rgba(255,255,255,0.28); }
@@ -180,7 +203,6 @@
         .rbtn-name { font-size: 13px; font-weight: 400; color: var(--text-1); line-height: 1.3; }
         .rbtn-50 .rbtn-name { font-weight: 500; }
         .rbtn-min  { font-size: 10px; color: var(--text-3); }
-        .rbtn-50 .rbtn-min { color: rgba(0,200,240,0.5); }
         .rbtn-xp { font-size: 15px; font-weight: 600; white-space: nowrap; margin-left: 8px; }
         .rxp-1  { color: var(--text-2); font-weight: 400; font-size: 14px; }
         .rxp-5  { background: linear-gradient(135deg,#c4b0f0,#8b70d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -205,18 +227,33 @@
         .toggle-saved.show { opacity: 1; }
         .baseline-text { font-size: 12px; color: var(--text-2); line-height: 1.6; font-style: italic; white-space: pre-wrap; }
  
-        /* ── VIIKKOKAAVIO ── */
-        .week-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 11px; }
-        .week-best-lbl { font-size: 9px; color: var(--text-2); }
-        .week-bars { display: flex; align-items: flex-end; gap: 5px; height: 46px; margin-bottom: 5px; }
-        .wbw { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
-        .wb { width: 100%; border-radius: 2px 2px 0 0; min-height: 2px; transition: height 0.4s ease; }
-        .wb-empty { background: rgba(255,255,255,0.06); }
-        .wb-done  { background: rgba(124,92,191,0.42); }
-        .wb-today { background: linear-gradient(180deg,var(--cyan) 0%,rgba(0,200,240,0.28) 100%); }
-        .wb-best  { background: linear-gradient(180deg,#22c55e 0%,rgba(34,197,94,0.3) 100%); }
-        .wdl { font-size: 8px; color: var(--text-3); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 3px; }
-        .wdl-today { color: var(--cyan); }
+        /* ── HEAT MAP (GitHub-tyylinen) ── */
+        .heatmap-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 16px 18px; margin-bottom: 9px; }
+        .heatmap-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .heatmap-grid { display: grid; grid-template-columns: repeat(18, 1fr); gap: 3px; }
+        .hm-cell { aspect-ratio: 1; border-radius: 2px; cursor: default; transition: opacity 0.2s; }
+        .hm-cell:hover { opacity: 0.7; }
+        .hm-0 { background: rgba(255,255,255,0.05); }
+        .hm-1 { background: rgba(124,92,191,0.35); }
+        .hm-2 { background: rgba(5,159,191,0.5); }
+        .hm-3 { background: rgba(0,200,240,0.65); }
+        .hm-4 { background: rgba(0,200,240,0.9); box-shadow: 0 0 4px rgba(0,200,240,0.4); }
+        .heatmap-legend { display: flex; align-items: center; gap: 4px; margin-top: 8px; justify-content: flex-end; }
+        .hm-legend-label { font-size: 8px; color: var(--text-3); letter-spacing: 1px; }
+        .hm-legend-cell { width: 9px; height: 9px; border-radius: 2px; }
+ 
+        /* ── DAY NOTES ── */
+        .daynote-body { padding-bottom: 0 !important; }
+        .daynote-grid { display: flex; flex-direction: column; gap: 8px; max-height: 180px; overflow-y: auto; scrollbar-width: none; margin-bottom: 10px; }
+        .daynote-grid::-webkit-scrollbar { display: none; }
+        .daynote-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 9px; padding: 9px 12px; }
+        .daynote-date { font-size: 9px; color: var(--text-3); letter-spacing: 1px; margin-bottom: 3px; }
+        .daynote-text { font-size: 12px; color: var(--text-2); line-height: 1.5; }
+        .daynote-input-row { display: flex; gap: 8px; align-items: flex-end; padding-top: 2px; border-top: 1px solid var(--border); padding-top: 10px; }
+        .daynote-textarea { background: transparent; border: none; color: var(--text-1); font-size: 13px; font-weight: 300; outline: none; width: 100%; font-family: inherit; resize: none; line-height: 1.5; min-height: 36px; }
+        .daynote-textarea::placeholder { color: var(--text-3); }
+        .daynote-save { background: var(--cyan-dim); border: 1px solid var(--cyan-line); color: var(--cyan); padding: 8px 14px; border-radius: 8px; font-size: 9px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; font-family: inherit; flex-shrink: 0; }
+        .daynote-save:active { background: rgba(0,200,240,0.22); }
  
         /* ── SECTION LABEL ── */
         .section-lbl { font-size: 10px; font-weight: 600; color: var(--text-2); text-transform: uppercase; letter-spacing: 2.5px; margin: 14px 0 8px; display: flex; align-items: center; gap: 8px; }
@@ -231,14 +268,12 @@
         /* ── FOOTER ── */
         .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-top: 18px; }
         .privacy-note { font-size: 10px; color: var(--text-3); text-align: center; letter-spacing: 0.5px; line-height: 1.6; margin-top: 14px; padding: 0 8px; }
- 
-        /* ── GOAL HEADER ── */
         .goal-header { display: flex; justify-content: space-between; align-items: center; margin: 26px 0 10px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
         .goal-name   { font-size: 11px; font-weight: 500; color: var(--text-1); letter-spacing: 2px; text-transform: uppercase; max-width: 70%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .goal-target { font-size: 10px; color: var(--text-2); letter-spacing: 1px; }
  
         /* ── OVERLAYS ── */
-        #lvlOverlay,#victoryOverlay,#milestoneOverlay,#bestDayOverlay,#newGoalOverlay,#reflectionOverlay {
+        #lvlOverlay,#victoryOverlay,#milestoneOverlay,#bestDayOverlay,#newGoalOverlay,#reflectionOverlay,#recoveryOverlay {
             position: fixed; inset: 0; z-index: 5000; display: none; flex-direction: column;
             align-items: center; justify-content: center;
             background: rgba(7,7,13,0.96); backdrop-filter: blur(24px); text-align: center; padding: 40px;
@@ -247,14 +282,30 @@
         .ov-title  { font-size: 2.5rem; font-weight: 200; letter-spacing: -1px; margin-bottom: 10px; color: var(--text-1); }
         .ov-sub    { font-size: 14px; font-weight: 300; color: var(--text-2); margin-bottom: 30px; line-height: 1.65; }
  
-        /* New goal overlay */
+        /* ── LEVEL-UP OVERLAY — animoitu ── */
+        #lvlOverlay { overflow: hidden; }
+        .lvl-particles { position: absolute; inset: 0; pointer-events: none; }
+        .lvl-ring { width: 120px; height: 120px; border-radius: 50%; border: 1px solid rgba(0,200,240,0.3); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; position: relative; animation: ringPulse 2s ease-in-out infinite; }
+        @keyframes ringPulse { 0%,100%{box-shadow:0 0 20px rgba(0,200,240,0.15)} 50%{box-shadow:0 0 50px rgba(0,200,240,0.35),0 0 100px rgba(124,92,191,0.15)} }
+        .lvl-number { font-size: 3rem; font-weight: 200; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: numPop 0.5s cubic-bezier(0.175,0.885,0.32,1.275); }
+        @keyframes numPop { 0%{transform:scale(0.5);opacity:0} 100%{transform:scale(1);opacity:1} }
+        .lvl-overlay-msg { font-size: 15px; font-weight: 300; color: var(--text-2); margin-bottom: 8px; line-height: 1.6; animation: fadeUp 0.6s 0.2s ease both; }
+        .lvl-overlay-next { font-size: 10px; color: var(--text-3); letter-spacing: 2px; margin-bottom: 28px; animation: fadeUp 0.6s 0.35s ease both; }
+        @keyframes fadeUp { 0%{transform:translateY(12px);opacity:0} 100%{transform:translateY(0);opacity:1} }
+ 
+        /* ── STREAK RECOVERY OVERLAY ── */
+        #recoveryOverlay { z-index: 5500; }
+        .rec-ov-icon { font-size: 3rem; margin-bottom: 14px; animation: shake 0.5s ease; }
+        @keyframes shake { 0%,100%{transform:rotate(0)} 25%{transform:rotate(-8deg)} 75%{transform:rotate(8deg)} }
+        .rec-days { font-size: 11px; color: var(--orange); letter-spacing: 3px; margin-bottom: 20px; text-transform: uppercase; }
+        .rec-input-wrap { background: rgba(255,255,255,0.03); border: 1px solid var(--border-2); border-radius: 14px; padding: 16px; width: 100%; max-width: 320px; text-align: left; margin-bottom: 20px; }
+        .rec-input-label { font-size: 9px; color: var(--text-3); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+        .rec-textarea { background: transparent; border: none; color: var(--text-1); font-size: 14px; font-weight: 300; outline: none; width: 100%; font-family: inherit; resize: none; line-height: 1.6; }
+        .rec-textarea::placeholder { color: var(--text-3); }
+ 
+        /* ── NEW GOAL OVERLAY ── */
         #newGoalOverlay { z-index: 6000; overflow-y: auto; padding: 20px; }
-        .ng-card {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 20px; padding: 24px; width: 100%; max-width: 390px;
-            text-align: left; max-height: 92vh; overflow-y: auto;
-            scrollbar-width: none;
-        }
+        .ng-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 24px; width: 100%; max-width: 390px; text-align: left; max-height: 92vh; overflow-y: auto; scrollbar-width: none; }
         .ng-card::-webkit-scrollbar { display: none; }
         .ng-title { font-size: 13px; font-weight: 500; color: var(--text-1); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
         .ng-title::before { content:''; width:3px; height:3px; background:var(--cyan); border-radius:50%; }
@@ -262,15 +313,15 @@
         .ng-label { font-size: 10px; color: var(--text-2); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 6px; }
         .ng-input { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 11px; padding: 11px 14px; margin-bottom: 7px; }
         .ng-input:last-child { margin-bottom: 0; }
-        .ng-input input, .ng-input select, .ng-input textarea { padding: 0; font-size: 13px; }
-        .ng-xp-row { display: flex; align-items: center; gap: 0; background: rgba(255,255,255,0.032); border: 1px solid var(--border); border-radius: 11px; margin-bottom: 7px; overflow: hidden; }
+        .ng-input input,.ng-input select,.ng-input textarea { padding: 0; font-size: 13px; }
+        .ng-xp-row { display: flex; align-items: center; background: rgba(255,255,255,0.032); border: 1px solid var(--border); border-radius: 11px; margin-bottom: 7px; overflow: hidden; }
         .ng-xp-row:last-child { margin-bottom: 0; }
         .ng-xp-tag { font-size: 10px; font-weight: 700; min-width: 52px; color: var(--cyan); flex-shrink: 0; padding: 0 12px; align-self: stretch; display: flex; align-items: center; justify-content: center; }
         .ng-xp-row input { padding: 12px 14px; font-size: 13px; }
         .ng-divider { height: 1px; background: var(--border); margin: 16px 0; }
         .ng-ai-hint { font-size: 11px; color: var(--text-3); font-weight: 300; margin-bottom: 10px; line-height: 1.6; }
  
-        /* ── Reflektio overlay ── */
+        /* ── WEEKLY REFLECTION OVERLAY ── */
         .refl-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border-2); border-radius: 16px; padding: 18px; width: 100%; max-width: 360px; text-align: left; margin-bottom: 24px; }
         .refl-xp { font-size: 11px; color: var(--cyan); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
         .refl-prompt { font-size: 11px; color: var(--text-3); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
@@ -278,8 +329,15 @@
         .refl-input::placeholder { color: var(--text-3); }
  
         /* ── XP FLY ── */
-        .xp-fly { position: absolute; font-size: 14px; font-weight: 600; pointer-events: none; z-index: 7000; color: var(--cyan); animation: fly 0.7s ease-out forwards; letter-spacing: 1px; }
-        @keyframes fly { 0%{transform:translateY(0);opacity:1;} 100%{transform:translateY(-70px);opacity:0;} }
+        .xp-fly { position: fixed; font-size: 14px; font-weight: 600; pointer-events: none; z-index: 7000; color: var(--cyan); animation: fly 0.8s ease-out forwards; letter-spacing: 1px; }
+        @keyframes fly { 0%{transform:translateY(0) scale(1);opacity:1;} 60%{opacity:1;} 100%{transform:translateY(-80px) scale(0.8);opacity:0;} }
+ 
+        /* ── PARTICLE ── */
+        .particle { position: fixed; pointer-events: none; z-index: 7000; border-radius: 50%; animation: particleFly var(--dur,1s) ease-out forwards; }
+        @keyframes particleFly {
+            0%   { transform: translate(0,0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx,0px),var(--ty,-120px)) scale(0); opacity: 0; }
+        }
  
         /* ── TOASTS ── */
         .day-toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.06); border: 1px solid var(--border-2); color: var(--text-2); padding: 10px 20px; border-radius: 40px; font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; z-index: 9000; opacity: 0; transition: opacity 0.4s ease; pointer-events: none; white-space: nowrap; }
@@ -291,26 +349,37 @@
 </head>
 <body>
  
-<!-- OVERLAYS -->
+<!-- ═══ OVERLAYS ═══ -->
+ 
+<!-- LEVEL-UP — animoitu -->
 <div id="lvlOverlay">
+    <canvas class="lvl-particles" id="lvlCanvas"></canvas>
+    <div class="lvl-ring">
+        <div class="lvl-number" id="popLvlText">2</div>
+    </div>
     <div class="ov-kicker">Taso nousi</div>
-    <div class="ov-title" id="popLvlText">Taso 2</div>
-    <div class="ov-sub" id="popLvlMsg">Systemaattinen tekeminen toimii.</div>
-    <div style="font-size:10px;color:var(--text-3);letter-spacing:1.5px;margin-bottom:28px;" id="popLvlNext"></div>
+    <div class="lvl-overlay-msg" id="popLvlMsg">Systemaattinen tekeminen toimii.</div>
+    <div class="lvl-overlay-next" id="popLvlNext"></div>
     <button class="btn-primary" onclick="closeLvl()" style="max-width:180px;margin:0 auto;">Jatka</button>
 </div>
+ 
+<!-- MILESTONE -->
 <div id="milestoneOverlay">
     <div class="ov-kicker" id="msKicker">Virstanpylväs</div>
     <div class="ov-title" id="msTitle">25 %</div>
     <div class="ov-sub" id="msSub"></div>
     <button class="btn-primary" onclick="closeMilestone()" style="max-width:180px;margin:0 auto;">Jatka</button>
 </div>
+ 
+<!-- BEST DAY -->
 <div id="bestDayOverlay">
     <div class="ov-kicker">Uusi ennätys</div>
     <div class="ov-title" id="bestDayVal"></div>
     <div class="ov-sub">Tämä on paras yksittäinen päiväsi tähän mennessä.<br>Muista tämä tunne.</div>
     <button class="btn-primary" onclick="document.getElementById('bestDayOverlay').style.display='none'" style="max-width:180px;margin:0 auto;">Jatka</button>
 </div>
+ 
+<!-- VICTORY -->
 <div id="victoryOverlay">
     <div class="ov-kicker">Tavoite saavutettu</div>
     <div class="ov-title" style="color:var(--green);">Valmis.</div>
@@ -318,7 +387,21 @@
     <button class="btn-primary" onclick="closeVictory()" style="max-width:180px;margin:0 auto;">Jatka</button>
 </div>
  
-<!-- Viikoittainen reflektio overlay -->
+<!-- STREAK RECOVERY RITUAL -->
+<div id="recoveryOverlay">
+    <div class="rec-ov-icon">🔥</div>
+    <div class="ov-kicker" style="color:var(--orange);">Putki katkesi</div>
+    <div class="ov-title" style="font-size:1.8rem;">Aloita uudelleen.</div>
+    <div class="rec-days" id="recDays">0 päivän putki</div>
+    <div class="rec-input-wrap">
+        <div class="rec-input-label">Mikä katkaisi putken — ja mitä teen nyt toisin?</div>
+        <textarea class="rec-textarea" id="recoveryInput" rows="3" placeholder="Vapaamuotoinen reflektio — ei tuomitsemista, vain suunta eteenpäin."></textarea>
+    </div>
+    <button class="btn-primary" onclick="saveRecovery()" style="max-width:240px;margin:0 auto;">Aloitan tänään uudelleen</button>
+    <button onclick="skipRecovery()" style="margin-top:12px;background:transparent;border:none;color:var(--text-3);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Ohita</button>
+</div>
+ 
+<!-- WEEKLY REFLECTION -->
 <div id="reflectionOverlay">
     <div class="ov-kicker" style="color:var(--purple);">Maanantai-reflektio</div>
     <div class="ov-title" style="font-size:1.8rem;">Viikko takana.</div>
@@ -331,21 +414,22 @@
     <button onclick="skipReflection()" style="margin-top:14px;background:transparent;border:none;color:var(--text-3);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Ohita</button>
 </div>
  
-<!-- Uusi tavoite overlay -->
+<!-- NEW GOAL OVERLAY -->
 <div id="newGoalOverlay">
     <div class="ng-card">
         <div class="ng-title">Uusi tavoite</div>
- 
         <div class="ng-section">
             <div class="ng-label">Tavoite</div>
             <div class="ng-input"><input type="text" id="ngGoal" placeholder="Mitä haluat saavuttaa?"></div>
         </div>
- 
+        <div class="ng-section">
+            <div class="ng-label">Identiteetti <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div>
+            <div class="ng-input"><input type="text" id="ngIdentity" placeholder="Olen jo… (esim. Olen juoksija)"></div>
+        </div>
         <div class="ng-section">
             <div class="ng-label">Miksi tämä on tärkeää? <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div>
-            <div class="ng-input"><textarea id="ngWhy" rows="2" placeholder="Mikä on perimmäinen syy? Mitä tämä muuttaa elämässäsi?"></textarea></div>
+            <div class="ng-input"><textarea id="ngWhy" rows="2" placeholder="Mikä on perimmäinen syy?"></textarea></div>
         </div>
- 
         <div class="ng-section">
             <div class="ng-label">Vaikeuskerroin</div>
             <div class="ng-input">
@@ -357,7 +441,6 @@
                 </select>
             </div>
         </div>
- 
         <div class="ng-section">
             <div class="ng-label">Rutiinit</div>
             <div class="ng-xp-row"><span class="ng-xp-tag">1 XP</span><input type="text" id="ngR1" placeholder="Pienin teko — 1–10 min"></div>
@@ -365,25 +448,21 @@
             <div class="ng-xp-row"><span class="ng-xp-tag">20 XP</span><input type="text" id="ngR20" placeholder="Merkittävä suoritus — 45–90 min"></div>
             <div class="ng-xp-row"><span class="ng-xp-tag">50 XP</span><input type="text" id="ngR50" placeholder="Päivän tärkein teko — 2–4 h"></div>
         </div>
- 
         <div class="ng-section">
             <div class="ng-label">Lähtötilanne <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div>
             <div class="ng-input"><textarea id="ngBaseline" rows="2" placeholder="Mistä lähdet?"></textarea></div>
         </div>
- 
         <div class="ng-section">
             <div class="ng-label">Oma motivaatiolause <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div>
             <div class="ng-input"><input type="text" id="ngQuote" placeholder="Mikä pitää sinut liikkeellä?"></div>
         </div>
- 
         <div style="display:flex;gap:8px;margin-bottom:16px;">
             <button class="btn-ghost" onclick="closeNewGoal()" style="flex:1;">Peruuta</button>
             <button class="btn-primary" onclick="addNewGoal()" style="flex:2;margin-top:0;">Lisää tavoite</button>
         </div>
- 
         <div class="ng-divider"></div>
-        <div class="ng-label" style="margin-bottom:6px;">Epävarma vaikeuskertoimesta tai rutiineista?</div>
-        <p class="ng-ai-hint">Kopioi strategiakehote, avaa <a href="https://gemini.google.com" target="_blank" style="color:var(--cyan);text-decoration:none;">Gemini</a> ja anna tekoälyn kalibroida parametrit. Sinä päätät, mitä tietoja jaat.</p>
+        <div class="ng-label" style="margin-bottom:6px;">Epävarma parametreista?</div>
+        <p class="ng-ai-hint">Kopioi strategiakehote, avaa <a href="https://gemini.google.com" target="_blank" style="color:var(--cyan);text-decoration:none;">Gemini</a> ja anna tekoälyn kalibroida ne. Sinä päätät, mitä jaat.</p>
         <button class="btn-ai" id="copyNgAiBtn" onclick="copyNewGoalPrompt()">Kopioi strategiakehote tälle tavoitteelle</button>
     </div>
 </div>
@@ -393,16 +472,22 @@
  
 <div class="container">
  
-<!-- ══════════════════════════ SIVU 1: SETUP -->
+<!-- ═══ SIVU 1: SETUP ═══ -->
 <div id="viewSetup">
     <div class="logo-area">
         <h1 class="neon-logo">Muutoskone</h1>
-        <div class="sub-logo">Strateginen analyysityökalu</div>
+        <div class="sub-logo">Strateginen muutostyökalu</div>
     </div>
  
     <div class="card">
         <div class="lbl"><span class="lbl-dot"></span>Tavoite</div>
         <input type="text" id="inGoal" placeholder="Mitä haluat saavuttaa?">
+    </div>
+ 
+    <div class="card" style="background:linear-gradient(135deg,rgba(124,92,191,0.07),rgba(0,200,240,0.02));border-color:rgba(124,92,191,0.22);">
+        <div class="lbl"><span class="lbl-dot" style="background:var(--purple);"></span>Identiteetti <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(James Clear — Atomic Habits)</span></div>
+        <input type="text" id="inIdentity" placeholder="Olen jo… (esim. Olen juoksija / Olen kirjoittaja)">
+        <div style="font-size:10px;color:var(--text-3);margin-top:8px;line-height:1.5;">Muutos alkaa identiteetistä, ei tavoitteesta. Kirjoita se henkilö, joksi olet jo tulossa.</div>
     </div>
  
     <div class="card">
@@ -430,7 +515,7 @@
  
     <div class="card">
         <div class="lbl"><span class="lbl-dot"></span>Lähtötilanne <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div>
-        <textarea id="inBaseline" rows="3" placeholder="Kuvaile nykytilasi. Mistä lähdet? Arjen rajoitteet, vahvuudet, aiemmat yritykset…"></textarea>
+        <textarea id="inBaseline" rows="3" placeholder="Kuvaile nykytilasi. Mistä lähdet?"></textarea>
         <div class="baseline-autosave" id="baselineAutosave">Tallennettu</div>
     </div>
  
@@ -443,7 +528,7 @@
  
     <div class="card card-accent" style="margin-top:16px;">
         <div class="lbl"><span class="lbl-dot"></span>Strategia-apuri</div>
-        <p class="ai-desc">Epävarma vaikeuskertoimesta tai rutiineista? Tekoäly auttaa kalibroimaan parametrit tilanteesi pohjalta. Kopioit kehotteen itse — sinä päätät, mitä tietoja jaat.</p>
+        <p class="ai-desc">Epävarma parametreista? Tekoäly auttaa kalibroimaan ne tilanteesi pohjalta.</p>
         <ol class="ai-steps">
             <li>Kopioi kehote alla olevasta napista.</li>
             <li>Avaa <a href="https://gemini.google.com" target="_blank">Gemini</a> ja liitä se sinne.</li>
@@ -452,13 +537,12 @@
         <button class="btn-ai" id="copyAiBtn" onclick="copyAiPrompt()">Kopioi strategiakehote</button>
     </div>
  
-    <p class="privacy-note">Kaikki data tallennetaan ainoastaan tällä laitteella.<br>Sovellus ei lähetä tietojasi minnekään — ei palvelimelle, ei tekoälylle.<br>AI-kehotteet kopioit itse ja päätät itse mitä jaat.</p>
+    <p class="privacy-note">Kaikki data tallennetaan ainoastaan tällä laitteella.<br>AI-kehotteet kopioit itse — sinä päätät mitä jaat.</p>
 </div>
  
-<!-- ══════════════════════════ SIVU 2: PELI -->
+<!-- ═══ SIVU 2: PELI ═══ -->
 <div id="viewGame" style="display:none;">
  
-    <!-- Tavoite-tabsit -->
     <div style="margin-top:26px;margin-bottom:10px;">
         <div class="goal-tabs" id="goalTabs"></div>
     </div>
@@ -466,6 +550,14 @@
     <div class="goal-header">
         <span class="goal-name" id="txtGoal"></span>
         <span class="goal-target" id="txtV"></span>
+    </div>
+ 
+    <!-- IDENTITY STATEMENT -->
+    <div class="identity-card" id="identityCard" onclick="editIdentity()" style="display:none;">
+        <div class="identity-kicker">Identiteettisi</div>
+        <div class="identity-text" id="identityDisplay"></div>
+        <textarea class="identity-edit" id="identityEdit" rows="2" placeholder="Olen jo…"></textarea>
+        <div class="identity-hint">Napauta muokataksesi</div>
     </div>
  
     <!-- STATUS CARD -->
@@ -504,45 +596,43 @@
         </div>
         <div class="lvl-row">
             <div class="lvl-lbl">Taso <span class="lvl-val" id="valLvl">1</span></div>
-            <div class="lvl-lbl" id="lvlNextLabel" style="color:var(--text-3);font-size:8px;"></div>
+            <div class="lvl-lbl" id="lvlNextLabel" style="font-size:8px;color:var(--text-3);"></div>
             <div class="lvl-lbl">Päivä <span class="lvl-val" id="valDays">1</span></div>
         </div>
         <div class="bar-track"><div class="bar-fill" id="barXP"></div></div>
         <div class="sc-bottom">
-            <div class="sb-item">
-                <div class="sb-val" id="statAvg">—</div>
-                <div class="sb-lbl">XP / pv</div>
-            </div>
-            <div class="sb-item">
-                <div class="sb-val" id="statBest">—</div>
-                <div class="sb-lbl">Paras pv</div>
-            </div>
+            <div class="sb-item"><div class="sb-val" id="statAvg">—</div><div class="sb-lbl">XP / pv</div></div>
+            <div class="sb-item"><div class="sb-val" id="statBest">—</div><div class="sb-lbl">Paras pv</div></div>
         </div>
     </div>
  
-    <!-- SIGNAALI: passiivisuus / kannustus -->
+    <!-- MOMENTUM SCORE -->
+    <div class="momentum-bar">
+        <div class="momentum-label">Vauhti</div>
+        <div class="momentum-track"><div class="momentum-fill" id="momentumFill"></div></div>
+        <div class="momentum-val" id="momentumVal">—</div>
+    </div>
+ 
+    <!-- SIGNAL -->
     <div class="signal-card" id="signalCard">
         <span class="signal-icon" id="signalIcon"></span>
         <span id="signalText"></span>
     </div>
  
-    <!-- MIKSI-MUISTUTUS -->
+    <!-- WHY -->
     <div class="why-card" id="whyCard">
         <div class="why-label">Miksi tämä on tärkeää</div>
         <div class="why-text" id="whyText"></div>
     </div>
  
-    <!-- OMA MOTIVAATIOLAUSE -->
+    <!-- QUOTE -->
     <div class="quote-card" id="quoteCard" onclick="editQuote()" style="display:none;">
-        <div class="quote-hint">
-            <span>Oma muistutuksesi</span>
-            <span class="quote-edit-icon">✎</span>
-        </div>
+        <div class="quote-hint"><span>Oma muistutuksesi</span><span style="font-size:10px;color:var(--text-3);">✎</span></div>
         <div class="quote-text" id="quoteDisplay"></div>
         <textarea class="quote-edit" id="quoteEdit" rows="2" placeholder="Kirjoita oma motivaatiolauseesi…"></textarea>
     </div>
  
-    <!-- RUTIININAPIT -->
+    <!-- ROUTINE BUTTONS -->
     <div class="routine-grid" id="taskList"></div>
  
     <!-- UNDO -->
@@ -553,17 +643,26 @@
  
     <!-- PÄIVÄN INTENTIO -->
     <div class="toggle-row" onclick="togglePanel('intentio')">
-        <div class="toggle-row-lbl">
-            <span class="lbl-dot"></span>
-            Päivän intentio
-            <span class="toggle-preview" id="intentioPreview"></span>
-        </div>
+        <div class="toggle-row-lbl"><span class="lbl-dot"></span>Päivän intentio<span class="toggle-preview" id="intentioPreview"></span></div>
         <span class="toggle-arrow" id="intentioArrow">▾</span>
     </div>
     <div class="toggle-body" id="intentioBody">
         <div style="font-size:10px;color:var(--text-2);letter-spacing:1px;margin-bottom:8px;">Tänään aion</div>
         <textarea id="intentioInput" rows="2" placeholder="Kirjoita yksi konkreettinen asia, jonka teet tänään…"></textarea>
         <div class="toggle-saved" id="intentioSaved">Tallennettu</div>
+    </div>
+ 
+    <!-- PÄIVÄN MUISTIINPANOT -->
+    <div class="toggle-row" onclick="togglePanel('daynote')">
+        <div class="toggle-row-lbl"><span class="lbl-dot"></span>Päivän muistiinpanot<span class="toggle-preview" id="daynotePreview"></span></div>
+        <span class="toggle-arrow" id="daynoteArrow">▾</span>
+    </div>
+    <div class="toggle-body daynote-body" id="daynoteBody">
+        <div class="daynote-grid" id="daynoteGrid"></div>
+        <div class="daynote-input-row">
+            <textarea class="daynote-textarea" id="daynoteInput" rows="2" placeholder="Mitä opin tänään? Mikä toimi?"></textarea>
+            <button class="daynote-save" onclick="saveDaynote()">Tallenna</button>
+        </div>
     </div>
  
     <!-- LÄHTÖTILANNE -->
@@ -576,20 +675,28 @@
         <div style="font-size:10px;color:var(--text-3);margin-top:10px;">Nollaa peli muokataksesi lähtötilannetta.</div>
     </div>
  
-    <!-- VIIKKOKAAVIO -->
-    <div class="card" style="margin-bottom:9px;">
-        <div class="week-header">
-            <div class="lbl" style="margin-bottom:0;"><span class="lbl-dot"></span>Aktiivisuus — 7 pv</div>
-            <div class="week-best-lbl">Paras: <span id="weekBestVal" style="color:var(--text-1);font-weight:400;">—</span> XP</div>
+    <!-- HEAT MAP -->
+    <div class="heatmap-card">
+        <div class="heatmap-header">
+            <div class="lbl" style="margin-bottom:0;"><span class="lbl-dot"></span>Aktiivisuus — 126 pv</div>
+            <div style="font-size:9px;color:var(--text-3);">Viime <span id="heatmapActive" style="color:var(--text-2);font-weight:400;">—</span> pv aktiivinen</div>
         </div>
-        <div class="week-bars" id="weekBars"></div>
-        <div style="display:flex;gap:5px;" id="weekLabels"></div>
+        <div class="heatmap-grid" id="heatmapGrid"></div>
+        <div class="heatmap-legend">
+            <span class="hm-legend-label">Vähemmän</span>
+            <div class="hm-legend-cell hm-0"></div>
+            <div class="hm-legend-cell hm-1"></div>
+            <div class="hm-legend-cell hm-2"></div>
+            <div class="hm-legend-cell hm-3"></div>
+            <div class="hm-legend-cell hm-4"></div>
+            <span class="hm-legend-label">Enemmän</span>
+        </div>
     </div>
  
     <!-- SPARRAUSKUMPPANI -->
     <div class="section-lbl">Sparrauskumppani</div>
     <div class="card card-accent">
-        <p class="ai-desc">Tarvitsetko ideoita seuraavaan askeleeseen? Uutta näkökulmaa tai motivaatiobuustia? Kopioi kehote Geminille — datasi on mukana valmiiksi. Sinä päätät, mitä tietoja jaat.</p>
+        <p class="ai-desc">Tarvitsetko ideoita seuraavaan askeleeseen? Kopioi kehote Geminille — datasi on mukana valmiiksi.</p>
         <ol class="ai-steps">
             <li>Kopioi kehote alta.</li>
             <li>Avaa <a href="https://gemini.google.com" target="_blank">Gemini</a> ja liitä se.</li>
@@ -606,11 +713,16 @@
         <button class="btn-ghost btn-ghost-danger" onclick="resetCurrentGoal()" style="grid-column:1/-1;">Nollaa tämä tavoite</button>
         <input type="file" id="fileIn" style="display:none" onchange="importData(event)">
     </div>
-    <p class="privacy-note">Kaikki data tallennetaan ainoastaan tällä laitteella.<br>Sinä päätät mitä jaat tekoälylle — sovellus ei tee sitä puolestasi.</p>
+    <p class="privacy-note">Kaikki data tallennetaan ainoastaan tällä laitteella.<br>Sinä päätät mitä jaat tekoälylle.</p>
 </div>
 </div>
  
 <script>
+/* ════════════════════════════════════════════
+   MUUTOSKONE — Täydellinen versio
+   Psykologia: identity, momentum, recovery, daynotes, heatmap, particles
+════════════════════════════════════════════ */
+ 
 const MINS = { 1:'1–10 min', 5:'15–30 min', 20:'45–90 min', 50:'2–4 h' };
 const MILESTONES = [10,25,50,75,100];
 const MS_DATA = {
@@ -621,32 +733,25 @@ const MS_DATA = {
    100:{ kicker:'Tavoite saavutettu', title:'100 %', sub:'Teit sen. Systemaattinen päivittäinen tekeminen voitti.' }
 };
  
-/* ── PROGRESSIIVINEN LEVELING ──
-   Taso 2 = 500 XP, 3 = 1500, 4 = 3000, 5 = 5500, 6 = 9000, 7 = 14000, 8 = 21000...
-   Tasot ovat oikeita saavutuksia — ei enää 200 XP:n halpoja leveleitä */
-const LVL_THRESHOLDS = [0, 0, 500, 1500, 3000, 5500, 9000, 14000, 21000, 30000, 42000];
+/* ── PROGRESSIIVINEN LEVELING ── */
+const LVL_THRESHOLDS = [0,0,500,1500,3000,5500,9000,14000,21000,30000,42000];
 function getLevelForXP(xp) {
     let lvl = 1;
-    for (let i = 2; i < LVL_THRESHOLDS.length; i++) {
-        if (xp >= LVL_THRESHOLDS[i]) lvl = i; else break;
-    }
-    if (xp >= LVL_THRESHOLDS[LVL_THRESHOLDS.length - 1]) {
-        lvl = LVL_THRESHOLDS.length - 1 + Math.floor((xp - LVL_THRESHOLDS[LVL_THRESHOLDS.length - 1]) / 18000);
-    }
+    for (let i=2;i<LVL_THRESHOLDS.length;i++) { if(xp>=LVL_THRESHOLDS[i]) lvl=i; else break; }
+    if (xp >= LVL_THRESHOLDS[LVL_THRESHOLDS.length-1])
+        lvl = LVL_THRESHOLDS.length-1 + Math.floor((xp-LVL_THRESHOLDS[LVL_THRESHOLDS.length-1])/18000);
     return lvl;
 }
 function getLevelThreshold(lvl) {
-    if (lvl < LVL_THRESHOLDS.length) return LVL_THRESHOLDS[lvl] || 0;
-    return LVL_THRESHOLDS[LVL_THRESHOLDS.length - 1] + (lvl - LVL_THRESHOLDS.length + 1) * 18000;
+    if (lvl<LVL_THRESHOLDS.length) return LVL_THRESHOLDS[lvl]||0;
+    return LVL_THRESHOLDS[LVL_THRESHOLDS.length-1]+(lvl-LVL_THRESHOLDS.length+1)*18000;
 }
 function getLevelProgress(xp) {
-    const lvl = getLevelForXP(xp);
-    const curr = getLevelThreshold(lvl);
-    const next = getLevelThreshold(lvl + 1);
-    return { pct: Math.min(1, (xp - curr) / (next - curr)), nextAt: next, lvl };
+    const lvl=getLevelForXP(xp), curr=getLevelThreshold(lvl), next=getLevelThreshold(lvl+1);
+    return {pct:Math.min(1,(xp-curr)/(next-curr)), nextAt:next, lvl};
 }
  
-/* ── LEVEL-UP VIESTIT — 10 erilaista, ei enää sama joka kerta ── */
+/* ── LEVEL-UP MESSAGES ── */
 const LVL_MSGS = [
     'Systemaattinen tekeminen toimii.',
     'Olet rakentamassa uutta identiteettiä.',
@@ -660,533 +765,569 @@ const LVL_MSGS = [
     'Olet vahvempi kuin viime viikolla.'
 ];
  
+/* ── DATA TEMPLATE ── */
 const GOAL_TEMPLATE = () => ({
-    id: Date.now(),
-    goal:'', baseline:'', quote:'', why:'',
+    id:Date.now(), goal:'', baseline:'', quote:'', why:'', identity:'',
     r1:'', r5:'', r20:'', r50:'',
     v:5000, total:0, days:1, lvl:1,
     initialEstimate:null, lowestEstimate:null,
-    startDate:null, streak:0, lastActivityDate:null,
-    graceDayUsed:null,
+    startDate:null, streak:0, lastActivityDate:null, graceDayUsed:null,
     lastXP:null, lastXPLabel:null,
     weekLog:{}, passedMilestones:[], bestDay:0,
     intentioDate:null, intentioText:'',
     reflectionDate:null, reflectionText:'',
-    intentioOpen:false, baselineOpen:false,
+    recoveryShown:false,
+    dayNotes:{},
+    intentioOpen:false, baselineOpen:false, daynoteOpen:false,
     done:false
 });
  
 let state = { goals:[], activeIdx:0, quote:'' };
-let draft = { baseline:'', goal:'', quote:'', why:'' };
+let draft = { baseline:'', goal:'', quote:'', why:'', identity:'' };
 let dayCheckInterval = null;
 function g() { return state.goals[state.activeIdx]; }
  
-/* ── VIIKKONUMERO (ISO) ── */
+/* ── DATE UTILS ── */
+function getDateStr(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+function getTodayStr() { return getDateStr(new Date()); }
 function getISOWeekStr() {
-    const d = new Date(); d.setHours(0,0,0,0);
-    const day = d.getDay() || 7;
-    d.setDate(d.getDate() + 4 - day);
-    const yearStart = new Date(d.getFullYear(), 0, 1);
-    const wk = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
-    return `${d.getFullYear()}-W${wk}`;
+    const d=new Date(); d.setHours(0,0,0,0);
+    const day=d.getDay()||7; d.setDate(d.getDate()+4-day);
+    const ys=new Date(d.getFullYear(),0,1);
+    return `${d.getFullYear()}-W${Math.ceil(((d-ys)/86400000+1)/7)}`;
 }
  
+/* ── INIT ── */
 window.onload = () => {
     installPWA();
-    try { const d = localStorage.getItem('mk_draft'); if(d) draft = Object.assign(draft, JSON.parse(d)); } catch(e){}
+    try { const d=localStorage.getItem('mk_draft'); if(d) draft=Object.assign(draft,JSON.parse(d)); } catch(e){}
     try {
-        const saved = localStorage.getItem('mk_v11');
-        if (saved) {
-            const p = JSON.parse(saved);
-            state = Object.assign(state, p);
-            state.goals.forEach(goal => {
-                if (!goal.weekLog) goal.weekLog = {};
-                if (!goal.passedMilestones) goal.passedMilestones = [];
-                if (!goal.why) goal.why = '';
-                if (goal.graceDayUsed === undefined) goal.graceDayUsed = null;
-                if (!goal.reflectionDate) goal.reflectionDate = null;
-                if (!goal.reflectionText) goal.reflectionText = '';
-                // Migrate old flat level to progressive
-                goal.lvl = getLevelForXP(goal.total);
-            });
+        const saved=localStorage.getItem('mk_v11');
+        if(saved) {
+            const p=JSON.parse(saved);
+            state=Object.assign(state,p);
+            state.goals.forEach(migrateGoal);
         }
     } catch(e){}
- 
-    if (state.goals.length > 0) { checkDayRollover(false); render(); }
+    if(state.goals.length>0) { checkDayRollover(false); render(); }
     else { initSetupPage(); }
- 
     startDayChecker();
     window.addEventListener('online',  ()=>document.getElementById('offlineBadge').style.display='none');
     window.addEventListener('offline', ()=>document.getElementById('offlineBadge').style.display='block');
 };
  
+function migrateGoal(goal) {
+    if(!goal.weekLog) goal.weekLog={};
+    if(!goal.passedMilestones) goal.passedMilestones=[];
+    if(!goal.why) goal.why='';
+    if(!goal.identity) goal.identity='';
+    if(goal.graceDayUsed===undefined) goal.graceDayUsed=null;
+    if(!goal.reflectionDate) goal.reflectionDate=null;
+    if(!goal.reflectionText) goal.reflectionText='';
+    if(!goal.dayNotes) goal.dayNotes={};
+    if(goal.recoveryShown===undefined) goal.recoveryShown=false;
+    if(goal.daynoteOpen===undefined) goal.daynoteOpen=false;
+    goal.lvl=getLevelForXP(goal.total);
+}
+ 
 /* ── PWA ── */
 function installPWA() {
-    const m = { name:'Muutoskone', short_name:'Muutoskone', start_url:'./', display:'standalone', background_color:'#07070d', theme_color:'#07070d' };
-    document.getElementById('manifestLink').href = URL.createObjectURL(new Blob([JSON.stringify(m)],{type:'application/json'}));
-    if ('serviceWorker' in navigator) {
-        const sw = `const C='mk-v11';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll([location.href])).catch(()=>{}));self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==C).map(k=>caches.delete(k)))));self.clients.claim();});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>caches.match(e.request))));});`;
+    const m={name:'Muutoskone',short_name:'Muutoskone',start_url:'./',display:'standalone',background_color:'#07070d',theme_color:'#07070d'};
+    document.getElementById('manifestLink').href=URL.createObjectURL(new Blob([JSON.stringify(m)],{type:'application/json'}));
+    if('serviceWorker' in navigator){
+        const sw=`const C='mk-v11';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll([location.href])).catch(()=>{}));self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==C).map(k=>caches.delete(k)))));self.clients.claim();});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>caches.match(e.request))));});`;
         navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(()=>{});
     }
 }
  
 /* ── SETUP PAGE ── */
 function initSetupPage() {
-    if (draft.goal)     document.getElementById('inGoal').value     = draft.goal;
-    if (draft.baseline) document.getElementById('inBaseline').value = draft.baseline;
-    if (draft.quote)    document.getElementById('inQuote').value    = draft.quote;
-    if (draft.why)      document.getElementById('inWhy').value      = draft.why;
- 
-    document.getElementById('inGoal').addEventListener('input', e => { draft.goal = e.target.value; saveDraft(); });
-    document.getElementById('inQuote').addEventListener('input', e => { draft.quote = e.target.value; saveDraft(); });
-    document.getElementById('inWhy').addEventListener('input', e => { draft.why = e.target.value; saveDraft(); });
-    document.getElementById('inBaseline').addEventListener('input', e => {
-        draft.baseline = e.target.value; saveDraft();
-        const el = document.getElementById('baselineAutosave');
-        el.classList.add('show'); clearTimeout(window._bsT); window._bsT = setTimeout(()=>el.classList.remove('show'),1500);
+    if(draft.goal)     document.getElementById('inGoal').value     = draft.goal;
+    if(draft.baseline) document.getElementById('inBaseline').value = draft.baseline;
+    if(draft.quote)    document.getElementById('inQuote').value    = draft.quote;
+    if(draft.why)      document.getElementById('inWhy').value      = draft.why;
+    if(draft.identity) document.getElementById('inIdentity').value = draft.identity;
+    document.getElementById('inGoal').addEventListener('input', e=>{draft.goal=e.target.value;saveDraft();});
+    document.getElementById('inQuote').addEventListener('input', e=>{draft.quote=e.target.value;saveDraft();});
+    document.getElementById('inWhy').addEventListener('input', e=>{draft.why=e.target.value;saveDraft();});
+    document.getElementById('inIdentity').addEventListener('input', e=>{draft.identity=e.target.value;saveDraft();});
+    document.getElementById('inBaseline').addEventListener('input', e=>{
+        draft.baseline=e.target.value; saveDraft();
+        const el=document.getElementById('baselineAutosave');
+        el.classList.add('show'); clearTimeout(window._bsT); window._bsT=setTimeout(()=>el.classList.remove('show'),1500);
     });
 }
-function saveDraft() { try { localStorage.setItem('mk_draft', JSON.stringify(draft)); } catch(e){} }
+function saveDraft(){try{localStorage.setItem('mk_draft',JSON.stringify(draft));}catch(e){}}
  
-/* ── PÄIVÄ ── */
-function startDayChecker() {
-    if (dayCheckInterval) clearInterval(dayCheckInterval);
-    dayCheckInterval = setInterval(()=>{ if(state.goals.length>0) checkDayRollover(true); }, 60000);
+/* ── DAY ROLLOVER ── */
+function startDayChecker(){
+    if(dayCheckInterval) clearInterval(dayCheckInterval);
+    dayCheckInterval=setInterval(()=>{ if(state.goals.length>0) checkDayRollover(true); }, 60000);
 }
-function getDateStr(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
-function getTodayStr() { return getDateStr(new Date()); }
  
-function checkDayRollover(animate) {
-    let changed = false;
-    state.goals.forEach(goal => {
-        if (!goal.startDate) return;
+function checkDayRollover(animate){
+    let changed=false;
+    state.goals.forEach(goal=>{
+        if(!goal.startDate) return;
         const start=new Date(goal.startDate), now=new Date();
         start.setHours(0,0,0,0); now.setHours(0,0,0,0);
-        const diff = Math.floor((now-start)/86400000)+1;
-        if (diff > goal.days) {
-            const today = getTodayStr();
-            if (goal.lastActivityDate !== today) {
+        const diff=Math.floor((now-start)/86400000)+1;
+        if(diff>goal.days){
+            const today=getTodayStr();
+            if(goal.lastActivityDate!==today){
                 const yest=new Date(now); yest.setDate(yest.getDate()-1);
-                const twoDaysAgo=new Date(now); twoDaysAgo.setDate(twoDaysAgo.getDate()-2);
-                const thisWeek = getISOWeekStr();
-                if (goal.lastActivityDate !== getDateStr(yest) && goal.lastActivityDate !== null) {
-                    // Armopäivälogiikka: 2 pv sitten aktiivinen + armopäivää ei käytetty tällä viikolla
-                    if (goal.lastActivityDate === getDateStr(twoDaysAgo) && goal.graceDayUsed !== thisWeek) {
-                        goal.graceDayUsed = thisWeek; // streak säilyy hiljaisesti
+                const twoAgo=new Date(now); twoAgo.setDate(twoAgo.getDate()-2);
+                const thisWeek=getISOWeekStr();
+                if(goal.lastActivityDate!==getDateStr(yest)&&goal.lastActivityDate!==null){
+                    if(goal.lastActivityDate===getDateStr(twoAgo)&&goal.graceDayUsed!==thisWeek){
+                        goal.graceDayUsed=thisWeek;
                     } else {
-                        goal.streak = 0;
+                        goal.streak=0;
                     }
                 }
             }
-            if (goal.intentioDate !== today) { goal.intentioText=''; goal.intentioDate=null; }
-            goal.days = diff;
-            changed = true;
+            if(goal.intentioDate!==today){goal.intentioText='';goal.intentioDate=null;}
+            goal.days=diff; changed=true;
         }
     });
-    if (changed) { save(); if(animate) { showToast('Uusi päivä'); updateUI(); } }
+    if(changed){save(); if(animate){showToast('Uusi päivä'); updateUI();}}
 }
  
-function showToast(txt) {
-    const t = document.getElementById('dayToast');
-    t.innerText = txt || 'Uusi päivä';
-    t.classList.add('show');
-    setTimeout(()=>t.classList.remove('show'), 3000);
+function showToast(txt){
+    const t=document.getElementById('dayToast');
+    t.innerText=txt||'Uusi päivä'; t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),3000);
 }
  
-/* ── VIIKOITTAINEN REFLEKTIO ── */
-function checkWeeklyReflection() {
-    const now = new Date();
-    if (now.getDay() !== 1) return; // Vain maanantaina
-    const thisWeek = getISOWeekStr();
-    if (g().reflectionDate === thisWeek) return; // Jo tehty
-    const lastWeekXP = getLastWeekXP();
-    if (lastWeekXP === 0) return; // Ei aktiivisuutta viime viikolla — ei pakoteta
-    document.getElementById('reflWeekXP').innerText = lastWeekXP.toLocaleString('fi-FI') + ' XP viime viikolla';
-    document.getElementById('reflectionInput').value = '';
-    setTimeout(()=>{ document.getElementById('reflectionOverlay').style.display='flex'; }, 1000);
-}
-function getLastWeekXP() {
-    const now = new Date(); now.setHours(0,0,0,0);
-    let total = 0;
-    for (let i = 1; i <= 7; i++) {
-        const d = new Date(now); d.setDate(d.getDate() - i);
-        total += g().weekLog[getDateStr(d)] || 0;
-    }
-    return total;
-}
-function saveReflection() {
-    const text = document.getElementById('reflectionInput').value.trim();
-    g().reflectionDate = getISOWeekStr();
-    g().reflectionText = text;
-    save();
-    document.getElementById('reflectionOverlay').style.display='none';
-}
-function skipReflection() {
-    g().reflectionDate = getISOWeekStr(); // Merkitään ohitetuksi jotta ei tule uudelleen tänään
-    save();
-    document.getElementById('reflectionOverlay').style.display='none';
-}
- 
-/* ── TAVOITE-TABS ── */
-function renderTabs() {
-    const tabs = document.getElementById('goalTabs');
-    tabs.innerHTML = state.goals.map((goal, i) => {
-        const active = i === state.activeIdx;
-        const short = goal.goal.length > 14 ? goal.goal.slice(0,13)+'…' : goal.goal;
-        return `<button class="btn-tab${active?' active':''}" onclick="switchGoal(${i})">${short || 'Tavoite '+(i+1)}</button>`;
+/* ── TABS ── */
+function renderTabs(){
+    const tabs=document.getElementById('goalTabs');
+    tabs.innerHTML=state.goals.map((goal,i)=>{
+        const active=i===state.activeIdx;
+        const short=goal.goal.length>14?goal.goal.slice(0,13)+'…':goal.goal;
+        return `<button class="btn-tab${active?' active':''}" onclick="switchGoal(${i})">${short||'Tavoite '+(i+1)}</button>`;
     }).join('');
-    if (state.goals.length < 5) {
-        tabs.innerHTML += `<button class="btn-tab btn-tab-add" onclick="openNewGoal()">+ Uusi</button>`;
-    }
+    if(state.goals.length<5) tabs.innerHTML+=`<button class="btn-tab btn-tab-add" onclick="openNewGoal()">+ Uusi</button>`;
 }
-function switchGoal(idx) { state.activeIdx = idx; save(); render(); }
-function openNewGoal() { document.getElementById('newGoalOverlay').style.display = 'flex'; }
-function closeNewGoal() {
-    document.getElementById('newGoalOverlay').style.display = 'none';
-    ['ngGoal','ngWhy','ngR1','ngR5','ngR20','ngR50','ngBaseline','ngQuote'].forEach(id => {
-        const el = document.getElementById(id); if (el) el.value = '';
+function switchGoal(idx){state.activeIdx=idx;save();render();}
+function openNewGoal(){document.getElementById('newGoalOverlay').style.display='flex';}
+function closeNewGoal(){
+    document.getElementById('newGoalOverlay').style.display='none';
+    ['ngGoal','ngIdentity','ngWhy','ngR1','ngR5','ngR20','ngR50','ngBaseline','ngQuote'].forEach(id=>{
+        const el=document.getElementById(id); if(el) el.value='';
     });
-    document.getElementById('ngV').value = '5000';
+    document.getElementById('ngV').value='5000';
 }
-function addNewGoal() {
-    const ng = GOAL_TEMPLATE();
-    ng.goal     = document.getElementById('ngGoal').value.trim()  || 'Uusi tavoite';
-    ng.why      = document.getElementById('ngWhy').value.trim();
-    ng.baseline = document.getElementById('ngBaseline').value.trim();
-    ng.quote    = document.getElementById('ngQuote').value.trim();
-    ng.r1       = document.getElementById('ngR1').value.trim()    || 'Pienin teko';
-    ng.r5       = document.getElementById('ngR5').value.trim()    || 'Päivittäinen toimenpide';
-    ng.r20      = document.getElementById('ngR20').value.trim()   || 'Merkittävä suoritus';
-    ng.r50      = document.getElementById('ngR50').value.trim()   || 'Päivän tärkein teko';
-    ng.v        = parseInt(document.getElementById('ngV').value);
-    ng.startDate = new Date().toISOString();
-    state.goals.push(ng);
-    state.activeIdx = state.goals.length - 1;
+function addNewGoal(){
+    const ng=GOAL_TEMPLATE();
+    ng.goal     =document.getElementById('ngGoal').value.trim()     ||'Uusi tavoite';
+    ng.identity =document.getElementById('ngIdentity').value.trim();
+    ng.why      =document.getElementById('ngWhy').value.trim();
+    ng.baseline =document.getElementById('ngBaseline').value.trim();
+    ng.quote    =document.getElementById('ngQuote').value.trim();
+    ng.r1       =document.getElementById('ngR1').value.trim()       ||'Pienin teko';
+    ng.r5       =document.getElementById('ngR5').value.trim()       ||'Päivittäinen toimenpide';
+    ng.r20      =document.getElementById('ngR20').value.trim()      ||'Merkittävä suoritus';
+    ng.r50      =document.getElementById('ngR50').value.trim()      ||'Päivän tärkein teko';
+    ng.v        =parseInt(document.getElementById('ngV').value);
+    ng.startDate=new Date().toISOString();
+    state.goals.push(ng); state.activeIdx=state.goals.length-1;
     closeNewGoal(); save(); render();
 }
  
 /* ── COLLAPSIBLES ── */
-function togglePanel(id) {
-    const key = id==='intentio' ? 'intentioOpen' : 'baselineOpen';
-    g()[key] = !g()[key]; save();
-    document.getElementById(id+'Body').classList.toggle('open', g()[key]);
-    document.getElementById(id+'Arrow').classList.toggle('open', g()[key]);
-    if (id==='intentio' && g()[key]) document.getElementById('intentioInput').focus();
-    if (id==='intentio') updateIntentioPreview();
+function togglePanel(id){
+    const keyMap={intentio:'intentioOpen',baseline:'baselineOpen',daynote:'daynoteOpen'};
+    const key=keyMap[id]||id+'Open';
+    g()[key]=!g()[key]; save();
+    document.getElementById(id+'Body').classList.toggle('open',g()[key]);
+    document.getElementById(id+'Arrow').classList.toggle('open',g()[key]);
+    if(id==='intentio'&&g()[key]) document.getElementById('intentioInput').focus();
+    if(id==='intentio') updateIntentioPreview();
+    if(id==='daynote'&&g()[key]) renderDaynotes();
 }
-function initIntentio() {
-    const el = document.getElementById('intentioInput');
-    const today = getTodayStr();
-    el.value = (g().intentioDate===today && g().intentioText) ? g().intentioText : '';
-    document.getElementById('intentioBody').classList.toggle('open', !!g().intentioOpen);
-    document.getElementById('intentioArrow').classList.toggle('open', !!g().intentioOpen);
+ 
+function initIntentio(){
+    const el=document.getElementById('intentioInput');
+    const today=getTodayStr();
+    el.value=(g().intentioDate===today&&g().intentioText)?g().intentioText:'';
+    document.getElementById('intentioBody').classList.toggle('open',!!g().intentioOpen);
+    document.getElementById('intentioArrow').classList.toggle('open',!!g().intentioOpen);
     updateIntentioPreview();
-    el.oninput = null;
-    el.addEventListener('input', ()=>{
+    el.oninput=null;
+    el.addEventListener('input',()=>{
         g().intentioText=el.value; g().intentioDate=getTodayStr(); save();
         updateIntentioPreview();
         const s=document.getElementById('intentioSaved');
         s.classList.add('show'); clearTimeout(window._iT); window._iT=setTimeout(()=>s.classList.remove('show'),1600);
     });
 }
-function updateIntentioPreview() {
-    const prev = document.getElementById('intentioPreview');
-    const today = getTodayStr();
-    prev.innerText = (!g().intentioOpen && g().intentioDate===today && g().intentioText)
-        ? '— '+g().intentioText.slice(0,28)+(g().intentioText.length>28?'…':'') : '';
+function updateIntentioPreview(){
+    const prev=document.getElementById('intentioPreview');
+    const today=getTodayStr();
+    prev.innerText=(!g().intentioOpen&&g().intentioDate===today&&g().intentioText)
+        ?'— '+g().intentioText.slice(0,28)+(g().intentioText.length>28?'…':''):'';
 }
-function initBaseline() {
-    document.getElementById('baselineText').innerText = g().baseline || '—';
-    document.getElementById('baselineBody').classList.toggle('open', !!g().baselineOpen);
-    document.getElementById('baselineArrow').classList.toggle('open', !!g().baselineOpen);
-}
- 
-/* ── MIKSI-MUISTUTUS ── */
-function initWhy() {
-    const card = document.getElementById('whyCard');
-    const txt  = document.getElementById('whyText');
-    const why  = g().why || '';
-    if (!why) { card.style.display='none'; return; }
-    card.style.display = 'block';
-    txt.innerText = why;
+function initBaseline(){
+    document.getElementById('baselineText').innerText=g().baseline||'—';
+    document.getElementById('baselineBody').classList.toggle('open',!!g().baselineOpen);
+    document.getElementById('baselineArrow').classList.toggle('open',!!g().baselineOpen);
 }
  
-/* ── OMA MOTIVAATIOLAUSE ── */
-function initQuote() {
-    const card    = document.getElementById('quoteCard');
-    const display = document.getElementById('quoteDisplay');
-    const edit    = document.getElementById('quoteEdit');
-    const q = g().quote || state.quote || '';
-    if (!q) { card.style.display='none'; return; }
-    card.style.display = 'block';
-    display.innerText = q;
-    display.className = 'quote-text';
-    edit.value = q;
+/* ── DAY NOTES ── */
+function initDaynote(){
+    document.getElementById('daynoteBody').classList.toggle('open',!!g().daynoteOpen);
+    document.getElementById('daynoteArrow').classList.toggle('open',!!g().daynoteOpen);
+    const today=getTodayStr();
+    const todayNote=g().dayNotes[today];
+    document.getElementById('daynotePreview').innerText=
+        (!g().daynoteOpen&&todayNote)?'— '+todayNote.slice(0,22)+(todayNote.length>22?'…':''):'';
+    if(g().daynoteOpen) renderDaynotes();
 }
-function editQuote() {
-    const display = document.getElementById('quoteDisplay');
-    const edit    = document.getElementById('quoteEdit');
+function renderDaynotes(){
+    const grid=document.getElementById('daynoteGrid');
+    const notes=g().dayNotes||{};
+    const keys=Object.keys(notes).sort().reverse().slice(0,14);
+    if(keys.length===0){grid.innerHTML='<div style="font-size:11px;color:var(--text-3);padding:4px 0;">Ei vielä muistiinpanoja.</div>';return;}
+    grid.innerHTML=keys.map(k=>{
+        const d=new Date(k);
+        const label=k===getTodayStr()?'Tänään':d.toLocaleDateString('fi-FI',{weekday:'short',day:'numeric',month:'short'});
+        return `<div class="daynote-item"><div class="daynote-date">${label}</div><div class="daynote-text">${escHtml(notes[k])}</div></div>`;
+    }).join('');
+}
+function saveDaynote(){
+    const txt=document.getElementById('daynoteInput').value.trim();
+    if(!txt) return;
+    if(!g().dayNotes) g().dayNotes={};
+    const today=getTodayStr();
+    g().dayNotes[today]=(g().dayNotes[today]?g().dayNotes[today]+'\n\n':'')+txt;
+    document.getElementById('daynoteInput').value='';
+    save(); renderDaynotes();
+    document.getElementById('daynotePreview').innerText='— '+g().dayNotes[today].slice(0,22)+'…';
+    showToast('Muistiinpano tallennettu');
+}
+function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
+ 
+/* ── IDENTITY STATEMENT ── */
+function initIdentity(){
+    const card=document.getElementById('identityCard');
+    const disp=document.getElementById('identityDisplay');
+    const edit=document.getElementById('identityEdit');
+    const id=g().identity||'';
+    if(!id){card.style.display='none';return;}
+    card.style.display='block';
+    disp.innerText=id;
+    disp.className='identity-text';
+    edit.value=id;
+}
+function editIdentity(){
+    const disp=document.getElementById('identityDisplay');
+    const edit=document.getElementById('identityEdit');
+    disp.style.display='none'; edit.style.display='block'; edit.focus();
+    edit.onblur=()=>{
+        const val=edit.value.trim();
+        g().identity=val; save();
+        if(val){disp.innerText=val;disp.className='identity-text';}
+        else{disp.innerText='Olen jo…';disp.className='identity-text placeholder';}
+        disp.style.display='block'; edit.style.display='none';
+        initIdentity();
+    };
+}
+ 
+/* ── WHY ── */
+function initWhy(){
+    const card=document.getElementById('whyCard');
+    const txt=document.getElementById('whyText');
+    const why=g().why||'';
+    if(!why){card.style.display='none';return;}
+    card.style.display='block'; txt.innerText=why;
+}
+ 
+/* ── QUOTE ── */
+function initQuote(){
+    const card=document.getElementById('quoteCard');
+    const display=document.getElementById('quoteDisplay');
+    const edit=document.getElementById('quoteEdit');
+    const q=g().quote||state.quote||'';
+    if(!q){card.style.display='none';return;}
+    card.style.display='block'; display.innerText=q; edit.value=q;
+}
+function editQuote(){
+    const display=document.getElementById('quoteDisplay');
+    const edit=document.getElementById('quoteEdit');
     display.style.display='none'; edit.style.display='block'; edit.focus();
-    edit.onblur = () => {
-        const val = edit.value.trim();
-        g().quote = val; state.quote = val; save();
-        display.innerText = val || 'Lisää oma motivaatiolauseesi…';
+    edit.onblur=()=>{
+        const val=edit.value.trim();
+        g().quote=val; state.quote=val; save();
+        display.innerText=val||'Lisää oma motivaatiolauseesi…';
         display.style.display='block'; edit.style.display='none';
     };
 }
  
-/* ── SIGNAALI ── */
-function updateSignal() {
-    const card = document.getElementById('signalCard');
-    const icon = document.getElementById('signalIcon');
-    const text = document.getElementById('signalText');
-    const today = getTodayStr();
-    const todayXP = g().weekLog[today] || 0;
-    const hour = new Date().getHours();
-    const avg = g().days > 0 ? Math.round(g().total / g().days) : 0;
-    const thisWeek = getISOWeekStr();
+/* ── MOMENTUM SCORE ── */
+function calcMomentum(){
+    // Yhdistelmä: tahti vs. keskiarvo, putki, viimeisen 3 pv aktiivisuus
+    const avg=g().days>0?g().total/g().days:0;
+    const today=getTodayStr();
+    let recentXP=0;
+    for(let i=0;i<3;i++){const d=new Date();d.setDate(d.getDate()-i);recentXP+=g().weekLog[getDateStr(d)]||0;}
+    const recentAvg=recentXP/3;
+    const speedRatio=avg>0?Math.min(recentAvg/avg,2):0;
+    const streakBonus=Math.min(g().streak/14,1);
+    const todayXP=g().weekLog[today]||0;
+    const todayBonus=avg>0?Math.min(todayXP/avg,1)*0.3:0;
+    const score=Math.round((speedRatio*0.5+streakBonus*0.35+todayBonus)*100);
+    return Math.min(score,100);
+}
+function updateMomentum(){
+    const score=calcMomentum();
+    const fill=document.getElementById('momentumFill');
+    const val=document.getElementById('momentumVal');
+    fill.style.width=score+'%';
+    let color,label;
+    if(score>=75){color='#22c55e';label=score+'% 🔥';}
+    else if(score>=45){color='var(--cyan)';label=score+'%';}
+    else if(score>=20){color='var(--orange)';label=score+'%';}
+    else{color='rgba(220,60,60,0.6)';label=score+'%';}
+    fill.style.background=color;
+    val.style.color=color;
+    val.innerText=label;
+}
  
-    card.className = 'signal-card'; icon.innerText = ''; text.innerText = '';
- 
-    if (g().streak === 0 && g().lastActivityDate && g().lastActivityDate !== today && g().total > 0) {
-        card.classList.add('show','warning');
-        icon.innerText = '—';
-        text.innerText = 'Putki katkesi. Se käy kaikille. Tärkeintä on mitä teet seuraavaksi — ei se, mitä jäi tekemättä.';
-    } else if (g().graceDayUsed === thisWeek && g().lastActivityDate !== today && g().streak > 0) {
-        card.classList.add('show','grace');
-        icon.innerText = '○';
-        text.innerText = `Armopäivä käytetty tällä viikolla — putki (${g().streak} pv) jatkuu. Tee jotain tänään.`;
-    } else if (hour >= 15 && todayXP === 0 && g().total > 0) {
-        card.classList.add('show','warning');
-        icon.innerText = '·';
-        text.innerText = 'Ei vielä yhtään XP:tä tänään. Päivä on vielä kesken.';
-    } else if (todayXP >= avg && todayXP > 0 && avg > 0) {
-        card.classList.add('show','info');
-        icon.innerText = '↑';
-        text.innerText = `${todayXP} XP tänään — päivän tahti on yli keskiarvosi. Hyvä.`;
+/* ── SIGNAL ── */
+function updateSignal(){
+    const card=document.getElementById('signalCard');
+    const icon=document.getElementById('signalIcon');
+    const text=document.getElementById('signalText');
+    const today=getTodayStr();
+    const todayXP=g().weekLog[today]||0;
+    const hour=new Date().getHours();
+    const avg=g().days>0?Math.round(g().total/g().days):0;
+    const thisWeek=getISOWeekStr();
+    card.className='signal-card'; icon.innerText=''; text.innerText='';
+    if(g().streak===0&&g().lastActivityDate&&g().lastActivityDate!==today&&g().total>0){
+        card.classList.add('show','warning'); icon.innerText='—';
+        text.innerText='Putki katkesi. Se käy kaikille. Tärkeintä on mitä teet seuraavaksi.';
+    } else if(g().graceDayUsed===thisWeek&&g().lastActivityDate!==today&&g().streak>0){
+        card.classList.add('show','grace'); icon.innerText='○';
+        text.innerText=`Armopäivä käytetty (${g().streak} pv putki jatkuu). Tee jotain tänään.`;
+    } else if(hour>=15&&todayXP===0&&g().total>0){
+        card.classList.add('show','warning'); icon.innerText='·';
+        text.innerText='Ei vielä yhtään XP:tä tänään. Päivä on vielä kesken.';
+    } else if(todayXP>=avg&&todayXP>0&&avg>0){
+        card.classList.add('show','info'); icon.innerText='↑';
+        text.innerText=`${todayXP} XP tänään — yli päivittäisen keskiarvosi. Hyvä.`;
     }
+    const bt=document.getElementById('baselineToggleRow');
+    if(bt) bt.style.display=(g().baseline&&g().baseline.trim())?'':'none';
+}
  
-    const baselineToggle = document.getElementById('baselineToggleRow');
-    if (baselineToggle) {
-        baselineToggle.style.display = (g().baseline && g().baseline.trim()) ? '' : 'none';
+/* ── HEAT MAP ── */
+function renderHeatmap(){
+    const grid=document.getElementById('heatmapGrid');
+    const days=126; // 18 columns × 7 rows
+    const cells=[];
+    let activeDays=0;
+    const vals=[];
+    for(let i=days-1;i>=0;i--){
+        const d=new Date(); d.setDate(d.getDate()-i);
+        vals.push(g().weekLog[getDateStr(d)]||0);
     }
-}
- 
-/* ── KEHOTTEET ── */
-function getBaselinePart() {
-    const bl = state.goals.length > 0 ? g().baseline : draft.baseline;
-    return bl ? `\n\nLähtötilanne (käyttäjän itsensä kirjaama):\n"${bl}"` : '';
-}
-function getWhyPart() {
-    const why = state.goals.length > 0 ? g().why : draft.why;
-    return why ? `\n· Miksi tämä on tärkeää: "${why}"` : '';
-}
- 
-function copyNewGoalPrompt() {
-    const goal     = document.getElementById('ngGoal').value.trim()     || '(ei vielä määritelty)';
-    const baseline = document.getElementById('ngBaseline').value.trim() || '';
-    const why      = document.getElementById('ngWhy').value.trim() || '';
-    const baselinePart = baseline ? `\n\nLähtötilanne:\n"${baseline}"` : '';
-    const whyPart  = why ? `\nMiksi tämä on tärkeää: "${why}"` : '';
-    const txt = `Olet MUUTOSKONE-järjestelmän strateginen suunnittelija. Autan sinua kalibroimaan uuden tavoitteeni parametrit täsmällisesti.
- 
-Järjestelmän logiikka:
-— Vaikeuskerroin (V):
-  · 1 000 XP ≈ 100 h — uuden tavan rakentaminen
-  · 5 000 XP ≈ 500 h — selkeä, mitattava elämänmuutos
-  · 10 000 XP ≈ 1 000 h — identiteettitason muutos
-  · 100 000 XP ≈ 10 000 h — maailmanluokan osaaminen
-— Rutiinit:
-  · 1 XP: minimaalinen teko, 1–10 min
-  · 5 XP: päivittäinen toimenpide, 15–30 min
-  · 20 XP: merkittävä suoritus, 45–90 min
-  · 50 XP: päivän tärkein panostus, 2–4 h
-— Kertymäkerroin kasvaa päivästä 1 päivään 84 välillä 1.0 → 2.0
- 
-Tavoitteeni: ${goal}${whyPart}${baselinePart}
- 
-Etene yksi askel kerrallaan — esitä yksi kysymys kerrallaan ja odota vastaustani.
- 
-Vaihe 1 — Esittele itsesi lyhyesti. Kysy sitten tarkentavia kysymyksiä joita tarvitset (ellei jo selviä yllä olevasta tiedosta).
-Vaihe 2 — Tee kokonaisanalyysi:
-  a) Perustele vaikeuskerroin työtuntilaskelmin.
-  b) Luo räätälöity rutiinikirjasto (1, 5, 20, 50 XP) konkreettisin nimineen.
-  c) Laske arvioitu aikajana päivissä.
-  d) Nimeä yksi kriittinen muuttuja — se tekijä, joka todennäköisimmin ratkaisee onnistumisen.
- 
-Aloita vaiheesta 1.`;
-    navigator.clipboard.writeText(txt).then(()=>{
-        const b=document.getElementById('copyNgAiBtn'); b.innerText='Kopioitu';
-        setTimeout(()=>{b.innerText='Kopioi strategiakehote tälle tavoitteelle';},2200);
+    const maxVal=Math.max(...vals,1);
+    vals.forEach(v=>{
+        let cls='hm-0';
+        if(v>0){
+            activeDays++;
+            const ratio=v/maxVal;
+            if(ratio>0.75) cls='hm-4';
+            else if(ratio>0.5) cls='hm-3';
+            else if(ratio>0.25) cls='hm-2';
+            else cls='hm-1';
+        }
+        cells.push(`<div class="hm-cell ${cls}" title="${v>0?v+' XP':''}"></div>`);
     });
+    grid.innerHTML=cells.join('');
+    document.getElementById('heatmapActive').innerText=activeDays;
 }
  
-function copyAiPrompt() {
-    const txt = `Olet MUUTOSKONE-järjestelmän strateginen suunnittelija ja sparrauskumppani. Tehtäväsi on auttaa minua rakentamaan realistinen, motivoiva polku tavoitteeni saavuttamiseen.
- 
-Järjestelmän logiikka:
-— Vaikeuskerroin (V) heijastaa kokonaistyömäärää:
-  · 1 000 XP ≈ 100 h — uuden tavan rakentaminen
-  · 5 000 XP ≈ 500 h — selkeä, mitattava elämänmuutos
-  · 10 000 XP ≈ 1 000 h — identiteettitason muutos
-  · 100 000 XP ≈ 10 000 h — maailmanluokan osaaminen
-— Rutiinit XP-arvoineen:
-  · 1 XP: minimaalinen teko, 1–10 min
-  · 5 XP: päivittäinen toimenpide, 15–30 min
-  · 20 XP: merkittävä suoritus, 45–90 min
-  · 50 XP: päivän tärkein panostus, 2–4 h tai merkittävä henkinen läpimurto
-— Kertymäkerroin kasvaa päivästä 1 päivään 84 välillä 1.0 → 2.0 — pitkäjänteisyys palkitaan konkreettisesti${getBaselinePart()}
- 
-Tyylisi: Ole suora ja rehellinen — älä kaunistele, mutta älä jähmety kylmäksi analyytikoksi. Puhu kuin hyvä mentori: uskot minuun, kerrot totuuden sellaisena kuin se on, ja kannustat silloin kun se on ansaittua.
- 
-TÄRKEÄÄ: Etene yksi askel kerrallaan. Esitä täsmälleen yksi kysymys kerrallaan ja odota vastaukseni.
- 
-Vaihe 1 — Esittele itsesi lyhyesti ja lämpimästi. Kysy sitten: mikä on tavoitteeni.
-Vaihe 2 — Kysy arjen realistiset rajoitteet ja vahvuudet (ellei jo selviä lähtötilanteesta).
-Vaihe 3 — Kysy: paljonko XP:tä voisin realistisesti kerryttää päivässä — ja mikä motivoi pysymään liikkeessä.
-Vaihe 4 — Tee kokonaisanalyysi:
-  a) Perustele vaikeuskerroin täsmällisesti työtuntilaskelmin.
-  b) Luo räätälöity rutiinikirjasto (1, 5, 20, 50 XP) — nimeä rutiinit konkreettisesti juuri tähän tavoitteeseen.
-  c) Laske arvioitu aikajana päivissä kertymäkerroin huomioiden.
-  d) Nimeä yksi kriittinen muuttuja — se yksi tekijä, joka todennäköisimmin ratkaisee onnistumiseni.
-  e) Sano yksi rehellinen, kannustava asia siitä, mitä näet tavoitteessani.
- 
-Aloita vaiheesta 1.`;
-    navigator.clipboard.writeText(txt).then(()=>{
-        const b=document.getElementById('copyAiBtn'); b.innerText='Kopioitu';
-        setTimeout(()=>{b.innerText='Kopioi strategiakehote';},2200);
-    });
+/* ── STREAK RECOVERY RITUAL ── */
+function checkRecovery(){
+    if(g().streak===0&&g().total>0&&!g().recoveryShown){
+        g().recoveryShown=true; save();
+        const prev=g().lastActivityDate;
+        let daysAgo='';
+        if(prev){
+            const last=new Date(prev), now=new Date();
+            now.setHours(0,0,0,0); last.setHours(0,0,0,0);
+            const diff=Math.round((now-last)/86400000);
+            daysAgo=diff===1?'eilen':diff+' päivää sitten';
+        }
+        document.getElementById('recDays').innerText=daysAgo?`Viimeisin teko: ${daysAgo}`:'Uusi alku';
+        document.getElementById('recoveryInput').value='';
+        setTimeout(()=>{ document.getElementById('recoveryOverlay').style.display='flex'; },800);
+    }
+    // Nollaa recoveryShown kun putki on käynnissä jälleen
+    if(g().streak>0) g().recoveryShown=false;
 }
+function saveRecovery(){
+    document.getElementById('recoveryOverlay').style.display='none';
+    save();
+}
+function skipRecovery(){ document.getElementById('recoveryOverlay').style.display='none'; }
  
-function copyMentorPrompt() {
-    const avg = g().days>0 ? Math.round(g().total/g().days) : 0;
-    const pct = g().v>0 ? ((g().total/g().v)*100).toFixed(1) : '0';
-    const today = getTodayStr();
-    const intentioTxt = (g().intentioDate===today && g().intentioText) ? g().intentioText : 'ei asetettu';
-    const todayXP = g().weekLog[today] || 0;
-    const whyLine = g().why ? `· Miksi tämä on tärkeää: "${g().why}"\n` : '';
-    const txt = `Olet MUUTOSKONE-järjestelmän sparrauskumppani. Tehtäväsi on auttaa minua löytämään seuraava askel, pitämään motivaation yllä ja näkemään tilanteeni uudessa valossa.
- 
-Tämänhetkinen datani:
-· Tavoite: ${g().goal}
-${whyLine}· Edistyminen: ${g().total.toLocaleString('fi-FI')} / ${g().v.toLocaleString('fi-FI')} XP (${pct} %)
-· Päivä: ${g().days}
-· Aktiivisuusputki: ${g().streak} päivää
-· Keskitahti: ${avg} XP / päivä
-· Tänään kerätty: ${todayXP} XP
-· Paras yksittäinen päivä: ${g().bestDay} XP
-· Kertymäkerroin nyt: ×${getMultiplier().toFixed(2)} (max ×2.00 päivänä 84)
-· Tämän päivän intentio: "${intentioTxt}"${getBaselinePart()}
- 
-Tyylisi: Ole lämmin mutta suora. Keskity ennen kaikkea siihen, mitä voin tehdä seuraavaksi — ei siihen, mitä olen jättänyt tekemättä. Kun data näyttää hyvältä, sano se suoraan. Kun on parannettavaa, ehdota konkreettinen ratkaisu ilman syyllistämistä.
- 
-TÄRKEÄÄ: Etene yksi askel kerrallaan. Odota vastaukseni ennen kuin jatkat.
- 
-1. Katso dataani ja kerro yksi asia, joka erottuu positiivisesti — jotain, jota en ehkä itse huomaa. Sen jälkeen kysy: mikä tällä hetkellä tuntuu haastavimmalta tai missä kaipaat eniten ideoita?
-2. Kun olet saanut vastaukseni, anna 2–3 konkreettista ideaa seuraavaan askeleeseen — erityisesti tapoja ansaita 50 XP huomenna. Räätälöi ehdotukset juuri tähän tavoitteeseen.
-3. Anna yksi näkökulma siihen, miltä matka näyttää tästä eteenpäin — tahdista, aikataulusta tai kertymäkertoimen vaikutuksesta — sellaisella sävyllä, joka motivoi jatkamaan.
-4. Lopeta yhdellä lauseella, joka jää mieleen.
- 
-Aloita kohdasta 1.`;
-    navigator.clipboard.writeText(txt).then(()=>{
-        const b=document.getElementById('copyMentorBtn'); b.innerText='Kopioitu';
-        setTimeout(()=>{b.innerText='Kopioi sparrauskehote';},2200);
-    });
+/* ── WEEKLY REFLECTION ── */
+function checkWeeklyReflection(){
+    const now=new Date();
+    if(now.getDay()!==1) return;
+    const thisWeek=getISOWeekStr();
+    if(g().reflectionDate===thisWeek) return;
+    const lastWeekXP=getLastWeekXP();
+    if(lastWeekXP===0) return;
+    document.getElementById('reflWeekXP').innerText=lastWeekXP.toLocaleString('fi-FI')+' XP viime viikolla';
+    document.getElementById('reflectionInput').value='';
+    setTimeout(()=>{ document.getElementById('reflectionOverlay').style.display='flex'; },1000);
+}
+function getLastWeekXP(){
+    const now=new Date(); now.setHours(0,0,0,0);
+    let total=0;
+    for(let i=1;i<=7;i++){const d=new Date(now);d.setDate(d.getDate()-i);total+=g().weekLog[getDateStr(d)]||0;}
+    return total;
+}
+function saveReflection(){
+    g().reflectionDate=getISOWeekStr();
+    g().reflectionText=document.getElementById('reflectionInput').value.trim();
+    save(); document.getElementById('reflectionOverlay').style.display='none';
+}
+function skipReflection(){
+    g().reflectionDate=getISOWeekStr(); save();
+    document.getElementById('reflectionOverlay').style.display='none';
 }
  
 /* ── START ── */
-function start() {
-    const ng = GOAL_TEMPLATE();
-    ng.goal     = document.getElementById('inGoal').value.trim()     || draft.goal     || 'Muutos';
-    ng.why      = document.getElementById('inWhy').value.trim()      || draft.why      || '';
-    ng.baseline = document.getElementById('inBaseline').value.trim() || draft.baseline || '';
-    ng.quote    = document.getElementById('inQuote').value.trim()    || draft.quote    || '';
-    ng.r1       = document.getElementById('inR1').value.trim()       || 'Pienin teko';
-    ng.r5       = document.getElementById('inR5').value.trim()       || 'Päivittäinen toimenpide';
-    ng.r20      = document.getElementById('inR20').value.trim()      || 'Merkittävä suoritus';
-    ng.r50      = document.getElementById('inR50').value.trim()      || 'Päivän tärkein teko';
-    ng.v        = parseInt(document.getElementById('inV').value);
-    ng.startDate = new Date().toISOString();
-    state.goals = [ng];
-    state.activeIdx = 0;
-    state.quote = ng.quote;
+function start(){
+    const ng=GOAL_TEMPLATE();
+    ng.goal     =document.getElementById('inGoal').value.trim()     ||draft.goal     ||'Muutos';
+    ng.identity =document.getElementById('inIdentity').value.trim() ||draft.identity ||'';
+    ng.why      =document.getElementById('inWhy').value.trim()      ||draft.why      ||'';
+    ng.baseline =document.getElementById('inBaseline').value.trim() ||draft.baseline ||'';
+    ng.quote    =document.getElementById('inQuote').value.trim()    ||draft.quote    ||'';
+    ng.r1       =document.getElementById('inR1').value.trim()       ||'Pienin teko';
+    ng.r5       =document.getElementById('inR5').value.trim()       ||'Päivittäinen toimenpide';
+    ng.r20      =document.getElementById('inR20').value.trim()      ||'Merkittävä suoritus';
+    ng.r50      =document.getElementById('inR50').value.trim()      ||'Päivän tärkein teko';
+    ng.v        =parseInt(document.getElementById('inV').value);
+    ng.startDate=new Date().toISOString();
+    state.goals=[ng]; state.activeIdx=0; state.quote=ng.quote;
     save(); render();
 }
  
-function render() {
+function render(){
     document.getElementById('viewSetup').style.display='none';
     document.getElementById('viewGame').style.display='block';
     renderTabs();
-    document.getElementById('txtGoal').innerText = g().goal.toUpperCase();
-    document.getElementById('txtV').innerText    = `${g().v.toLocaleString('fi-FI')} XP`;
-    initIntentio(); initBaseline(); initQuote(); initWhy(); updateUI();
+    document.getElementById('txtGoal').innerText=g().goal.toUpperCase();
+    document.getElementById('txtV').innerText=`${g().v.toLocaleString('fi-FI')} XP`;
+    initIntentio(); initBaseline(); initQuote(); initWhy(); initIdentity(); initDaynote();
+    updateUI();
     checkWeeklyReflection();
+    checkRecovery();
 }
  
-function getMultiplier() { return 1+(Math.min(g().days,84)-1)/83; }
-function calculateDaysToGoal() {
-    if (g().total>=g().v) return 0;
-    if (!g().total||!g().days) return null;
+function getMultiplier(){ return 1+(Math.min(g().days,84)-1)/83; }
+function calculateDaysToGoal(){
+    if(g().total>=g().v) return 0;
+    if(!g().total||!g().days) return null;
     const avg=g().total/g().days; if(avg<=0) return null;
     return Math.ceil((g().v-g().total)/avg);
 }
  
-function addXP(baseAmt, label, e) {
-    if (navigator.vibrate) navigator.vibrate(25);
+/* ── ADD XP ── */
+function addXP(baseAmt, label, e){
+    if(navigator.vibrate) navigator.vibrate(baseAmt===50?[30,15,50]:25);
     const multi=getMultiplier(), finalAmt=Math.round(baseAmt*multi);
     g().lastXP=finalAmt; g().lastXPLabel=label; g().total+=finalAmt;
     const today=getTodayStr();
     g().weekLog[today]=(g().weekLog[today]||0)+finalAmt;
-    const prevBest = g().bestDay;
-    if (g().weekLog[today]>g().bestDay) g().bestDay=g().weekLog[today];
+    const prevBest=g().bestDay;
+    if(g().weekLog[today]>g().bestDay) g().bestDay=g().weekLog[today];
  
     // STREAK + ARMOPÄIVÄ
-    if (g().lastActivityDate!==today) {
+    if(g().lastActivityDate!==today){
         const yest=new Date(); yest.setDate(yest.getDate()-1);
-        const twoDaysAgo=new Date(); twoDaysAgo.setDate(twoDaysAgo.getDate()-2);
-        const thisWeek = getISOWeekStr();
-        if (g().lastActivityDate===getDateStr(yest)||g().lastActivityDate===null) {
+        const twoAgo=new Date(); twoAgo.setDate(twoAgo.getDate()-2);
+        const thisWeek=getISOWeekStr();
+        if(g().lastActivityDate===getDateStr(yest)||g().lastActivityDate===null){
             g().streak++;
-        } else if (g().lastActivityDate===getDateStr(twoDaysAgo) && g().graceDayUsed!==thisWeek) {
-            // Armopäivä pelastaa putkea — yksi vapaa päivä viikossa
-            g().graceDayUsed = thisWeek;
-            g().streak++;
+        } else if(g().lastActivityDate===getDateStr(twoAgo)&&g().graceDayUsed!==thisWeek){
+            g().graceDayUsed=thisWeek; g().streak++;
             showToast('Armopäivä ✓ — putki jatkuu');
         } else {
             g().streak=1;
         }
         g().lastActivityDate=today;
+        g().recoveryShown=false; // Putki käynnistyi uudelleen
     }
  
-    const fly=document.createElement('div'); fly.className='xp-fly'; fly.innerText=`+${finalAmt}`;
-    fly.style.cssText=`left:${e.pageX}px;top:${e.pageY-10}px;`;
-    document.body.appendChild(fly); setTimeout(()=>fly.remove(),700);
+    // XP FLY
+    const fly=document.createElement('div'); fly.className='xp-fly';
+    fly.innerText=`+${finalAmt}`;
+    fly.style.cssText=`left:${e.clientX-20}px;top:${e.clientY-20}px;`;
+    document.body.appendChild(fly); setTimeout(()=>fly.remove(),800);
  
-    // PROGRESSIIVINEN LEVEL-UP
+    // PARTICLES — vain 50 XP:lle
+    if(baseAmt===50) spawnParticles(e.clientX, e.clientY);
+ 
+    // BUTTON FLASH
+    const btn=e.currentTarget;
+    if(btn){btn.classList.remove('flash');void btn.offsetWidth;btn.classList.add('flash');}
+ 
+    // LEVEL UP
     const newLvl=getLevelForXP(g().total);
     if(newLvl>g().lvl){g().lvl=newLvl;showLvlPop();}
  
-    // Paras päivä -ennätys
-    if (g().weekLog[today]>prevBest && prevBest>0) {
-        document.getElementById('bestDayVal').innerText = g().weekLog[today]+' XP';
+    // PARAS PÄIVÄ
+    if(g().weekLog[today]>prevBest&&prevBest>0){
+        document.getElementById('bestDayVal').innerText=g().weekLog[today]+' XP';
         document.getElementById('bestDayOverlay').style.display='flex';
         if(navigator.vibrate) navigator.vibrate([30,20,60]);
     }
  
     checkMilestones();
     if(g().total>=g().v) document.getElementById('victoryOverlay').style.display='flex';
- 
     const est=calculateDaysToGoal();
     if(est!==null){if(g().initialEstimate===null){g().initialEstimate=est;g().lowestEstimate=est;}else if(est<g().lowestEstimate)g().lowestEstimate=est;}
- 
     save(); updateUI();
+ 
     const bar=document.getElementById('undoBar');
     document.getElementById('undoMsg').innerText=`${label} · +${finalAmt} XP`;
     bar.classList.add('visible'); clearTimeout(window._undoT);
     window._undoT=setTimeout(()=>bar.classList.remove('visible'),6000);
 }
  
-function checkMilestones() {
+/* ── PARTICLES ── */
+function spawnParticles(x,y){
+    const colors=['#00c8f0','#7c5cbf','#b09fe0','#4dcce4','#22c55e','#f97316'];
+    const count=22;
+    for(let i=0;i<count;i++){
+        const p=document.createElement('div'); p.className='particle';
+        const size=Math.random()*5+3;
+        const angle=Math.random()*Math.PI*2;
+        const dist=Math.random()*120+40;
+        const dur=(Math.random()*0.5+0.6).toFixed(2);
+        const tx=Math.cos(angle)*dist, ty=Math.sin(angle)*dist-60;
+        p.style.cssText=`
+            width:${size}px;height:${size}px;
+            background:${colors[Math.floor(Math.random()*colors.length)]};
+            left:${x}px;top:${y}px;
+            --tx:${tx}px;--ty:${ty}px;--dur:${dur}s;
+        `;
+        document.body.appendChild(p);
+        setTimeout(()=>p.remove(),dur*1000+100);
+    }
+}
+ 
+/* ── MILESTONES ── */
+function checkMilestones(){
     const pct=(g().total/g().v)*100;
     for(const ms of MILESTONES){
         if(pct>=ms&&!g().passedMilestones.includes(ms)&&ms<100){
@@ -1202,7 +1343,8 @@ function checkMilestones() {
     }
 }
  
-function undoXP() {
+/* ── UNDO ── */
+function undoXP(){
     if(g().lastXP===null) return;
     if(navigator.vibrate) navigator.vibrate([15,20,15]);
     g().total=Math.max(0,g().total-g().lastXP);
@@ -1213,7 +1355,8 @@ function undoXP() {
     save(); updateUI();
 }
  
-function updateUI() {
+/* ── UPDATE UI ── */
+function updateUI(){
     const multi=getMultiplier(), avg=g().days>0?Math.round(g().total/g().days):0;
     const pct=g().v>0?(g().total/g().v)*100:0;
     const pctStr=pct<10?pct.toFixed(1)+'%':Math.round(pct)+'%';
@@ -1224,29 +1367,30 @@ function updateUI() {
     document.getElementById('pctVal').innerText=pctStr;
     document.getElementById('xpDisplay').innerText=`${g().total.toLocaleString('fi-FI')} XP`;
  
-    // Progressiivinen level bar
-    const lvlProg = getLevelProgress(g().total);
+    const lvlProg=getLevelProgress(g().total);
     document.getElementById('barXP').style.width=`${lvlProg.pct*100}%`;
-    const nextLbl = document.getElementById('lvlNextLabel');
-    if (nextLbl) nextLbl.innerText = `→ ${lvlProg.nextAt.toLocaleString('fi-FI')} XP`;
+    const nextLbl=document.getElementById('lvlNextLabel');
+    if(nextLbl) nextLbl.innerText=`→ ${lvlProg.nextAt.toLocaleString('fi-FI')} XP`;
  
     document.getElementById('statAvg').innerText=avg||'—';
     document.getElementById('statBest').innerText=g().bestDay||'—';
  
     let dv='—';
-    if(g().total>=g().v){dv='0';}else{const est=calculateDaysToGoal();if(est!==null)dv=String(g().lowestEstimate!==null?Math.min(est,g().lowestEstimate):est);}
+    if(g().total>=g().v){dv='0';}
+    else{const est=calculateDaysToGoal();if(est!==null)dv=String(g().lowestEstimate!==null?Math.min(est,g().lowestEstimate):est);}
     document.getElementById('valM').innerText=dv;
  
     MILESTONES.forEach(ms=>{
         const el=document.getElementById(`ms${ms}`), lbl=document.getElementById(`mslbl${ms}`);
         if(!el) return;
         if(g().passedMilestones.includes(ms)||(ms===100&&g().total>=g().v)){el.className='ms done';if(lbl)lbl.className='ms-lbl done-lbl';}
-        else if(pct>=ms*0.75){el.className='ms near';}else{el.className='ms';}
+        else if(pct>=ms*0.75){el.className='ms near';}
+        else{el.className='ms';}
     });
  
     const levels=[
-        {base:1, name:g().r1, cls:'rbtn-1', dot:'rdot-1', xpCls:'rxp-1'},
-        {base:5, name:g().r5, cls:'rbtn-5', dot:'rdot-5', xpCls:'rxp-5'},
+        {base:1,name:g().r1,cls:'rbtn-1',dot:'rdot-1',xpCls:'rxp-1'},
+        {base:5,name:g().r5,cls:'rbtn-5',dot:'rdot-5',xpCls:'rxp-5'},
         {base:20,name:g().r20,cls:'rbtn-20',dot:'rdot-20',xpCls:'rxp-20'},
         {base:50,name:g().r50,cls:'rbtn-50',dot:'rdot-50',xpCls:'rxp-50'}
     ];
@@ -1266,87 +1410,200 @@ function updateUI() {
         </button>`;
     }).join('');
  
-    renderWeekChart();
+    renderHeatmap();
     updateSignal();
+    updateMomentum();
     renderTabs();
 }
  
-function renderWeekChart() {
-    const today=new Date(), days=[];
-    for(let i=6;i>=0;i--){const d=new Date(today);d.setDate(d.getDate()-i);days.push(d);}
-    const vals=days.map(d=>g().weekLog[getDateStr(d)]||0);
-    const maxVal=Math.max(...vals,1), bestW=Math.max(...vals);
-    const bestIdx=vals.indexOf(bestW);
-    document.getElementById('weekBestVal').innerText=bestW||'—';
-    const DN=['Su','Ma','Ti','Ke','To','Pe','La'], todayStr=getTodayStr();
-    document.getElementById('weekBars').innerHTML=days.map((d,i)=>{
-        const h=Math.max(2,Math.round((vals[i]/maxVal)*42));
-        const isToday=getDateStr(d)===todayStr;
-        const isBest=i===bestIdx&&vals[i]>0;
-        const cls=isToday?'wb wb-today':(isBest?'wb wb-best':(vals[i]>0?'wb wb-done':'wb wb-empty'));
-        return `<div class="wbw"><div class="${cls}" style="height:${h}px;"></div></div>`;
-    }).join('');
-    document.getElementById('weekLabels').innerHTML=days.map((d,i)=>{
-        const isToday=getDateStr(d)===todayStr;
-        return `<div style="flex:1;text-align:center;"><span class="wdl ${isToday?'wdl-today':''}">${DN[d.getDay()]}</span></div>`;
-    }).join('');
-}
- 
-/* ── LEVEL-UP OVERLAY ── */
+/* ── LEVEL-UP OVERLAY — canvas particles ── */
 function showLvlPop(){
-    const msg = LVL_MSGS[(g().lvl - 2) % LVL_MSGS.length];
-    const prog = getLevelProgress(g().total);
-    document.getElementById('popLvlText').innerText=`Taso ${g().lvl}`;
+    const msg=LVL_MSGS[(g().lvl-2)%LVL_MSGS.length];
+    const prog=getLevelProgress(g().total);
+    document.getElementById('popLvlText').innerText=g().lvl;
     document.getElementById('popLvlMsg').innerText=msg;
     document.getElementById('popLvlNext').innerText=`Seuraava taso: ${prog.nextAt.toLocaleString('fi-FI')} XP`;
     document.getElementById('lvlOverlay').style.display='flex';
+    startLvlCanvas();
 }
-function closeLvl(){document.getElementById('lvlOverlay').style.display='none';}
+function closeLvl(){
+    document.getElementById('lvlOverlay').style.display='none';
+    stopLvlCanvas();
+}
 function closeMilestone(){document.getElementById('milestoneOverlay').style.display='none';}
  
-function modifyGoalSettings() {
-    const newGoal = prompt('Tavoite:', g().goal);
-    if (newGoal !== null) g().goal = newGoal.trim() || g().goal;
-    const newWhy = prompt('Miksi tämä on tärkeää:', g().why || '');
-    if (newWhy !== null) g().why = newWhy.trim();
-    const newQuote = prompt('Oma motivaatiolause:', g().quote || '');
-    if (newQuote !== null) g().quote = newQuote.trim();
-    const vOptions = {'1000':'1 000 XP — Uusi tapa','5000':'5 000 XP — Merkittävä muutos','10000':'10 000 XP — Elämänmuutos','100000':'100 000 XP — Mestari'};
-    const vCurrent = String(g().v);
-    const vList = Object.entries(vOptions).map(([k,v],i)=>`${i+1}. ${v}`).join('\n');
-    const vKeys = Object.keys(vOptions);
-    const vChoice = prompt(`Vaikeuskerroin (nykyinen: ${vOptions[vCurrent]}):\n\n${vList}\n\nSyötä numero 1–4:`, vKeys.indexOf(vCurrent)+1);
-    if (vChoice !== null) {
-        const idx = parseInt(vChoice) - 1;
-        if (idx >= 0 && idx < vKeys.length) g().v = parseInt(vKeys[idx]);
+let lvlAnimFrame=null;
+function startLvlCanvas(){
+    const canvas=document.getElementById('lvlCanvas');
+    canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+    const ctx=canvas.getContext('2d');
+    const particles=[];
+    const colors=['#00c8f0','#7c5cbf','#b09fe0','rgba(0,200,240,0.6)','#22c55e'];
+    for(let i=0;i<60;i++){
+        particles.push({
+            x:Math.random()*canvas.width, y:canvas.height+10,
+            vx:(Math.random()-0.5)*2, vy:-(Math.random()*3+2),
+            r:Math.random()*3+1, color:colors[Math.floor(Math.random()*colors.length)],
+            life:1, decay:Math.random()*0.008+0.004
+        });
     }
+    function animate(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        particles.forEach(p=>{
+            p.x+=p.vx; p.y+=p.vy; p.vy+=0.03; p.life-=p.decay;
+            ctx.globalAlpha=Math.max(0,p.life);
+            ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+            ctx.fillStyle=p.color; ctx.fill();
+        });
+        ctx.globalAlpha=1;
+        particles.forEach((p,i)=>{if(p.life<=0){p.x=Math.random()*canvas.width;p.y=canvas.height+10;p.vy=-(Math.random()*3+2);p.life=1;}});
+        lvlAnimFrame=requestAnimationFrame(animate);
+    }
+    animate();
+}
+function stopLvlCanvas(){
+    if(lvlAnimFrame) cancelAnimationFrame(lvlAnimFrame);
+    const canvas=document.getElementById('lvlCanvas');
+    const ctx=canvas.getContext('2d');
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+ 
+/* ── MODALS ── */
+function modifyGoalSettings(){
+    const newGoal=prompt('Tavoite:',g().goal);
+    if(newGoal!==null) g().goal=newGoal.trim()||g().goal;
+    const newIdentity=prompt('Identiteetti (Olen jo…):',g().identity||'');
+    if(newIdentity!==null) g().identity=newIdentity.trim();
+    const newWhy=prompt('Miksi tämä on tärkeää:',g().why||'');
+    if(newWhy!==null) g().why=newWhy.trim();
+    const newQuote=prompt('Oma motivaatiolause:',g().quote||'');
+    if(newQuote!==null) g().quote=newQuote.trim();
+    const vOptions={'1000':'1 000 XP — Uusi tapa','5000':'5 000 XP — Merkittävä muutos','10000':'10 000 XP — Elämänmuutos','100000':'100 000 XP — Mestari'};
+    const vCurrent=String(g().v);
+    const vList=Object.entries(vOptions).map(([k,v],i)=>`${i+1}. ${v}`).join('\n');
+    const vKeys=Object.keys(vOptions);
+    const vChoice=prompt(`Vaikeuskerroin (nykyinen: ${vOptions[vCurrent]}):\n\n${vList}\n\nSyötä numero 1–4:`,vKeys.indexOf(vCurrent)+1);
+    if(vChoice!==null){const idx=parseInt(vChoice)-1;if(idx>=0&&idx<vKeys.length)g().v=parseInt(vKeys[idx]);}
     save(); render();
 }
  
-function modifyRoutines() {
+function modifyRoutines(){
     [['1 XP — pienin teko (1–10 min)','r1'],['5 XP — päivittäinen toimenpide (15–30 min)','r5'],
      ['20 XP — merkittävä suoritus (45–90 min)','r20'],['50 XP — päivän tärkein teko (2–4 h)','r50']
     ].forEach(([lbl,key])=>{ const v=prompt(lbl,g()[key]); if(v!==null)g()[key]=v.trim()||g()[key]; });
     save(); updateUI();
 }
  
-function closeVictory() {
-    document.getElementById('victoryOverlay').style.display='none';
-    g().done = true; save();
-}
+function closeVictory(){ document.getElementById('victoryOverlay').style.display='none'; g().done=true; save(); }
  
-function resetCurrentGoal() {
-    if (state.goals.length === 1) {
-        if(confirm('Nollataan kaikki data?')) { try{localStorage.removeItem('mk_v11');localStorage.removeItem('mk_draft');}catch(e){} location.reload(); }
+function resetCurrentGoal(){
+    if(state.goals.length===1){
+        if(confirm('Nollataan kaikki data?')){try{localStorage.removeItem('mk_v11');localStorage.removeItem('mk_draft');}catch(e){} location.reload();}
     } else {
-        if(confirm(`Poistetaan tavoite "${g().goal}"?`)) {
+        if(confirm(`Poistetaan tavoite "${g().goal}"?`)){
             state.goals.splice(state.activeIdx,1);
-            state.activeIdx = Math.max(0, state.activeIdx-1);
+            state.activeIdx=Math.max(0,state.activeIdx-1);
             save(); render();
         }
     }
 }
  
+/* ── PROMPTS ── */
+function getBaselinePart(){
+    const bl=state.goals.length>0?g().baseline:draft.baseline;
+    return bl?`\n\nLähtötilanne:\n"${bl}"`:'';
+}
+function getWhyPart(){
+    const why=state.goals.length>0?g().why:draft.why;
+    return why?`\n· Miksi tämä on tärkeää: "${why}"`:'';
+}
+function getIdentityPart(){
+    const id=state.goals.length>0?g().identity:'';
+    return id?`\n· Identiteetti: "${id}"`:'';
+}
+ 
+function copyNewGoalPrompt(){
+    const goal=document.getElementById('ngGoal').value.trim()||'(ei vielä)';
+    const why=document.getElementById('ngWhy').value.trim();
+    const baseline=document.getElementById('ngBaseline').value.trim();
+    const txt=`Olet MUUTOSKONE-järjestelmän strateginen suunnittelija.
+ 
+Järjestelmän logiikka:
+— 1 000 XP ≈ 100 h — uuden tavan rakentaminen
+— 5 000 XP ≈ 500 h — selkeä, mitattava elämänmuutos
+— 10 000 XP ≈ 1 000 h — identiteettitason muutos
+— Rutiinit: 1 XP (1–10 min), 5 XP (15–30 min), 20 XP (45–90 min), 50 XP (2–4 h)
+— Kertymäkerroin 1.0 → 2.0 päiville 1–84
+ 
+Tavoitteeni: ${goal}${why?'\nMiksi: '+why:''}${baseline?'\nLähtötilanne: '+baseline:''}
+ 
+Vaihe 1 — Kysy tarkentavia kysymyksiä yksi kerrallaan.
+Vaihe 2 — Perustele vaikeuskerroin, luo rutiinikirjasto, laske aikajana.
+ 
+Aloita vaiheesta 1.`;
+    navigator.clipboard.writeText(txt).then(()=>{
+        const b=document.getElementById('copyNgAiBtn'); b.innerText='Kopioitu';
+        setTimeout(()=>{b.innerText='Kopioi strategiakehote tälle tavoitteelle';},2200);
+    });
+}
+ 
+function copyAiPrompt(){
+    const txt=`Olet MUUTOSKONE-järjestelmän strateginen suunnittelija.
+ 
+Järjestelmän logiikka:
+— 1 000 XP ≈ 100 h / 5 000 XP ≈ 500 h / 10 000 XP ≈ 1 000 h / 100 000 XP ≈ 10 000 h
+— Rutiinit: 1 XP (1–10 min), 5 XP (15–30 min), 20 XP (45–90 min), 50 XP (2–4 h)
+— Kertymäkerroin kasvaa 1.0 → 2.0 välillä päivä 1–84${getBaselinePart()}
+ 
+Etene yksi askel kerrallaan. Esitä täsmälleen yksi kysymys kerrallaan ja odota vastaukseni.
+ 
+Vaihe 1 — Esittele itsesi. Kysy tavoitteeni.
+Vaihe 2 — Kysy arjen rajoitteet.
+Vaihe 3 — Kysy realistinen päivittäinen XP-kapasiteetti.
+Vaihe 4 — Tee kokonaisanalyysi: vaikeuskerroin, rutiinikirjasto, aikajana, kriittinen muuttuja.
+ 
+Aloita vaiheesta 1.`;
+    navigator.clipboard.writeText(txt).then(()=>{
+        const b=document.getElementById('copyAiBtn'); b.innerText='Kopioitu';
+        setTimeout(()=>{b.innerText='Kopioi strategiakehote';},2200);
+    });
+}
+ 
+function copyMentorPrompt(){
+    const avg=g().days>0?Math.round(g().total/g().days):0;
+    const pct=g().v>0?((g().total/g().v)*100).toFixed(1):'0';
+    const today=getTodayStr();
+    const intentioTxt=(g().intentioDate===today&&g().intentioText)?g().intentioText:'ei asetettu';
+    const todayXP=g().weekLog[today]||0;
+    const momentum=calcMomentum();
+    const todayNote=g().dayNotes&&g().dayNotes[today]?g().dayNotes[today]:'';
+    const identityLine=g().identity?`· Identiteetti: "${g().identity}"\n`:'';
+    const whyLine=g().why?`· Miksi tämä on tärkeää: "${g().why}"\n`:'';
+    const txt=`Olet MUUTOSKONE-järjestelmän sparrauskumppani.
+ 
+Tämänhetkinen datani:
+· Tavoite: ${g().goal}
+${identityLine}${whyLine}· Edistyminen: ${g().total.toLocaleString('fi-FI')} / ${g().v.toLocaleString('fi-FI')} XP (${pct}%)
+· Päivä: ${g().days} | Putki: ${g().streak} pv | Momentum: ${momentum}%
+· Keskitahti: ${avg} XP/pv | Tänään: ${todayXP} XP | Paras pv: ${g().bestDay} XP
+· Kertymäkerroin: ×${getMultiplier().toFixed(2)}
+· Tämän päivän intentio: "${intentioTxt}"${todayNote?'\n· Päivän muistiinpano: "'+todayNote.slice(0,200)+'"':''}${getBaselinePart()}
+ 
+Tyylisi: Ole lämmin mutta suora. Fokus eteenpäin — ei taaksepäin.
+ 
+1. Kerro yksi positiivinen asia datasta. Kysy: mikä tuntuu haastavimmalta?
+2. Anna 2–3 konkreettista ideaa seuraavaan askeleeseen (erityisesti 50 XP:n tekoja).
+3. Kommentoi momentumia (${momentum}%) — mitä se kertoo?
+4. Lopeta yhdellä lauseella.
+ 
+Aloita kohdasta 1.`;
+    navigator.clipboard.writeText(txt).then(()=>{
+        const b=document.getElementById('copyMentorBtn'); b.innerText='Kopioitu';
+        setTimeout(()=>{b.innerText='Kopioi sparrauskehote';},2200);
+    });
+}
+ 
+/* ── HELPERS ── */
 function escQ(s){return(s||'').replace(/'/g,"\\'");}
 function save(){try{localStorage.setItem('mk_v11',JSON.stringify(state));}catch(e){}}
  
@@ -1360,18 +1617,8 @@ function importData(ev){
     r.onload=e=>{
         try{
             const p=JSON.parse(e.target.result);
-            if(p.goals){state=p;}
-            else{state.goals=[p];state.activeIdx=0;}
-            // Migraatio: varmista uudet kentät
-            state.goals.forEach(goal => {
-                if (!goal.weekLog) goal.weekLog = {};
-                if (!goal.passedMilestones) goal.passedMilestones = [];
-                if (!goal.why) goal.why = '';
-                if (goal.graceDayUsed === undefined) goal.graceDayUsed = null;
-                if (!goal.reflectionDate) goal.reflectionDate = null;
-                if (!goal.reflectionText) goal.reflectionText = '';
-                goal.lvl = getLevelForXP(goal.total);
-            });
+            if(p.goals){state=p;} else{state.goals=[p];state.activeIdx=0;}
+            state.goals.forEach(migrateGoal);
             save(); render();
         }catch(err){alert('Tiedoston lukeminen epäonnistui.');}
     };
