@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="fi">
 <head>
@@ -251,6 +253,38 @@
         .ai-steps li{margin-bottom:4px;} .ai-steps a{color:var(--cyan);text-decoration:none;}
  
         /* FOOTER */
+        /* SHARE OVERLAY */
+        #shareOverlay{position:fixed;inset:0;z-index:8000;display:none;flex-direction:column;align-items:center;justify-content:center;background:rgba(7,7,13,0.97);backdrop-filter:blur(28px);padding:28px;}
+        #shareOverlay.show{display:flex;}
+        .share-canvas-wrap{background:#0a0a18;border:1px solid var(--border-2);border-radius:20px;overflow:hidden;margin-bottom:20px;max-width:340px;width:100%;}
+        #shareCanvas{display:block;width:100%;height:auto;}
+        .share-btns{display:flex;gap:10px;width:100%;max-width:340px;flex-wrap:wrap;}
+        .share-btn{flex:1;min-width:120px;background:transparent;border:1px solid var(--border-2);color:var(--text-1);padding:13px 10px;border-radius:12px;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background 0.2s;display:flex;align-items:center;justify-content:center;gap:7px;}
+        .share-btn:hover{background:rgba(255,255,255,0.05);}
+        .share-btn:active{transform:scale(0.98);}
+        .share-btn-primary{border-color:var(--cyan-line);color:var(--cyan);}
+        .share-btn-primary:hover{background:var(--cyan-dim);}
+        .share-close{margin-top:14px;background:transparent;border:none;color:var(--text-3);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;}
+ 
+        /* DIFFICULTY GUIDE OVERLAY */
+        #diffGuideOverlay{position:fixed;inset:0;z-index:8500;display:none;align-items:center;justify-content:center;background:rgba(7,7,13,0.96);backdrop-filter:blur(24px);padding:24px;}
+        #diffGuideOverlay.show{display:flex;}
+        .dg-card{background:var(--surface);border:1px solid var(--border-2);border-radius:20px;padding:24px;width:100%;max-width:390px;max-height:92vh;overflow-y:auto;scrollbar-width:none;}
+        .dg-card::-webkit-scrollbar{display:none;}
+        .dg-card-title{font-size:11px;font-weight:600;color:var(--text-2);letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+        .dg-card-title::before{content:'';width:3px;height:3px;background:var(--cyan);border-radius:50%;}
+        .dg-tier{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:10px;cursor:pointer;transition:border-color 0.2s;}
+        .dg-tier:hover{border-color:var(--border-2);}
+        .dg-tier.selected{border-color:var(--cyan-line);background:var(--cyan-dim);}
+        .dg-tier-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+        .dg-tier-xp{font-size:16px;font-weight:200;color:var(--text-1);letter-spacing:-0.5px;}
+        .dg-tier-name{font-size:9px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;font-weight:600;margin-top:3px;}
+        .dg-tier-hours{font-size:11px;color:var(--text-3);}
+        .dg-tier-desc{font-size:12px;color:var(--text-2);line-height:1.6;margin-bottom:8px;}
+        .dg-tier-examples{font-size:11px;color:var(--text-3);line-height:1.65;font-style:italic;}
+        .dg-tier-examples strong{color:var(--text-2);font-style:normal;}
+        .dg-bottom{display:flex;gap:8px;margin-top:16px;}
+ 
         .footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:18px;}
         .privacy-note{font-size:10px;color:var(--text-3);text-align:center;letter-spacing:0.5px;line-height:1.6;margin-top:14px;padding:0 8px;}
         .goal-header{display:flex;justify-content:space-between;align-items:center;margin:26px 0 10px;padding-bottom:12px;border-bottom:1px solid var(--border);}
@@ -359,45 +393,46 @@
         <div class="ob-slide active" data-slide="0">
             <div class="ob-icon">⚡</div>
             <div class="ob-title">Tervetuloa Muutoskoneeseen</div>
-            <div class="ob-body">Muutoskone on henkilökohtainen muutostyökalu joka perustuu <strong>XP-keräykseen</strong> — samaan logiikkaan kuin videopeleissä, sovellettuna oikeisiin tavoitteisiin.<br><br>Teet pieniä tekoja päivittäin. Ne kertyvät. Muutos tapahtuu.</div>
+            <div class="ob-body">Muutoskone on henkilökohtainen työkalu, joka perustuu <strong>XP:n-keräämiseen</strong> — eli samaan logiikkaan kuin videopeleissä, mutta sovellettuna oikeisiin tavoitteisiin.<br><br>Teet pieniä tekoja päivittäin ja kun ne kertyvät muutos on väistämätön! </div>
         </div>
         <div class="ob-slide" data-slide="1">
             <div class="ob-icon">🎯</div>
             <div class="ob-title">Miten XP toimii?</div>
             <div class="ob-body">
                 <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-bottom:12px;">
-                    <div class="ob-mini-xp"><span>1 XP</span> Pienin teko</div>
-                    <div class="ob-mini-xp"><span>5 XP</span> Päivittäinen</div>
-                    <div class="ob-mini-xp"><span>20 XP</span> Suoritus</div>
-                    <div class="ob-mini-xp"><span>50 XP</span> Päivän paras</div>
+                    <div class="ob-mini-xp"><span>1 XP</span> Mikrotehtävä</div>
+                    <div class="ob-mini-xp"><span>5 XP</span> Harppaus</div>
+                    <div class="ob-mini-xp"><span>20 XP</span> Panostus</div>
+                    <div class="ob-mini-xp"><span>50 XP</span> Uroteko</div>
                 </div>
-                <strong>Kertymäkerroin</strong> kasvaa päivittäin — päivänä 84 jokainen teko on 2× arvokkaampi. Jatkuvuus palkitaan konkreettisesti.
+               <br> <strong>XP</strong> mittaa edistystäsi kohti tavoitetta. <br> <br> <strong>Kertymäkerroin</strong> kasvaa päivittäin — päivänä 84 jokainen teko on 2× arvokkaampi. Jatkuvuus palkitaan konkreettisesti.
             </div>
         </div>
         <div class="ob-slide" data-slide="2">
             <div class="ob-icon">🧠</div>
             <div class="ob-title">Identiteetti ensin</div>
-            <div class="ob-body"><em>Atomic Habits</em>: muutos ei tapahdu tavoitteen kautta — se tapahtuu <span class="hl-purple">identiteetin</span> kautta.<br><br>Älä sano <em>"haluan juosta"</em>. Sano <span class="hl-purple">"Olen juoksija"</span>.<br><br>Muutoskone muistuttaa tätä lausetta joka päivä.</div>
+            <div class="ob-body">Todellinen muutos ei synny tavoitteita tuijottamalla,<span class="hl-purple">vaan muuttamalla käsitystä itsestäsi.
+</span>.<br><br>Älä sano <em>"haluan juosta"</em>. Sano <span class="hl-purple">"Olen juoksija"</span>.<br><br>Muutoskone kirkastaa tätä kuvaa joka päivä.</div>
         </div>
         <div class="ob-slide" data-slide="3">
             <div class="ob-icon">🔥</div>
-            <div class="ob-title">Putki &amp; Momentum</div>
-            <div class="ob-body"><span class="hl-orange">Aktiivisuusputki</span> lasketaan peräkkäisistä päivistä. Yksi ohitettu päivä viikossa ei nollaa putkea — sinulla on <strong>armopäivä</strong>.<br><br><span class="hl-green">Momentum-palkki</span> kertoo onko vauhti kiihtymässä vai hiipumassa.</div>
+            <div class="ob-title">Aktiivisuusputki &amp; draivi</div>
+            <div class="ob-body"><span class="hl-orange">Aktiivisuusputki</span> lasketaan peräkkäisistä päivistä. Yksi ohitettu päivä viikossa ei nollaa putkea — sinulla on <strong>armopäivä</strong>.<br><br><span class="hl-green">Draivi-palkki</span> kertoo onko vauhti kiihtymässä vai hiipumassa.</div>
         </div>
         <div class="ob-slide" data-slide="4">
             <div class="ob-icon">📓</div>
             <div class="ob-title">Reflektio juurruttaa muutoksen</div>
-            <div class="ob-body"><strong>Päivän intentio</strong> — kirjoita aamulla mitä teet tänään.<br><br><strong>Muistiinpanot</strong> — "mitä opin tänään?" Tallentuu päiväkohtaisesti.<br><br><strong>Maanantai-reflektio</strong> — paras asia viime viikolla. Pelkkä tekeminen ei riitä.</div>
+            <div class="ob-body"><strong>Päivän intentio</strong> — kirjoita aamulla mitä teet tänään.<br><br><strong>Muistiinpanot</strong> — "mitä opin tänään?" Tallentuu päiväkohtaisesti.<br><br><strong>Maanantai-reflektio</strong> — paras asia viime viikolla. Muutos vaatii oivalluksia. Pysähtyminen onnistumisen äärelle opettaa aivoillesi, että uusi suuntasi on oikea.</div>
         </div>
         <div class="ob-slide" data-slide="5">
             <div class="ob-icon">📊</div>
             <div class="ob-title">Näe edistymisesi</div>
-            <div class="ob-body"><strong>Heat map</strong> — 126 päivän aktiivisuuskartta.<br><br><strong>Päiväkohtainen XP-tavoite</strong> — aseta oma tavoite ja seuraa miten täyttyy.<br><br><strong>Tasot</strong> — oikeita saavutuksia: taso 2 = 500 XP, taso 5 = 5 500 XP.</div>
+            <div class="ob-body"><strong>Aktiivisuuskartta</strong> — 126 päivän aktiivisuuskartta.<br><br><strong>Päiväkohtainen XP-tavoite</strong> — aseta oma tavoite ja seuraa miten se täyttyy.<br><br></div>
         </div>
         <div class="ob-slide" data-slide="6">
             <div class="ob-icon">🚀</div>
             <div class="ob-title">Olet valmis.</div>
-            <div class="ob-body">Kaikki data tallentuu <strong>vain tällä laitteella</strong>. Ei rekisteröitymistä, ei pilveä, ei mainoksia.<br><br>Täytä tavoite, identiteetti ja rutiinit. AI auttaa kalibroimaan ne jos olet epävarma.<br><br><span class="hl-green">Ensimmäinen teko on tärkein.</span></div>
+            <div class="ob-body">Kaikki data tallentuu <strong>vain omalle laitteellesi</strong>. Ei rekisteröitymistä, ei pilveä, ei mainoksia.<br><br>Täytä tavoite, identiteetti ja rutiinit. AI-työkalu auttaa sinua, jos olet epävarma.<br><br><span class="hl-green">Ensimmäinen teko on tärkein.</span></div>
         </div>
     </div>
     <div class="ob-nav">
@@ -463,14 +498,14 @@
         <div class="ng-section"><div class="ng-label">Identiteetti <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div><div class="ng-input"><input type="text" id="ngIdentity" placeholder="Olen jo… (esim. Olen juoksija)"></div></div>
         <div class="ng-section"><div class="ng-label">Miksi tämä on tärkeää? <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div><div class="ng-input"><textarea id="ngWhy" rows="2" placeholder="Mikä on perimmäinen syy?"></textarea></div></div>
         <div class="ng-section">
-            <div class="ng-label">Vaikeuskerroin</div>
+            <div class="ng-label">Vaikeuskerroin <button onclick="openDiffGuide('ng')" style="background:rgba(0,200,240,0.1);border:1px solid rgba(0,200,240,0.25);color:var(--cyan);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div>
             <div class="ng-input"><select id="ngV"><option value="1000">1 000 XP — Uusi tapa</option><option value="5000" selected>5 000 XP — Merkittävä muutos</option><option value="10000">10 000 XP — Elämänmuutos</option><option value="100000">100 000 XP — Mestari</option></select></div>
         </div>
         <div class="ng-section"><div class="ng-label">Rutiinit</div>
-            <div class="ng-xp-row"><span class="ng-xp-tag">1 XP</span><input type="text" id="ngR1" placeholder="Pienin teko — 1–10 min"></div>
-            <div class="ng-xp-row"><span class="ng-xp-tag">5 XP</span><input type="text" id="ngR5" placeholder="Päivittäinen toimenpide — 15–30 min"></div>
-            <div class="ng-xp-row"><span class="ng-xp-tag">20 XP</span><input type="text" id="ngR20" placeholder="Merkittävä suoritus — 45–90 min"></div>
-            <div class="ng-xp-row"><span class="ng-xp-tag">50 XP</span><input type="text" id="ngR50" placeholder="Päivän tärkein teko — 2–4 h"></div>
+            <div class="ng-xp-row"><span class="ng-xp-tag">1 XP</span><input type="text" id="ngR1" placeholder="Mikrotehtävä — 1–10 min"></div>
+            <div class="ng-xp-row"><span class="ng-xp-tag">5 XP</span><input type="text" id="ngR5" placeholder="Harppaus — 15–30 min"></div>
+            <div class="ng-xp-row"><span class="ng-xp-tag">20 XP</span><input type="text" id="ngR20" placeholder="Panostus — 45–90 min"></div>
+            <div class="ng-xp-row"><span class="ng-xp-tag">50 XP</span><input type="text" id="ngR50" placeholder="Uroteko — 2–4 h"></div>
         </div>
         <div class="ng-section"><div class="ng-label">Lähtötilanne <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div><div class="ng-input"><textarea id="ngBaseline" rows="2" placeholder="Mistä lähdet?"></textarea></div></div>
         <div class="ng-section"><div class="ng-label">Oma motivaatiolause <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div><div class="ng-input"><input type="text" id="ngQuote" placeholder="Mikä pitää sinut liikkeellä?"></div></div>
@@ -482,6 +517,72 @@
         <div class="ng-label" style="margin-bottom:6px;">Epävarma parametreista?</div>
         <p class="ng-ai-hint">Kopioi strategiakehote, avaa <a href="https://gemini.google.com" target="_blank" style="color:var(--cyan);text-decoration:none;">Gemini</a> ja anna tekoälyn kalibroida ne.</p>
         <button class="btn-ai" id="copyNgAiBtn" onclick="copyNewGoalPrompt()">Kopioi strategiakehote tälle tavoitteelle</button>
+    </div>
+</div>
+ 
+<!-- ═══ SHARE OVERLAY ═══ -->
+<div id="shareOverlay">
+    <div class="share-canvas-wrap">
+        <canvas id="shareCanvas" width="680" height="400"></canvas>
+    </div>
+    <div class="share-btns">
+        <button class="share-btn share-btn-primary" onclick="doShare()">↗ Jaa</button>
+        <button class="share-btn" onclick="downloadShareImg()">↓ Lataa kuva</button>
+    </div>
+    <button class="share-close" onclick="closeShare()">Sulje</button>
+</div>
+ 
+<!-- ═══ DIFFICULTY GUIDE ═══ -->
+<div id="diffGuideOverlay">
+    <div class="dg-card">
+        <div class="dg-card-title">Mikä vaikeuskerroin sopii sinulle?</div>
+ 
+        <div class="dg-tier" onclick="selectDiffTier(this,'1000')">
+            <div class="dg-tier-header">
+                <div><div class="dg-tier-xp">1 000 XP</div><div class="dg-tier-name">Uusi tapa</div></div>
+                <div class="dg-tier-hours">Pieni muutos</div>
+            </div>
+            <div class="dg-tier-desc">Hyvä lähtöpiste yksittäisen tottumuksen vakiinnuttamiseen.</div>
+            <div class="dg-tier-examples"><strong>Esimerkkejä:</strong> Aloitat meditaation, alat lukea enemmän, otat liikuntatottumuksen käyttöön, opettelet uuden sovelluksen tai taidon alkeita.</div>
+        </div>
+ 
+        <div class="dg-tier" onclick="selectDiffTier(this,'5000')">
+            <div class="dg-tier-header">
+                <div><div class="dg-tier-xp">5 000 XP</div><div class="dg-tier-name">Merkittävä muutos</div></div>
+                <div class="dg-tier-hours">
+</div>
+            </div>
+            <div class="dg-tier-desc">Selkeä, mitattava elämänmuutos.</div>
+            <div class="dg-tier-examples"><strong>Esimerkkejä:</strong> Laihdut 10 kg, opit uuden kielen perusteet, aloitat sivubisneksen tai kirjoitat kirjan luonnoksen.</div>
+        </div>
+ 
+        <div class="dg-tier" onclick="selectDiffTier(this,'10000')">
+            <div class="dg-tier-header">
+                <div><div class="dg-tier-xp">10 000 XP</div><div class="dg-tier-name">Elämänmuutos</div></div>
+                <div class="dg-tier-hours">Identiteettitason muutos</div>
+            </div>
+            <div class="dg-tier-desc"> Tämä taso vaatii pitkäjänteistä, systemaattista työtä ja todellista sitoutumista.</div>
+            <div class="dg-tier-examples"><strong>Esimerkkejä:</strong> Vaihdat uraa, saavutat kilpaurheilutason, perustat ja kasvatat yrityksen, läpäiset tutkinnon tai saavutat mestaruustason taidossa.</div>
+        </div>
+ 
+        <div class="dg-tier" onclick="selectDiffTier(this,'100000')">
+            <div class="dg-tier-header">
+                <div><div class="dg-tier-xp">100 000 XP</div><div class="dg-tier-name">Mestari</div></div>
+                <div class="dg-tier-hours"></div>
+            </div>
+            <div class="dg-tier-desc">Perustuu Malcolm Gladwellin 10 000 tunnin sääntöön.</div>
+            <div class="dg-tier-examples"><strong>Esimerkkejä:</strong> Ammattiurheilija, konserttipianisti, huippuasiantuntija alallasi, kirjailija jolla on julkaistu teos ja vakiintunut lukijakunta.</div>
+        </div>
+ 
+        <div style="background:rgba(0,200,240,0.05);border:1px solid rgba(0,200,240,0.15);border-radius:11px;padding:12px 14px;margin-top:4px;margin-bottom:4px;">
+            <div style="font-size:9px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:6px;">Muista: kertymäkerroin</div>
+            <div style="font-size:12px;color:var(--text-2);line-height:1.6;">XP ei ole tunteja 1:1. Kertymäkerroin kasvaa päivästä 1 → päivään 84 välillä ×1.0–×2.0. Pitkäjänteisyys nopeuttaa matkaa konkreettisesti.</div>
+        </div>
+ 
+        <div class="dg-bottom">
+            <button class="btn-ghost" onclick="closeDiffGuide()" style="flex:1;">Sulje</button>
+            <button class="btn-primary" id="diffGuideSelectBtn" onclick="applyDiffTier()" style="flex:2;margin-top:0;display:none;">Valitse tämä</button>
+        </div>
     </div>
 </div>
  
@@ -502,14 +603,14 @@
         <div style="font-size:10px;color:var(--text-3);margin-top:8px;line-height:1.5;">Muutos alkaa identiteetistä. Kirjoita se henkilö, joksi olet jo tulossa.</div>
     </div>
     <div class="card"><div class="lbl"><span class="lbl-dot"></span>Miksi tämä on tärkeää? <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div><textarea id="inWhy" rows="2" placeholder="Mikä on perimmäinen syy?"></textarea></div>
-    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Vaikeuskerroin</div>
+    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Vaikeuskerroin <button onclick="openDiffGuide('setup')" style="background:rgba(0,200,240,0.1);border:1px solid rgba(0,200,240,0.25);color:var(--cyan);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:auto;">Mikä sopii minulle?</button></div>
         <select id="inV"><option value="1000">1 000 XP — Uusi tapa</option><option value="5000" selected>5 000 XP — Merkittävä muutos</option><option value="10000">10 000 XP — Elämänmuutos</option><option value="100000">100 000 XP — Mestari</option></select>
     </div>
     <div class="card"><div class="lbl"><span class="lbl-dot"></span>Rutiinit</div>
-        <div class="xp-row"><span class="xp-tag">1 XP</span><input type="text" id="inR1" placeholder="Pienin teko — 1–10 min"></div>
-        <div class="xp-row"><span class="xp-tag">5 XP</span><input type="text" id="inR5" placeholder="Päivittäinen toimenpide — 15–30 min"></div>
-        <div class="xp-row"><span class="xp-tag">20 XP</span><input type="text" id="inR20" placeholder="Merkittävä suoritus — 45–90 min"></div>
-        <div class="xp-row"><span class="xp-tag">50 XP</span><input type="text" id="inR50" placeholder="Päivän tärkein teko — 2–4 h"></div>
+        <div class="xp-row"><span class="xp-tag">1 XP</span><input type="text" id="inR1" placeholder="Mikrotehtävä — 1–10 min"></div>
+        <div class="xp-row"><span class="xp-tag">5 XP</span><input type="text" id="inR5" placeholder="Harppaus — 15–30 min"></div>
+        <div class="xp-row"><span class="xp-tag">20 XP</span><input type="text" id="inR20" placeholder="Panostus — 45–90 min"></div>
+        <div class="xp-row"><span class="xp-tag">50 XP</span><input type="text" id="inR50" placeholder="Uroteko — 2–4 h"></div>
     </div>
     <div class="card"><div class="lbl"><span class="lbl-dot"></span>Lähtötilanne <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div><textarea id="inBaseline" rows="3" placeholder="Kuvaile nykytilasi. Mistä lähdet?"></textarea><div class="baseline-autosave" id="baselineAutosave">Tallennettu</div></div>
     <div class="card"><div class="lbl"><span class="lbl-dot"></span>Oma motivaatiolause <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div><input type="text" id="inQuote" placeholder="Mikä pitää sinut liikkeellä?"></div>
@@ -646,8 +747,8 @@
             <div class="ssc-logo">MUUTOSKONE ⚡</div>
         </div>
         <div class="ssc-grid">
-            <div class="ssc-stat"><div class="ssc-val" id="sscXP"></div><div class="ssc-lbl">XP kerätty</div></div>
-            <div class="ssc-stat"><div class="ssc-val" id="sscDays"></div><div class="ssc-lbl">Päivää</div></div>
+            <div class="ssc-stat"><div class="ssc-val" id="sscXP"></div><div class="ssc-lbl">kerätty XP</div></div>
+            <div class="ssc-stat"><div class="ssc-val" id="sscDays"></div><div class="ssc-lbl">Päivä nro.</div></div>
             <div class="ssc-stat"><div class="ssc-val" id="sscStreak"></div><div class="ssc-lbl">Pv putki</div></div>
         </div>
         <div class="ssc-bar-wrap">
@@ -668,7 +769,7 @@
     <div class="footer-grid">
         <button class="btn-ghost" onclick="modifyRoutines()">Muokkaa rutiineja</button>
         <button class="btn-ghost" onclick="modifyGoalSettings()">Muokkaa tavoitetta</button>
-        <button class="btn-ghost" onclick="toggleStatsCard()">Edistymiskortti</button>
+        <button class="btn-ghost" onclick="openShare()" style="border-color:rgba(0,200,240,0.22);color:var(--cyan);">↗ Jaa edistyminen</button>
         <button class="btn-ghost" onclick="exportData()">Varmuuskopio</button>
         <button class="btn-ghost" onclick="document.getElementById('fileIn').click()">Tuo data</button>
         <button class="btn-ghost btn-ghost-danger" onclick="resetCurrentGoal()" style="grid-column:1/-1;">Nollaa tämä tavoite</button>
@@ -683,6 +784,7 @@
    MUUTOSKONE — Täydellinen versio
 ════════════════════════════════════ */
 const MINS={1:'1–10 min',5:'15–30 min',20:'45–90 min',50:'2–4 h'};
+const XP_LABELS={1:'Mikrotehtävä',5:'Harppaus',20:'Panostus',50:'Uroteko'};
 const MILESTONES=[10,25,50,75,100];
 const MS_DATA={
     10:{kicker:'Ensimmäinen virstanpylväs',title:'10 %',sub:'Järjestelmä toimii. Jokainen napautus vie sinua eteenpäin — ja se näkyy jo nyt.'},
@@ -861,13 +963,10 @@ function addNewGoal(){
     ng.why=document.getElementById('ngWhy').value.trim();
     ng.baseline=document.getElementById('ngBaseline').value.trim();
     ng.quote=document.getElementById('ngQuote').value.trim();
-    ng.r1=document.getElementById('ngR1').value.trim()||'Pienin teko';
-    ng.r5=document.getElementById('ngR5').value.trim()||'Päivittäinen toimenpide';
-    ng.r20=document.getElementById('ngR20').value.trim()||'Merkittävä suoritus';
-    ng.r50=document.getElementById('ngR50').value.trim()||'Päivän tärkein teko';
-    ng.v=parseInt(document.getElementById('ngV').value);
-    ng.startDate=new Date().toISOString();
-    state.goals.push(ng);state.activeIdx=state.goals.length-1;
+    ng.r1=document.getElementById('ngR1').value.trim()||'Mikrotehtävä';
+    ng.r5=document.getElementById('ngR5').value.trim()||'Harppaus';
+    ng.r20=document.getElementById('ngR20').value.trim()||'Panostus';
+    ng.r50=document.getElementById('ngR50').value.trim()||'Uroteko';
     closeNewGoal();save();render();
 }
  
@@ -1060,10 +1159,10 @@ function start(){
     ng.why=document.getElementById('inWhy').value.trim()||draft.why||'';
     ng.baseline=document.getElementById('inBaseline').value.trim()||draft.baseline||'';
     ng.quote=document.getElementById('inQuote').value.trim()||draft.quote||'';
-    ng.r1=document.getElementById('inR1').value.trim()||'Pienin teko';
-    ng.r5=document.getElementById('inR5').value.trim()||'Päivittäinen toimenpide';
-    ng.r20=document.getElementById('inR20').value.trim()||'Merkittävä suoritus';
-    ng.r50=document.getElementById('inR50').value.trim()||'Päivän tärkein teko';
+    ng.r1=document.getElementById('inR1').value.trim()||'Mikrotehtävä';
+    ng.r5=document.getElementById('inR5').value.trim()||'Harppaus';
+    ng.r20=document.getElementById('inR20').value.trim()||'Panostus';
+    ng.r50=document.getElementById('inR50').value.trim()||'Uroteko';
     ng.v=parseInt(document.getElementById('inV').value);
     ng.startDate=new Date().toISOString();
     state.goals=[ng];state.activeIdx=0;state.quote=ng.quote;save();render();
@@ -1131,7 +1230,7 @@ function updateUI(){
     let dv='—';if(g().total>=g().v){dv='0';}else{const est=calculateDaysToGoal();if(est!==null)dv=String(g().lowestEstimate!==null?Math.min(est,g().lowestEstimate):est);}document.getElementById('valM').innerText=dv;
     MILESTONES.forEach(ms=>{const el=document.getElementById(`ms${ms}`),lbl=document.getElementById(`mslbl${ms}`);if(!el)return;if(g().passedMilestones.includes(ms)||(ms===100&&g().total>=g().v)){el.className='ms done';if(lbl)lbl.className='ms-lbl done-lbl';}else if(pct>=ms*0.75){el.className='ms near';}else{el.className='ms';}});
     const levels=[{base:1,name:g().r1,cls:'rbtn-1',dot:'rdot-1',xpCls:'rxp-1'},{base:5,name:g().r5,cls:'rbtn-5',dot:'rdot-5',xpCls:'rxp-5'},{base:20,name:g().r20,cls:'rbtn-20',dot:'rdot-20',xpCls:'rxp-20'},{base:50,name:g().r50,cls:'rbtn-50',dot:'rdot-50',xpCls:'rxp-50'}];
-    document.getElementById('taskList').innerHTML=levels.map(l=>{const xp=Math.round(l.base*multi);return`<button class="rbtn ${l.cls}" onclick="addXP(${l.base},'${escQ(l.name)}',event)"><div class="rbtn-inner"><div class="rbtn-left"><span class="rbtn-dot ${l.dot}"></span><div class="rbtn-text"><span class="rbtn-name">${l.name}</span><span class="rbtn-min">${MINS[l.base]}</span></div></div><span class="rbtn-xp ${l.xpCls}">+${xp}</span></div></button>`;}).join('');
+    document.getElementById('taskList').innerHTML=levels.map(l=>{const xp=Math.round(l.base*multi);return`<button class="rbtn ${l.cls}" onclick="addXP(${l.base},'${escQ(l.name)}',event)"><div class="rbtn-inner"><div class="rbtn-left"><span class="rbtn-dot ${l.dot}"></span><div class="rbtn-text"><span class="rbtn-name">${l.name}</span><span class="rbtn-min"><span style="color:var(--cyan);opacity:0.7;font-weight:500;">${XP_LABELS[l.base]}</span> · ${MINS[l.base]}</span></div></div><span class="rbtn-xp ${l.xpCls}">+${xp}</span></div></button>`;}).join('');
     renderHeatmap();updateSignal();updateMomentum();renderTabs();initDailyGoal();
 }
  
@@ -1190,7 +1289,144 @@ function copyMentorPrompt(){
     navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyMentorBtn');b.innerText='Kopioitu';setTimeout(()=>{b.innerText='Kopioi sparrauskehote';},2200);});
 }
  
-/* HELPERS */
+/* ── SHARE / JAKAMINEN ── */
+function openShare(){
+    drawShareCard();
+    document.getElementById('shareOverlay').classList.add('show');
+}
+function closeShare(){document.getElementById('shareOverlay').classList.remove('show');}
+ 
+function drawShareCard(){
+    const canvas=document.getElementById('shareCanvas');
+    const W=680,H=400;canvas.width=W;canvas.height=H;
+    const ctx=canvas.getContext('2d');
+    // Background
+    ctx.fillStyle='#08081a';ctx.fillRect(0,0,W,H);
+    // Subtle glow top-left
+    const gl=ctx.createRadialGradient(120,80,0,120,80,260);
+    gl.addColorStop(0,'rgba(124,92,191,0.18)');gl.addColorStop(1,'transparent');
+    ctx.fillStyle=gl;ctx.fillRect(0,0,W,H);
+    // Subtle glow bottom-right
+    const gl2=ctx.createRadialGradient(560,320,0,560,320,200);
+    gl2.addColorStop(0,'rgba(0,200,240,0.12)');gl2.addColorStop(1,'transparent');
+    ctx.fillStyle=gl2;ctx.fillRect(0,0,W,H);
+ 
+    // MUUTOSKONE logo top-left
+    ctx.font='600 11px Inter,sans-serif';ctx.fillStyle='rgba(255,255,255,0.35)';
+    ctx.letterSpacing='4px';ctx.fillText('MUUTOSKONE  ⚡',36,38);
+    ctx.letterSpacing='0px';
+ 
+    // Goal text
+    const pct=g().v>0?Math.round((g().total/g().v)*100):0;
+    ctx.font='300 28px Inter,sans-serif';ctx.fillStyle='rgba(255,255,255,0.92)';
+    const goalTxt=g().goal.length>32?g().goal.slice(0,31)+'…':g().goal;
+    ctx.fillText(goalTxt,36,80);
+ 
+    // Identity if present
+    let yOff=0;
+    if(g().identity){
+        ctx.font='300 14px Inter,sans-serif';ctx.fillStyle='rgba(176,159,224,0.8)';
+        ctx.fillText('"'+g().identity+'"',36,108);yOff=22;
+    }
+ 
+    // Progress bar
+    const barY=138+yOff,barH=6,barW=W-72;
+    ctx.fillStyle='rgba(255,255,255,0.07)';roundRect(ctx,36,barY,barW,barH,3);ctx.fill();
+    // Bar fill gradient
+    const barGrad=ctx.createLinearGradient(36,0,36+barW*Math.min(pct/100,1),0);
+    barGrad.addColorStop(0,'#7c5cbf');barGrad.addColorStop(0.6,'#059fbf');barGrad.addColorStop(1,'#00c8f0');
+    ctx.fillStyle=barGrad;roundRect(ctx,36,barY,barW*Math.min(pct/100,1),barH,3);ctx.fill();
+    // Pct label
+    ctx.font='600 13px Inter,sans-serif';ctx.fillStyle='rgba(0,200,240,0.9)';
+    ctx.fillText(pct+'% valmis',36,barY+26);
+ 
+    // Big stats — 3 columns
+    const stats=[
+        {val:g().total.toLocaleString('fi-FI'),lbl:'XP kerätty'},
+        {val:g().streak+' pv',lbl:'Putki'},
+        {val:'Taso '+g().lvl,lbl:'Taso'}
+    ];
+    const colW=(W-72)/3;
+    stats.forEach((s,i)=>{
+        const cx=36+i*colW;
+        ctx.font='200 42px Inter,sans-serif';ctx.fillStyle='rgba(255,255,255,0.9)';
+        ctx.fillText(s.val,cx,barY+90);
+        ctx.font='500 10px Inter,sans-serif';ctx.fillStyle='rgba(255,255,255,0.35)';
+        ctx.letterSpacing='2px';ctx.fillText(s.lbl.toUpperCase(),cx,barY+112);ctx.letterSpacing='0px';
+    });
+ 
+    // Divider
+    ctx.strokeStyle='rgba(255,255,255,0.07)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(36,barY+130);ctx.lineTo(W-36,barY+130);ctx.stroke();
+ 
+    // Bottom info
+    ctx.font='300 12px Inter,sans-serif';ctx.fillStyle='rgba(255,255,255,0.35)';
+    const days='Päivä '+g().days+' matkalla';
+    ctx.fillText(days,36,barY+156);
+    ctx.fillStyle='rgba(255,255,255,0.18)';
+    ctx.fillText('muutoskone.fi',W-36-90,barY+156);
+ 
+    // Milestone dots bottom-right
+    const dotColors=['rgba(124,92,191,0.5)','rgba(5,159,191,0.6)','rgba(0,200,240,0.75)','rgba(0,200,240,0.9)','rgba(34,197,94,0.8)'];
+    MILESTONES.forEach((ms,i)=>{
+        const done=g().passedMilestones.includes(ms)||(ms===100&&g().total>=g().v);
+        const dx=W-36-((MILESTONES.length-i-1)*22);
+        ctx.beginPath();ctx.arc(dx,H-36,5,0,Math.PI*2);
+        ctx.fillStyle=done?dotColors[i]:'rgba(255,255,255,0.08)';ctx.fill();
+        if(done){ctx.strokeStyle=dotColors[i];ctx.lineWidth=1;ctx.stroke();}
+    });
+}
+ 
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();}
+ 
+function getShareBlob(cb){
+    const canvas=document.getElementById('shareCanvas');
+    canvas.toBlob(cb,'image/png',1.0);
+}
+async function doShare(){
+    const canvas=document.getElementById('shareCanvas');
+    canvas.toBlob(async blob=>{
+        const file=new File([blob],'muutoskone-edistyminen.png',{type:'image/png'});
+        const shareData={title:'Muutoskone — edistymiseni',text:`${g().goal} — ${Math.round((g().total/g().v)*100)}% valmis! 🔥 muutoskone.fi`,files:[file]};
+        if(navigator.share&&navigator.canShare&&navigator.canShare(shareData)){
+            try{await navigator.share(shareData);}
+            catch(e){if(e.name!=='AbortError')downloadShareImg();}
+        } else {downloadShareImg();}
+    },'image/png',1.0);
+}
+function downloadShareImg(){
+    const canvas=document.getElementById('shareCanvas');
+    const a=document.createElement('a');a.href=canvas.toDataURL('image/png',1.0);
+    a.download=`muutoskone-${g().goal.slice(0,20).replace(/\s/g,'-')}.png`;a.click();
+}
+ 
+/* ── DIFFICULTY GUIDE ── */
+let _diffCtx='setup';let _diffSelected=null;
+function openDiffGuide(ctx){
+    _diffCtx=ctx;_diffSelected=null;
+    // Highlight current selection
+    const cur=ctx==='setup'?document.getElementById('inV').value:document.getElementById('ngV').value;
+    document.querySelectorAll('.dg-tier').forEach(el=>{
+        const val=el.getAttribute('onclick').match(/'(\d+)'/)[1];
+        el.classList.toggle('selected',val===cur);
+    });
+    document.getElementById('diffGuideSelectBtn').style.display='none';
+    document.getElementById('diffGuideOverlay').classList.add('show');
+}
+function closeDiffGuide(){document.getElementById('diffGuideOverlay').classList.remove('show');}
+function selectDiffTier(el,val){
+    document.querySelectorAll('.dg-tier').forEach(t=>t.classList.remove('selected'));
+    el.classList.add('selected');_diffSelected=val;
+    document.getElementById('diffGuideSelectBtn').style.display='block';
+}
+function applyDiffTier(){
+    if(!_diffSelected)return;
+    const sel=_diffCtx==='setup'?document.getElementById('inV'):document.getElementById('ngV');
+    if(sel)sel.value=_diffSelected;
+    closeDiffGuide();
+}
+ 
+/* ── HELPERS ── */
 function escQ(s){return(s||'').replace(/'/g,"\\'");}
 function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
 function save(){try{localStorage.setItem('mk_v11',JSON.stringify(state));}catch(e){}}
