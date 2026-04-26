@@ -346,22 +346,22 @@
  
         /* ONBOARDING */
         #onboardingOverlay{z-index:9500;padding:32px 28px;}
-        .ob-progress{display:flex;gap:6px;margin-bottom:36px;}
+        .ob-progress{display:flex;gap:6px;margin-bottom:24px;}
         .ob-dot{width:20px;height:2px;border-radius:1px;background:rgba(255,255,255,0.12);transition:background 0.4s,width 0.4s;}
         .ob-dot.active{background:var(--cyan);width:28px;}
         .ob-dot.done{background:rgba(0,200,240,0.4);}
-        .ob-slides{width:100%;max-width:340px;overflow:hidden;position:relative;min-height:320px;}
+        .ob-slides{width:100%;max-width:340px;overflow:hidden;position:relative;min-height:280px;}
         .ob-slide{position:absolute;inset:0;opacity:0;transform:translateX(40px);transition:opacity 0.4s ease,transform 0.4s ease;pointer-events:none;display:flex;flex-direction:column;align-items:center;text-align:center;justify-content:center;}
         .ob-slide.active{opacity:1;transform:translateX(0);pointer-events:auto;}
         .ob-slide.exit{opacity:0;transform:translateX(-40px);}
-        .ob-icon{font-size:2.8rem;margin-bottom:18px;line-height:1;}
-        .ob-title{font-size:1.25rem;font-weight:300;color:var(--text-1);margin-bottom:12px;letter-spacing:-0.5px;}
-        .ob-body{font-size:13px;color:var(--text-2);line-height:1.75;font-weight:300;max-width:290px;}
+        .ob-icon{font-size:2.4rem;margin-bottom:12px;line-height:1;}
+        .ob-title{font-size:1.15rem;font-weight:300;color:var(--text-1);margin-bottom:10px;letter-spacing:-0.5px;}
+        .ob-body{font-size:12.5px;color:var(--text-2);line-height:1.65;font-weight:300;max-width:290px;}
         .ob-body strong{color:var(--cyan);font-weight:500;}
         .ob-body .hl-purple{color:#b09fe0;font-weight:500;}
         .ob-body .hl-green{color:var(--green);font-weight:500;}
         .ob-body .hl-orange{color:var(--orange);font-weight:500;}
-        .ob-nav{display:flex;gap:12px;margin-top:32px;width:100%;max-width:340px;align-items:center;}
+        .ob-nav{display:flex;gap:12px;margin-top:22px;width:100%;max-width:340px;align-items:center;}
         .ob-btn-skip{flex:1;background:transparent;border:none;color:var(--text-3);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;text-align:left;}
         .ob-btn-next{flex:2;background:transparent;border:1px solid var(--cyan-line);color:var(--text-1);padding:14px 20px;border-radius:12px;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background 0.2s;}
         .ob-btn-next:hover{background:var(--cyan-dim);}
@@ -391,46 +391,46 @@
         <div class="ob-slide active" data-slide="0">
             <div class="ob-icon">⚡</div>
             <div class="ob-title">Tervetuloa Muutoskoneeseen</div>
-            <div class="ob-body">Muutoskone on henkilökohtainen työkalu, joka perustuu <strong>XP:n-keräämiseen</strong> — eli samaan logiikkaan kuin videopeleissä, mutta sovellettuna oikeisiin tavoitteisiin.<br><br>Teet pieniä tekoja päivittäin ja kun ne kertyvät muutos on väistämätön! <br>  <br> Voit toteuttaa tällä koneella minkä tavoitteen tahansa.  </div>
+            <div class="ob-body">Muutoskone muuttaa <strong>minkä tahansa tavoitteen</strong> päivittäisiksi teoiksi — ja tekee edistymisestä näkyvää.<br><br>Halusit laihtua, oppia kielen, rakentaa yrityksen tai muuttaa elämäntapasi — logiikka on aina sama:<br><br><span style="color:var(--cyan);font-weight:500;">Pieniä tekoja. Päivä kerrallaan.</span></div>
         </div>
         <div class="ob-slide" data-slide="1">
             <div class="ob-icon">🎯</div>
             <div class="ob-title">Miten XP toimii?</div>
             <div class="ob-body">
-                <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-bottom:12px;">
+                Ansaitset jokaisella teolla pisteitä — XP:tä:<br><br>
+                <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-bottom:10px;">
                     <div class="ob-mini-xp"><span>1 XP</span> Mikrotehtävä</div>
                     <div class="ob-mini-xp"><span>5 XP</span> Harppaus</div>
                     <div class="ob-mini-xp"><span>20 XP</span> Panostus</div>
                     <div class="ob-mini-xp"><span>50 XP</span> Uroteko</div>
                 </div>
-               <br> <strong>XP</strong> mittaa edistystymistäsi kohti tavoitetta. <br> <br> <strong>Kertymäkerroin</strong> kasvaa päivittäin — päivänä 84 jokainen teko on 2× arvokkaampi. Jatkuvuus palkitaan konkreettisesti.
+                Mitä pidempään teet, sitä arvokkaampia pisteitä saat. Päivänä 84 jokainen teko on <strong>2× arvokkaampi</strong> kuin alussa.
             </div>
         </div>
         <div class="ob-slide" data-slide="2">
             <div class="ob-icon">🧠</div>
-            <div class="ob-title">Identiteetti ensin</div>
-            <div class="ob-body">Todellinen muutos ei synny tavoitteita tuijottamalla,<span class="hl-purple">vaan muuttamalla käsitystä itsestäsi.
-</span>.<br><br>Älä sano <em>"haluan juosta"</em>. Sano <span class="hl-purple">"Olen juoksija"</span>.<br><br>Muutoskone kirkastaa tätä kuvaa joka päivä.</div>
+            <div class="ob-title">Identiteetti — salaisin ase</div>
+            <div class="ob-body">Muutos ei pysy pelkällä tavoitteella. Se pysyy kun <span class="hl-purple">käsityksesi itsestäsi muuttuu.</span><br><br>Ei "haluan juosta" — vaan <span class="hl-purple">"Olen juoksija."</span><br>Ei "yritän kirjoittaa" — vaan <span class="hl-purple">"Olen kirjoittaja."</span><br><br>Muutoskone näyttää tämän lauseen sinulle joka päivä.</div>
         </div>
         <div class="ob-slide" data-slide="3">
             <div class="ob-icon">🔥</div>
-            <div class="ob-title">Aktiivisuusputki &amp; draivi</div>
-            <div class="ob-body"><span class="hl-orange">Aktiivisuusputki</span> lasketaan peräkkäisistä päivistä. Yksi ohitettu päivä viikossa ei nollaa putkea — sinulla on <strong>armopäivä</strong>.<br><br><span class="hl-green">Draivi-palkki</span> kertoo onko vauhti kiihtymässä vai hiipumassa.</div>
+            <div class="ob-title">Putki &amp; vauhti</div>
+            <div class="ob-body"><span class="hl-orange">Aktiivisuusputki</span> kasvaa joka päivä kun teet jotain — edes mikrotehtävän. Yksi ohitettu päivä viikossa ei nollaa putkea: sinulla on <strong>armopäivä</strong>.<br><br><span class="hl-green">Vauhti-palkki</span> kertoo onko tekemisesi kiihtymässä vai hiipumassa, niin tiedät milloin painaa kaasua.</div>
         </div>
         <div class="ob-slide" data-slide="4">
             <div class="ob-icon">📓</div>
-            <div class="ob-title">Reflektio juurruttaa muutoksen</div>
-            <div class="ob-body"><strong>Päivän intentio</strong> — kirjoita aamulla mitä teet tänään.<br><br><strong>Muistiinpanot</strong> — "mitä opin tänään?" Tallentuu päiväkohtaisesti.<br><br><strong>Maanantai-reflektio</strong> — paras asia viime viikolla. Muutos vaatii oivalluksia. Pysähtyminen onnistumisen äärelle opettaa aivoillesi, että uusi suuntasi on oikea.</div>
+            <div class="ob-title">Kirjaa — ja muutos jää</div>
+            <div class="ob-body"><strong>Aamuintentio</strong> — kirjoita yksi asia jonka teet tänään.<br><br><strong>Päivän muistiinpano</strong> — mitä opit, mikä toimi.<br><br><strong>Maanantai-reflektio</strong> — paras asia viime viikolla.<br><br>Pysähtyminen onnistumisen äärelle opettaa aivojasi, että uusi suunta on oikea.</div>
         </div>
         <div class="ob-slide" data-slide="5">
             <div class="ob-icon">📊</div>
-            <div class="ob-title">Näe edistymisesi</div>
-            <div class="ob-body"><strong>Aktiivisuuskartta</strong> — 126 päivän aktiivisuuskartta.<br><br><strong>Päiväkohtainen XP-tavoite</strong> — aseta oma tavoite ja seuraa miten se täyttyy.<br><br></div>
+            <div class="ob-title">Näe koko matkasi</div>
+            <div class="ob-body"><strong>126 päivän aktiivisuuskartta</strong> — näet kerralla koko historiasi.<br><br><strong>Päivätavoite</strong> — aseta oma XP-tavoite päivälle ja seuraa miten se täyttyy.<br><br><strong>Tasot</strong> — konkreettisia saavutuksia matkan varrella. Jokainen taso ansaitaan.</div>
         </div>
         <div class="ob-slide" data-slide="6">
             <div class="ob-icon">🚀</div>
-            <div class="ob-title">Olet valmis.</div>
-            <div class="ob-body">Kaikki data tallentuu <strong>vain omalle laitteellesi</strong>. Ei rekisteröitymistä, ei pilveä, ei mainoksia.<br><br>Täytä tavoite, identiteetti ja rutiinit. AI-työkalu auttaa sinua, jos olet epävarma.<br><br><span class="hl-green">Ensimmäinen teko on tärkein.</span></div>
+            <div class="ob-title">Valmis. Aloitetaan.</div>
+            <div class="ob-body">Seuraavaksi täytät:<br>1. Tavoitteesi<br>2. Identiteettisi — "Olen jo…"<br>3. Rutiinit — vähintään yksi jokaiselle tasolle<br><br>Epävarma? Tekoälyapuri auttaa löytämään sopivat arvot.<br><br><span class="hl-green">Ensimmäinen teko on tärkein.</span></div>
         </div>
     </div>
     <div class="ob-nav">
@@ -512,7 +512,7 @@
             <button class="btn-primary" onclick="addNewGoal()" style="flex:2;margin-top:0;">Lisää tavoite</button>
         </div>
         <div class="ng-divider"></div>
-        <div class="ng-label" style="margin-bottom:6px;">Epävarma parametreista?</div>
+        <div class="ng-label" style="margin-bottom:6px;">Epävarma vaikeusasteesta tai rutiineista?</div>
         <p class="ng-ai-hint">Kopioi strategiakehote, avaa <a href="https://gemini.google.com" target="_blank" style="color:var(--cyan);text-decoration:none;">Gemini</a> ja anna tekoälyn kalibroida ne.</p>
         <button class="btn-ai" id="copyNgAiBtn" onclick="copyNewGoalPrompt()">Kopioi strategiakehote tälle tavoitteelle</button>
     </div>
@@ -615,7 +615,7 @@
     <button class="btn-primary" onclick="start()">Käynnistä</button>
     <div class="card card-accent" style="margin-top:16px;">
         <div class="lbl"><span class="lbl-dot"></span>Strategia-apuri</div>
-        <p class="ai-desc">Epävarma parametreista? Tekoäly auttaa kalibroimaan ne tilanteesi pohjalta.</p>
+        <p class="ai-desc">Etkö ole varma siitä, minkä vaikeusasteen valitset tai millaisia rutiineja asetat? Tekoäly auttaa sinua löytämään sopivat arvot — se kysyy tilanteestasi ja tekee ehdotuksen juuri sinulle.</p>
         <ol class="ai-steps"><li>Kopioi kehote alla olevasta napista.</li><li>Avaa <a href="https://gemini.google.com" target="_blank">Gemini</a> ja liitä se sinne.</li><li>Palaa ja syötä AI:n ehdottamat arvot.</li></ol>
         <button class="btn-ai" id="copyAiBtn" onclick="copyAiPrompt()">Kopioi strategiakehote</button>
     </div>
@@ -965,9 +965,6 @@ function addNewGoal(){
     ng.r5=document.getElementById('ngR5').value.trim()||'Harppaus';
     ng.r20=document.getElementById('ngR20').value.trim()||'Panostus';
     ng.r50=document.getElementById('ngR50').value.trim()||'Uroteko';
-    ng.v=parseInt(document.getElementById('ngV').value)||5000;
-    ng.startDate=new Date().toISOString();
-    state.goals.push(ng);state.activeIdx=state.goals.length-1;
     closeNewGoal();save();render();
 }
  
@@ -1265,141 +1262,29 @@ function modifyGoalSettings(){
     if(vCh!==null){const idx=parseInt(vCh)-1;if(idx>=0&&idx<vK.length)g().v=parseInt(vK[idx]);}
     save();render();
 }
-function modifyRoutines(){[['1 XP — Mikrotehtävä (1–10 min)','r1'],['5 XP — Harppaus (15–30 min)','r5'],['20 XP — Panostus (45–90 min)','r20'],['50 XP — Uroteko (2–4 h)','r50']].forEach(([lbl,key])=>{const v=prompt(lbl,g()[key]);if(v!==null)g()[key]=v.trim()||g()[key];});save();updateUI();}
+function modifyRoutines(){[['1 XP — pienin teko (1–10 min)','r1'],['5 XP — päivittäinen toimenpide (15–30 min)','r5'],['20 XP — merkittävä suoritus (45–90 min)','r20'],['50 XP — päivän tärkein teko (2–4 h)','r50']].forEach(([lbl,key])=>{const v=prompt(lbl,g()[key]);if(v!==null)g()[key]=v.trim()||g()[key];});save();updateUI();}
 function closeVictory(){document.getElementById('victoryOverlay').style.display='none';g().done=true;save();}
 function resetCurrentGoal(){if(state.goals.length===1){if(confirm('Nollataan kaikki data?')){try{localStorage.removeItem('mk_v11');localStorage.removeItem('mk_draft');}catch(e){}location.reload();}}else{if(confirm(`Poistetaan tavoite "${g().goal}"?`)){state.goals.splice(state.activeIdx,1);state.activeIdx=Math.max(0,state.activeIdx-1);save();render();}}}
  
 /* PROMPTS */
-function getBaselinePart(){const bl=state.goals.length>0?g().baseline:draft.baseline;return bl?`\n\nLähtötilanne (käyttäjän itsensä kirjaama):\n"${bl}"`:''}
-function getIdentityAndWhyPart(){
-    const id=state.goals.length>0?g().identity:draft.identity;
-    const why=state.goals.length>0?g().why:draft.why;
-    let out='';
-    if(id) out+=`\nIdentiteetti: "${id}"`;
-    if(why) out+=`\nMiksi tämä on tärkeää: "${why}"`;
-    return out;
-}
-
+function getBaselinePart(){const bl=state.goals.length>0?g().baseline:draft.baseline;return bl?`\n\nLähtötilanne:\n"${bl}"`:''}
 function copyNewGoalPrompt(){
-    const goal=document.getElementById('ngGoal').value.trim()||'(ei vielä määritelty)';
-    const why=document.getElementById('ngWhy').value.trim();
-    const identity=document.getElementById('ngIdentity').value.trim();
-    const baseline=document.getElementById('ngBaseline').value.trim();
-    const contextParts=[];
-    if(identity) contextParts.push(`Identiteetti: "${identity}"`);
-    if(why) contextParts.push(`Miksi tämä on tärkeää: "${why}"`);
-    if(baseline) contextParts.push(`Lähtötilanne: "${baseline}"`);
-    const contextBlock=contextParts.length?'\n'+contextParts.join('\n'):'';
-    const txt=`Olet MUUTOSKONE-järjestelmän strateginen suunnittelija. Tehtäväsi on auttaa minua asettamaan tavoitteeni oikein — valitsemaan sopiva vaikeuskerroin ja rakentamaan toimivat rutiinit.
-
-JÄRJESTELMÄN LOGIIKKA:
-• Vaikeuskerroin = tavoitteesi kokonaiskoko XP:nä (ei tunteja, vaan sitoutumisen syvyys)
-  – 1 000 XP: Uusi tapa, nopea saavuttaa
-  – 5 000 XP: Merkittävä muutos (suosituin)
-  – 10 000 XP: Identiteettitason elämänmuutos
-  – 100 000 XP: Mestari — vuosien työ
-• Rutiinit ja niiden XP-arvot:
-  – 1 XP (Mikrotehtävä): 1–10 min, pienin mahdollinen teko
-  – 5 XP (Harppaus): 15–30 min, päivittäinen perusteko
-  – 20 XP (Panostus): 45–90 min, merkittävä suoritus
-  – 50 XP (Uroteko): 2–4 h, päivän tärkein panos
-• Kertymäkerroin kasvaa päivästä 1 → päivään 84 välillä ×1.0–×2.0. Jatkuvuus nopeuttaa matkaa konkreettisesti.
-
-MINUN TAVOITTEENI: ${goal}${contextBlock}
-
-TEHTÄVÄSI:
-Vaihe 1 — Kysy minulta täsmälleen yksi kysymys kerrallaan selvittääksesi tilanteeni (arjen resurssit, aiemmat yritykset, mitä "onnistuminen" tarkoittaa minulle). Odota vastaukseni ennen seuraavaa kysymystä.
-Vaihe 2 — Kun sinulla on riittävästi tietoa, tee analyysi:
-  a) Perustele vaikeuskerroin konkreettisesti tähän tavoitteeseen
-  b) Luo räätälöity rutiinikirjasto — nimeä jokainen rutiini täsmällisesti (esim. "Juokse 20 min aamulla" ei "Liikunta")
-  c) Laske realistinen aikajana kertymäkerroin huomioiden
-  d) Nimeä yksi kriittinen tekijä — se asia, joka todennäköisimmin ratkaisee onnistumiseni
-  e) Jos annoin identiteetin tai "miksi"-syyn, kommentoi lyhyesti sen voimaa
-
-Aloita vaiheesta 1. Esittele itsesi lyhyesti ja kysy ensimmäinen kysymys.`;
-    navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyNgAiBtn');b.innerText='Kopioitu ✓';setTimeout(()=>{b.innerText='Kopioi strategiakehote tälle tavoitteelle';},2500);});
+    const goal=document.getElementById('ngGoal').value.trim()||'(ei vielä)';const why=document.getElementById('ngWhy').value.trim();const baseline=document.getElementById('ngBaseline').value.trim();
+    const txt=`Olet MUUTOSKONE-järjestelmän strateginen suunnittelija.\n\nLogiikka:\n— 1 000 XP ≈ 100 h | 5 000 XP ≈ 500 h | 10 000 XP ≈ 1 000 h\n— Rutiinit: 1 XP (1–10 min), 5 XP (15–30 min), 20 XP (45–90 min), 50 XP (2–4 h)\n— Kertymäkerroin 1.0 → 2.0 päiville 1–84\n\nTavoitteeni: ${goal}${why?'\nMiksi: '+why:''}${baseline?'\nLähtötilanne: '+baseline:''}\n\nVaihe 1 — Kysy tarkentavia kysymyksiä yksi kerrallaan.\nVaihe 2 — Perustele vaikeuskerroin, luo rutiinikirjasto, laske aikajana.\n\nAloita vaiheesta 1.`;
+    navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyNgAiBtn');b.innerText='Kopioitu';setTimeout(()=>{b.innerText='Kopioi strategiakehote tälle tavoitteelle';},2200);});
 }
-
 function copyAiPrompt(){
-    const contextBlock=getIdentityAndWhyPart()+getBaselinePart();
-    const txt=`Olet MUUTOSKONE-järjestelmän strateginen suunnittelija. Tehtäväsi on auttaa minua rakentamaan täsmällinen, motivoiva polku tavoitteeni saavuttamiseen.
-
-JÄRJESTELMÄN LOGIIKKA:
-• Vaikeuskerroin = tavoitteesi kokonaiskoko XP:nä
-  – 1 000 XP: Uusi tapa, nopea saavuttaa
-  – 5 000 XP: Merkittävä muutos (suosituin)
-  – 10 000 XP: Identiteettitason elämänmuutos
-  – 100 000 XP: Mestari — vuosien työ
-• Rutiinit:
-  – 1 XP (Mikrotehtävä): 1–10 min
-  – 5 XP (Harppaus): 15–30 min
-  – 20 XP (Panostus): 45–90 min
-  – 50 XP (Uroteko): 2–4 h
-• Kertymäkerroin ×1.0 → ×2.0 päiville 1–84 — pitkäjänteisyys palkitaan konkreettisesti${contextBlock}
-
-TYYLISI: Ole suora ja rehellinen. Puhu kuin hyvä mentori — uskot minuun, kerrot totuuden, ja kannustat kun se on ansaittua. Älä kaunistele, mutta älä jähmety kylmäksi.
-
-TÄRKEÄÄ: Etene yksi askel kerrallaan. Esitä täsmälleen yksi kysymys kerrallaan ja odota vastaukseni.
-
-Vaihe 1 — Esittele itsesi lyhyesti. Kysy: mikä on tavoitteeni (jos et jo tiedä).
-Vaihe 2 — Kysy arjen realistiset resurssit: aika, energia, aiemmat yritykset.
-Vaihe 3 — Kysy: mitä "onnistuminen" tarkoittaa minulle konkreettisesti.
-Vaihe 4 — Tee kokonaisanalyysi:
-  a) Perustele vaikeuskerroin täsmällisesti tähän tavoitteeseen
-  b) Luo räätälöity rutiinikirjasto — nimeä rutiinit konkreettisesti (ei "liikunta" vaan "Juokse 20 min")
-  c) Laske realistinen aikajana kertymäkerroin huomioiden
-  d) Nimeä yksi kriittinen tekijä joka ratkaisee onnistumiseni
-  e) Sano yksi rehellinen, kannustava asia tavoitteestani
-
-Aloita vaiheesta 1.`;
-    navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyAiBtn');b.innerText='Kopioitu ✓';setTimeout(()=>{b.innerText='Kopioi strategiakehote';},2500);});
+    const txt=`Olet MUUTOSKONE-järjestelmän strateginen suunnittelija.\n\nLogiikka:\n— 1 000 XP ≈ 100 h | 5 000 XP ≈ 500 h | 10 000 XP ≈ 1 000 h | 100 000 XP ≈ 10 000 h\n— Rutiinit: 1 XP (1–10 min), 5 XP (15–30 min), 20 XP (45–90 min), 50 XP (2–4 h)\n— Kertymäkerroin 1.0 → 2.0 päiville 1–84${getBaselinePart()}\n\nEtene yksi askel kerrallaan.\n\nVaihe 1 — Esittele itsesi. Kysy tavoitteeni.\nVaihe 2 — Kysy arjen rajoitteet.\nVaihe 3 — Kysy realistinen päivittäinen XP-kapasiteetti.\nVaihe 4 — Vaikeuskerroin, rutiinikirjasto, aikajana, kriittinen muuttuja.\n\nAloita vaiheesta 1.`;
+    navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyAiBtn');b.innerText='Kopioitu';setTimeout(()=>{b.innerText='Kopioi strategiakehote';},2200);});
 }
-
 function copyMentorPrompt(){
-    const avg=g().days>0?Math.round(g().total/g().days):0;
-    const pct=g().v>0?((g().total/g().v)*100).toFixed(1):'0';
-    const today=getTodayStr();
-    const intentioTxt=(g().intentioDate===today&&g().intentioText)?g().intentioText:'ei asetettu';
-    const todayXP=g().weekLog[today]||0;
-    const momentum=calcMomentum();
+    const avg=g().days>0?Math.round(g().total/g().days):0;const pct=g().v>0?((g().total/g().v)*100).toFixed(1):'0';
+    const today=getTodayStr();const intentioTxt=(g().intentioDate===today&&g().intentioText)?g().intentioText:'ei asetettu';const todayXP=g().weekLog[today]||0;const momentum=calcMomentum();
     const todayNote=g().dayNotes&&g().dayNotes[today]?g().dayNotes[today]:'';
-    // Hae viimeisimmät muistiinpanot (max 3 päivää)
-    let recentNotes='';
-    if(g().dayNotes){
-        const keys=Object.keys(g().dayNotes).sort().reverse().slice(0,3);
-        if(keys.length) recentNotes='\n\nViimeisimmät päivän muistiinpanot:\n'+keys.map(k=>`  ${k}: "${g().dayNotes[k].slice(0,150)}"`).join('\n');
-    }
-    const identityLine=g().identity?`· Identiteetti: "${g().identity}"\n`:'';
-    const whyLine=g().why?`· Miksi tämä on tärkeää: "${g().why}"\n`:'';
-    const dgLine=g().dailyGoal?`· Päivätavoite: ${todayXP}/${g().dailyGoal} XP (${Math.round(todayXP/g().dailyGoal*100)}%)\n`:'';
-    const momentumLabel=momentum>=75?'kiihtyvä 🔥':momentum>=45?'vakaa':'hiipuva ⚠';
-    const txt=`Olet MUUTOSKONE-järjestelmän sparrauskumppani. Tehtäväsi on auttaa minua löytämään seuraava askel, pitämään motivaation yllä ja näkemään tilanteeni uudessa valossa.
-
-TÄMÄNHETKINEN DATANI:
-· Tavoite: ${g().goal}
-${identityLine}${whyLine}· Edistyminen: ${g().total.toLocaleString('fi-FI')} / ${g().v.toLocaleString('fi-FI')} XP (${pct}%)
-· Päivä: ${g().days} | Putki: ${g().streak} pv | Vauhti: ${momentum}% (${momentumLabel})
-${dgLine}· Keskitahti: ${avg} XP/pv | Tänään kerätty: ${todayXP} XP | Paras päivä: ${g().bestDay} XP
-· Kertymäkerroin nyt: ×${getMultiplier().toFixed(2)} (kasvaa päivään 84 asti, max ×2.00)
-· Tämän päivän intentio: "${intentioTxt}"${todayNote?'\n· Tänään kirjattu: "'+todayNote.slice(0,200)+'"':''}${recentNotes}${getBaselinePart()}
-
-RUTIININI:
-· 1 XP — Mikrotehtävä: ${g().r1}
-· 5 XP — Harppaus: ${g().r5}
-· 20 XP — Panostus: ${g().r20}
-· 50 XP — Uroteko: ${g().r50}
-
-TYYLISI: Ole lämmin mutta suora. Fokus eteenpäin — ei siihen mitä jäi tekemättä. Kun data näyttää hyvältä, sano se suoraan. Kun on parannettavaa, ehdota konkreettinen ratkaisu ilman syyllistämistä.
-
-TÄRKEÄÄ: Etene yksi askel kerrallaan. Odota vastaukseni ennen kuin jatkat seuraavaan kohtaan.
-
-1. Katso dataani. Kerro yksi asia joka erottuu positiivisesti — jotain mitä en ehkä itse huomaa. Kysy sitten: mikä tällä hetkellä tuntuu haastavimmalta, tai missä kaipaat eniten tukea?
-2. Kun olet saanut vastaukseni, anna 2–3 konkreettista ideaa seuraavaan askeleeseen. Räätälöi ne juuri minun rutiineihini ja tavoitteeseeni — ei geneerisiä neuvoja.
-3. Kommentoi vauhtiani (${momentum}% — ${momentumLabel}). Mitä se kertoo tilanteestani, ja miten voisin vaikuttaa siihen?
-4. Lopeta yhdellä lauseella joka jää mieleen.
-
-Aloita kohdasta 1.`;
-    navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyMentorBtn');b.innerText='Kopioitu ✓';setTimeout(()=>{b.innerText='Kopioi sparrauskehote';},2500);});
+    const identityLine=g().identity?`· Identiteetti: "${g().identity}"\n`:'';const whyLine=g().why?`· Miksi tämä on tärkeää: "${g().why}"\n`:'';
+    const dgLine=g().dailyGoal?`· Päivätavoite: ${todayXP}/${g().dailyGoal} XP\n`:'';
+    const txt=`Olet MUUTOSKONE-järjestelmän sparrauskumppani.\n\nTämänhetkinen datani:\n· Tavoite: ${g().goal}\n${identityLine}${whyLine}· Edistyminen: ${g().total.toLocaleString('fi-FI')} / ${g().v.toLocaleString('fi-FI')} XP (${pct}%)\n· Päivä: ${g().days} | Putki: ${g().streak} pv | Momentum: ${momentum}%\n${dgLine}· Keskitahti: ${avg} XP/pv | Tänään: ${todayXP} XP | Paras pv: ${g().bestDay} XP\n· Kertymäkerroin: ×${getMultiplier().toFixed(2)}\n· Tämän päivän intentio: "${intentioTxt}"${todayNote?'\n· Päivän muistiinpano: "'+todayNote.slice(0,200)+'"':''}${getBaselinePart()}\n\nTyylisi: Ole lämmin mutta suora. Fokus eteenpäin.\n\n1. Kerro yksi positiivinen asia datasta. Kysy: mikä tuntuu haastavimmalta?\n2. Anna 2–3 konkreettista ideaa seuraavaan askeleeseen.\n3. Kommentoi momentumia (${momentum}%).\n4. Lopeta yhdellä lauseella.\n\nAloita kohdasta 1.`;
+    navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyMentorBtn');b.innerText='Kopioitu';setTimeout(()=>{b.innerText='Kopioi sparrauskehote';},2200);});
 }
  
 /* ── SHARE / JAKAMINEN ── */
