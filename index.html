@@ -133,7 +133,22 @@
         .signal-card.info{background:rgba(0,200,240,0.06);border:1px solid rgba(0,200,240,0.18);color:rgba(0,200,240,0.8);}
         .signal-card.grace{background:rgba(124,92,191,0.08);border:1px solid rgba(124,92,191,0.25);color:rgba(168,139,220,0.9);}
         .signal-card.nudge{background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.22);color:rgba(34,197,94,0.85);cursor:pointer;}
-        .signal-card.danger{background:rgba(220,60,60,0.10);border:1px solid rgba(220,60,60,0.30);color:rgba(255,100,100,0.92);cursor:pointer;}
+        .signal-icon{font-size:16px;flex-shrink:0;}
+        .signal-card.danger{background:rgba(220,60,60,0.10);border:1px solid rgba(220,60,60,0.32);color:rgba(255,110,110,0.95);cursor:pointer;}
+
+        /* ETENEMISENNUSTE */
+        .forecast-bar{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin-bottom:9px;}
+        .forecast-label{font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;}
+        .forecast-val{font-size:12px;font-weight:400;color:var(--text-1);}
+        .forecast-date{font-size:11px;font-weight:300;color:var(--cyan);}
+
+        /* TERVEYSMITTARI */
+        .health-bar{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin-bottom:9px;}
+        .health-label{font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;flex-shrink:0;}
+        .health-track{flex:1;height:6px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden;}
+        .health-fill{height:100%;border-radius:3px;transition:width 0.8s ease,background 0.8s ease;}
+        .health-val{font-size:12px;font-weight:600;flex-shrink:0;min-width:32px;text-align:right;}
+        .health-tip{font-size:10px;color:var(--text-3);margin-top:3px;}
 
         /* VIIKKOVERTAILU */
         .week-compare-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 18px;margin-bottom:9px;display:none;}
@@ -142,27 +157,35 @@
         .wc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
         .wc-item{text-align:center;}
         .wc-val{font-size:16px;font-weight:300;color:var(--text-1);}
-        .wc-val.up{color:var(--green);}
-        .wc-val.down{color:var(--orange);}
         .wc-lbl{font-size:8px;color:var(--text-3);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
-        .wc-delta{font-size:10px;margin-top:2px;}
+        .wc-delta{font-size:10px;margin-top:3px;}
         .wc-delta.up{color:var(--green);}
         .wc-delta.down{color:var(--orange);}
+        .wc-delta.neutral{color:var(--text-3);}
+
+        /* RECOVERY ANALYYSI */
+        .recovery-pattern{background:rgba(249,115,22,0.06);border:1px solid rgba(249,115,22,0.15);border-radius:12px;padding:11px 16px;margin-bottom:9px;display:none;}
+        .recovery-pattern.show{display:block;}
+        .rp-label{font-size:9px;color:var(--orange);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+        .rp-text{font-size:12px;color:var(--text-2);line-height:1.55;}
+
+        /* ARMOPÄIVÄMUISTUTUS */
+        .grace-reminder{background:rgba(124,92,191,0.07);border:1px solid rgba(124,92,191,0.22);border-radius:12px;padding:10px 15px;margin-bottom:9px;display:none;font-size:12px;color:rgba(168,139,220,0.9);line-height:1.5;}
+        .grace-reminder.show{display:block;}
 
         /* OMAT VIRSTANPYLVÄÄT */
-        .milestone-editor{display:none;}
-        .milestone-editor.show{display:block;}
         .ms-custom-list{display:flex;flex-direction:column;gap:6px;margin-bottom:10px;}
         .ms-custom-item{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:9px;padding:8px 12px;}
-        .ms-custom-xp{font-size:10px;font-weight:600;color:var(--cyan);min-width:54px;flex-shrink:0;}
-        .ms-custom-name{font-size:12px;color:var(--text-2);flex:1;cursor:pointer;}
+        .ms-custom-xp{font-size:10px;font-weight:600;color:var(--cyan);min-width:58px;flex-shrink:0;}
+        .ms-custom-name{font-size:12px;color:var(--text-2);flex:1;}
         .ms-custom-name.done{color:var(--green);text-decoration:line-through;opacity:0.6;}
-        .ms-custom-check{font-size:14px;}
         .ms-add-row{display:flex;gap:6px;align-items:center;}
         .ms-add-input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:9px;padding:8px 12px;color:var(--text-1);font-size:12px;font-weight:300;outline:none;width:100%;font-family:inherit;}
         .ms-add-input::placeholder{color:var(--text-3);}
         .ms-add-btn{background:var(--cyan-dim);border:1px solid var(--cyan-line);color:var(--cyan);padding:8px 14px;border-radius:9px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;}
-        .signal-icon{font-size:16px;flex-shrink:0;}
+
+        /* RUTIINISUOSIKKI */
+        .routine-fav-badge{display:inline-block;background:rgba(0,200,240,0.10);border:1px solid rgba(0,200,240,0.22);border-radius:5px;padding:1px 6px;font-size:8px;color:var(--cyan);font-weight:600;letter-spacing:1px;margin-left:5px;vertical-align:middle;}
  
         /* WHY + QUOTE */
         .why-card{background:linear-gradient(135deg,rgba(124,92,191,0.08),rgba(0,200,240,0.03));border:1px solid rgba(124,92,191,0.22);border-radius:12px;padding:11px 16px;margin-bottom:9px;display:none;}
@@ -685,6 +708,8 @@
         <div class="sc-bottom">
             <div class="sb-item"><div class="sb-val" id="statAvg">—</div><div class="sb-lbl">XP / pv</div></div>
             <div class="sb-item"><div class="sb-val" id="statBest">—</div><div class="sb-lbl">Paras pv</div></div>
+            <div class="sb-item"><div class="sb-val" id="statBestStreak">—</div><div class="sb-lbl">Paras putki</div></div>
+            <div class="sb-item"><div class="sb-val" id="statWeekXP">—</div><div class="sb-lbl">Tällä vk</div></div>
         </div>
     </div>
  
@@ -697,6 +722,30 @@
         <div class="dg-track"><div class="dg-fill" id="dgFill" style="width:0%"></div></div>
     </div>
  
+    <!-- ETENEMISENNUSTE -->
+    <div class="forecast-bar" id="forecastBar">
+        <div>
+            <div class="forecast-label">Etenemisennuste</div>
+            <div class="forecast-date" id="forecastDate">—</div>
+        </div>
+        <div style="text-align:right;">
+            <div class="forecast-label">Tahdilla</div>
+            <div class="forecast-val" id="forecastPace">—</div>
+        </div>
+    </div>
+
+    <!-- TERVEYSMITTARI -->
+    <div style="margin-bottom:9px;">
+        <div class="health-bar">
+            <div class="health-label">Kunto</div>
+            <div style="flex:1;">
+                <div class="health-track"><div class="health-fill" id="healthFill"></div></div>
+                <div class="health-tip" id="healthTip"></div>
+            </div>
+            <div class="health-val" id="healthVal">—</div>
+        </div>
+    </div>
+
     <!-- MOMENTUM -->
     <div class="momentum-bar">
         <div class="momentum-label">Vauhti</div>
@@ -706,6 +755,8 @@
  
     <!-- SIGNAL + WHY + QUOTE -->
     <div class="signal-card" id="signalCard"><span class="signal-icon" id="signalIcon"></span><span id="signalText"></span></div>
+    <div class="grace-reminder" id="graceReminder"></div>
+    <div class="recovery-pattern" id="recoveryPattern"><div class="rp-label">Tunnistettu kaava</div><div class="rp-text" id="recoveryPatternText"></div></div>
     <div class="why-card" id="whyCard"><div class="why-label">Miksi tämä on tärkeää</div><div class="why-text" id="whyText"></div></div>
     <div class="quote-card" id="quoteCard" onclick="editQuote()" style="display:none;">
         <div class="quote-hint"><span>Oma muistutuksesi</span><span style="font-size:10px;color:var(--text-3);">✎</span></div>
@@ -767,31 +818,6 @@
         </div>
     </div>
  
-    <!-- VIIKKOVERTAILU -->
-    <div class="week-compare-card" id="weekCompareCard">
-        <div class="wc-header">Viikko sitten vs. nyt</div>
-        <div class="wc-grid">
-            <div class="wc-item"><div class="wc-val" id="wcXP">—</div><div class="wc-lbl">XP tällä vk</div><div class="wc-delta" id="wcXPDelta"></div></div>
-            <div class="wc-item"><div class="wc-val" id="wcAvg">—</div><div class="wc-lbl">Päivässä</div><div class="wc-delta" id="wcAvgDelta"></div></div>
-            <div class="wc-item"><div class="wc-val" id="wcStreak">—</div><div class="wc-lbl">Putki</div><div class="wc-delta" id="wcStreakNote"></div></div>
-        </div>
-    </div>
-
-    <!-- OMAT VIRSTANPYLVÄÄT -->
-    <div class="toggle-row" onclick="togglePanel('mseditor')">
-        <div class="toggle-row-lbl"><span class="lbl-dot"></span>Omat virstanpylväät<span class="toggle-preview" id="mseditorPreview"></span></div>
-        <span class="toggle-arrow" id="mseditorArrow">▾</span>
-    </div>
-    <div class="toggle-body milestone-editor" id="mseditorBody">
-        <div style="font-size:11px;color:var(--text-2);margin-bottom:10px;line-height:1.6;">Aseta välietappeja — konkreettisia palkintoja tai merkkipaaluja matkallasi.<br><em style="color:var(--text-3);">Esim: 1 000 XP → Ostan uudet juoksukengät.</em></div>
-        <div class="ms-custom-list" id="msCustomList"></div>
-        <div class="ms-add-row">
-            <input class="ms-add-input" type="number" id="msAddXP" placeholder="XP" min="1" style="max-width:78px;">
-            <input class="ms-add-input" type="text" id="msAddName" placeholder="Mitä saat tai teet tässä kohtaa?">
-            <button class="ms-add-btn" onclick="addCustomMilestone()">+ Lisää</button>
-        </div>
-    </div>
-
     <!-- STATS SHARE CARD -->
     <div class="stats-share-card" id="statsShareCard">
         <div class="ssc-header">
@@ -811,6 +837,31 @@
     </div>
  
     <!-- SPARRAUSKUMPPANI -->
+    <!-- VIIKKOVERTAILU -->
+    <div class="week-compare-card" id="weekCompareCard">
+        <div class="wc-header">Tämä viikko vs. edellinen viikko</div>
+        <div class="wc-grid">
+            <div class="wc-item"><div class="wc-val" id="wcXP">—</div><div class="wc-lbl">XP</div><div class="wc-delta" id="wcXPDelta"></div></div>
+            <div class="wc-item"><div class="wc-val" id="wcAvg">—</div><div class="wc-lbl">XP / pv</div><div class="wc-delta" id="wcAvgDelta"></div></div>
+            <div class="wc-item"><div class="wc-val" id="wcDays">—</div><div class="wc-lbl">Aktiivipv</div><div class="wc-delta" id="wcDaysDelta"></div></div>
+        </div>
+    </div>
+
+    <!-- OMAT VIRSTANPYLVÄÄT -->
+    <div class="toggle-row" onclick="togglePanel('mseditor')">
+        <div class="toggle-row-lbl"><span class="lbl-dot"></span>Omat virstanpylväät<span class="toggle-preview" id="mseditorPreview"></span></div>
+        <span class="toggle-arrow" id="mseditorArrow">▾</span>
+    </div>
+    <div class="toggle-body" id="mseditorBody">
+        <div style="font-size:11px;color:var(--text-2);margin-bottom:10px;line-height:1.6;">Aseta välietappeja — konkreettisia palkintoja tai merkkipaaluja matkallasi.<br><em style="color:var(--text-3);">Esim: 1 000 XP → Ostan uudet juoksukengät.</em></div>
+        <div class="ms-custom-list" id="msCustomList"></div>
+        <div class="ms-add-row">
+            <input class="ms-add-input" type="number" id="msAddXP" placeholder="XP" min="1" style="max-width:78px;">
+            <input class="ms-add-input" type="text" id="msAddName" placeholder="Mitä saat tai teet tässä kohtaa?">
+            <button class="ms-add-btn" onclick="addCustomMilestone()">+ Lisää</button>
+        </div>
+    </div>
+
     <div class="section-lbl">Sparrauskumppani</div>
     <div class="card card-accent">
         <p class="ai-desc">Tarvitsetko ideoita tai motivaatiobuustia? Kopioi kehote Geminille — datasi on mukana valmiiksi.</p>
@@ -864,15 +915,17 @@ const GOAL_TEMPLATE=()=>({
     r1:'',r5:'',r20:'',r50:'',
     v:5000,total:0,days:1,lvl:1,
     initialEstimate:null,lowestEstimate:null,
-    startDate:null,streak:0,lastActivityDate:null,graceDayUsed:null,
+    startDate:null,streak:0,bestStreak:0,lastActivityDate:null,graceDayUsed:null,
     lastXP:null,lastXPLabel:null,
-    weekLog:{},passedMilestones:[],bestDay:0,
+    weekLog:{},passedMilestones:[],bestDay:0,bestWeekXP:0,
+    routineCount:{r1:0,r5:0,r20:0,r50:0},
+    recoveryLog:[],
     customMilestones:[],
     intentioDate:null,intentioText:'',
     reflectionDate:null,reflectionText:'',
     recoveryShown:false,dayNotes:{},
-    dailyGoal:0,
-    intentioOpen:false,baselineOpen:false,daynoteOpen:false,mseditorOpen:false,done:false
+    dailyGoal:0,mseditorOpen:false,
+    intentioOpen:false,baselineOpen:false,daynoteOpen:false,done:false
 });
  
 let state={goals:[],activeIdx:0,quote:''};
@@ -889,7 +942,6 @@ function getISOWeekStr(){const d=new Date();d.setHours(0,0,0,0);const day=d.getD
 function migrateGoal(goal){
     if(!goal.weekLog)goal.weekLog={};
     if(!goal.passedMilestones)goal.passedMilestones=[];
-    if(!goal.customMilestones)goal.customMilestones=[];
     if(!goal.why)goal.why='';
     if(!goal.identity)goal.identity='';
     if(goal.graceDayUsed===undefined)goal.graceDayUsed=null;
@@ -899,6 +951,12 @@ function migrateGoal(goal){
     if(goal.recoveryShown===undefined)goal.recoveryShown=false;
     if(goal.daynoteOpen===undefined)goal.daynoteOpen=false;
     if(!goal.dailyGoal)goal.dailyGoal=0;
+    if(!goal.bestStreak)goal.bestStreak=goal.streak||0;
+    if(!goal.bestWeekXP)goal.bestWeekXP=0;
+    if(!goal.routineCount)goal.routineCount={r1:0,r5:0,r20:0,r50:0};
+    if(!goal.recoveryLog)goal.recoveryLog=[];
+    if(!goal.customMilestones)goal.customMilestones=[];
+    if(!goal.mseditorOpen)goal.mseditorOpen=false;
     goal.lvl=getLevelForXP(goal.total);
 }
  
@@ -1149,21 +1207,15 @@ function updateSignal(){
     const card=document.getElementById('signalCard'),icon=document.getElementById('signalIcon'),text=document.getElementById('signalText');
     const today=getTodayStr();const todayXP=g().weekLog[today]||0;const hour=new Date().getHours();
     const avg=g().days>0?Math.round(g().total/g().days):0;const thisWeek=getISOWeekStr();
-    card.className='signal-card';icon.innerText='';text.innerText='';card.onclick=null;
-
+    card.className='signal-card';icon.innerText='';text.innerText='';
     if(g().streak===0&&g().lastActivityDate&&g().lastActivityDate!==today&&g().total>0){
         card.classList.add('show','warning');icon.innerText='—';
         text.innerText='Putki katkesi. Se käy kaikille. Tärkeintä on mitä teet seuraavaksi.';
     } else if(g().graceDayUsed===thisWeek&&g().lastActivityDate!==today&&g().streak>0){
         card.classList.add('show','grace');icon.innerText='○';
         text.innerText=`Armopäivä käytetty — putki (${g().streak} pv) jatkuu. Tee jotain tänään.`;
-    } else if(hour>=20&&todayXP===0&&g().streak>0&&g().total>0){
-        // STREAK-VAARA — klo 20+ ei mitään tehty, putki katkeaa yöllä
-        card.classList.add('show','danger');icon.innerText='!';
-        const streakTxt=g().streak>1?`${g().streak} päivän putki`:'aloittamasi putki';
-        text.innerHTML=`${streakTxt} katkeaa tänään yöllä — tee edes tämä nyt: <strong>${escHtml(g().r1||'mikrotehtävä')}</strong>`;
-        card.onclick=()=>{const btn=document.querySelector('.rbtn-1');if(btn)btn.click();};
     } else if(hour>=19&&todayXP===0&&g().total>0&&g().r1){
+        // SMART NUDGE — klo 19+ ei mitään tehty, ehdota pienintä tekoa
         card.classList.add('show','nudge');icon.innerText='→';
         text.innerHTML=`Ei vielä yhtään XP:tä. Tee edes tämä: <strong>${escHtml(g().r1)}</strong> — se vie alle 10 min.`;
         card.onclick=()=>{const btn=document.querySelector('.rbtn-1');if(btn)btn.click();};
@@ -1173,7 +1225,7 @@ function updateSignal(){
     } else if(todayXP>=avg&&todayXP>0&&avg>0){
         card.classList.add('show','info');icon.innerText='↑';
         text.innerText=`${todayXP} XP tänään — yli päivittäisen keskiarvosi. Hyvä.`;
-    }
+    } else {card.onclick=null;}
     const bt=document.getElementById('baselineToggleRow');if(bt)bt.style.display=(g().baseline&&g().baseline.trim())?'':'none';
 }
  
@@ -1198,7 +1250,14 @@ function checkRecovery(){
     }
     if(g().streak>0)g().recoveryShown=false;
 }
-function saveRecovery(){document.getElementById('recoveryOverlay').style.display='none';save();}
+function saveRecovery(){
+    const txt=document.getElementById('recoveryInput').value.trim();
+    if(!g().recoveryLog)g().recoveryLog=[];
+    g().recoveryLog.push({date:getTodayStr(),text:txt});
+    if(g().recoveryLog.length>30)g().recoveryLog=g().recoveryLog.slice(-30);
+    document.getElementById('recoveryOverlay').style.display='none';
+    save();updateRecoveryPattern();
+}
 function skipRecovery(){document.getElementById('recoveryOverlay').style.display='none';}
  
 /* WEEKLY REFLECTION */
@@ -1231,8 +1290,8 @@ function start(){
 function render(){
     document.getElementById('viewSetup').style.display='none';document.getElementById('viewGame').style.display='block';
     renderTabs();document.getElementById('txtGoal').innerText=g().goal.toUpperCase();document.getElementById('txtV').innerText=`${g().v.toLocaleString('fi-FI')} XP`;
-    initIntentio();initBaseline();initQuote();initWhy();initIdentity();initDaynote();initCustomMilestones();
-    updateUI();checkWeeklyReflection();checkRecovery();
+    initIntentio();initBaseline();initQuote();initWhy();initIdentity();initDaynote();
+    updateUI();checkWeeklyReflection();checkRecovery();initCustomMilestones();
 }
 function getMultiplier(){return 1+(Math.min(g().days,84)-1)/83;}
 function calculateDaysToGoal(){if(g().total>=g().v)return 0;if(!g().total||!g().days)return null;const avg=g().total/g().days;if(avg<=0)return null;return Math.ceil((g().v-g().total)/avg);}
@@ -1250,7 +1309,12 @@ function addXP(baseAmt,label,e){
         else if(g().lastActivityDate===getDateStr(twoAgo)&&g().graceDayUsed!==thisWeek){g().graceDayUsed=thisWeek;g().streak++;showToast('Armopäivä ✓ — putki jatkuu');}
         else g().streak=1;
         g().lastActivityDate=today;g().recoveryShown=false;
+        if(g().streak>g().bestStreak)g().bestStreak=g().streak;
     }
+    // Rutiinilaskuri
+    const rkey=baseAmt===1?'r1':baseAmt===5?'r5':baseAmt===20?'r20':'r50';
+    if(!g().routineCount)g().routineCount={r1:0,r5:0,r20:0,r50:0};
+    g().routineCount[rkey]=(g().routineCount[rkey]||0)+1;
     const fly=document.createElement('div');fly.className='xp-fly';fly.innerText=`+${finalAmt}`;fly.style.cssText=`left:${e.clientX-20}px;top:${e.clientY-20}px;`;document.body.appendChild(fly);setTimeout(()=>fly.remove(),800);
     if(baseAmt===50)spawnParticles(e.clientX,e.clientY);
     const btn=e.currentTarget;if(btn){btn.classList.remove('flash');void btn.offsetWidth;btn.classList.add('flash');}
@@ -1287,12 +1351,28 @@ function updateUI(){
     const multi=getMultiplier(),avg=g().days>0?Math.round(g().total/g().days):0;const pct=g().v>0?(g().total/g().v)*100:0;const pctStr=pct<10?pct.toFixed(1)+'%':Math.round(pct)+'%';
     document.getElementById('multNum').innerText=`×${multi.toFixed(2)}`;document.getElementById('streakNum').innerText=g().streak;document.getElementById('valLvl').innerText=g().lvl;document.getElementById('valDays').innerText=g().days;document.getElementById('pctVal').innerText=pctStr;document.getElementById('xpDisplay').innerText=`${g().total.toLocaleString('fi-FI')} XP`;
     const lvlProg=getLevelProgress(g().total);document.getElementById('barXP').style.width=`${lvlProg.pct*100}%`;const nextLbl=document.getElementById('lvlNextLabel');if(nextLbl)nextLbl.innerText=`→ ${lvlProg.nextAt.toLocaleString('fi-FI')} XP`;
-    document.getElementById('statAvg').innerText=avg||'—';document.getElementById('statBest').innerText=g().bestDay||'—';
     let dv='—';if(g().total>=g().v){dv='0';}else{const est=calculateDaysToGoal();if(est!==null)dv=String(g().lowestEstimate!==null?Math.min(est,g().lowestEstimate):est);}document.getElementById('valM').innerText=dv;
     MILESTONES.forEach(ms=>{const el=document.getElementById(`ms${ms}`),lbl=document.getElementById(`mslbl${ms}`);if(!el)return;if(g().passedMilestones.includes(ms)||(ms===100&&g().total>=g().v)){el.className='ms done';if(lbl)lbl.className='ms-lbl done-lbl';}else if(pct>=ms*0.75){el.className='ms near';}else{el.className='ms';}});
     const levels=[{base:1,name:g().r1,cls:'rbtn-1',dot:'rdot-1',xpCls:'rxp-1'},{base:5,name:g().r5,cls:'rbtn-5',dot:'rdot-5',xpCls:'rxp-5'},{base:20,name:g().r20,cls:'rbtn-20',dot:'rdot-20',xpCls:'rxp-20'},{base:50,name:g().r50,cls:'rbtn-50',dot:'rdot-50',xpCls:'rxp-50'}];
     document.getElementById('taskList').innerHTML=levels.map(l=>{const xp=Math.round(l.base*multi);return`<button class="rbtn ${l.cls}" onclick="addXP(${l.base},'${escQ(l.name)}',event)"><div class="rbtn-inner"><div class="rbtn-left"><span class="rbtn-dot ${l.dot}"></span><div class="rbtn-text"><span class="rbtn-name">${l.name}</span><span class="rbtn-min"><span style="color:var(--cyan);opacity:0.7;font-weight:500;">${XP_LABELS[l.base]}</span> · ${MINS[l.base]}</span></div></div><span class="rbtn-xp ${l.xpCls}">+${xp}</span></div></button>`;}).join('');
-    renderHeatmap();updateSignal();updateMomentum();renderTabs();initDailyGoal();updateWeekCompare();
+    renderHeatmap();updateSignal();updateMomentum();renderTabs();initDailyGoal();
+    // Uudet ominaisuudet
+    document.getElementById('statAvg').innerText=avg||'—';
+    document.getElementById('statBest').innerText=g().bestDay||'—';
+    const bsEl=document.getElementById('statBestStreak');if(bsEl)bsEl.innerText=(g().bestStreak||g().streak||0)+' pv';
+    const wkEl=document.getElementById('statWeekXP');if(wkEl)wkEl.innerText=getWeekXP(0).total||'—';
+    updateForecast();updateHealth();updateWeekCompare();updateGraceReminder();updateRecoveryPattern();
+    // Kertymäkerroin countdown päivässä maaliin -lukuun
+    const cdEl=document.getElementById('lvlNextLabel');
+    if(cdEl){
+        const cd=getMultiplierCountdown();
+        const lvlProg2=getLevelProgress(g().total);
+        cdEl.innerText=cd?`→ ${lvlProg2.nextAt.toLocaleString('fi-FI')} XP  ·  ×2.00 ${cd} pv`:lvlProg2.nextAt>0?`→ ${lvlProg2.nextAt.toLocaleString('fi-FI')} XP`:'';
+    }
+    // Rutiinisuosikki badge
+    const fav=getFavouriteRoutine();
+    document.querySelectorAll('.routine-fav-badge').forEach(b=>b.remove());
+    if(fav){const map={r1:0,r5:1,r20:2,r50:3};const btns=document.querySelectorAll('.rbtn');const idx=map[fav];if(btns[idx]){const badge=document.createElement('span');badge.className='routine-fav-badge';badge.innerText='SUOSIKKI';btns[idx].querySelector('.rbtn-name').appendChild(badge);}}
 }
  
 /* LEVEL-UP OVERLAY */
@@ -1487,60 +1567,165 @@ function applyDiffTier(){
     closeDiffGuide();
 }
  
-/* ── VIIKKOVERTAILU ── */
-function updateWeekCompare(){
-    const card=document.getElementById('weekCompareCard');
-    if(!card)return;
-    const now=new Date();now.setHours(0,0,0,0);
-    // Tämä viikko (ma–tänään)
-    let thisWkXP=0,thisWkDays=0;
-    for(let i=0;i<7;i++){const d=new Date(now);d.setDate(d.getDate()-i);const v=g().weekLog[getDateStr(d)]||0;if(v>0)thisWkDays++;thisWkXP+=v;}
-    // Viime viikko (sama 7 pv, mutta -7 päivää taaksepäin)
-    let lastWkXP=0,lastWkDays=0;
-    for(let i=7;i<14;i++){const d=new Date(now);d.setDate(d.getDate()-i);const v=g().weekLog[getDateStr(d)]||0;if(v>0)lastWkDays++;lastWkXP+=v;}
-    // Näytetään vain jos on dataa
-    if(thisWkXP===0&&lastWkXP===0){card.classList.remove('show');return;}
-    card.classList.add('show');
-    // XP
-    const xcEl=document.getElementById('wcXP');const xdEl=document.getElementById('wcXPDelta');
-    if(xcEl)xcEl.innerText=thisWkXP;
-    if(xdEl){const diff=thisWkXP-lastWkXP;xdEl.innerText=diff>=0?`+${diff} vs. viime vk`:`${diff} vs. viime vk`;xdEl.className='wc-delta '+(diff>=0?'up':'down');}
-    // Päivässä
-    const acEl=document.getElementById('wcAvg');const adEl=document.getElementById('wcAvgDelta');
-    const thisAvg=thisWkDays>0?Math.round(thisWkXP/thisWkDays):0;
-    const lastAvg=lastWkDays>0?Math.round(lastWkXP/lastWkDays):0;
-    if(acEl)acEl.innerText=thisAvg||'—';
-    if(adEl){const diff=thisAvg-lastAvg;adEl.innerText=lastAvg>0?(diff>=0?`+${diff}`:String(diff)):'';adEl.className='wc-delta '+(diff>=0?'up':'down');}
-    // Putki
-    const scEl=document.getElementById('wcStreak');const snEl=document.getElementById('wcStreakNote');
-    if(scEl)scEl.innerText=g().streak+' pv';
-    if(snEl){const bs=g().bestStreak||g().streak;snEl.innerText=bs>0?`ennätys ${bs} pv`:'';snEl.className='wc-delta info';}
+/* ── 1. ETENEMISENNUSTE ── */
+function updateForecast(){
+    const bar=document.getElementById('forecastBar');
+    const dateEl=document.getElementById('forecastDate');
+    const paceEl=document.getElementById('forecastPace');
+    if(!bar||!dateEl||!paceEl)return;
+    if(g().total>=g().v){dateEl.innerText='Tavoite saavutettu ✓';paceEl.innerText='';return;}
+    const avg=g().days>0?g().total/g().days:0;
+    if(avg<=0){dateEl.innerText='Lisää dataa';paceEl.innerText='';return;}
+    const daysLeft=Math.ceil((g().v-g().total)/avg);
+    const arrival=new Date();arrival.setDate(arrival.getDate()+daysLeft);
+    const opts={day:'numeric',month:'long',year:'numeric'};
+    dateEl.innerText=arrival.toLocaleDateString('fi-FI',opts);
+    paceEl.innerText=Math.round(avg)+' XP/pv';
 }
 
-/* ── OMAT VIRSTANPYLVÄÄT ── */
+/* ── 2. TERVEYSMITTARI (0–100) ──
+   Painotus: tahti 35%, putki 25%, viikkokate 25%, reflektiot 15% */
+function calcHealth(){
+    const avg=g().days>0?g().total/g().days:0;
+    const today=getTodayStr();
+    // Tahti: onko tänään kerätty suhteessa keskiarvoon
+    const todayXP=g().weekLog[today]||0;
+    const paceScore=avg>0?Math.min(todayXP/avg,1)*100:0;
+    // Putki
+    const streakScore=Math.min(g().streak/21,1)*100;
+    // Viikkoaktiivisuus: aktiivipäivät viimeisen 7 pv:n aikana
+    let activeDays=0;
+    for(let i=0;i<7;i++){const d=new Date();d.setDate(d.getDate()-i);if((g().weekLog[getDateStr(d)]||0)>0)activeDays++;}
+    const coverScore=(activeDays/7)*100;
+    // Reflektioita: intentio tänään + viikkorefletkio
+    let reflScore=0;
+    if(g().intentioDate===today&&g().intentioText)reflScore+=50;
+    if(g().reflectionDate)reflScore+=50;
+    const total=Math.round(paceScore*0.35+streakScore*0.25+coverScore*0.25+reflScore*0.15);
+    return{score:Math.min(total,100),paceScore,streakScore,coverScore,reflScore};
+}
+function updateHealth(){
+    const fill=document.getElementById('healthFill');
+    const val=document.getElementById('healthVal');
+    const tip=document.getElementById('healthTip');
+    if(!fill||!val||!tip)return;
+    if(g().total===0){fill.style.width='0%';val.innerText='—';tip.innerText='Aloita kerääminen';return;}
+    const {score,paceScore,streakScore,coverScore}=calcHealth();
+    fill.style.width=score+'%';
+    val.innerText=score;
+    let color,label;
+    if(score>=80){color='#22c55e';label='Loistavaa — jatka samaan tahtiin';}
+    else if(score>=60){color='var(--cyan)';label='Hyvässä vauhdissa';}
+    else if(score>=40){color='var(--orange)';label='Vaatii huomiota';}
+    else{color='rgba(220,60,60,0.8)';label='Tavoite tarvitsee rakkautta';}
+    fill.style.background=color;val.style.color=color;
+    // Pahin heikkous
+    const weakest=Math.min(paceScore,streakScore,coverScore);
+    let weak='';
+    if(weakest===paceScore&&paceScore<60)weak=' · Tee jotain vielä tänään';
+    else if(weakest===streakScore&&streakScore<60)weak=` · Rakenna putkea`;
+    else if(weakest===coverScore&&coverScore<60)weak=' · Useampi päivä aktiivisena';
+    tip.innerText=label+weak;
+}
+
+/* ── 3. VIIKKOVERTAILU ── */
+function getWeekXP(offsetWeeks){
+    const now=new Date();now.setHours(0,0,0,0);
+    let total=0,days=0;
+    const start=offsetWeeks*7;
+    for(let i=start;i<start+7;i++){const d=new Date(now);d.setDate(d.getDate()-i);const v=g().weekLog[getDateStr(d)]||0;total+=v;if(v>0)days++;}
+    return{total,days,avg:days>0?Math.round(total/days):0};
+}
+function updateWeekCompare(){
+    const card=document.getElementById('weekCompareCard');if(!card)return;
+    const thisW=getWeekXP(0),lastW=getWeekXP(1);
+    if(thisW.total===0&&lastW.total===0){card.classList.remove('show');return;}
+    card.classList.add('show');
+    function setWC(valId,deltaId,val,delta,suffix){
+        const ve=document.getElementById(valId),de=document.getElementById(deltaId);
+        if(ve)ve.innerText=(val||'0')+(suffix||'');
+        if(de){if(delta>0){de.innerText='+'+delta;de.className='wc-delta up';}
+               else if(delta<0){de.innerText=String(delta);de.className='wc-delta down';}
+               else{de.innerText='sama';de.className='wc-delta neutral';}}
+    }
+    setWC('wcXP','wcXPDelta',thisW.total,thisW.total-lastW.total,' XP');
+    setWC('wcAvg','wcAvgDelta',thisW.avg,thisW.avg-lastW.avg,' XP/pv');
+    setWC('wcDays','wcDaysDelta',thisW.days,thisW.days-lastW.days,' pv');
+}
+
+/* ── 4. ARMOPÄIVÄMUISTUTUS (sunnuntai) ── */
+function updateGraceReminder(){
+    const el=document.getElementById('graceReminder');if(!el)return;
+    const now=new Date();
+    const isSunday=now.getDay()===0;
+    const thisWeek=getISOWeekStr();
+    const graceUnused=g().graceDayUsed!==thisWeek;
+    const today=getTodayStr();
+    const todayXP=g().weekLog[today]||0;
+    if(isSunday&&graceUnused&&g().streak>0&&todayXP===0&&g().total>0){
+        el.className='grace-reminder show';
+        el.innerText=`Armopäivää ei ole käytetty tällä viikolla. Jos teet edes mikrotehtävän tänään, pidät putken (${g().streak} pv) ehjänä ja säästät armopäivän seuraavalle viikolle.`;
+    } else {el.className='grace-reminder';}
+}
+
+/* ── 5. RECOVERY-ANALYYSI ── */
+function updateRecoveryPattern(){
+    const el=document.getElementById('recoveryPattern');
+    const textEl=document.getElementById('recoveryPatternText');
+    if(!el||!textEl)return;
+    const logs=g().recoveryLog||[];
+    if(logs.length<2){el.classList.remove('show');return;}
+    // Laske mikä viikonpäivä lipsahdukset tapahtuvat
+    const dayCounts={0:0,1:0,2:0,3:0,4:0,5:0,6:0};
+    const dayNames=['sunnuntaisin','maanantaisin','tiistaisin','keskiviikkoisin','torstaisin','perjantaisin','lauantaisin'];
+    logs.forEach(log=>{if(log.date){const d=new Date(log.date);dayCounts[d.getDay()]++;}});
+    const maxDay=Object.entries(dayCounts).sort((a,b)=>b[1]-a[1])[0];
+    if(maxDay[1]>=2){
+        el.classList.add('show');
+        textEl.innerText=`Putkesi on katkennut useimmiten ${dayNames[maxDay[0]]}. Varaudu siihen etukäteen — suunnittele ${dayNames[maxDay[0]]} mikrotehtävä valmiiksi.`;
+    } else {el.classList.remove('show');}
+}
+
+/* ── 6. KERTYMÄKERTOIMEN COUNTDOWN ── */
+function getMultiplierCountdown(){
+    if(g().days>=84)return null;
+    return 84-g().days;
+}
+
+/* ── 7. OMAT VIRSTANPYLVÄÄT ── */
 function initCustomMilestones(){
     if(!g().customMilestones)g().customMilestones=[];
     const body=document.getElementById('mseditorBody');
     const arrow=document.getElementById('mseditorArrow');
     if(body)body.classList.toggle('open',!!g().mseditorOpen);
     if(arrow)arrow.classList.toggle('open',!!g().mseditorOpen);
-    const prev=document.getElementById('mseditorPreview');
-    if(prev){const done=g().customMilestones.filter(m=>g().total>=m.xp).length;const total=g().customMilestones.length;prev.innerText=total>0?`${done}/${total} saavutettu`:'';}
+    updateMsPreview();
     if(g().mseditorOpen)renderCustomMilestones();
     checkCustomMilestones();
 }
+function updateMsPreview(){
+    const prev=document.getElementById('mseditorPreview');
+    if(!prev)return;
+    const ms=g().customMilestones||[];
+    if(!ms.length){prev.innerText='';return;}
+    const done=ms.filter(m=>g().total>=m.xp).length;
+    prev.innerText=`${done}/${ms.length} saavutettu`;
+}
 function renderCustomMilestones(){
     const list=document.getElementById('msCustomList');if(!list)return;
-    const ms=g().customMilestones||[];
-    if(!ms.length){list.innerHTML='<div style="font-size:11px;color:var(--text-3);padding:4px 0;">Ei vielä virstanpylväitä. Lisää ensimmäinen alta.</div>';return;}
-    ms.sort((a,b)=>a.xp-b.xp);
+    const ms=(g().customMilestones||[]).slice().sort((a,b)=>a.xp-b.xp);
+    if(!ms.length){list.innerHTML='<div style="font-size:11px;color:var(--text-3);padding:4px 0;">Ei vielä virstanpylväitä.</div>';return;}
     list.innerHTML=ms.map((m,i)=>{
         const done=g().total>=m.xp;
+        const pct=Math.min(100,Math.round(g().total/m.xp*100));
         return `<div class="ms-custom-item">
             <div class="ms-custom-xp">${m.xp.toLocaleString('fi-FI')} XP</div>
-            <div class="ms-custom-name${done?' done':''}">${escHtml(m.name)}</div>
-            <span class="ms-custom-check">${done?'✓':'○'}</span>
-            <span onclick="removeCustomMilestone(${i})" style="font-size:11px;color:var(--text-3);cursor:pointer;margin-left:4px;">✕</span>
+            <div style="flex:1;">
+                <div class="ms-custom-name${done?' done':''}">${escHtml(m.name)}</div>
+                ${!done?`<div style="height:2px;background:rgba(255,255,255,0.07);border-radius:1px;margin-top:4px;overflow:hidden;"><div style="height:100%;width:${pct}%;background:var(--grad);border-radius:1px;"></div></div>`:''}
+            </div>
+            <span style="font-size:13px;margin:0 4px;">${done?'✓':'○'}</span>
+            <span onclick="removeCustomMilestone(${i})" style="font-size:11px;color:var(--text-3);cursor:pointer;">✕</span>
         </div>`;
     }).join('');
 }
@@ -1551,20 +1736,17 @@ function addCustomMilestone(){
     if(!g().customMilestones)g().customMilestones=[];
     g().customMilestones.push({xp,name,shown:false});
     xpEl.value='';nameEl.value='';
-    save();renderCustomMilestones();
-    const prev=document.getElementById('mseditorPreview');
-    if(prev){const done=g().customMilestones.filter(m=>g().total>=m.xp).length;prev.innerText=`${done}/${g().customMilestones.length} saavutettu`;}
+    save();renderCustomMilestones();updateMsPreview();
 }
 function removeCustomMilestone(idx){
-    g().customMilestones.splice(idx,1);save();renderCustomMilestones();
+    g().customMilestones.splice(idx,1);save();renderCustomMilestones();updateMsPreview();
 }
 function checkCustomMilestones(){
     if(!g().customMilestones||!g().customMilestones.length)return;
     for(const m of g().customMilestones){
         if(g().total>=m.xp&&!m.shown){
             m.shown=true;save();
-            // Näytetään milestone overlaylla
-            document.getElementById('msKicker').innerText='Oma virstanpylväs saavutettu';
+            document.getElementById('msKicker').innerText='Oma virstanpylväs';
             document.getElementById('msTitle').innerText=m.xp.toLocaleString('fi-FI')+' XP';
             document.getElementById('msSub').innerText=m.name;
             document.getElementById('milestoneOverlay').style.display='flex';
@@ -1572,6 +1754,15 @@ function checkCustomMilestones(){
             break;
         }
     }
+}
+
+/* ── 8. RUTIINISUOSIKKI ── */
+function getFavouriteRoutine(){
+    const counts=g().routineCount||{r1:0,r5:0,r20:0,r50:0};
+    const keys=['r1','r5','r20','r50'];
+    const max=Math.max(...keys.map(k=>counts[k]||0));
+    if(max<3)return null;
+    return keys.find(k=>(counts[k]||0)===max)||null;
 }
 
 /* ── HELPERS ── */
