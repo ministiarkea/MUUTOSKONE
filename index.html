@@ -545,7 +545,7 @@
     <div class="ng-card">
         <div class="ng-title">Uusi tavoite</div>
         <div class="ng-section"><div class="ng-label">Tavoite</div><div class="ng-input"><input type="text" id="ngGoal" placeholder="Mitä haluat saavuttaa?"></div></div>
-        <div class="ng-section"><div class="ng-label">Identiteetti <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div><div class="ng-input"><input type="text" id="ngIdentity" placeholder="Olen jo… (esim. Olen juoksija)"></div></div>
+        <div class="ng-section"><div class="ng-label">Identiteetti <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span> <button onclick="openIdentityGuide()" style="background:rgba(124,92,191,0.12);border:1px solid rgba(124,92,191,0.3);color:var(--purple);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:4px;">?</button></div><div class="ng-input"><input type="text" id="ngIdentity" placeholder="Olen jo… (esim. Olen juoksija)"></div></div>
         <div class="ng-section"><div class="ng-label">Miksi tämä on tärkeää? <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div><div class="ng-input"><textarea id="ngWhy" rows="2" placeholder="Mikä on perimmäinen syy?"></textarea></div></div>
         <div class="ng-section">
             <div class="ng-label">Vaikeuskerroin <button onclick="openDiffGuide('ng')" style="background:rgba(0,200,240,0.1);border:1px solid rgba(0,200,240,0.25);color:var(--cyan);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div>
@@ -636,6 +636,30 @@
     </div>
 </div>
  
+<!-- ═══ IDENTITY GUIDE ═══ -->
+<div id="identityGuideOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:9500;align-items:flex-end;justify-content:center;">
+    <div style="background:#111120;border:1px solid rgba(124,92,191,0.35);border-radius:20px 20px 0 0;padding:28px 24px 36px;max-width:430px;width:100%;max-height:85vh;overflow-y:auto;">
+        <div style="font-size:8px;color:var(--purple);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:10px;">Miksi identiteetti ratkaisee?</div>
+        <div style="font-size:1.1rem;font-weight:300;color:var(--text-1);margin-bottom:18px;letter-spacing:-0.3px;">Oletko juoksija — vai joku joka juoksee?</div>
+        <div style="background:rgba(124,92,191,0.08);border:1px solid rgba(124,92,191,0.22);border-radius:12px;padding:14px 16px;margin-bottom:14px;">
+            <div style="font-size:9px;color:var(--purple);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:8px;">Tavoitelähtöinen ajattelu ❌</div>
+            <div style="font-size:13px;color:var(--text-2);line-height:1.6;">"Haluan juosta puolimaratonin."<br>"Yritän käydä salilla kolmesti viikossa."<br>"Minun täytyy laihduttaa 10 kg."</div>
+            <div style="font-size:11px;color:var(--text-3);margin-top:8px;line-height:1.5;">Tavoite on ulkoinen — kun se saavutetaan tai epäonnistuu, motivaatio katoaa. Käytös ei pysy.</div>
+        </div>
+        <div style="background:rgba(0,200,240,0.06);border:1px solid rgba(0,200,240,0.22);border-radius:12px;padding:14px 16px;margin-bottom:14px;">
+            <div style="font-size:9px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:8px;">Identiteettilähtöinen ajattelu ✓</div>
+            <div style="font-size:13px;color:var(--text-1);line-height:1.6;font-weight:400;">"Olen juoksija."<br>"Olen ihminen, joka pitää kehostaan huolta."<br>"Olen kirjoittaja."</div>
+            <div style="font-size:11px;color:var(--text-2);margin-top:8px;line-height:1.5;">Kun identiteetti on sisäistetty, jokainen teko vahvistaa sitä — ei tavoitetta vaan sitä mitä olet. Käytös juurtuu.</div>
+        </div>
+        <div style="font-size:12px;color:var(--text-2);line-height:1.7;margin-bottom:18px;">James Clearin <em>Atomitottumukset</em>-kirjassa tämä on yksi keskeisimmistä oivalluksista: kestävin motivaatio ei tule siitä <strong style="color:var(--text-1);">mitä haluat saavuttaa</strong>, vaan siitä <strong style="color:var(--cyan);">kuka haluat olla</strong>.<br><br>Muutoskone muistuttaa sinua identiteetistäsi joka päivä — koska se on muutoksen ydin.</div>
+        <div style="background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:20px;">
+            <div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Esimerkkejä</div>
+            <div style="font-size:12px;color:var(--text-2);line-height:1.8;">🏃 "Olen juoksija"<br>✍️ "Olen kirjoittaja"<br>💪 "Olen ihminen, joka liikkuu päivittäin"<br>🧠 "Olen jatkuvasti oppiva"<br>🥗 "Olen ihminen, joka syö hyvin"</div>
+        </div>
+        <button onclick="closeIdentityGuide()" style="background:transparent;border:1px solid var(--cyan-line);color:var(--text-1);padding:14px;border-radius:12px;width:100%;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Selvä, ymmärsin</button>
+    </div>
+</div>
+
 <div id="dayToast" class="day-toast">Uusi päivä</div>
 <div id="offlineBadge">Offline — data tallennettu</div>
  
@@ -648,7 +672,7 @@
     </div>
     <div class="card"><div class="lbl"><span class="lbl-dot"></span>Tavoite</div><input type="text" id="inGoal" placeholder="Mitä haluat saavuttaa?"></div>
     <div class="card" style="background:linear-gradient(135deg,rgba(124,92,191,0.07),rgba(0,200,240,0.02));border-color:rgba(124,92,191,0.22);">
-        <div class="lbl"><span class="lbl-dot" style="background:var(--purple);"></span>Identiteetti <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(James Clear)</span></div>
+        <div class="lbl"><span class="lbl-dot" style="background:var(--purple);"></span>Identiteetti <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(James Clear)</span> <button onclick="openIdentityGuide()" style="background:rgba(124,92,191,0.12);border:1px solid rgba(124,92,191,0.3);color:var(--purple);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div>
         <input type="text" id="inIdentity" placeholder="Olen jo… (esim. Olen juoksija / Olen kirjoittaja)">
         <div style="font-size:10px;color:var(--text-3);margin-top:8px;line-height:1.5;">Muutos alkaa identiteetistä. Kirjoita se henkilö, joksi olet jo tulossa.</div>
     </div>
@@ -1079,6 +1103,11 @@ function addNewGoal(){
     ng.r5=document.getElementById('ngR5').value.trim()||'Harppaus';
     ng.r20=document.getElementById('ngR20').value.trim()||'Panostus';
     ng.r50=document.getElementById('ngR50').value.trim()||'Uroteko';
+    ng.v=parseInt(document.getElementById('ngV').value)||5000;
+    ng.startDate=getTodayStr();
+    ng.id=Date.now();
+    state.goals.push(ng);
+    state.activeIdx=state.goals.length-1;
     closeNewGoal();save();render();
 }
  
@@ -1766,6 +1795,9 @@ function getFavouriteRoutine(){
 }
 
 /* ── HELPERS ── */
+function openIdentityGuide(){const el=document.getElementById('identityGuideOverlay');el.style.display='flex';}
+function closeIdentityGuide(){const el=document.getElementById('identityGuideOverlay');el.style.display='none';}
+
 function escQ(s){return(s||'').replace(/'/g,"\\'");}
 function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
 function save(){try{localStorage.setItem('mk_v11',JSON.stringify(state));}catch(e){}}
