@@ -551,6 +551,7 @@
             <div class="ng-label">Vaikeuskerroin <button onclick="openDiffGuide('ng')" style="background:rgba(0,200,240,0.1);border:1px solid rgba(0,200,240,0.25);color:var(--cyan);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div>
             <div class="ng-input"><select id="ngV"><option value="1000">1 000 XP — Uusi tapa</option><option value="5000" selected>5 000 XP — Merkittävä muutos</option><option value="10000">10 000 XP — Elämänmuutos</option><option value="100000">100 000 XP — Mestari</option></select></div>
         </div>
+        <div class="ng-section"><div class="ng-label">Tavoitepäivä <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div><div class="ng-input"><input type="date" id="ngDeadline" style="color-scheme:dark;"></div></div>
         <div class="ng-section"><div class="ng-label">Rutiinit</div>
             <div class="ng-xp-row"><span class="ng-xp-tag">1 XP</span><input type="text" id="ngR1" placeholder="Mikrotehtävä — 1–10 min"></div>
             <div class="ng-xp-row"><span class="ng-xp-tag">5 XP</span><input type="text" id="ngR5" placeholder="Harppaus — 15–30 min"></div>
@@ -570,6 +571,53 @@
     </div>
 </div>
  
+<!-- ═══ MUOKKAA TAVOITETTA ═══ -->
+<div id="editGoalOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:7000;align-items:flex-end;justify-content:center;">
+    <div style="background:#111120;border:1px solid rgba(255,255,255,0.11);border-radius:20px 20px 0 0;padding:24px 22px 40px;max-width:430px;width:100%;max-height:92vh;overflow-y:auto;scrollbar-width:none;">
+        <div style="font-size:9px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:20px;">Muokkaa tavoitetta</div>
+        <div style="margin-bottom:11px;"><div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;font-weight:600;">Tavoite</div><input id="egGoal" type="text" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text-1);font-size:14px;font-weight:300;outline:none;width:100%;font-family:inherit;"></div>
+        <div style="margin-bottom:11px;"><div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;font-weight:600;">Identiteetti <button onclick="openIdentityGuide()" style="background:rgba(124,92,191,0.12);border:1px solid rgba(124,92,191,0.3);color:var(--purple);border-radius:5px;padding:1px 7px;font-size:8px;font-weight:600;cursor:pointer;font-family:inherit;margin-left:4px;">?</button></div><input id="egIdentity" type="text" placeholder="Olen jo…" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text-1);font-size:14px;font-weight:300;outline:none;width:100%;font-family:inherit;"></div>
+        <div style="margin-bottom:11px;"><div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;font-weight:600;">Miksi tämä on tärkeää</div><textarea id="egWhy" rows="2" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text-1);font-size:13px;font-weight:300;outline:none;width:100%;font-family:inherit;resize:none;line-height:1.5;"></textarea></div>
+        <div style="margin-bottom:11px;"><div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;font-weight:600;">Oma motivaatiolause</div><input id="egQuote" type="text" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text-1);font-size:14px;font-weight:300;outline:none;width:100%;font-family:inherit;"></div>
+        <div style="margin-bottom:11px;"><div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;font-weight:600;">Tavoitepäivä</div><input id="egDeadline" type="date" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text-1);font-size:14px;font-weight:300;outline:none;width:100%;font-family:inherit;color-scheme:dark;"></div>
+        <div style="margin-bottom:20px;"><div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;font-weight:600;">Vaikeuskerroin</div><select id="egV" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text-1);font-size:13px;font-weight:300;outline:none;width:100%;font-family:inherit;"><option value="1000">1 000 XP — Uusi tapa</option><option value="5000">5 000 XP — Merkittävä muutos</option><option value="10000">10 000 XP — Elämänmuutos</option><option value="100000">100 000 XP — Mestari</option></select></div>
+        <div style="display:flex;gap:8px;">
+            <button onclick="closeEditGoal()" style="flex:1;background:transparent;border:1px solid var(--border);color:var(--text-2);padding:14px;border-radius:12px;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Peruuta</button>
+            <button onclick="saveEditGoal()" style="flex:2;background:transparent;border:1px solid var(--cyan-line);color:var(--text-1);padding:14px;border-radius:12px;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Tallenna</button>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ MUOKKAA RUTIINEJA ═══ -->
+<div id="editRoutinesOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:7000;align-items:flex-end;justify-content:center;">
+    <div style="background:#111120;border:1px solid rgba(255,255,255,0.11);border-radius:20px 20px 0 0;padding:24px 22px 40px;max-width:430px;width:100%;">
+        <div style="font-size:9px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:20px;">Muokkaa rutiineja</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
+            <div style="display:flex;align-items:center;background:rgba(255,255,255,0.032);border:1px solid var(--border);border-radius:11px;overflow:hidden;"><span style="font-size:10px;font-weight:700;min-width:52px;color:var(--text-2);flex-shrink:0;padding:0 14px;align-self:stretch;display:flex;align-items:center;justify-content:center;">1 XP</span><input id="erR1" type="text" style="background:transparent;border:none;color:var(--text-1);font-size:13px;font-weight:300;padding:12px 14px;outline:none;width:100%;font-family:inherit;" placeholder="Mikrotehtävä — 1–10 min"></div>
+            <div style="display:flex;align-items:center;background:rgba(255,255,255,0.032);border:1px solid var(--border-r5);border-radius:11px;overflow:hidden;"><span style="font-size:10px;font-weight:700;min-width:52px;color:rgba(168,139,220,0.9);flex-shrink:0;padding:0 14px;align-self:stretch;display:flex;align-items:center;justify-content:center;">5 XP</span><input id="erR5" type="text" style="background:transparent;border:none;color:var(--text-1);font-size:13px;font-weight:300;padding:12px 14px;outline:none;width:100%;font-family:inherit;" placeholder="Harppaus — 15–30 min"></div>
+            <div style="display:flex;align-items:center;background:rgba(255,255,255,0.032);border:1px solid var(--border-r20);border-radius:11px;overflow:hidden;"><span style="font-size:10px;font-weight:700;min-width:52px;color:rgba(0,190,230,0.85);flex-shrink:0;padding:0 14px;align-self:stretch;display:flex;align-items:center;justify-content:center;">20 XP</span><input id="erR20" type="text" style="background:transparent;border:none;color:var(--text-1);font-size:13px;font-weight:300;padding:12px 14px;outline:none;width:100%;font-family:inherit;" placeholder="Panostus — 45–90 min"></div>
+            <div style="display:flex;align-items:center;background:rgba(255,255,255,0.032);border:1px solid var(--border-r50);border-radius:11px;overflow:hidden;"><span style="font-size:10px;font-weight:700;min-width:52px;color:var(--cyan);flex-shrink:0;padding:0 14px;align-self:stretch;display:flex;align-items:center;justify-content:center;">50 XP</span><input id="erR50" type="text" style="background:transparent;border:none;color:var(--text-1);font-size:13px;font-weight:300;padding:12px 14px;outline:none;width:100%;font-family:inherit;" placeholder="Uroteko — 2–4 h"></div>
+        </div>
+        <div style="display:flex;gap:8px;">
+            <button onclick="closeEditRoutines()" style="flex:1;background:transparent;border:1px solid var(--border);color:var(--text-2);padding:14px;border-radius:12px;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Peruuta</button>
+            <button onclick="saveEditRoutines()" style="flex:2;background:transparent;border:1px solid var(--cyan-line);color:var(--text-1);padding:14px;border-radius:12px;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Tallenna</button>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ PÄIVÄTAVOITE OVERLAY ═══ -->
+<div id="dailyGoalOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:7000;align-items:flex-end;justify-content:center;">
+    <div style="background:#111120;border:1px solid rgba(255,255,255,0.11);border-radius:20px 20px 0 0;padding:24px 22px 40px;max-width:430px;width:100%;">
+        <div style="font-size:9px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:8px;">Päivittäinen XP-tavoite</div>
+        <div style="font-size:12px;color:var(--text-3);margin-bottom:18px;line-height:1.6;">1 XP = pienin teko &nbsp;·&nbsp; 5 XP = päivittäinen &nbsp;·&nbsp; 20 XP = suoritus &nbsp;·&nbsp; 50 XP = päivän paras</div>
+        <input id="dgInput" type="number" min="0" placeholder="esim. 20" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:14px;color:var(--text-1);font-size:20px;font-weight:200;outline:none;width:100%;font-family:inherit;text-align:center;margin-bottom:16px;">
+        <div style="display:flex;gap:8px;">
+            <button onclick="closeDailyGoalOverlay()" style="flex:1;background:transparent;border:1px solid var(--border);color:var(--text-2);padding:14px;border-radius:12px;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Peruuta</button>
+            <button onclick="saveDailyGoalOverlay()" style="flex:2;background:transparent;border:1px solid var(--cyan-line);color:var(--text-1);padding:14px;border-radius:12px;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Aseta tavoite</button>
+        </div>
+    </div>
+</div>
+
 <!-- ═══ SHARE OVERLAY ═══ -->
 <div id="shareOverlay">
     <div class="share-canvas-wrap">
@@ -680,6 +728,10 @@
     <div class="card"><div class="lbl"><span class="lbl-dot"></span>Vaikeuskerroin <button onclick="openDiffGuide('setup')" style="background:rgba(0,200,240,0.1);border:1px solid rgba(0,200,240,0.25);color:var(--cyan);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:auto;">Mikä sopii minulle?</button></div>
         <select id="inV"><option value="1000">1 000 XP — Uusi tapa</option><option value="5000" selected>5 000 XP — Merkittävä muutos</option><option value="10000">10 000 XP — Elämänmuutos</option><option value="100000">100 000 XP — Mestari</option></select>
     </div>
+    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Tavoitepäivä <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div>
+        <input type="date" id="inDeadline" style="color-scheme:dark;">
+        <div style="font-size:10px;color:var(--text-3);margin-top:6px;line-height:1.5;">Muutoskone laskee tarvittavan päivätahdin automaattisesti.</div>
+    </div>
     <div class="card"><div class="lbl"><span class="lbl-dot"></span>Rutiinit</div>
         <div class="xp-row"><span class="xp-tag">1 XP</span><input type="text" id="inR1" placeholder="Mikrotehtävä — 1–10 min"></div>
         <div class="xp-row"><span class="xp-tag">5 XP</span><input type="text" id="inR5" placeholder="Harppaus — 15–30 min"></div>
@@ -746,38 +798,55 @@
         <div class="dg-track"><div class="dg-fill" id="dgFill" style="width:0%"></div></div>
     </div>
  
-    <!-- ETENEMISENNUSTE -->
-    <div class="forecast-bar" id="forecastBar">
-        <div>
-            <div class="forecast-label">Etenemisennuste</div>
-            <div class="forecast-date" id="forecastDate">—</div>
-        </div>
-        <div style="text-align:right;">
-            <div class="forecast-label">Tahdilla</div>
-            <div class="forecast-val" id="forecastPace">—</div>
+    <!-- RUTIININAPIT — heti daily goal -palkin jälkeen, ennen analytiikkaa -->
+    <div class="routine-grid" id="taskList"></div>
+
+    <!-- UNDO -->
+    <div class="undo-bar" id="undoBar"><span class="undo-msg" id="undoMsg"></span><button class="btn-undo" onclick="undoXP()">Peruuta</button></div>
+
+    <!-- IDENTITY NUDGE (näkyy jos identiteetti puuttuu ja XP > 0) -->
+    <div id="identityNudge" style="display:none;background:rgba(124,92,191,0.06);border:1px solid rgba(124,92,191,0.2);border-radius:12px;padding:12px 16px;margin-bottom:9px;cursor:pointer;" onclick="openEditGoalOverlay()">
+        <div style="font-size:8px;color:var(--purple);letter-spacing:2.5px;text-transform:uppercase;font-weight:600;margin-bottom:4px;">💡 Vinkki</div>
+        <div style="font-size:12px;color:var(--text-2);line-height:1.6;">Lisää identiteettisi — se on tehokkain yksittäinen muutos. <span style="color:var(--purple);">Napauta →</span></div>
+    </div>
+
+    <!-- DEADLINE COUNTDOWN -->
+    <div id="deadlineBar" style="display:none;background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin-bottom:9px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div><div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;">Tavoitepäivä</div><div id="deadlineDate" style="font-size:13px;color:var(--cyan);font-weight:300;"></div></div>
+            <div style="text-align:right;"><div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;">Tarvitaan</div><div id="deadlineRequired" style="font-size:13px;color:var(--text-1);font-weight:300;"></div></div>
         </div>
     </div>
 
-    <!-- TERVEYSMITTARI -->
+    <!-- VIIKKOHAASTE -->
+    <div id="weekChallengeCard" style="display:none;background:linear-gradient(135deg,rgba(34,197,94,0.07),rgba(0,200,240,0.03));border:1px solid rgba(34,197,94,0.22);border-radius:14px;padding:14px 18px;margin-bottom:9px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+            <div style="font-size:8px;color:var(--green);letter-spacing:3px;text-transform:uppercase;font-weight:700;">⚡ Viikkohaaste</div>
+            <span onclick="newWeekChallenge()" style="font-size:9px;color:var(--text-3);cursor:pointer;letter-spacing:1px;">↺ Uusi</span>
+        </div>
+        <div id="weekChallengeText" style="font-size:13px;color:var(--text-1);line-height:1.6;font-weight:300;"></div>
+    </div>
+
+    <!-- ANALYTIIKKA (rullaamalla) -->
+    <div class="forecast-bar" id="forecastBar">
+        <div><div class="forecast-label">Etenemisennuste</div><div class="forecast-date" id="forecastDate">—</div></div>
+        <div style="text-align:right;"><div class="forecast-label">Tahdilla</div><div class="forecast-val" id="forecastPace">—</div></div>
+    </div>
+
     <div style="margin-bottom:9px;">
         <div class="health-bar">
             <div class="health-label">Kunto</div>
-            <div style="flex:1;">
-                <div class="health-track"><div class="health-fill" id="healthFill"></div></div>
-                <div class="health-tip" id="healthTip"></div>
-            </div>
+            <div style="flex:1;"><div class="health-track"><div class="health-fill" id="healthFill"></div></div><div class="health-tip" id="healthTip"></div></div>
             <div class="health-val" id="healthVal">—</div>
         </div>
     </div>
 
-    <!-- MOMENTUM -->
     <div class="momentum-bar">
         <div class="momentum-label">Vauhti</div>
         <div class="momentum-track"><div class="momentum-fill" id="momentumFill"></div></div>
         <div class="momentum-val" id="momentumVal">—</div>
     </div>
- 
-    <!-- SIGNAL + WHY + QUOTE -->
+
     <div class="signal-card" id="signalCard"><span class="signal-icon" id="signalIcon"></span><span id="signalText"></span></div>
     <div class="grace-reminder" id="graceReminder"></div>
     <div class="recovery-pattern" id="recoveryPattern"><div class="rp-label">Tunnistettu kaava</div><div class="rp-text" id="recoveryPatternText"></div></div>
@@ -787,12 +856,6 @@
         <div class="quote-text" id="quoteDisplay"></div>
         <textarea class="quote-edit" id="quoteEdit" rows="2" placeholder="Kirjoita oma motivaatiolauseesi…"></textarea>
     </div>
- 
-    <!-- ROUTINE BUTTONS -->
-    <div class="routine-grid" id="taskList"></div>
- 
-    <!-- UNDO -->
-    <div class="undo-bar" id="undoBar"><span class="undo-msg" id="undoMsg"></span><button class="btn-undo" onclick="undoXP()">Peruuta</button></div>
  
     <!-- INTENTIO -->
     <div class="toggle-row" onclick="togglePanel('intentio')">
@@ -935,7 +998,7 @@ function getLevelProgress(xp){const lvl=getLevelForXP(xp),curr=getLevelThreshold
 const LVL_MSGS=['Systemaattinen tekeminen toimii.','Olet rakentamassa uutta identiteettiä.','Pienet teot, suuret seuraukset.','Kerryttäminen on taito — ja sinulla se on.','Putki rakentaa ihmistä. Tämä on se hetki.','Matka on enemmän kuin maali. Jatka.','Harva pääsee näin pitkälle. Sinä olet.','Jokainen teko jättää jäljen. Tämä on todiste.','Taso on vain numero — tekeminen on totta.','Olet vahvempi kuin viime viikolla.'];
  
 const GOAL_TEMPLATE=()=>({
-    id:Date.now(),goal:'',baseline:'',quote:'',why:'',identity:'',
+    id:Date.now(),goal:'',baseline:'',quote:'',why:'',identity:'',deadline:null,
     r1:'',r5:'',r20:'',r50:'',
     v:5000,total:0,days:1,lvl:1,
     initialEstimate:null,lowestEstimate:null,
@@ -981,6 +1044,8 @@ function migrateGoal(goal){
     if(!goal.recoveryLog)goal.recoveryLog=[];
     if(!goal.customMilestones)goal.customMilestones=[];
     if(!goal.mseditorOpen)goal.mseditorOpen=false;
+    if(goal.deadline===undefined)goal.deadline=null;
+    if(goal.weekChallengeIdx===undefined)goal.weekChallengeIdx=0;
     goal.lvl=getLevelForXP(goal.total);
 }
  
@@ -1104,6 +1169,7 @@ function addNewGoal(){
     ng.r20=document.getElementById('ngR20').value.trim()||'Panostus';
     ng.r50=document.getElementById('ngR50').value.trim()||'Uroteko';
     ng.v=parseInt(document.getElementById('ngV').value)||5000;
+    ng.deadline=document.getElementById('ngDeadline')?document.getElementById('ngDeadline').value||null:null;
     ng.startDate=getTodayStr();
     ng.id=Date.now();
     state.goals.push(ng);
@@ -1191,8 +1257,9 @@ function initDailyGoal(){
     }
 }
 function editDailyGoal(){
-    const val=prompt('Päivittäinen XP-tavoite (esim. 20):\n\n1 XP = pienin teko\n5 XP = päivittäinen\n20 XP = suoritus\n50 XP = päivän paras',g().dailyGoal||'');
-    if(val===null)return;const n=parseInt(val);if(!isNaN(n)&&n>=0){g().dailyGoal=n;save();initDailyGoal();}
+    document.getElementById('dgInput').value=g().dailyGoal||'';
+    document.getElementById('dailyGoalOverlay').style.display='flex';
+    setTimeout(()=>document.getElementById('dgInput').focus(),100);
 }
  
 /* STATS SHARE CARD */
@@ -1313,6 +1380,7 @@ function start(){
     ng.r20=document.getElementById('inR20').value.trim()||'Panostus';
     ng.r50=document.getElementById('inR50').value.trim()||'Uroteko';
     ng.v=parseInt(document.getElementById('inV').value);
+    ng.deadline=document.getElementById('inDeadline').value||null;
     ng.startDate=new Date().toISOString();
     state.goals=[ng];state.activeIdx=0;state.quote=ng.quote;save();render();
 }
@@ -1391,6 +1459,7 @@ function updateUI(){
     const bsEl=document.getElementById('statBestStreak');if(bsEl)bsEl.innerText=(g().bestStreak||g().streak||0)+' pv';
     const wkEl=document.getElementById('statWeekXP');if(wkEl)wkEl.innerText=getWeekXP(0).total||'—';
     updateForecast();updateHealth();updateWeekCompare();updateGraceReminder();updateRecoveryPattern();
+    updateDeadlineBar();updateIdentityNudge();updateWeekChallenge();
     // Kertymäkerroin countdown päivässä maaliin -lukuun
     const cdEl=document.getElementById('lvlNextLabel');
     if(cdEl){
@@ -1422,21 +1491,119 @@ function startLvlCanvas(){
 }
 function stopLvlCanvas(){if(lvlAnimFrame)cancelAnimationFrame(lvlAnimFrame);const canvas=document.getElementById('lvlCanvas');canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);}
  
-/* MODALS */
-function modifyGoalSettings(){
-    const ng=prompt('Tavoite:',g().goal);if(ng!==null)g().goal=ng.trim()||g().goal;
-    const ni=prompt('Identiteetti (Olen jo…):',g().identity||'');if(ni!==null)g().identity=ni.trim();
-    const nw=prompt('Miksi tämä on tärkeää:',g().why||'');if(nw!==null)g().why=nw.trim();
-    const nq=prompt('Oma motivaatiolause:',g().quote||'');if(nq!==null)g().quote=nq.trim();
-    const vO={'1000':'1 000 XP — Uusi tapa','5000':'5 000 XP — Merkittävä muutos','10000':'10 000 XP — Elämänmuutos','100000':'100 000 XP — Mestari'};
-    const vC=String(g().v);const vL=Object.entries(vO).map(([k,v],i)=>`${i+1}. ${v}`).join('\n');const vK=Object.keys(vO);
-    const vCh=prompt(`Vaikeuskerroin (nykyinen: ${vO[vC]}):\n\n${vL}\n\nSyötä numero 1–4:`,vK.indexOf(vC)+1);
-    if(vCh!==null){const idx=parseInt(vCh)-1;if(idx>=0&&idx<vK.length)g().v=parseInt(vK[idx]);}
-    save();render();
+/* MODALS — oikeat overlayt, ei enää prompt() */
+function modifyGoalSettings(){openEditGoalOverlay();}
+function openEditGoalOverlay(){
+    document.getElementById('egGoal').value=g().goal||'';
+    document.getElementById('egIdentity').value=g().identity||'';
+    document.getElementById('egWhy').value=g().why||'';
+    document.getElementById('egQuote').value=g().quote||'';
+    document.getElementById('egDeadline').value=g().deadline||'';
+    document.getElementById('egV').value=String(g().v||5000);
+    document.getElementById('editGoalOverlay').style.display='flex';
 }
-function modifyRoutines(){[['1 XP — pienin teko (1–10 min)','r1'],['5 XP — päivittäinen toimenpide (15–30 min)','r5'],['20 XP — merkittävä suoritus (45–90 min)','r20'],['50 XP — päivän tärkein teko (2–4 h)','r50']].forEach(([lbl,key])=>{const v=prompt(lbl,g()[key]);if(v!==null)g()[key]=v.trim()||g()[key];});save();updateUI();}
+function closeEditGoal(){document.getElementById('editGoalOverlay').style.display='none';}
+function saveEditGoal(){
+    const goal=document.getElementById('egGoal').value.trim();
+    if(goal)g().goal=goal;
+    g().identity=document.getElementById('egIdentity').value.trim();
+    g().why=document.getElementById('egWhy').value.trim();
+    g().quote=document.getElementById('egQuote').value.trim();
+    g().deadline=document.getElementById('egDeadline').value||null;
+    g().v=parseInt(document.getElementById('egV').value)||g().v;
+    closeEditGoal();save();render();
+}
+
+function modifyRoutines(){openEditRoutinesOverlay();}
+function openEditRoutinesOverlay(){
+    document.getElementById('erR1').value=g().r1||'';
+    document.getElementById('erR5').value=g().r5||'';
+    document.getElementById('erR20').value=g().r20||'';
+    document.getElementById('erR50').value=g().r50||'';
+    document.getElementById('editRoutinesOverlay').style.display='flex';
+}
+function closeEditRoutines(){document.getElementById('editRoutinesOverlay').style.display='none';}
+function saveEditRoutines(){
+    const r1=document.getElementById('erR1').value.trim();if(r1)g().r1=r1;
+    const r5=document.getElementById('erR5').value.trim();if(r5)g().r5=r5;
+    const r20=document.getElementById('erR20').value.trim();if(r20)g().r20=r20;
+    const r50=document.getElementById('erR50').value.trim();if(r50)g().r50=r50;
+    closeEditRoutines();save();updateUI();
+}
+
+function editDailyGoal(){
+    document.getElementById('dgInput').value=g().dailyGoal||'';
+    document.getElementById('dailyGoalOverlay').style.display='flex';
+    setTimeout(()=>document.getElementById('dgInput').focus(),100);
+}
+function closeDailyGoalOverlay(){document.getElementById('dailyGoalOverlay').style.display='none';}
+function saveDailyGoalOverlay(){
+    const n=parseInt(document.getElementById('dgInput').value);
+    if(!isNaN(n)&&n>=0){g().dailyGoal=n;save();initDailyGoal();}
+    closeDailyGoalOverlay();
+}
+
 function closeVictory(){document.getElementById('victoryOverlay').style.display='none';g().done=true;save();}
 function resetCurrentGoal(){if(state.goals.length===1){if(confirm('Nollataan kaikki data?')){try{localStorage.removeItem('mk_v11');localStorage.removeItem('mk_draft');}catch(e){}location.reload();}}else{if(confirm(`Poistetaan tavoite "${g().goal}"?`)){state.goals.splice(state.activeIdx,1);state.activeIdx=Math.max(0,state.activeIdx-1);save();render();}}}
+
+/* ── DEADLINE BAR ── */
+function updateDeadlineBar(){
+    const bar=document.getElementById('deadlineBar');if(!bar)return;
+    if(!g().deadline){bar.style.display='none';return;}
+    const today=new Date();today.setHours(0,0,0,0);
+    const dl=new Date(g().deadline);dl.setHours(0,0,0,0);
+    const daysLeft=Math.ceil((dl-today)/86400000);
+    if(daysLeft<0){bar.style.display='none';return;}
+    bar.style.display='block';
+    const opts={day:'numeric',month:'short',year:'numeric'};
+    document.getElementById('deadlineDate').innerText=dl.toLocaleDateString('fi-FI',opts)+' ('+daysLeft+' pv)';
+    const remaining=Math.max(0,g().v-g().total);
+    document.getElementById('deadlineRequired').innerText=daysLeft>0?Math.ceil(remaining/daysLeft)+' XP/pv':'Tänään!';
+}
+
+/* ── IDENTITY NUDGE ── */
+function updateIdentityNudge(){
+    const el=document.getElementById('identityNudge');if(!el)return;
+    el.style.display=(!g().identity&&g().total>0&&g().days>2)?'block':'none';
+}
+
+/* ── VIIKKOHAASTE ── */
+const WEEK_CHALLENGES=[
+    'Tee ainakin {r1}, älä turhaan jätä yhtäkään päivää väliin.',
+    'Tee vähintään yksi {r20} tällä viikolla — varaa aika kalenteriin jo nyt.',
+    'Kokeile {r1} eri kellonaikaan kuin normaalisti. Löydä parempi hetki.',
+    'Kirjoita päivittäin intentio ennen kuin aloitat tekemisen.',
+    'Tee {r5} kolme kertaa ennen klo 10. Aamutekeminen muuttaa päivän.',
+    'Jaa edistymisesi jollekin tällä viikolla. Vastuullisuus kaksinkertaistaa tulokset.',
+    'Varaa joka ilta 5 min: mitä tein tänään? Kirjoita muistiinpano.',
+    'Yhdistä {r1} jo olemassa olevaan tottumukseen (kahvi, ruokailu, hampaiden pesu).',
+    'Tee {r1} heti kun heräät — ennen puhelimen katsomista.',
+    'Viikon tavoite: {weekXP} XP. Se on saavutettavissa — laske itse.',
+];
+function getWeekChallengeText(){
+    if(!g())return'';
+    const weekXP=Math.max(20,Math.round((g().total/Math.max(g().days,1))*7));
+    const seed=(g().weekChallengeIdx!==undefined)?g().weekChallengeIdx:
+        (getISOWeekStr()+g().id).split('').reduce((a,c)=>a+c.charCodeAt(0),0)%WEEK_CHALLENGES.length;
+    let txt=WEEK_CHALLENGES[seed%WEEK_CHALLENGES.length];
+    return txt.replace('{r1}',g().r1||'mikrotehtävä').replace('{r5}',g().r5||'harppaus').replace('{r20}',g().r20||'panostus').replace('{weekXP}',weekXP);
+}
+function newWeekChallenge(){
+    if(!g())return;
+    const cur=g().weekChallengeIdx||0;
+    g().weekChallengeIdx=(cur+1)%WEEK_CHALLENGES.length;
+    save();document.getElementById('weekChallengeText').innerText=getWeekChallengeText();
+}
+function updateWeekChallenge(){
+    const card=document.getElementById('weekChallengeCard');if(!card||!g())return;
+    if(g().days<1){card.style.display='none';return;}
+    card.style.display='block';
+    document.getElementById('weekChallengeText').innerText=getWeekChallengeText();
+}
+
+/* IDENTITY GUIDE */
+function openIdentityGuide(){document.getElementById('identityGuideOverlay').style.display='flex';}
+function closeIdentityGuide(){document.getElementById('identityGuideOverlay').style.display='none';}
  
 /* PROMPTS */
 function getBaselinePart(){const bl=state.goals.length>0?g().baseline:draft.baseline;return bl?`\n\nLähtötilanne:\n"${bl}"`:''}
@@ -1795,9 +1962,6 @@ function getFavouriteRoutine(){
 }
 
 /* ── HELPERS ── */
-function openIdentityGuide(){const el=document.getElementById('identityGuideOverlay');el.style.display='flex';}
-function closeIdentityGuide(){const el=document.getElementById('identityGuideOverlay');el.style.display='none';}
-
 function escQ(s){return(s||'').replace(/'/g,"\\'");}
 function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
 function save(){try{localStorage.setItem('mk_v11',JSON.stringify(state));}catch(e){}}
