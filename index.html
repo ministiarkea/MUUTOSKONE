@@ -72,14 +72,14 @@
         .goal-tabs::-webkit-scrollbar{display:none;} .btn-tab-add{border-style:dashed;}
  
         /* STATUS CARD */
-        .status-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:12px 18px 11px;margin-bottom:8px;}
+        .status-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:16px 20px 14px;margin-bottom:9px;}
         .sc-micro{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
         .micro-item{display:flex;align-items:baseline;gap:5px;}
         .micro-val-orange{font-size:13px;font-weight:400;color:var(--orange);}
         .micro-val-cyan{font-size:13px;font-weight:400;color:var(--cyan);}
         .micro-lbl{font-size:9px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;}
-        .days-row{display:flex;align-items:baseline;gap:12px;margin-bottom:8px;}
-        .days-val{font-size:54px;font-weight:200;line-height:1;letter-spacing:-2px;color:var(--text-1);}
+        .days-row{display:flex;align-items:baseline;gap:12px;margin-bottom:11px;}
+        .days-val{font-size:66px;font-weight:200;line-height:1;letter-spacing:-3px;color:var(--text-1);}
         .days-right{display:flex;flex-direction:column;gap:3px;justify-content:flex-end;padding-bottom:4px;}
         .days-lbl{font-size:9px;text-transform:uppercase;color:var(--text-2);letter-spacing:2.5px;}
         .days-pct{font-size:13px;font-weight:400;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
@@ -87,14 +87,14 @@
         .milestones{display:flex;gap:4px;margin-bottom:3px;}
         .ms{flex:1;height:2px;border-radius:1px;background:rgba(255,255,255,0.07);transition:background 0.6s;}
         .ms.done{background:var(--grad);} .ms.near{background:rgba(0,200,240,0.3);}
-        .ms-labels{display:flex;justify-content:space-between;margin-bottom:8px;}
+        .ms-labels{display:flex;justify-content:space-between;margin-bottom:12px;}
         .ms-lbl{font-size:8px;color:var(--text-3);} .ms-lbl.done-lbl{color:var(--text-2);}
         .lvl-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
         .lvl-lbl{font-size:9px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;}
         .lvl-val{font-size:11px;font-weight:400;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
         .bar-track{height:2px;background:rgba(255,255,255,0.07);border-radius:1px;overflow:hidden;}
         .bar-fill{height:100%;width:0%;background:var(--grad);transition:width 0.7s ease;}
-        .sc-bottom{display:flex;justify-content:space-around;margin-top:9px;}
+        .sc-bottom{display:flex;justify-content:space-around;margin-top:12px;}
         .sb-item{text-align:center;} .sb-val{font-size:14px;font-weight:300;color:var(--text-1);}
         .sb-lbl{font-size:8px;color:var(--text-3);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
  
@@ -197,13 +197,13 @@
         .quote-hint{font-size:9px;color:var(--text-3);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;display:flex;justify-content:space-between;}
  
         /* ROUTINE BUTTONS */
-        .routine-grid{display:flex;flex-direction:column;gap:6px;margin-bottom:8px;}
+        .routine-grid{display:flex;flex-direction:column;gap:7px;margin-bottom:9px;}
         .rbtn{border:none;border-radius:14px;padding:0;cursor:pointer;width:100%;font-family:inherit;position:relative;overflow:hidden;transition:transform 0.12s ease,box-shadow 0.15s ease;}
         .rbtn::after{content:'';position:absolute;inset:0;background:white;opacity:0;transition:opacity 0.3s;border-radius:14px;}
         .rbtn.flash::after{animation:btnFlash 0.4s ease-out;}
         @keyframes btnFlash{0%{opacity:0.15}100%{opacity:0}}
         .rbtn:active{transform:scale(0.965);}
-        .rbtn-inner{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;}
+        .rbtn-inner{display:flex;justify-content:space-between;align-items:center;padding:15px 18px;}
         .rbtn-1{background:var(--grad-r1);border:1px solid var(--border-r1);}
         .rbtn-5{background:var(--grad-r5);border:1px solid var(--border-r5);box-shadow:0 2px 14px rgba(124,92,191,0.14);}
         .rbtn-20{background:var(--grad-r20);border:1px solid var(--border-r20);box-shadow:0 2px 16px rgba(0,160,210,0.16);}
@@ -219,9 +219,11 @@
         .rdot-20{background:rgba(0,190,230,0.85);box-shadow:0 0 6px rgba(0,160,210,0.55);}
         .rdot-50{background:var(--cyan);box-shadow:0 0 9px rgba(0,200,240,0.75);}
         .rbtn-text{display:flex;flex-direction:column;gap:2px;}
-        .rbtn-name{font-size:12px;font-weight:400;color:var(--text-1);line-height:1.3;}
+        .rbtn-name{font-size:13px;font-weight:400;color:var(--text-1);line-height:1.3;}
         .rbtn-50 .rbtn-name{font-weight:500;}
         .rbtn-min{font-size:10px;color:var(--text-3);}
+        .rbtn-progress{position:absolute;bottom:0;left:0;height:2px;background:rgba(0,200,240,0.5);border-radius:0 0 14px 14px;transition:width 0.6s ease;pointer-events:none;}
+        .rbtn-50 .rbtn-progress{background:rgba(0,200,240,0.7);}
         .rbtn-50 .rbtn-min{color:rgba(0,200,240,0.5);}
         .rbtn-xp{font-size:15px;font-weight:600;white-space:nowrap;margin-left:8px;}
         .rxp-1{color:var(--text-2);font-weight:400;font-size:14px;}
@@ -552,7 +554,7 @@
             <div class="ng-input"><select id="ngV"><option value="1000">1 000 XP — Uusi tapa</option><option value="5000" selected>5 000 XP — Merkittävä muutos</option><option value="10000">10 000 XP — Elämänmuutos</option><option value="100000">100 000 XP — Mestari</option></select></div>
         </div>
         <div class="ng-section"><div class="ng-label">Tavoitepäivä <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div><div class="ng-input"><input type="date" id="ngDeadline" style="color-scheme:dark;"></div></div>
-        <div class="ng-section"><div class="ng-label">Rutiinit <button onclick="document.getElementById('routinesGuideOverlay').style.display='flex'" style="background:rgba(0,200,240,0.1);border:1px solid rgba(0,200,240,0.25);color:var(--cyan);border-radius:5px;padding:1px 7px;font-size:8px;font-weight:600;cursor:pointer;font-family:inherit;margin-left:4px;">?</button></div>
+        <div class="ng-section"><div class="ng-label">Rutiinit</div>
             <div class="ng-xp-row"><span class="ng-xp-tag">1 XP</span><input type="text" id="ngR1" placeholder="Mikrotehtävä — 1–10 min"></div>
             <div class="ng-xp-row"><span class="ng-xp-tag">5 XP</span><input type="text" id="ngR5" placeholder="Harppaus — 15–30 min"></div>
             <div class="ng-xp-row"><span class="ng-xp-tag">20 XP</span><input type="text" id="ngR20" placeholder="Panostus — 45–90 min"></div>
@@ -699,76 +701,12 @@
             <div style="font-size:13px;color:var(--text-1);line-height:1.6;font-weight:400;">"Olen juoksija."<br>"Olen ihminen, joka pitää kehostaan huolta."<br>"Olen kirjoittaja."</div>
             <div style="font-size:11px;color:var(--text-2);margin-top:8px;line-height:1.5;">Kun identiteetti on sisäistetty, jokainen teko vahvistaa sitä — ei tavoitetta vaan sitä mitä olet. Käytös juurtuu.</div>
         </div>
-        <div style="font-size:12px;color:var(--text-2);line-height:1.7;margin-bottom:18px;">James Clearin <em>Atomitottumukset</em>-kirjassa tämä on yksi keskeisimmistä oivalluksista: kestävin motivaatio ei tule siitä <strong style="color:var(--text-1);">mitä haluat saavuttaa</strong>, vaan siitä <strong style="color:var(--cyan);">kuka haluat olla</strong>.<br><br>Muutoskone muistuttaa sinua identiteetistäsi joka päivä — koska se on muutoksen ydin.</div>
+        <div style="font-size:12px;color:var(--text-2);line-height:1.7;margin-bottom:18px;">James Clearin <em>Pura rutiinit atomeiksi</em>-kirjassa tämä on yksi keskeisimmistä oivalluksista: kestävin motivaatio ei tule siitä <strong style="color:var(--text-1);">mitä haluat saavuttaa</strong>, vaan siitä <strong style="color:var(--cyan);">kuka haluat olla</strong>.<br><br>Muutoskone muistuttaa sinua identiteetistäsi joka päivä — koska se on muutoksen ydin.</div>
         <div style="background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:20px;">
             <div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Esimerkkejä</div>
             <div style="font-size:12px;color:var(--text-2);line-height:1.8;">🏃 "Olen juoksija"<br>✍️ "Olen kirjoittaja"<br>💪 "Olen ihminen, joka liikkuu päivittäin"<br>🧠 "Olen jatkuvasti oppiva"<br>🥗 "Olen ihminen, joka syö hyvin"</div>
         </div>
         <button onclick="closeIdentityGuide()" style="background:transparent;border:1px solid var(--cyan-line);color:var(--text-1);padding:14px;border-radius:12px;width:100%;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Selvä, ymmärsin</button>
-    </div>
-</div>
-
-<!-- ═══ ROUTINESGUIDEOVERLAY ═══ -->
-<div id="routinesGuideOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:9500;align-items:flex-end;justify-content:center;">
-    <div style="background:#111120;border:1px solid rgba(0,200,240,0.35);border-radius:20px 20px 0 0;padding:28px 24px 36px;max-width:430px;width:100%;max-height:85vh;overflow-y:auto;scrollbar-width:none;">
-        <div style="font-size:8px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:10px;">Neljä tasoa — yksi periaate</div><div style="font-size:1.0rem;font-weight:300;color:var(--text-1);margin-bottom:16px;letter-spacing:-0.3px;">Tee jotain joka päivä — vaikka pienin mahdollinen teko.</div><div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:13px 15px;margin-bottom:10px;"><div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:7px;">1 XP — Mikrotehtävä (1–10 min)</div><div style="font-size:12px;color:var(--text-2);line-height:1.6;">Niin pieni, ettet voi sanoa ei. Pitää sinut pelissä mukana huonoinakin päivinä.<br><em style="color:var(--text-3);">Esim: Juo lasi vettä, lue yksi sivu, kävele 5 min.</em></div></div><div style="background:rgba(124,92,191,0.07);border:1px solid rgba(124,92,191,0.22);border-radius:12px;padding:13px 15px;margin-bottom:10px;"><div style="font-size:9px;color:rgba(168,139,220,0.9);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:7px;">5 XP — Harppaus (15–30 min)</div><div style="font-size:12px;color:var(--text-2);line-height:1.6;">Arjen perusliike. Tekee perushommat jotka vievät eteenpäin.<br><em style="color:var(--text-3);">Esim: Lyhyt lenkki, terveellinen ateria, 20 min syvätyö.</em></div></div><div style="background:rgba(0,160,210,0.07);border:1px solid rgba(0,160,210,0.25);border-radius:12px;padding:13px 15px;margin-bottom:10px;"><div style="font-size:9px;color:rgba(0,190,230,0.85);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:7px;">20 XP — Panostus (45–90 min)</div><div style="font-size:12px;color:var(--text-2);line-height:1.6;">Päivän tärkein suoritus. Tämä vie sinua todella eteenpäin.<br><em style="color:var(--text-3);">Esim: Kuntosali, tunnin kirjoittaminen, projektin edistäminen.</em></div></div><div style="background:rgba(0,200,240,0.07);border:1px solid rgba(0,200,240,0.28);border-radius:12px;padding:13px 15px;margin-bottom:16px;"><div style="font-size:9px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:7px;">50 XP — Uroteko (2–4 h tai iso voitto)</div><div style="font-size:12px;color:var(--text-2);line-height:1.6;">Harvinaisempi, mutta palkitsee eniten. Tee kun olet hyvässä vireessä.<br><em style="color:var(--text-3);">Esim: Vaikean projektin loppuunsaattaminen, pitkä juoksulenkki.</em></div></div><div style="font-size:12px;color:var(--text-2);line-height:1.7;margin-bottom:4px;">💡 Tee rutiineista niin helppoja, että voit tehdä ne vaikka väsyneenä. <strong style="color:var(--text-1);">Pienet teot päivittäin voittavat isot teot harvoin.</strong></div>
-        <button onclick="document.getElementById('routinesGuideOverlay').style.display='none'" style="background:transparent;border:1px solid var(--cyan-line);color:var(--text-1);padding:14px;border-radius:12px;width:100%;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Selvä, ymmärsin</button>
-    </div>
-</div>
-
-<!-- ═══ KERROINGUIDEOVERLAY ═══ -->
-<div id="kerroinGuideOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:9500;align-items:flex-end;justify-content:center;">
-    <div style="background:#111120;border:1px solid rgba(0,200,240,0.35);border-radius:20px 20px 0 0;padding:28px 24px 36px;max-width:430px;width:100%;max-height:85vh;overflow-y:auto;scrollbar-width:none;">
-        <div style="font-size:8px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:10px;">Pitkäjänteisyys palkitaan konkreettisesti</div><div style="font-size:1.0rem;font-weight:300;color:var(--text-1);margin-bottom:16px;">Sama teko on päivänä 84 tuplasti arvokkaampi.</div><div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:13px 15px;margin-bottom:10px;"><div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:7px;">Päivä 1 → Päivä 84</div><div style="font-size:12px;color:var(--text-2);line-height:1.65;"><strong style="color:var(--text-1);">Päivä 1:</strong> Kerroin ×1.0 — teko on perusarvonsa mukainen.<br><strong style="color:var(--cyan);">Päivä 84:</strong> Kerroin ×2.0 — sama teko antaa tuplasti XP:tä.<br><br>Välillä kerroin kasvaa tasaisesti joka päivä.</div></div><div style="background:rgba(0,200,240,0.06);border:1px solid rgba(0,200,240,0.2);border-radius:12px;padding:13px 15px;margin-bottom:16px;"><div style="font-size:9px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:7px;">Miksi tämä on tärkeää?</div><div style="font-size:12px;color:var(--text-2);line-height:1.65;">Ensimmäinen lenkki on raskain ja tuottaa vähiten tuloksia. 84. lenkin jälkeen kehosi on tehokkaampi, rutiini on automatisoitunut — ja kertymäkerroin tekee tästä näkyvää.<br><br>Kertymäkerroin ei nollaudu vaikka yksittäinen putki katkeaisi. Se kasvaa päivälaskurin mukaan.</div></div><div style="font-size:12px;color:var(--text-2);line-height:1.7;margin-bottom:4px;">⚡ Tänään keräämäsi XP on investointi huomisen kertoimen kasvuun.</div>
-        <button onclick="document.getElementById('kerroinGuideOverlay').style.display='none'" style="background:transparent;border:1px solid var(--cyan-line);color:var(--text-1);padding:14px;border-radius:12px;width:100%;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Selvä, ymmärsin</button>
-    </div>
-</div>
-
-<!-- ═══ STREAKGUIDEOVERLAY ═══ -->
-<div id="streakGuideOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:9500;align-items:flex-end;justify-content:center;">
-    <div style="background:#111120;border:1px solid rgba(249,115,22,0.35);border-radius:20px 20px 0 0;padding:28px 24px 36px;max-width:430px;width:100%;max-height:85vh;overflow-y:auto;scrollbar-width:none;">
-        <div style="font-size:8px;color:var(--orange);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:10px;">Jatkuvuus on ylivoimainen supervoima</div><div style="font-size:1.0rem;font-weight:300;color:var(--text-1);margin-bottom:16px;">Et halua katkaista putkea — ja se on tarkoituksellista.</div><div style="background:rgba(249,115,22,0.07);border:1px solid rgba(249,115,22,0.22);border-radius:12px;padding:13px 15px;margin-bottom:10px;"><div style="font-size:9px;color:var(--orange);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:7px;">Armopäivä</div><div style="font-size:12px;color:var(--text-2);line-height:1.65;">Muutoskone antaa yhden armopäivän viikossa. Jos hyppäät yhden päivän yli, putki ei katkea. Elämä ei aina suju suunnitelmien mukaan — järjestelmä ymmärtää sen.</div></div><div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:13px 15px;margin-bottom:16px;"><div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:7px;">Mitä jos putki katkeaa?</div><div style="font-size:12px;color:var(--text-2);line-height:1.65;">Se ei tarkoita epäonnistumista. Muutoskone ei rankaise — se muistuttaa että matka jatkuu. Tärkeintä on aloittaa uudelleen, ei se että pysähdyit.</div></div><div style="font-size:12px;color:var(--text-2);line-height:1.7;margin-bottom:4px;">🔥 Pitkä putki = vahvistuva identiteetti. Jokainen päivä on äänestys sen puolesta kuka olet.</div>
-        <button onclick="document.getElementById('streakGuideOverlay').style.display='none'" style="background:transparent;border:1px solid var(--cyan-line);color:var(--text-1);padding:14px;border-radius:12px;width:100%;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Selvä, ymmärsin</button>
-    </div>
-</div>
-
-<!-- ═══ MIKSIGUIDEOVERLAY ═══ -->
-<div id="miksiGuideOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:9500;align-items:flex-end;justify-content:center;">
-    <div style="background:#111120;border:1px solid rgba(124,92,191,0.35);border-radius:20px 20px 0 0;padding:28px 24px 36px;max-width:430px;width:100%;max-height:85vh;overflow-y:auto;scrollbar-width:none;">
-        <div style="font-size:8px;color:var(--purple);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:10px;">Simon Sinek — Start With Why</div><div style="font-size:1.0rem;font-weight:300;color:var(--text-1);margin-bottom:16px;">Ihmiset eivät tee asioita siksi mitä tekevät — vaan siksi miksi tekevät.</div><div style="background:rgba(220,60,60,0.07);border:1px solid rgba(220,60,60,0.2);border-radius:12px;padding:13px 15px;margin-bottom:10px;"><div style="font-size:9px;color:rgba(220,110,110,0.9);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:7px;">Tavoitelähtöinen motivaatio (hauras)</div><div style="font-size:12px;color:var(--text-2);line-height:1.65;">"Haluan laihduttaa 10 kg." — Jos vaaka ei liiku tai elämä häiritsee, motivaatio katoaa. Tavoite on ulkoinen palkinto.</div></div><div style="background:rgba(0,200,240,0.06);border:1px solid rgba(0,200,240,0.2);border-radius:12px;padding:13px 15px;margin-bottom:16px;"><div style="font-size:9px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:7px;">Syvälähtöinen motivaatio (kestävä)</div><div style="font-size:12px;color:var(--text-2);line-height:1.65;">"Haluan olla energinen läsnä lasteni kanssa vielä 20 vuoden päästä." — Tätä motivaatiota ei voi ottaa pois.</div></div><div style="font-size:12px;color:var(--text-2);line-height:1.7;margin-bottom:4px;">Sparrauskehote liittää "Miksi"-lauseesi mukaan — jotta AI ymmärtää mikä sinulle oikeasti merkitsee.</div>
-        <button onclick="document.getElementById('miksiGuideOverlay').style.display='none'" style="background:transparent;border:1px solid var(--cyan-line);color:var(--text-1);padding:14px;border-radius:12px;width:100%;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Selvä, ymmärsin</button>
-    </div>
-</div>
-
-<!-- ═══ DEADLINEGUIDEOVERLAY ═══ -->
-<div id="deadlineGuideOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:9500;align-items:flex-end;justify-content:center;">
-    <div style="background:#111120;border:1px solid rgba(0,200,240,0.35);border-radius:20px 20px 0 0;padding:28px 24px 36px;max-width:430px;width:100%;max-height:85vh;overflow-y:auto;scrollbar-width:none;">
-        <div style="font-size:8px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:10px;">Deadline tekee abstraktista konkreettista</div><div style="font-size:1.0rem;font-weight:300;color:var(--text-1);margin-bottom:16px;">Muutoskone laskee tarvittavan päivätahdin automaattisesti.</div><div style="background:rgba(0,200,240,0.06);border:1px solid rgba(0,200,240,0.2);border-radius:12px;padding:13px 15px;margin-bottom:10px;"><div style="font-size:9px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:7px;">Mitä se näyttää?</div><div style="font-size:12px;color:var(--text-2);line-height:1.65;">Pelisivulla näet laskurin joka kertoo:<br>• Konkreettisen päivämäärän ja päivät jäljellä<br>• Tarvittavan XP-tahdin päivässä<br>• Onko nykyinen vauhtisi riittävä</div></div><div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:13px 15px;margin-bottom:16px;"><div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:7px;">Ilman deadlineä</div><div style="font-size:12px;color:var(--text-2);line-height:1.65;">Muutoskone laskee ennusteen nykyisen tahdin perusteella. Deadline lisää konkretiaa — mutta on täysin valinnainen.</div></div><div style="font-size:12px;color:var(--text-2);line-height:1.7;margin-bottom:4px;">💡 Realistinen deadline motivoi enemmän kuin epärealistinen. Parempi löysä deadline jonka saavutat.</div>
-        <button onclick="document.getElementById('deadlineGuideOverlay').style.display='none'" style="background:transparent;border:1px solid var(--cyan-line);color:var(--text-1);padding:14px;border-radius:12px;width:100%;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Selvä, ymmärsin</button>
-    </div>
-</div>
-
-<!-- ═══ BASELINEGUIDEOVERLAY ═══ -->
-<div id="baselineGuideOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:9500;align-items:flex-end;justify-content:center;">
-    <div style="background:#111120;border:1px solid rgba(124,92,191,0.35);border-radius:20px 20px 0 0;padding:28px 24px 36px;max-width:430px;width:100%;max-height:85vh;overflow-y:auto;scrollbar-width:none;">
-        <div style="font-size:8px;color:var(--purple);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:10px;">Vertailukohta joka inspiroi</div><div style="font-size:1.0rem;font-weight:300;color:var(--text-1);margin-bottom:16px;">Kun kirjoitat mistä lähdet, voit myöhemmin nähdä kuinka kauas olet tullut.</div><div style="background:rgba(0,200,240,0.06);border:1px solid rgba(0,200,240,0.2);border-radius:12px;padding:13px 15px;margin-bottom:10px;"><div style="font-size:9px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:7px;">Mitä kirjoittaa?</div><div style="font-size:12px;color:var(--text-2);line-height:1.65;">• Nykyinen tilanteesi tavoitteeseen nähden<br>• Mitä olet jo yrittänyt<br>• Arjen rajoitteet ja vahvuudet<br>• Mikä on tuntunut vaikealta<br><br><em style="color:var(--text-3);">Ei tarvitse olla täydellinen — rehellisyys riittää.</em></div></div><div style="font-size:12px;color:var(--text-2);line-height:1.7;margin-bottom:4px;">50% kohdalla: avaa lähtötilanne ja lue mitä kirjoitit. Useimmat hämmästyvät kuinka paljon ovat muuttuneet.</div>
-        <button onclick="document.getElementById('baselineGuideOverlay').style.display='none'" style="background:transparent;border:1px solid var(--cyan-line);color:var(--text-1);padding:14px;border-radius:12px;width:100%;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Selvä, ymmärsin</button>
-    </div>
-</div>
-
-<!-- ═══ QUOTEGUIDEOVERLAY ═══ -->
-<div id="quoteGuideOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:9500;align-items:flex-end;justify-content:center;">
-    <div style="background:#111120;border:1px solid rgba(124,92,191,0.35);border-radius:20px 20px 0 0;padding:28px 24px 36px;max-width:430px;width:100%;max-height:85vh;overflow-y:auto;scrollbar-width:none;">
-        <div style="font-size:8px;color:var(--purple);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:10px;">Omat sanat — paras motivaattori</div><div style="font-size:1.0rem;font-weight:300;color:var(--text-1);margin-bottom:16px;">Omat sanat toimivat paremmin kuin lainaukset.</div><div style="background:rgba(124,92,191,0.07);border:1px solid rgba(124,92,191,0.22);border-radius:12px;padding:13px 15px;margin-bottom:10px;"><div style="font-size:9px;color:var(--purple);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:7px;">Millainen on hyvä lause?</div><div style="font-size:12px;color:var(--text-2);line-height:1.65;">• Lyhyt — yksi virke tai jopa pelkkä sana<br>• Henkilökohtainen — kirjoitettu sinulle<br>• Toimintaan tähtäävä<br><br><em style="color:var(--text-3);">Esim: "Tänään riittää pienin teko." tai "Prosessi ennen tulosta."</em></div></div><div style="font-size:12px;color:var(--text-2);line-height:1.7;margin-bottom:4px;">Lauseesi näkyy pelisivulla joka päivä. Voit muokata sitä milloin tahansa.</div>
-        <button onclick="document.getElementById('quoteGuideOverlay').style.display='none'" style="background:transparent;border:1px solid var(--cyan-line);color:var(--text-1);padding:14px;border-radius:12px;width:100%;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Selvä, ymmärsin</button>
-    </div>
-</div>
-
-<!-- ═══ INTENTIOGUIDEOVERLAY ═══ -->
-<div id="intentioGuideOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:9500;align-items:flex-end;justify-content:center;">
-    <div style="background:#111120;border:1px solid rgba(0,200,240,0.35);border-radius:20px 20px 0 0;padding:28px 24px 36px;max-width:430px;width:100%;max-height:85vh;overflow-y:auto;scrollbar-width:none;">
-        <div style="font-size:8px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:10px;">Kirjoitettu suunnitelma toteutuu</div><div style="font-size:1.0rem;font-weight:300;color:var(--text-1);margin-bottom:16px;">2–3× todennäköisemmin toteutuva teko.</div><div style="background:rgba(0,200,240,0.06);border:1px solid rgba(0,200,240,0.2);border-radius:12px;padding:13px 15px;margin-bottom:10px;"><div style="font-size:9px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:7px;">Tutkimuspohja</div><div style="font-size:12px;color:var(--text-2);line-height:1.65;">Ihmiset jotka kirjoittavat etukäteen <em>milloin, missä ja miten</em> tekevät jonkin asian, tekevät sen 2–3× todennäköisemmin. Tätä kutsutaan toteutusaikomukseksi (implementation intention).</div></div><div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:13px 15px;margin-bottom:16px;"><div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:7px;">Miten kirjoittaa?</div><div style="font-size:12px;color:var(--text-2);line-height:1.65;"><em style="color:var(--green);">Hyvä: "Käyn 20 minuutin kävelyllä klo 18 töiden jälkeen."</em><br><em style="color:var(--text-3);">Ei niin hyvä: "Yritän liikkua enemmän."</em><br><br>Yksi lupaus itsellesi. Mitä pienempi ja konkreettisempi, sitä parempi.</div></div><div style="font-size:12px;color:var(--text-2);line-height:1.7;margin-bottom:4px;">Intentio ei ole lista kaikesta — se on yksi konkreettinen sitoumus tälle päivälle.</div>
-        <button onclick="document.getElementById('intentioGuideOverlay').style.display='none'" style="background:transparent;border:1px solid var(--cyan-line);color:var(--text-1);padding:14px;border-radius:12px;width:100%;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Selvä, ymmärsin</button>
     </div>
 </div>
 
@@ -788,22 +726,22 @@
         <input type="text" id="inIdentity" placeholder="Olen jo… (esim. Olen juoksija / Olen kirjoittaja)">
         <div style="font-size:10px;color:var(--text-3);margin-top:8px;line-height:1.5;">Muutos alkaa identiteetistä. Kirjoita se henkilö, joksi olet jo tulossa.</div>
     </div>
-    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Miksi tämä on tärkeää? <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span><button onclick="document.getElementById('miksiGuideOverlay').style.display='flex'" style="background:rgba(124,92,191,0.12);border:1px solid rgba(124,92,191,0.3);color:var(--purple);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div><textarea id="inWhy" rows="2" placeholder="Mikä on perimmäinen syy?"></textarea></div>
+    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Miksi tämä on tärkeää? <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div><textarea id="inWhy" rows="2" placeholder="Mikä on perimmäinen syy?"></textarea></div>
     <div class="card"><div class="lbl"><span class="lbl-dot"></span>Vaikeuskerroin <button onclick="openDiffGuide('setup')" style="background:rgba(0,200,240,0.1);border:1px solid rgba(0,200,240,0.25);color:var(--cyan);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:auto;">Mikä sopii minulle?</button></div>
         <select id="inV"><option value="1000">1 000 XP — Uusi tapa</option><option value="5000" selected>5 000 XP — Merkittävä muutos</option><option value="10000">10 000 XP — Elämänmuutos</option><option value="100000">100 000 XP — Mestari</option></select>
     </div>
-    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Tavoitepäivä <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span><button onclick="document.getElementById('deadlineGuideOverlay').style.display='flex'" style="background:rgba(0,200,240,0.1);border:1px solid rgba(0,200,240,0.25);color:var(--cyan);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div>
+    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Tavoitepäivä <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div>
         <input type="date" id="inDeadline" style="color-scheme:dark;">
         <div style="font-size:10px;color:var(--text-3);margin-top:6px;line-height:1.5;">Muutoskone laskee tarvittavan päivätahdin automaattisesti.</div>
     </div>
-    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Rutiinit <button onclick="document.getElementById('routinesGuideOverlay').style.display='flex'" style="background:rgba(0,200,240,0.1);border:1px solid rgba(0,200,240,0.25);color:var(--cyan);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div>
+    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Rutiinit</div>
         <div class="xp-row"><span class="xp-tag">1 XP</span><input type="text" id="inR1" placeholder="Mikrotehtävä — 1–10 min"></div>
         <div class="xp-row"><span class="xp-tag">5 XP</span><input type="text" id="inR5" placeholder="Harppaus — 15–30 min"></div>
         <div class="xp-row"><span class="xp-tag">20 XP</span><input type="text" id="inR20" placeholder="Panostus — 45–90 min"></div>
         <div class="xp-row"><span class="xp-tag">50 XP</span><input type="text" id="inR50" placeholder="Uroteko — 2–4 h"></div>
     </div>
-    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Lähtötilanne <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span><button onclick="document.getElementById('baselineGuideOverlay').style.display='flex'" style="background:rgba(124,92,191,0.12);border:1px solid rgba(124,92,191,0.3);color:var(--purple);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div><textarea id="inBaseline" rows="3" placeholder="Kuvaile nykytilasi. Mistä lähdet?"></textarea><div class="baseline-autosave" id="baselineAutosave">Tallennettu</div></div>
-    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Oma motivaatiolause <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span><button onclick="document.getElementById('quoteGuideOverlay').style.display='flex'" style="background:rgba(124,92,191,0.12);border:1px solid rgba(124,92,191,0.3);color:var(--purple);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div><input type="text" id="inQuote" placeholder="Mikä pitää sinut liikkeellä?"></div>
+    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Lähtötilanne <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div><textarea id="inBaseline" rows="3" placeholder="Kuvaile nykytilasi. Mistä lähdet?"></textarea><div class="baseline-autosave" id="baselineAutosave">Tallennettu</div></div>
+    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Oma motivaatiolause <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div><input type="text" id="inQuote" placeholder="Mikä pitää sinut liikkeellä?"></div>
     <button class="btn-primary" onclick="start()">Käynnistä</button>
     <div class="card card-accent" style="margin-top:16px;">
         <div class="lbl"><span class="lbl-dot"></span>Strategia-apuri</div>
@@ -830,8 +768,8 @@
     <!-- STATUS CARD -->
     <div class="status-card">
         <div class="sc-micro">
-            <div class="micro-item"><span class="micro-val-orange" id="streakNum">0</span><span class="micro-lbl">pv putki</span><button onclick="document.getElementById('streakGuideOverlay').style.display='flex'" style="background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.25);color:var(--orange);border-radius:5px;padding:1px 6px;font-size:8px;font-weight:600;cursor:pointer;font-family:inherit;margin-left:4px;">?</button></div>
-            <div class="micro-item"><span class="micro-lbl">kerroin</span><span class="micro-val-cyan" id="multNum">×1.00</span><button onclick="document.getElementById('kerroinGuideOverlay').style.display='flex'" style="background:rgba(0,200,240,0.08);border:1px solid rgba(0,200,240,0.2);color:rgba(0,200,240,0.6);border-radius:5px;padding:1px 6px;font-size:8px;font-weight:600;cursor:pointer;font-family:inherit;margin-left:4px;">?</button></div>
+            <div class="micro-item"><span class="micro-val-orange" id="streakNum">0</span><span class="micro-lbl">pv putki</span></div>
+            <div class="micro-item"><span class="micro-lbl">kerroin</span><span class="micro-val-cyan" id="multNum">×1.00</span></div>
         </div>
         <div class="days-row">
             <div class="days-val" id="valM">—</div>
@@ -923,7 +861,7 @@
  
     <!-- INTENTIO -->
     <div class="toggle-row" onclick="togglePanel('intentio')">
-        <div class="toggle-row-lbl"><span class="lbl-dot"></span>Päivän intentio<button onclick="event.stopPropagation();document.getElementById('intentioGuideOverlay').style.display='flex'" style="background:rgba(0,200,240,0.1);border:1px solid rgba(0,200,240,0.25);color:var(--cyan);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;margin-left:8px;">?</button><span class="toggle-preview" id="intentioPreview"></span></div>
+        <div class="toggle-row-lbl"><span class="lbl-dot"></span>Päivän intentio<span class="toggle-preview" id="intentioPreview"></span></div>
         <span class="toggle-arrow" id="intentioArrow">▾</span>
     </div>
     <div class="toggle-body" id="intentioBody">
@@ -1515,7 +1453,11 @@ function updateUI(){
     let dv='—';if(g().total>=g().v){dv='0';}else{const est=calculateDaysToGoal();if(est!==null)dv=String(g().lowestEstimate!==null?Math.min(est,g().lowestEstimate):est);}document.getElementById('valM').innerText=dv;
     MILESTONES.forEach(ms=>{const el=document.getElementById(`ms${ms}`),lbl=document.getElementById(`mslbl${ms}`);if(!el)return;if(g().passedMilestones.includes(ms)||(ms===100&&g().total>=g().v)){el.className='ms done';if(lbl)lbl.className='ms-lbl done-lbl';}else if(pct>=ms*0.75){el.className='ms near';}else{el.className='ms';}});
     const levels=[{base:1,name:g().r1,cls:'rbtn-1',dot:'rdot-1',xpCls:'rxp-1'},{base:5,name:g().r5,cls:'rbtn-5',dot:'rdot-5',xpCls:'rxp-5'},{base:20,name:g().r20,cls:'rbtn-20',dot:'rdot-20',xpCls:'rxp-20'},{base:50,name:g().r50,cls:'rbtn-50',dot:'rdot-50',xpCls:'rxp-50'}];
-    document.getElementById('taskList').innerHTML=levels.map(l=>{const xp=Math.round(l.base*multi);return`<button class="rbtn ${l.cls}" onclick="addXP(${l.base},'${escQ(l.name)}',event)"><div class="rbtn-inner"><div class="rbtn-left"><span class="rbtn-dot ${l.dot}"></span><div class="rbtn-text"><span class="rbtn-name">${l.name}</span><span class="rbtn-min"><span style="color:var(--cyan);opacity:0.7;font-weight:500;">${XP_LABELS[l.base]}</span> · ${MINS[l.base]}</span></div></div><span class="rbtn-xp ${l.xpCls}">+${xp}</span></div></button>`;}).join('');
+    {const today=getTodayStr();const todayXP=g().weekLog[today]||0;const dg=g().dailyGoal||0;
+    document.getElementById('taskList').innerHTML=levels.map(l=>{const xp=Math.round(l.base*multi);
+    const progPct=dg>0?Math.min(100,Math.round((todayXP/dg)*100)):0;
+    const progBar=dg>0?`<div class="rbtn-progress" style="width:${progPct}%"></div>`:'';
+    return`<button class="rbtn ${l.cls}" onclick="addXP(${l.base},'${escQ(l.name)}',event)"><div class="rbtn-inner"><div class="rbtn-left"><span class="rbtn-dot ${l.dot}"></span><div class="rbtn-text"><span class="rbtn-name">${l.name}</span><span class="rbtn-min"><span style="color:var(--cyan);opacity:0.7;font-weight:500;">${XP_LABELS[l.base]}</span> · ${MINS[l.base]}</span></div></div><span class="rbtn-xp ${l.xpCls}">+${xp}</span></div>${progBar}</button>`;}).join('');}
     renderHeatmap();updateSignal();updateMomentum();renderTabs();initDailyGoal();
     // Uudet ominaisuudet
     document.getElementById('statAvg').innerText=avg||'—';
@@ -1633,24 +1575,44 @@ function updateIdentityNudge(){
 
 /* ── VIIKKOHAASTE ── */
 const WEEK_CHALLENGES=[
-    'Tee ainakin {r1}, älä turhaan jätä yhtäkään päivää väliin.',
-    'Tee vähintään yksi {r20} tällä viikolla — varaa aika kalenteriin jo nyt.',
+    'Tee ainakin {r1} joka ikinen päivä — älä jätä yhtäkään välistä. 7/7.',
+    'Tee vähintään yksi {r20} tällä viikolla. Varaa aika kalenteriin heti nyt.',
     'Kokeile {r1} eri kellonaikaan kuin normaalisti. Löydä parempi hetki.',
     'Kirjoita päivittäin intentio ennen kuin aloitat tekemisen.',
-    'Tee {r5} kolme kertaa ennen klo 10. Aamutekeminen muuttaa päivän.',
+    'Tee {r5} kolme kertaa ennen klo 10. Aamutekeminen muuttaa koko päivän.',
     'Jaa edistymisesi jollekin tällä viikolla. Vastuullisuus kaksinkertaistaa tulokset.',
     'Varaa joka ilta 5 min: mitä tein tänään? Kirjoita muistiinpano.',
-    'Yhdistä {r1} jo olemassa olevaan tottumukseen (kahvi, ruokailu, hampaiden pesu).',
+    'Yhdistä {r1} jo olemassa olevaan tottumukseen — kahviin, ruokailuun tai hampaiden pesuun.',
     'Tee {r1} heti kun heräät — ennen puhelimen katsomista.',
-    'Viikon tavoite: {weekXP} XP. Se on saavutettavissa — laske itse.',
+    'Viikon tavoite: {weekXP} XP. Jaa se seitsemälle päivälle — se on {dailyXP} XP/pv.',
+    'Tee {r20} ja kirjoita sen jälkeen yksi lause: mitä opin?',
+    'Kokeile "ei nollapäiviä" -sääntöä. Pienikin {r1} on voitto — nollapäivät eivät kuulu peliin.',
+    'Aseta itsellesi äänihälytys joka päivä klo {hr} — se on rutiinisi aika tällä viikolla.',
+    'Tee {r50} — tai suunnittele milloin teet sen ensi viikolla.',
+    'Vie {r5} ulkotiloihin tai eri ympäristöön. Uusi ympäristö, uusi energia.',
+    'Kerro ääneen tai kirjoita: "Olen {identity}." Sano se ennen jokaista rutiinia.',
+    'Tee {r1} välittömästi kun olet lukenut tämän. Lämmittelyä ei tarvita.',
+    'Laske: kuinka monta XP:tä tarvitset saavuttaaksesi tavoitteesi? Jaa viikkoihin.',
+    'Palkitse itsesi viikon lopussa jos keräät {weekXP} XP. Päätä palkinnoista nyt.',
+    'Arvioi: mikä rutiini on helpoin? Tuplaa se tällä viikolla.',
 ];
 function getWeekChallengeText(){
     if(!g())return'';
     const weekXP=Math.max(20,Math.round((g().total/Math.max(g().days,1))*7));
+    const dailyXP=Math.ceil(weekXP/7);
+    const hr=['07','08','09','17','18','19','20'][Math.floor(Math.random()*7)];
     const seed=(g().weekChallengeIdx!==undefined)?g().weekChallengeIdx:
         (getISOWeekStr()+g().id).split('').reduce((a,c)=>a+c.charCodeAt(0),0)%WEEK_CHALLENGES.length;
     let txt=WEEK_CHALLENGES[seed%WEEK_CHALLENGES.length];
-    return txt.replace('{r1}',g().r1||'mikrotehtävä').replace('{r5}',g().r5||'harppaus').replace('{r20}',g().r20||'panostus').replace('{weekXP}',weekXP);
+    return txt
+        .replace('{r1}',g().r1||'mikrotehtävä')
+        .replace('{r5}',g().r5||'harppaus')
+        .replace('{r20}',g().r20||'panostus')
+        .replace('{r50}',g().r50||'uroteko')
+        .replace('{weekXP}',weekXP)
+        .replace('{dailyXP}',dailyXP)
+        .replace('{identity}',g().identity||'muutoksen tekijä')
+        .replace('{hr}',hr+':00');
 }
 function newWeekChallenge(){
     if(!g())return;
