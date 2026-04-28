@@ -745,7 +745,7 @@
     <button class="btn-primary" onclick="start()">Käynnistä</button>
     <div class="card card-accent" style="margin-top:16px;">
         <div class="lbl"><span class="lbl-dot"></span>Strategia-apuri</div>
-        <p class="ai-desc">Epävarma parametreista? Tekoäly auttaa kalibroimaan ne tilanteesi pohjalta.</p>
+        <p class="ai-desc">Oletko epävarma vaikeuskertoimesta, tai rutiineista? Tekoäly auttaa kalibroimaan ne tilanteesi pohjalta.</p>
         <ol class="ai-steps"><li>Kopioi kehote alla olevasta napista.</li><li>Avaa <a href="https://gemini.google.com" target="_blank">Gemini</a> ja liitä se sinne.</li><li>Palaa ja syötä AI:n ehdottamat arvot.</li></ol>
         <button class="btn-ai" id="copyAiBtn" onclick="copyAiPrompt()">Kopioi strategiakehote</button>
     </div>
@@ -1635,11 +1635,11 @@ function closeIdentityGuide(){document.getElementById('identityGuideOverlay').st
 function getBaselinePart(){const bl=state.goals.length>0?g().baseline:draft.baseline;return bl?`\n\nLähtötilanne:\n"${bl}"`:''}
 function copyNewGoalPrompt(){
     const goal=document.getElementById('ngGoal').value.trim()||'(ei vielä)';const why=document.getElementById('ngWhy').value.trim();const baseline=document.getElementById('ngBaseline').value.trim();
-    const txt=`Olet MUUTOSKONE-järjestelmän strateginen suunnittelija.\n\nLogiikka:\n— 1 000 XP ≈ 100 h | 5 000 XP ≈ 500 h | 10 000 XP ≈ 1 000 h\n— Rutiinit: 1 XP (1–10 min), 5 XP (15–30 min), 20 XP (45–90 min), 50 XP (2–4 h)\n— Kertymäkerroin 1.0 → 2.0 päiville 1–84\n\nTavoitteeni: ${goal}${why?'\nMiksi: '+why:''}${baseline?'\nLähtötilanne: '+baseline:''}\n\nVaihe 1 — Kysy tarkentavia kysymyksiä yksi kerrallaan.\nVaihe 2 — Perustele vaikeuskerroin, luo rutiinikirjasto, laske aikajana.\n\nAloita vaiheesta 1.`;
+    const txt=`Olet MUUTOSKONE-järjestelmän strateginen suunnittelija.\n\nLogiikka:\n— vaikeuskertoimet ovat valittavissa näistä neljästä: 1 000 XP ≈ 100 h | 5 000 XP ≈ 500 h | 10 000 XP ≈ 1 000 h\n— Rutiinit: 1 XP (1–10 min), 5 XP (15–30 min), 20 XP (45–90 min), 50 XP (2–4 h)\n— Kertymäkerroin 1.0 → 2.0 päiville 1–84\n\nTavoitteeni: ${goal}${why?'\nMiksi: '+why:''}${baseline?'\nLähtötilanne: '+baseline:''}\n\nVaihe 1 — Kysy tarkentavia kysymyksiä yksi kerrallaan.\nVaihe 2 — Perustele vaikeuskerroin, luo rutiinikirjasto, laske aikajana.\n\nAloita vaiheesta 1.`;
     navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyNgAiBtn');b.innerText='Kopioitu';setTimeout(()=>{b.innerText='Kopioi strategiakehote tälle tavoitteelle';},2200);});
 }
 function copyAiPrompt(){
-    const txt=`Olet MUUTOSKONE-järjestelmän strateginen suunnittelija.\n\nLogiikka:\n— 1 000 XP ≈ 100 h | 5 000 XP ≈ 500 h | 10 000 XP ≈ 1 000 h | 100 000 XP ≈ 10 000 h\n— Rutiinit: 1 XP (1–10 min), 5 XP (15–30 min), 20 XP (45–90 min), 50 XP (2–4 h)\n— Kertymäkerroin 1.0 → 2.0 päiville 1–84${getBaselinePart()}\n\nEtene yksi askel kerrallaan.\n\nVaihe 1 — Esittele itsesi. Kysy tavoitteeni.\nVaihe 2 — Kysy arjen rajoitteet.\nVaihe 3 — Kysy realistinen päivittäinen XP-kapasiteetti.\nVaihe 4 — Vaikeuskerroin, rutiinikirjasto, aikajana, kriittinen muuttuja.\n\nAloita vaiheesta 1.`;
+    const txt=`Olet MUUTOSKONE-järjestelmän strateginen suunnittelija.\n\nLogiikka:\n— vaikeuskertoimet ovat valittavissa näistä neljästä: 1 000 XP ≈ 100 h | 5 000 XP ≈ 500 h | 10 000 XP ≈ 1 000 h | 100 000 XP ≈ 10 000 h\n— Rutiinit: 1 XP (1–10 min), 5 XP (15–30 min), 20 XP (45–90 min), 50 XP (2–4 h)\n— Kertymäkerroin 1.0 → 2.0 päiville 1–84${getBaselinePart()}\n\nEtene yksi askel kerrallaan.\n\nKysy kysmykset yksi kerrallaan. Vaihe 1 — Esittele itsesi. Kysy tavoitteeni.\nVaihe 2 — Kysy arjen rajoitteet.\nVaihe 3 —anna vaikeuskerroin.\nVaihe 4 — Anna rutiinikirjasto,, \nVaihe 5 Kysy realistinen päivittäinen XP-kapasiteetti \nVaihe 6 aikajana, \nVaihe 7 kriittinen muuttuja.\n\nAloita vaiheesta 1.`;
     navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyAiBtn');b.innerText='Kopioitu';setTimeout(()=>{b.innerText='Kopioi strategiakehote';},2200);});
 }
 function copyMentorPrompt(){
@@ -1648,7 +1648,7 @@ function copyMentorPrompt(){
     const todayNote=g().dayNotes&&g().dayNotes[today]?g().dayNotes[today]:'';
     const identityLine=g().identity?`· Identiteetti: "${g().identity}"\n`:'';const whyLine=g().why?`· Miksi tämä on tärkeää: "${g().why}"\n`:'';
     const dgLine=g().dailyGoal?`· Päivätavoite: ${todayXP}/${g().dailyGoal} XP\n`:'';
-    const txt=`Olet MUUTOSKONE-järjestelmän sparrauskumppani.\n\nTämänhetkinen datani:\n· Tavoite: ${g().goal}\n${identityLine}${whyLine}· Edistyminen: ${g().total.toLocaleString('fi-FI')} / ${g().v.toLocaleString('fi-FI')} XP (${pct}%)\n· Päivä: ${g().days} | Putki: ${g().streak} pv | Momentum: ${momentum}%\n${dgLine}· Keskitahti: ${avg} XP/pv | Tänään: ${todayXP} XP | Paras pv: ${g().bestDay} XP\n· Kertymäkerroin: ×${getMultiplier().toFixed(2)}\n· Tämän päivän intentio: "${intentioTxt}"${todayNote?'\n· Päivän muistiinpano: "'+todayNote.slice(0,200)+'"':''}${getBaselinePart()}\n\nTyylisi: Ole lämmin mutta suora. Fokus eteenpäin.\n\n1. Kerro yksi positiivinen asia datasta. Kysy: mikä tuntuu haastavimmalta?\n2. Anna 2–3 konkreettista ideaa seuraavaan askeleeseen.\n3. Kommentoi momentumia (${momentum}%).\n4. Lopeta yhdellä lauseella.\n\nAloita kohdasta 1.`;
+    const txt=`Olet MUUTOSKONE-järjestelmän sparrauskumppani.\n\nTämänhetkinen datani:\n· Tavoite: ${g().goal}\n${identityLine}${whyLine}· Edistyminen: ${g().total.toLocaleString('fi-FI')} / ${g().v.toLocaleString('fi-FI')} XP (${pct}%)\n· Päivä: ${g().days} | Putki: ${g().streak} pv | Momentum: ${momentum}%\n${dgLine}· Keskitahti: ${avg} XP/pv | Tänään: ${todayXP} XP | Paras pv: ${g().bestDay} XP\n· Kertymäkerroin: ×${getMultiplier().toFixed(2)}\n· Tämän päivän intentio: "${intentioTxt}"${todayNote?'\n· Päivän muistiinpano: "'+todayNote.slice(0,200)+'"':''}${getBaselinePart()}\n\nTyylisi: Ole lämmin mutta suora. Fokus eteenpäin.\n\n1. Kerro yksi positiivinen asia datasta. Kysy: mikä tuntuu haastavimmalta?\n2. Anna 2–3 konkreettista ideaa seuraavaan askeleeseen.\n3. Lopeta yhdellä lauseella.\n\nAloita kohdasta 1.`;
     navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyMentorBtn');b.innerText='Kopioitu';setTimeout(()=>{b.innerText='Kopioi sparrauskehote';},2200);});
 }
  
