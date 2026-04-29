@@ -197,13 +197,13 @@
         .quote-hint{font-size:9px;color:var(--text-3);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;display:flex;justify-content:space-between;}
  
         /* ROUTINE BUTTONS */
-        .routine-grid{display:flex;flex-direction:column;gap:7px;margin-bottom:9px;}
-        .rbtn{border:none;border-radius:14px;padding:0;cursor:pointer;width:100%;font-family:inherit;position:relative;overflow:hidden;transition:transform 0.12s ease,box-shadow 0.15s ease;}
+        .routine-grid{display:flex;flex-direction:column;gap:5px;margin-bottom:9px;}
+        .rbtn{border:none;border-radius:12px;padding:0;cursor:pointer;width:100%;font-family:inherit;position:relative;overflow:hidden;transition:transform 0.12s ease,box-shadow 0.15s ease;}
         .rbtn::after{content:'';position:absolute;inset:0;background:white;opacity:0;transition:opacity 0.3s;border-radius:14px;}
         .rbtn.flash::after{animation:btnFlash 0.4s ease-out;}
         @keyframes btnFlash{0%{opacity:0.15}100%{opacity:0}}
         .rbtn:active{transform:scale(0.965);}
-        .rbtn-inner{display:flex;justify-content:space-between;align-items:center;padding:15px 18px;}
+        .rbtn-inner{display:flex;justify-content:space-between;align-items:center;padding:11px 15px;}
         .rbtn-1{background:var(--grad-r1);border:1px solid var(--border-r1);}
         .rbtn-5{background:var(--grad-r5);border:1px solid var(--border-r5);box-shadow:0 2px 14px rgba(124,92,191,0.14);}
         .rbtn-20{background:var(--grad-r20);border:1px solid var(--border-r20);box-shadow:0 2px 16px rgba(0,160,210,0.16);}
@@ -219,13 +219,13 @@
         .rdot-20{background:rgba(0,190,230,0.85);box-shadow:0 0 6px rgba(0,160,210,0.55);}
         .rdot-50{background:var(--cyan);box-shadow:0 0 9px rgba(0,200,240,0.75);}
         .rbtn-text{display:flex;flex-direction:column;gap:2px;}
-        .rbtn-name{font-size:13px;font-weight:400;color:var(--text-1);line-height:1.3;}
+        .rbtn-name{font-size:12px;font-weight:400;color:var(--text-1);line-height:1.2;}
         .rbtn-50 .rbtn-name{font-weight:500;}
-        .rbtn-min{font-size:10px;color:var(--text-3);}
+        .rbtn-min{font-size:9px;color:var(--text-3);}
         .rbtn-progress{position:absolute;bottom:0;left:0;height:2px;background:rgba(0,200,240,0.5);border-radius:0 0 14px 14px;transition:width 0.6s ease;pointer-events:none;}
         .rbtn-50 .rbtn-progress{background:rgba(0,200,240,0.7);}
         .rbtn-50 .rbtn-min{color:rgba(0,200,240,0.5);}
-        .rbtn-xp{font-size:15px;font-weight:600;white-space:nowrap;margin-left:8px;}
+        .rbtn-xp{font-size:14px;font-weight:600;white-space:nowrap;margin-left:8px;}
         .rxp-1{color:var(--text-2);font-weight:400;font-size:14px;}
         .rxp-5{background:linear-gradient(135deg,#c4b0f0,#8b70d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
         .rxp-20{background:linear-gradient(135deg,#5cdaf5,#00a8d0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
@@ -265,8 +265,11 @@
         /* HEAT MAP */
         .heatmap-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px 18px;margin-bottom:9px;}
         .heatmap-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
-        .heatmap-grid{display:grid;grid-template-columns:repeat(18,1fr);gap:3px;}
-        .hm-cell{aspect-ratio:1;border-radius:2px;transition:opacity 0.2s;}
+        .heatmap-wrap{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+        .heatmap-wrap::-webkit-scrollbar{display:none;}
+        .heatmap-grid{display:grid;grid-template-rows:repeat(7,1fr);grid-auto-flow:column;gap:3px;min-width:100%;}
+        .heatmap-grid-inner{display:inline-grid;grid-template-rows:repeat(7,12px);grid-auto-columns:12px;grid-auto-flow:column;gap:3px;}
+        .hm-cell{width:12px;height:12px;border-radius:2px;transition:opacity 0.2s;flex-shrink:0;}
         .hm-cell:hover{opacity:0.7;}
         .hm-0{background:rgba(255,255,255,0.05);}
         .hm-1{background:rgba(124,92,191,0.35);}
@@ -408,7 +411,17 @@
         .ob-slide{position:absolute;inset:0;opacity:0;transform:translateX(40px);transition:opacity 0.4s ease,transform 0.4s ease;pointer-events:none;display:flex;flex-direction:column;align-items:center;text-align:center;justify-content:center;}
         .ob-slide.active{opacity:1;transform:translateX(0);pointer-events:auto;}
         .ob-slide.exit{opacity:0;transform:translateX(-40px);}
-        .ob-icon{font-size:2.8rem;margin-bottom:18px;line-height:1;}
+        .ob-icon{width:48px;height:48px;margin:0 auto 18px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;position:relative;}
+        .ob-icon::before{content:'';position:absolute;width:16px;height:16px;background:var(--cyan);border-radius:2px;opacity:0.7;}
+        .ob-icon-bolt::before{background:var(--grad);clip-path:polygon(60% 0%,20% 50%,55% 50%,40% 100%,80% 45%,45% 45%);width:18px;height:18px;}
+        .ob-icon-xp::before{border-radius:50%;background:var(--cyan);}
+        .ob-icon-identity::before{border-radius:50%;background:var(--purple);width:12px;height:12px;}
+        .ob-icon-streak::before{background:var(--orange);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);width:18px;height:18px;opacity:0.85;}
+        .ob-icon-reflect::before{border-radius:1px;background:rgba(255,255,255,0.5);width:12px;height:14px;}
+        .ob-icon-stats::before{background:var(--grad-text);border-radius:1px;clip-path:polygon(0 80%,25% 80%,25% 40%,25% 40%,50% 40%,50% 20%,50% 20%,75% 20%,75% 60%,75% 60%,100% 60%,100% 80%);width:18px;height:14px;}
+        .ob-icon-start::before{background:var(--grad);clip-path:polygon(0 0,100% 50%,0 100%);border-radius:0;width:14px;height:14px;}
+        .rec-ov-fire{font-size:2rem;margin-bottom:14px;animation:shake 0.5s ease;color:var(--orange);display:block;text-align:center;}
+        .rec-ov-fire::after{content:'—';font-size:2rem;color:var(--orange);}
         .ob-title{font-size:1.25rem;font-weight:300;color:var(--text-1);margin-bottom:12px;letter-spacing:-0.5px;}
         .ob-body{font-size:13px;color:var(--text-2);line-height:1.75;font-weight:300;max-width:290px;}
         .ob-body strong{color:var(--cyan);font-weight:500;}
@@ -434,6 +447,14 @@
         #offlineBadge{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(249,115,22,0.12);border:1px solid rgba(249,115,22,0.28);color:rgba(249,115,22,0.85);padding:7px 16px;border-radius:30px;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:500;z-index:8000;display:none;white-space:nowrap;}
         .baseline-autosave{font-size:10px;color:var(--green);letter-spacing:1px;margin-top:6px;opacity:0;transition:opacity 0.3s;min-height:14px;}
         .baseline-autosave.show{opacity:1;}
+        .stat-q{font-size:7px;color:var(--text-3);border:1px solid var(--border);border-radius:3px;padding:0 3px;cursor:pointer;letter-spacing:0;vertical-align:middle;transition:color 0.2s;}
+        .stat-help-btn{background:transparent;border:1px solid var(--border);color:var(--text-3);border-radius:4px;padding:1px 5px;font-size:8px;cursor:pointer;font-family:inherit;line-height:1.2;vertical-align:middle;}
+        #statGuideOverlay{position:fixed;inset:0;z-index:8800;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,0.72);}
+        #statGuideOverlay.show{display:flex;}
+        .sg-card{background:#111120;border:1px solid rgba(255,255,255,0.11);border-radius:20px 20px 0 0;padding:28px 24px 44px;max-width:430px;width:100%;}
+        .sg-title{font-size:11px;font-weight:600;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;}
+        .sg-body{font-size:13px;color:var(--text-2);line-height:1.75;font-weight:300;}
+        .sg-val{font-size:24px;font-weight:200;color:var(--text-1);margin-bottom:8px;}
     </style>
 </head>
 <body>
@@ -443,12 +464,12 @@
     <div class="ob-progress" id="obProgress"></div>
     <div class="ob-slides">
         <div class="ob-slide active" data-slide="0">
-            <div class="ob-icon">⚡</div>
+            <div class="ob-icon ob-icon-bolt"></div>
             <div class="ob-title">Tervetuloa Muutoskoneeseen</div>
             <div class="ob-body">Muutoskone on henkilökohtainen työkalu, joka perustuu <strong>XP:n-keräämiseen</strong> — eli samaan logiikkaan kuin videopeleissä, mutta sovellettuna oikeisiin tavoitteisiin.<br><br>Teet pieniä tekoja päivittäin ja kun ne kertyvät muutos on väistämätön! <br>  <br> Voit toteuttaa tällä koneella minkä tavoitteen tahansa.  </div>
         </div>
         <div class="ob-slide" data-slide="1">
-            <div class="ob-icon">🎯</div>
+            <div class="ob-icon ob-icon-xp"></div>
             <div class="ob-title">Miten XP toimii?</div>
             <div class="ob-body">
                 <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-bottom:12px;">
@@ -461,28 +482,28 @@
             </div>
         </div>
         <div class="ob-slide" data-slide="2">
-            <div class="ob-icon">🧠</div>
+            <div class="ob-icon ob-icon-identity"></div>
             <div class="ob-title">Identiteetti ensin</div>
             <div class="ob-body">Todellinen muutos ei synny tavoitteita tuijottamalla,<span class="hl-purple">vaan muuttamalla käsitystä itsestäsi.
 </span>.<br><br>Älä sano <em>"haluan juosta"</em>. Sano <span class="hl-purple">"Olen juoksija"</span>.<br><br>Muutoskone kirkastaa tätä kuvaa joka päivä.</div>
         </div>
         <div class="ob-slide" data-slide="3">
-            <div class="ob-icon">🔥</div>
+            <div class="ob-icon ob-icon-streak"></div>
             <div class="ob-title">Aktiivisuusputki &amp; draivi</div>
             <div class="ob-body"><span class="hl-orange">Aktiivisuusputki</span> lasketaan peräkkäisistä päivistä. Yksi ohitettu päivä viikossa ei nollaa putkea — sinulla on <strong>armopäivä</strong>.<br><br><span class="hl-green">Draivi-palkki</span> kertoo onko vauhti kiihtymässä vai hiipumassa.</div>
         </div>
         <div class="ob-slide" data-slide="4">
-            <div class="ob-icon">📓</div>
+            <div class="ob-icon ob-icon-reflect"></div>
             <div class="ob-title">Reflektio juurruttaa muutoksen</div>
             <div class="ob-body"><strong>Päivän intentio</strong> — kirjoita aamulla mitä teet tänään.<br><br><strong>Muistiinpanot</strong> — "mitä opin tänään?" Tallentuu päiväkohtaisesti.<br><br><strong>Maanantai-reflektio</strong> — paras asia viime viikolla. Muutos vaatii oivalluksia. Pysähtyminen onnistumisen äärelle opettaa aivoillesi, että uusi suuntasi on oikea.</div>
         </div>
         <div class="ob-slide" data-slide="5">
-            <div class="ob-icon">📊</div>
+            <div class="ob-icon ob-icon-stats"></div>
             <div class="ob-title">Näe edistymisesi</div>
             <div class="ob-body"><strong>Aktiivisuuskartta</strong> — 126 päivän aktiivisuuskartta.<br><br><strong>Päiväkohtainen XP-tavoite</strong> — aseta oma tavoite ja seuraa miten se täyttyy.<br><br></div>
         </div>
         <div class="ob-slide" data-slide="6">
-            <div class="ob-icon">🚀</div>
+            <div class="ob-icon ob-icon-start"></div>
             <div class="ob-title">Olet valmis.</div>
             <div class="ob-body">Kaikki data tallentuu <strong>vain omalle laitteellesi</strong>. Ei rekisteröitymistä, ei pilveä, ei mainoksia.<br><br>Täytä tavoite, identiteetti ja rutiinit. AI-työkalu auttaa sinua, jos olet epävarma.<br><br><span class="hl-green">Ensimmäinen teko on tärkein.</span></div>
         </div>
@@ -521,7 +542,7 @@
     <button class="btn-primary" onclick="closeVictory()" style="max-width:180px;margin:0 auto;">Jatka</button>
 </div>
 <div id="recoveryOverlay">
-    <div class="rec-ov-icon">🔥</div>
+    <div class="rec-ov-icon rec-ov-fire"></div>
     <div class="ov-kicker" style="color:var(--orange);">Putki katkesi</div>
     <div class="ov-title" style="font-size:1.8rem;">Aloita uudelleen.</div>
     <div class="rec-days" id="recDays"></div>
@@ -548,6 +569,7 @@
         <div class="ng-title">Uusi tavoite</div>
         <div class="ng-section"><div class="ng-label">Tavoite</div><div class="ng-input"><input type="text" id="ngGoal" placeholder="Mitä haluat saavuttaa?"></div></div>
         <div class="ng-section"><div class="ng-label">Identiteetti <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span> <button onclick="openIdentityGuide()" style="background:rgba(124,92,191,0.12);border:1px solid rgba(124,92,191,0.3);color:var(--purple);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:4px;">?</button></div><div class="ng-input"><input type="text" id="ngIdentity" placeholder="Olen jo… (esim. Olen juoksija)"></div></div>
+        <div class="ng-section"><div class="ng-label">Lähtötilanne <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div><div class="ng-input"><textarea id="ngBaseline" rows="2" placeholder="Mistä lähdet?"></textarea></div></div>
         <div class="ng-section"><div class="ng-label">Miksi tämä on tärkeää? <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div><div class="ng-input"><textarea id="ngWhy" rows="2" placeholder="Mikä on perimmäinen syy?"></textarea></div></div>
         <div class="ng-section">
             <div class="ng-label">Vaikeuskerroin <button onclick="openDiffGuide('ng')" style="background:rgba(0,200,240,0.1);border:1px solid rgba(0,200,240,0.25);color:var(--cyan);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div>
@@ -560,7 +582,6 @@
             <div class="ng-xp-row"><span class="ng-xp-tag">20 XP</span><input type="text" id="ngR20" placeholder="Panostus — 45–90 min"></div>
             <div class="ng-xp-row"><span class="ng-xp-tag">50 XP</span><input type="text" id="ngR50" placeholder="Uroteko — 2–4 h"></div>
         </div>
-        <div class="ng-section"><div class="ng-label">Lähtötilanne <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div><div class="ng-input"><textarea id="ngBaseline" rows="2" placeholder="Mistä lähdet?"></textarea></div></div>
         <div class="ng-section"><div class="ng-label">Oma motivaatiolause <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span></div><div class="ng-input"><input type="text" id="ngQuote" placeholder="Mikä pitää sinut liikkeellä?"></div></div>
         <div style="display:flex;gap:8px;margin-bottom:16px;">
             <button class="btn-ghost" onclick="closeNewGoal()" style="flex:1;">Peruuta</button>
@@ -710,6 +731,38 @@
     </div>
 </div>
 
+
+<!-- ═══ COMEBACK OVERLAY ═══ -->
+<div id="comebackOverlay" style="display:none;position:fixed;inset:0;z-index:5800;flex-direction:column;align-items:center;justify-content:center;background:rgba(7,7,13,0.97);backdrop-filter:blur(28px);text-align:center;padding:36px;">
+    <div style="width:60px;height:2px;background:var(--grad);border-radius:1px;margin:0 auto 24px;"></div>
+    <div style="font-size:9px;color:var(--text-3);letter-spacing:4px;text-transform:uppercase;margin-bottom:12px;">Tervetuloa takaisin</div>
+    <div style="font-size:2rem;font-weight:200;color:var(--text-1);margin-bottom:8px;letter-spacing:-1px;" id="comebackDaysTitle">—</div>
+    <div style="font-size:13px;color:var(--text-2);line-height:1.7;max-width:280px;margin-bottom:28px;" id="comebackMsg">Tauko on osa matkaa. Tärkeintä on, että olet täällä.</div>
+    <div style="background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:14px;padding:16px 20px;max-width:300px;width:100%;margin-bottom:24px;">
+        <div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Edistymisesi on tallessa</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div style="text-align:center;"><div style="font-size:20px;font-weight:200;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;" id="comebackXP">—</div><div style="font-size:8px;color:var(--text-3);letter-spacing:1px;text-transform:uppercase;margin-top:2px;">XP kerätty</div></div>
+            <div style="text-align:center;"><div style="font-size:20px;font-weight:200;color:var(--text-1);" id="comebackDay">—</div><div style="font-size:8px;color:var(--text-3);letter-spacing:1px;text-transform:uppercase;margin-top:2px;">Päivä</div></div>
+        </div>
+    </div>
+    <div style="font-size:12px;color:var(--text-3);margin-bottom:8px;max-width:260px;font-style:italic;" id="comebackFirstStep"></div>
+    <button class="btn-primary" onclick="closeComebackOverlay()" style="max-width:220px;margin:0 auto;">Jatkan nyt</button>
+    <button onclick="closeComebackOverlay()" style="margin-top:14px;background:transparent;border:none;color:var(--text-3);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Ohita</button>
+</div>
+
+
+<!-- ═══ STAT GUIDE OVERLAY ═══ -->
+<div id="statGuideOverlay">
+    <div class="sg-card">
+        <div class="sg-title" id="sgTitle">Tilasto</div>
+        <div class="sg-val" id="sgVal"></div>
+        <div class="sg-body" id="sgBody"></div>
+        <button onclick="closeStatGuide()" style="margin-top:20px;background:transparent;border:1px solid var(--cyan-line);color:var(--text-1);padding:13px;border-radius:12px;width:100%;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Selvä</button>
+    </div>
+</div>
+
+<!-- ═══ COMEBACK GUIDE OVERLAYS ═══ -->
+
 <div id="dayToast" class="day-toast">Uusi päivä</div>
 <div id="offlineBadge">Offline — data tallennettu</div>
  
@@ -726,8 +779,9 @@
         <input type="text" id="inIdentity" placeholder="Olen jo… (esim. Olen juoksija / Olen kirjoittaja)">
         <div style="font-size:10px;color:var(--text-3);margin-top:8px;line-height:1.5;">Muutos alkaa identiteetistä. Kirjoita se henkilö, joksi olet jo tulossa.</div>
     </div>
+    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Lähtötilanne <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div><textarea id="inBaseline" rows="3" placeholder="Kuvaile nykytilasi. Mistä lähdet?"></textarea><div class="baseline-autosave" id="baselineAutosave">Tallennettu</div></div>
     <div class="card"><div class="lbl"><span class="lbl-dot"></span>Miksi tämä on tärkeää? <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div><textarea id="inWhy" rows="2" placeholder="Mikä on perimmäinen syy?"></textarea></div>
-    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Vaikeuskerroin <button onclick="openDiffGuide('setup')" style="background:rgba(0,200,240,0.1);border:1px solid rgba(0,200,240,0.25);color:var(--cyan);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:auto;">Mikä sopii minulle?</button></div>
+    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Vaikeuskerroin <button onclick="openDiffGuide('setup')" style="background:rgba(0,200,240,0.1);border:1px solid rgba(0,200,240,0.25);color:var(--cyan);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div>
         <select id="inV"><option value="1000">1 000 XP — Uusi tapa</option><option value="5000" selected>5 000 XP — Merkittävä muutos</option><option value="10000">10 000 XP — Elämänmuutos</option><option value="100000">100 000 XP — Mestari</option></select>
     </div>
     <div class="card"><div class="lbl"><span class="lbl-dot"></span>Tavoitepäivä <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div>
@@ -740,7 +794,6 @@
         <div class="xp-row"><span class="xp-tag">20 XP</span><input type="text" id="inR20" placeholder="Panostus — 45–90 min"></div>
         <div class="xp-row"><span class="xp-tag">50 XP</span><input type="text" id="inR50" placeholder="Uroteko — 2–4 h"></div>
     </div>
-    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Lähtötilanne <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div><textarea id="inBaseline" rows="3" placeholder="Kuvaile nykytilasi. Mistä lähdet?"></textarea><div class="baseline-autosave" id="baselineAutosave">Tallennettu</div></div>
     <div class="card"><div class="lbl"><span class="lbl-dot"></span>Oma motivaatiolause <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div><input type="text" id="inQuote" placeholder="Mikä pitää sinut liikkeellä?"></div>
     <button class="btn-primary" onclick="start()">Käynnistä</button>
     <div class="card card-accent" style="margin-top:16px;">
@@ -759,7 +812,7 @@
  
     <!-- IDENTITY -->
     <div class="identity-card" id="identityCard" onclick="editIdentity()" style="display:none;">
-        <div class="identity-kicker">Identiteettisi</div>
+        <div class="identity-kicker">Identiteettisi <span class="stat-q" onclick="event.stopPropagation();openIdentityGuide()" style="margin-left:4px;">?</span></div>
         <div class="identity-text" id="identityDisplay"></div>
         <textarea class="identity-edit" id="identityEdit" rows="2" placeholder="Olen jo…"></textarea>
         <div class="identity-hint">Napauta muokataksesi</div>
@@ -768,12 +821,12 @@
     <!-- STATUS CARD -->
     <div class="status-card">
         <div class="sc-micro">
-            <div class="micro-item"><span class="micro-val-orange" id="streakNum">0</span><span class="micro-lbl">pv putki</span></div>
-            <div class="micro-item"><span class="micro-lbl">kerroin</span><span class="micro-val-cyan" id="multNum">×1.00</span></div>
+            <div class="micro-item" onclick="openStatGuide('streak')" style="cursor:pointer;"><span class="micro-val-orange" id="streakNum">0</span><span class="micro-lbl">pv putki <span class="stat-q">?</span></span></div>
+            <div class="micro-item" onclick="openStatGuide('mult')" style="cursor:pointer;"><span class="micro-lbl">kerroin <span class="stat-q">?</span></span><span class="micro-val-cyan" id="multNum">×1.00</span></div>
         </div>
         <div class="days-row">
             <div class="days-val" id="valM">—</div>
-            <div class="days-right"><div class="days-lbl">Päiviä<br>maaliin</div><div class="days-pct" id="pctVal">0%</div><div class="days-xp" id="xpDisplay">0 XP</div></div>
+            <div class="days-right"><div class="days-lbl" style="display:flex;align-items:center;gap:4px;">Päiviä<br>maaliin <button onclick="openStatGuide('days')" class="stat-help-btn">?</button></div><div class="days-pct" id="pctVal" onclick="openStatGuide('pct')" style="cursor:pointer;">0% <span class="stat-q">?</span></div><div class="days-xp" id="xpDisplay">0 XP</div></div>
         </div>
         <div class="milestones"><div class="ms" id="ms10"></div><div class="ms" id="ms25"></div><div class="ms" id="ms50"></div><div class="ms" id="ms75"></div><div class="ms" id="ms100"></div></div>
         <div class="ms-labels"><span class="ms-lbl" id="mslbl10">10%</span><span class="ms-lbl" id="mslbl25">25%</span><span class="ms-lbl" id="mslbl50">50%</span><span class="ms-lbl" id="mslbl75">75%</span><span class="ms-lbl" id="mslbl100">100%</span></div>
@@ -784,17 +837,17 @@
         </div>
         <div class="bar-track"><div class="bar-fill" id="barXP"></div></div>
         <div class="sc-bottom">
-            <div class="sb-item"><div class="sb-val" id="statAvg">—</div><div class="sb-lbl">XP / pv</div></div>
-            <div class="sb-item"><div class="sb-val" id="statBest">—</div><div class="sb-lbl">Paras pv</div></div>
-            <div class="sb-item"><div class="sb-val" id="statBestStreak">—</div><div class="sb-lbl">Paras putki</div></div>
-            <div class="sb-item"><div class="sb-val" id="statWeekXP">—</div><div class="sb-lbl">Tällä vk</div></div>
+            <div class="sb-item" onclick="openStatGuide('avg')" style="cursor:pointer;"><div class="sb-val" id="statAvg">—</div><div class="sb-lbl">XP / pv <span class="stat-q">?</span></div></div>
+            <div class="sb-item" onclick="openStatGuide('best')" style="cursor:pointer;"><div class="sb-val" id="statBest">—</div><div class="sb-lbl">Paras pv <span class="stat-q">?</span></div></div>
+            <div class="sb-item" onclick="openStatGuide('bestStreak')" style="cursor:pointer;"><div class="sb-val" id="statBestStreak">—</div><div class="sb-lbl">Paras putki <span class="stat-q">?</span></div></div>
+            <div class="sb-item" onclick="openStatGuide('weekXP')" style="cursor:pointer;"><div class="sb-val" id="statWeekXP">—</div><div class="sb-lbl">Tällä vk <span class="stat-q">?</span></div></div>
         </div>
     </div>
  
     <!-- DAILY XP GOAL -->
     <div class="daily-goal-bar" id="dailyGoalBar">
         <div class="dg-header">
-            <div class="dg-label">Tavoite tänään</div>
+            <div class="dg-label" onclick="openStatGuide('dailygoal')" style="cursor:pointer;">Tavoite tänään <span class="stat-q">?</span></div>
             <div class="dg-vals"><strong id="dgCurrent">0</strong> / <span id="dgTarget">—</span> XP <span id="dgEditBtn" onclick="editDailyGoal()" style="color:var(--text-3);cursor:pointer;margin-left:6px;font-size:10px;">✎</span></div>
         </div>
         <div class="dg-track"><div class="dg-fill" id="dgFill" style="width:0%"></div></div>
@@ -808,7 +861,7 @@
 
     <!-- IDENTITY NUDGE (näkyy jos identiteetti puuttuu ja XP > 0) -->
     <div id="identityNudge" style="display:none;background:rgba(124,92,191,0.06);border:1px solid rgba(124,92,191,0.2);border-radius:12px;padding:12px 16px;margin-bottom:9px;cursor:pointer;" onclick="openEditGoalOverlay()">
-        <div style="font-size:8px;color:var(--purple);letter-spacing:2.5px;text-transform:uppercase;font-weight:600;margin-bottom:4px;">💡 Vinkki</div>
+        <div style="font-size:8px;color:var(--purple);letter-spacing:2.5px;text-transform:uppercase;font-weight:600;margin-bottom:4px;">Vinkki</div>
         <div style="font-size:12px;color:var(--text-2);line-height:1.6;">Lisää identiteettisi — se on tehokkain yksittäinen muutos. <span style="color:var(--purple);">Napauta →</span></div>
     </div>
 
@@ -823,28 +876,28 @@
     <!-- VIIKKOHAASTE -->
     <div id="weekChallengeCard" style="display:none;background:linear-gradient(135deg,rgba(34,197,94,0.07),rgba(0,200,240,0.03));border:1px solid rgba(34,197,94,0.22);border-radius:14px;padding:14px 18px;margin-bottom:9px;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
-            <div style="font-size:8px;color:var(--green);letter-spacing:3px;text-transform:uppercase;font-weight:700;">⚡ Viikkohaaste</div>
-            <span onclick="newWeekChallenge()" style="font-size:9px;color:var(--text-3);cursor:pointer;letter-spacing:1px;">↺ Uusi</span>
+            <div style="font-size:8px;color:var(--green);letter-spacing:3px;text-transform:uppercase;font-weight:700;">Viikkohaaste</div>
+            <div style="display:flex;gap:8px;align-items:center;"><span onclick="openStatGuide('viikkohaaste')" style="font-size:9px;color:var(--text-3);cursor:pointer;">?</span><span onclick="newWeekChallenge()" style="font-size:9px;color:var(--text-3);cursor:pointer;letter-spacing:1px;">↺ Uusi</span></div>
         </div>
         <div id="weekChallengeText" style="font-size:13px;color:var(--text-1);line-height:1.6;font-weight:300;"></div>
     </div>
 
     <!-- ANALYTIIKKA (rullaamalla) -->
     <div class="forecast-bar" id="forecastBar">
-        <div><div class="forecast-label">Etenemisennuste</div><div class="forecast-date" id="forecastDate">—</div></div>
+        <div><div class="forecast-label" onclick="openStatGuide('forecast')" style="cursor:pointer;">Etenemisennuste <span class="stat-q">?</span></div><div class="forecast-date" id="forecastDate">—</div></div>
         <div style="text-align:right;"><div class="forecast-label">Tahdilla</div><div class="forecast-val" id="forecastPace">—</div></div>
     </div>
 
     <div style="margin-bottom:9px;">
         <div class="health-bar">
-            <div class="health-label">Kunto</div>
+            <div class="health-label" onclick="openStatGuide('kunto')" style="cursor:pointer;">Kunto <span class="stat-q">?</span></div>
             <div style="flex:1;"><div class="health-track"><div class="health-fill" id="healthFill"></div></div><div class="health-tip" id="healthTip"></div></div>
             <div class="health-val" id="healthVal">—</div>
         </div>
     </div>
 
     <div class="momentum-bar">
-        <div class="momentum-label">Vauhti</div>
+        <div class="momentum-label" onclick="openStatGuide('vauhti')" style="cursor:pointer;">Vauhti <span class="stat-q">?</span></div>
         <div class="momentum-track"><div class="momentum-fill" id="momentumFill"></div></div>
         <div class="momentum-val" id="momentumVal">—</div>
     </div>
@@ -885,7 +938,7 @@
  
     <!-- BASELINE -->
     <div class="toggle-row" id="baselineToggleRow" onclick="togglePanel('baseline')">
-        <div class="toggle-row-lbl"><span class="lbl-dot"></span>Lähtötilanne</div>
+        <div class="toggle-row-lbl"><span class="lbl-dot"></span>Lähtötilanne <span class="stat-q" onclick="event.stopPropagation();openGuide('baseline')" style="margin-left:6px;">?</span></div>
         <span class="toggle-arrow" id="baselineArrow">▾</span>
     </div>
     <div class="toggle-body" id="baselineBody">
@@ -896,10 +949,10 @@
     <!-- HEAT MAP -->
     <div class="heatmap-card">
         <div class="heatmap-header">
-            <div class="lbl" style="margin-bottom:0;"><span class="lbl-dot"></span>Aktiivisuus — 126 pv</div>
+            <div class="lbl" style="margin-bottom:0;"><span class="lbl-dot"></span>Aktiivisuus</div>
             <div style="font-size:9px;color:var(--text-3);">Aktiivisia: <span id="heatmapActive" style="color:var(--text-2);font-weight:400;">—</span> pv</div>
         </div>
-        <div class="heatmap-grid" id="heatmapGrid"></div>
+        <div class="heatmap-wrap"><div class="heatmap-grid-inner" id="heatmapGrid"></div></div>
         <div class="heatmap-legend">
             <span class="hm-legend-label">Vähemmän</span>
             <div class="hm-legend-cell hm-0"></div><div class="hm-legend-cell hm-1"></div><div class="hm-legend-cell hm-2"></div><div class="hm-legend-cell hm-3"></div><div class="hm-legend-cell hm-4"></div>
@@ -1085,7 +1138,7 @@ function showOnboarding(){
 function renderObProgress(){
     document.getElementById('obProgress').innerHTML=Array.from({length:OB_TOTAL},(_,i)=>
         `<div class="ob-dot ${i===obCurrent?'active':i<obCurrent?'done':''}"></div>`).join('');
-    document.getElementById('obNextBtn').innerText=obCurrent===OB_TOTAL-1?'Aloita ⚡':'Seuraava →';
+    document.getElementById('obNextBtn').innerText=obCurrent===OB_TOTAL-1?'Aloita →':'Seuraava →';
 }
 function obNext(){
     if(obCurrent>=OB_TOTAL-1){closeOnboarding();return;}
@@ -1329,11 +1382,27 @@ function updateSignal(){
  
 /* HEAT MAP */
 function renderHeatmap(){
-    const grid=document.getElementById('heatmapGrid');const cells=[];let activeDays=0;
-    const vals=[];for(let i=125;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);vals.push(g().weekLog[getDateStr(d)]||0);}
+    const grid=document.getElementById('heatmapGrid');let cells=[];let activeDays=0;
+    // Show from startDate or 182 days, whichever is longer (max 52 weeks)
+    const startDate=g().startDate?new Date(g().startDate):null;
+    const today=new Date();today.setHours(0,0,0,0);
+    let daysBack=182;
+    if(startDate){const diff=Math.floor((today-startDate)/86400000);daysBack=Math.max(42,Math.min(diff+14,364));}
+    // Align to week start (Mon)
+    const startDay=new Date(today);startDay.setDate(today.getDate()-daysBack);
+    const dayOfWeek=startDay.getDay()||7;if(dayOfWeek>1)startDay.setDate(startDay.getDate()-(dayOfWeek-1));
+    const vals=[];const dateArr=[];let cur=new Date(startDay);
+    while(cur<=today){vals.push(g().weekLog[getDateStr(cur)]||0);dateArr.push(new Date(cur));cur.setDate(cur.getDate()+1);}
     const maxVal=Math.max(...vals,1);
-    vals.forEach(v=>{let cls='hm-0';if(v>0){activeDays++;const r=v/maxVal;if(r>0.75)cls='hm-4';else if(r>0.5)cls='hm-3';else if(r>0.25)cls='hm-2';else cls='hm-1';}cells.push(`<div class="hm-cell ${cls}"></div>`);});
-    grid.innerHTML=cells.join('');document.getElementById('heatmapActive').innerText=activeDays;
+    vals.forEach((v,i)=>{let cls='hm-0';if(v>0){activeDays++;const r=v/maxVal;if(r>0.75)cls='hm-4';else if(r>0.5)cls='hm-3';else if(r>0.25)cls='hm-2';else cls='hm-1';}
+    const d=dateArr[i];const label=d.toLocaleDateString('fi-FI',{day:'numeric',month:'short'});
+    cells.push(`<div class="hm-cell ${cls}" title="${label}: ${v} XP"></div>`);});
+    grid.innerHTML=cells.join('');
+    document.getElementById('heatmapActive').innerText=activeDays;
+    // Update heatmap header label
+    const hdr=document.querySelector('.heatmap-card .lbl span:last-child');
+    // scroll to end
+    const wrap=grid.parentElement.parentElement;if(wrap&&wrap.classList.contains('heatmap-wrap'))setTimeout(()=>{wrap.scrollLeft=wrap.scrollWidth;},50);
 }
  
 /* RECOVERY */
@@ -1390,7 +1459,7 @@ function render(){
     document.getElementById('viewSetup').style.display='none';document.getElementById('viewGame').style.display='block';
     renderTabs();document.getElementById('txtGoal').innerText=g().goal.toUpperCase();document.getElementById('txtV').innerText=`${g().v.toLocaleString('fi-FI')} XP`;
     initIntentio();initBaseline();initQuote();initWhy();initIdentity();initDaynote();
-    updateUI();checkWeeklyReflection();checkRecovery();initCustomMilestones();
+    updateUI();checkWeeklyReflection();checkRecovery();initCustomMilestones();setTimeout(checkComebackOverlay,1200);
 }
 function getMultiplier(){return 1+(Math.min(g().days,84)-1)/83;}
 function calculateDaysToGoal(){if(g().total>=g().v)return 0;if(!g().total||!g().days)return null;const avg=g().total/g().days;if(avg<=0)return null;return Math.ceil((g().v-g().total)/avg);}
@@ -1455,8 +1524,8 @@ function updateUI(){
     const levels=[{base:1,name:g().r1,cls:'rbtn-1',dot:'rdot-1',xpCls:'rxp-1'},{base:5,name:g().r5,cls:'rbtn-5',dot:'rdot-5',xpCls:'rxp-5'},{base:20,name:g().r20,cls:'rbtn-20',dot:'rdot-20',xpCls:'rxp-20'},{base:50,name:g().r50,cls:'rbtn-50',dot:'rdot-50',xpCls:'rxp-50'}];
     {const today=getTodayStr();const todayXP=g().weekLog[today]||0;const dg=g().dailyGoal||0;
     document.getElementById('taskList').innerHTML=levels.map(l=>{const xp=Math.round(l.base*multi);
-    const progPct=dg>0?Math.min(100,Math.round((todayXP/dg)*100)):0;
-    const progBar=dg>0?`<div class="rbtn-progress" style="width:${progPct}%"></div>`:'';
+    const progPct=dg>0?Math.min(100,Math.round((todayXP/dg)*100)):(avg>0?Math.min(100,Math.round((todayXP/avg)*100)):0);
+    const progBar=(progPct>0)?`<div class="rbtn-progress" style="width:${progPct}%"></div>`:'';
     return`<button class="rbtn ${l.cls}" onclick="addXP(${l.base},'${escQ(l.name)}',event)"><div class="rbtn-inner"><div class="rbtn-left"><span class="rbtn-dot ${l.dot}"></span><div class="rbtn-text"><span class="rbtn-name">${l.name}</span><span class="rbtn-min"><span style="color:var(--cyan);opacity:0.7;font-weight:500;">${XP_LABELS[l.base]}</span> · ${MINS[l.base]}</span></div></div><span class="rbtn-xp ${l.xpCls}">+${xp}</span></div>${progBar}</button>`;}).join('');}
     renderHeatmap();updateSignal();updateMomentum();renderTabs();initDailyGoal();
     // Uudet ominaisuudet
@@ -1596,6 +1665,26 @@ const WEEK_CHALLENGES=[
     'Palkitse itsesi viikon lopussa jos keräät {weekXP} XP. Päätä palkinnoista nyt.',
     'Arvioi: mikä rutiini on helpoin? Tuplaa se tällä viikolla.',
 ];
+// Tavoitekohtaiset haasteet
+function getSmartWeekChallenge(){
+    if(!g())return null;
+    const goal=(g().goal||'').toLowerCase();
+    const pct=g().v>0?(g().total/g().v)*100:0;
+    const avg=g().days>0?g().total/g().days:0;
+    // Early stage
+    if(pct<10)return`Tämä on alku. Tee {r1} vähintään 5 kertaa tällä viikolla — et tarvitse täydellistä viikkoa, tarvitset toistoja.`;
+    // Low momentum
+    if(g().streak<3&&g().days>7)return`Putkesi on lyhyt — eikä se haittaa. Haaste: rakenna 5 päivän putki. Edes {r1} joka päivä riittää.`;
+    // High momentum
+    if(g().streak>=14)return`Putkesi on ${g().streak} päivää. Kokeile tällä viikolla {r50} — näet kuinka pitkälle pääset kun energiaa on.`;
+    // Goal-specific hints
+    if(goal.includes('juoks')||goal.includes('liiku')||goal.includes('urheilu')||goal.includes('treeni'))return`Liikuntatavoite: tee {r5} ulkona, vaihtele reittiä tai kellonaikaa. Keho adaptoituu uusiin ärsykkeisiin nopeammin.`;
+    if(goal.includes('kirj')||goal.includes('kirja')||goal.includes('lue'))return`Kirjoittaminen/lukeminen: tee {r1} joka päivä samassa paikassa ja samaan aikaan. Paikka triggeröi tilan.`;
+    if(goal.includes('laih')||goal.includes('paino')||goal.includes('ruoka'))return`Ruokavaliohaaste: dokumentoi kolmena päivänä mitä syöt — tieto on paras motivaattori.`;
+    if(goal.includes('kiel')||goal.includes('englan')||goal.includes('oppiminen'))return`Kielenoppiminen vie toistoja. Tee {r1} joka ikinen päivä, mieluiten ääneen — puhuminen on nopeinta oppimista.`;
+    if(goal.includes('bisnest')||goal.includes('yritys')||goal.includes('raha'))return`Yrittäjyyshaaste: tee yksi asia joka viikko, jota et voi tehdä myöhemmin — asiakaskontakti, julkaisu, puhelu.`;
+    return null;
+}
 function getWeekChallengeText(){
     if(!g())return'';
     const weekXP=Math.max(20,Math.round((g().total/Math.max(g().days,1))*7));
@@ -1624,7 +1713,14 @@ function updateWeekChallenge(){
     const card=document.getElementById('weekChallengeCard');if(!card||!g())return;
     if(g().days<1){card.style.display='none';return;}
     card.style.display='block';
-    document.getElementById('weekChallengeText').innerText=getWeekChallengeText();
+    const smartTxt=getSmartWeekChallenge();
+    const finalTxt=smartTxt||getWeekChallengeText();
+    // Replace placeholders in smartTxt too
+    document.getElementById('weekChallengeText').innerText=finalTxt
+        .replace('{r1}',g().r1||'mikrotehtävä')
+        .replace('{r5}',g().r5||'harppaus')
+        .replace('{r20}',g().r20||'panostus')
+        .replace('{r50}',g().r50||'uroteko');
 }
 
 /* IDENTITY GUIDE */
@@ -1987,8 +2083,76 @@ function getFavouriteRoutine(){
     return keys.find(k=>(counts[k]||0)===max)||null;
 }
 
+
+/* ── STAT GUIDE ── */
+const STAT_DATA={
+    days:{title:'Päiviä maaliin',fn:()=>{const d=document.getElementById('valM').innerText;return{val:d+' pv',body:'Laskettu nykyisellä päivätahdillasi. Jos XP/pv kasvaa, tämä luku pienenee. Kertymäkerroin (kasvaa päivittäin) nopeuttaa matkaa automaattisesti.'};},},
+    pct:{title:'Edistymisprosentti',fn:()=>{const p=document.getElementById('pctVal').innerText.replace(/[^0-9.%]/g,'');const xp=document.getElementById('xpDisplay').innerText;return{val:p,body:`Kerättyä XP:tä suhteessa tavoitteesi kokonais-XP:hen. Tällä hetkellä: ${xp} kerätty. Prosentti kasvaa jokaisen rutiininapin painalluksesta.`};},},
+    avg:{title:'XP per päivä',fn:()=>({val:document.getElementById('statAvg').innerText+' XP',body:'Kokonais-XP jaettuna matkan päivillä. Mittaa pitkän aikavälin tuottavuuttasi. Ei romahda yhden heikkon päivän takia.'})},
+    best:{title:'Paras päivä',fn:()=>({val:document.getElementById('statBest').innerText+' XP',body:'Korkein yhden päivän XP-kertymäsi. Katso kuinka kaukana olet tästä tänään — se on konkreettinen tavoite.'})},
+    bestStreak:{title:'Paras putki',fn:()=>({val:document.getElementById('statBestStreak').innerText,body:'Pisin peräkkäisten aktiivisten päivien jakso. Armopäivä (1/vk) ei katkaise putkea. Riko oma ennätyksesi.'})},
+    weekXP:{title:'Tällä viikolla',fn:()=>({val:document.getElementById('statWeekXP').innerText+' XP',body:'Tämän viikon (ma–su) kertyneet XP:t. Vertaa viikkovertailu-kortissa edelliseen viikkoon.'})},
+    streak:{title:'Aktiivisuusputki',fn:()=>({val:document.getElementById('streakNum').innerText+' pv',body:'Peräkkäiset päivät joina olet tehnyt vähintään yhden rutiinin. Kerran viikossa armopäivä sallitaan — putki ei katkea. Putki on motivaation ytimessä.'})},
+    mult:{title:'Kertymäkerroin',fn:()=>({val:document.getElementById('multNum').innerText,body:'Kerroin kasvaa lineaarisesti päivästä 1 (×1.00) päivään 84 (×2.00). Sen jälkeen pysyy ×2.00:ssa. Jokainen rutiini on arvokkaampi mitä pidempään olet jatkanut.'})},
+    kunto:{title:'Kunto-indeksi',fn:()=>({val:document.getElementById('healthVal').innerText,body:'Yhdistää neljä asiaa: päivätahti (35%), putki (25%), viikkoaktiivisuus (25%) ja reflektiot (15%). 80+ = loistava, 60+ = hyvä, alle 40 = tarvitsee huomiota.'})},
+    vauhti:{title:'Vauhti (Momentum)',fn:()=>({val:document.getElementById('momentumVal').innerText,body:'Onko tekemisesi kiihtymässä vai hiipumassa? Laskee 3 viime päivän XP:n suhteessa pitkän aikavälin keskiarvoon. Yli 75% = kiihtyvä vauhti.'})},
+    forecast:{title:'Etenemisennuste',fn:()=>({val:document.getElementById('forecastDate').innerText,body:'Arvioitu maalipäivä nykyisellä tahdilla. Ei ota huomioon kertymäkerrointa — todellisuudessa olet aiemmin maalissa jos jatkat kasvavalla tahdilla.'})},
+    dailygoal:{title:'Päivittäinen XP-tavoite',fn:()=>({val:document.getElementById('dgCurrent').innerText+' / '+document.getElementById('dgTarget').innerText+' XP',body:'Oma asettamasi päivätavoite. Rutiininapin alla oleva edistymispalkki näyttää kuinka lähellä olet. Saavutat sen nappia painamalla!'})},
+    viikkohaaste:{title:'Viikkohaaste',fn:()=>({val:'',body:'Uusi henkilökohtainen haaste joka viikko — pohjautuu tavoitteeseesi, rutiineihisi ja edistymiseesi. ↺-napista saat uuden haasteen jos nykyinen ei sovi tällä hetkellä.'})},
+};
+function openStatGuide(key){
+    const data=STAT_DATA[key];if(!data)return;
+    const {val,body}=data.fn?data.fn():(data);
+    document.getElementById('sgTitle').innerText=data.title||key;
+    document.getElementById('sgVal').innerText=val||'';
+    document.getElementById('sgBody').innerText=body||'';
+    document.getElementById('statGuideOverlay').classList.add('show');
+}
+function closeStatGuide(){document.getElementById('statGuideOverlay').classList.remove('show');}
+
+/* ── COMEBACK ── */
+function checkComebackOverlay(){
+    if(!g()||!g().lastActivityDate||g().total===0)return;
+    const last=new Date(g().lastActivityDate);const today=new Date();today.setHours(0,0,0,0);last.setHours(0,0,0,0);
+    const days=Math.floor((today-last)/86400000);
+    if(days<3)return; // only show after 3+ days away
+    const key='cb_shown_'+g().id+'_'+getTodayStr();
+    try{if(localStorage.getItem(key))return;}catch(e){}
+    document.getElementById('comebackDaysTitle').innerText=days+' päivän tauko';
+    let msg='Tauko on osa matkaa. Et ala alusta — olet edelleen sama ihminen joka aloitti.';
+    if(days>=14)msg='Reilu parin viikon tauko. Kertymäsi odottaa. Yksi teko tänään käynnistää kaiken uudelleen.';
+    else if(days>=7)msg='Viikon tauko. Se käy kaikille. Tärkeintä on, mitä teet nyt — ei se, mitä jätit tekemättä.';
+    document.getElementById('comebackMsg').innerText=msg;
+    document.getElementById('comebackXP').innerText=g().total.toLocaleString('fi-FI')+' XP';
+    document.getElementById('comebackDay').innerText='Päivä '+g().days;
+    const firstStep=g().r1?`Aloita tästä: "${g().r1}" — alle 10 minuuttia.`:'';
+    document.getElementById('comebackFirstStep').innerText=firstStep;
+    document.getElementById('comebackOverlay').style.display='flex';
+    try{localStorage.setItem(key,'1');}catch(e){}
+}
+function closeComebackOverlay(){document.getElementById('comebackOverlay').style.display='none';}
+
+/* ── GUIDE OVERLAYS (8 bottom-sheet) ── */
+const GUIDE_CONTENTS={
+    streak:{title:'Aktiivisuusputki',body:'Peräkkäiset aktiivipäivät. Armopäivä kerran viikossa. Rakenna putkea — se on tärkein yksittäinen motivaattori.'},
+    mult:{title:'Kertymäkerroin',body:'Kasvaa ×1.00 → ×2.00 päivien 1–84 välillä. Pitkäjänteisyys palkitaan konkreettisesti: päivän 84 teko on kaksinkertaisesti arvokas.'},
+    identity:{title:'Identiteetti',body:'Todellinen muutos alkaa siitä kuka olet — ei mitä haluat saavuttaa. "Olen juoksija" on vahvempi kuin "haluan juosta".'},
+    xp:{title:'XP-järjestelmä',body:'1 XP = 1–10 min mikrotehtävä\n5 XP = 15–30 min harppaus\n20 XP = 45–90 min panostus\n50 XP = 2–4 h uroteko\n\nKertymäkerroin kasvattaa jokaista XP:tä automaattisesti.'},
+    baseline:{title:'Lähtötilanne',body:'Kuvaus tilanteestasi ennen matkan alkua. Auttaa sinua ja AI-apuria ymmärtämään mistä lähdit. Myös hyvä muistutus siitä kuinka pitkälle olet tullut.'},
+    daily:{title:'Päivätavoite',body:'Oma XP-tavoitteesi joka päivälle. Rutiininapin alla näkyy edistymispalkki. Konkreettinen päivätavoite parantaa tekemistä merkittävästi.'},
+    why:{title:'Miksi tämä on tärkeää',body:'Perimmäinen syy tavoitteesi takana. Motivaatio hiipuu — mutta "miksi" pysyy. Kirjoita se, niin palaat siihen vaikeina päivinä.'},
+    routines:{title:'Rutiinit',body:'Neljä tasoa tarjoaa vaihtelua energiasi mukaan. Huonona päivänä tee mikrotehtävä (1 XP). Nollapäiviä ei tarvita — pienikin teko on voitto.'},
+};
+function openGuide(key){
+    const d=GUIDE_CONTENTS[key];if(!d)return;
+    document.getElementById('sgTitle').innerText=d.title;
+    document.getElementById('sgVal').innerText='';
+    document.getElementById('sgBody').innerText=d.body;
+    document.getElementById('statGuideOverlay').classList.add('show');
+}
+
 /* ── HELPERS ── */
-function escQ(s){return(s||'').replace(/'/g,"\\'");}
+function escQ(s){return(s||'').replace(/'/g,"\'");}
 function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
 function save(){try{localStorage.setItem('mk_v11',JSON.stringify(state));}catch(e){}}
 function exportData(){const a=document.createElement('a');a.href='data:text/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(state));a.download='muutoskone_v11.json';a.click();}
