@@ -472,13 +472,13 @@
             <div class="ob-icon ob-icon-xp"></div>
             <div class="ob-title">Miten XP toimii?</div>
             <div class="ob-body">
-                <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-bottom:12px;">
+                <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:14px;">
                     <div class="ob-mini-xp"><span>1 XP</span> Mikrotehtävä</div>
                     <div class="ob-mini-xp"><span>5 XP</span> Harppaus</div>
                     <div class="ob-mini-xp"><span>20 XP</span> Panostus</div>
                     <div class="ob-mini-xp"><span>50 XP</span> Uroteko</div>
                 </div>
-               <br> <strong>XP</strong> mittaa edistystymistäsi kohti tavoitetta. <br> <br> <strong>Kertymäkerroin</strong> kasvaa päivittäin — päivänä 84 jokainen teko on 2× arvokkaampi. Jatkuvuus palkitaan konkreettisesti.
+                Joka kerta kun teet pienen rutiinin joka vie kohti tavoitettasi, painat nappia ja keräät <strong>XP:tä</strong>. Päivittäin tehdyt pienet teot kertyvät — ja muutos on väistämätön.<br><br><strong>Kertymäkerroin</strong> kasvaa päivittäin: päivänä 84 sama teko on <strong>2× arvokkaampi</strong> kuin alussa. Jatkuvuus palkitaan konkreettisesti.
             </div>
         </div>
         <div class="ob-slide" data-slide="2">
@@ -763,6 +763,23 @@
 
 <!-- ═══ COMEBACK GUIDE OVERLAYS ═══ -->
 
+
+<!-- ═══ SETUP GUIDE OVERLAY ═══ -->
+<div id="setupGuideOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.78);z-index:9600;align-items:flex-end;justify-content:center;">
+    <div style="background:#0e0e1f;border:1px solid rgba(255,255,255,0.11);border-radius:22px 22px 0 0;padding:0 0 52px;max-width:430px;width:100%;max-height:88vh;overflow-y:auto;scrollbar-width:none;">
+        <div style="width:36px;height:3px;border-radius:2px;background:rgba(255,255,255,0.14);margin:14px auto 0;"></div>
+        <div style="padding:22px 24px 0;">
+            <div id="sgcKicker" style="font-size:8px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:5px;"></div>
+            <div id="sgcTitle" style="font-size:1.2rem;font-weight:300;color:var(--text-1);margin-bottom:0;letter-spacing:-0.3px;line-height:1.3;"></div>
+        </div>
+        <div style="height:1px;background:rgba(255,255,255,0.06);margin:16px 24px;"></div>
+        <div id="sgcBody" style="padding:0 24px;font-size:13px;color:var(--text-2);line-height:1.78;font-weight:300;"></div>
+        <div style="padding:0 24px;margin-top:20px;">
+            <button onclick="closeSetupGuide()" style="background:transparent;border:1px solid rgba(255,255,255,0.11);color:var(--text-1);padding:14px;border-radius:13px;width:100%;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:border-color 0.2s;">Selvä</button>
+        </div>
+    </div>
+</div>
+
 <div id="dayToast" class="day-toast">Uusi päivä</div>
 <div id="offlineBadge">Offline — data tallennettu</div>
  
@@ -773,28 +790,28 @@
         <h1 class="neon-logo">Muutoskone</h1>
         <div class="sub-logo">Strateginen muutostyökalu</div>
     </div>
-    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Tavoite</div><input type="text" id="inGoal" placeholder="Mitä haluat saavuttaa?"></div>
+    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Tavoite <button onclick="openSetupGuide('tavoite')" style="background:rgba(0,200,240,0.1);border:1px solid rgba(0,200,240,0.25);color:var(--cyan);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div><input type="text" id="inGoal" placeholder="Mitä haluat saavuttaa?"></div>
     <div class="card" style="background:linear-gradient(135deg,rgba(124,92,191,0.07),rgba(0,200,240,0.02));border-color:rgba(124,92,191,0.22);">
         <div class="lbl"><span class="lbl-dot" style="background:var(--purple);"></span>Identiteetti <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(James Clear)</span> <button onclick="openIdentityGuide()" style="background:rgba(124,92,191,0.12);border:1px solid rgba(124,92,191,0.3);color:var(--purple);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div>
         <input type="text" id="inIdentity" placeholder="Olen jo… (esim. Olen juoksija / Olen kirjoittaja)">
         <div style="font-size:10px;color:var(--text-3);margin-top:8px;line-height:1.5;">Muutos alkaa identiteetistä. Kirjoita se henkilö, joksi olet jo tulossa.</div>
     </div>
-    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Lähtötilanne <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div><textarea id="inBaseline" rows="3" placeholder="Kuvaile nykytilasi. Mistä lähdet?"></textarea><div class="baseline-autosave" id="baselineAutosave">Tallennettu</div></div>
-    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Miksi tämä on tärkeää? <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div><textarea id="inWhy" rows="2" placeholder="Mikä on perimmäinen syy?"></textarea></div>
+    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Lähtötilanne <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span><button onclick="openSetupGuide('lahtotilanne')" style="background:rgba(124,92,191,0.12);border:1px solid rgba(124,92,191,0.3);color:var(--purple);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div><textarea id="inBaseline" rows="3" placeholder="Kuvaile nykytilasi. Mistä lähdet?"></textarea><div class="baseline-autosave" id="baselineAutosave">Tallennettu</div></div>
+    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Miksi tämä on tärkeää? <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span><button onclick="openSetupGuide('miksi')" style="background:rgba(124,92,191,0.12);border:1px solid rgba(124,92,191,0.3);color:var(--purple);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div><textarea id="inWhy" rows="2" placeholder="Mikä on perimmäinen syy?"></textarea></div>
     <div class="card"><div class="lbl"><span class="lbl-dot"></span>Vaikeuskerroin <button onclick="openDiffGuide('setup')" style="background:rgba(0,200,240,0.1);border:1px solid rgba(0,200,240,0.25);color:var(--cyan);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div>
         <select id="inV"><option value="1000">1 000 XP — Uusi tapa</option><option value="5000" selected>5 000 XP — Merkittävä muutos</option><option value="10000">10 000 XP — Elämänmuutos</option><option value="100000">100 000 XP — Mestari</option></select>
     </div>
-    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Tavoitepäivä <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div>
+    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Tavoitepäivä <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span><button onclick="openSetupGuide('tavoitepaiva')" style="background:rgba(0,200,240,0.1);border:1px solid rgba(0,200,240,0.25);color:var(--cyan);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div>
         <input type="date" id="inDeadline" style="color-scheme:dark;">
         <div style="font-size:10px;color:var(--text-3);margin-top:6px;line-height:1.5;">Muutoskone laskee tarvittavan päivätahdin automaattisesti.</div>
     </div>
-    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Rutiinit</div>
+    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Rutiinit <button onclick="openSetupGuide('rutiinit')" style="background:rgba(0,200,240,0.1);border:1px solid rgba(0,200,240,0.25);color:var(--cyan);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div>
         <div class="xp-row"><span class="xp-tag">1 XP</span><input type="text" id="inR1" placeholder="Mikrotehtävä — 1–10 min"></div>
         <div class="xp-row"><span class="xp-tag">5 XP</span><input type="text" id="inR5" placeholder="Harppaus — 15–30 min"></div>
         <div class="xp-row"><span class="xp-tag">20 XP</span><input type="text" id="inR20" placeholder="Panostus — 45–90 min"></div>
         <div class="xp-row"><span class="xp-tag">50 XP</span><input type="text" id="inR50" placeholder="Uroteko — 2–4 h"></div>
     </div>
-    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Oma motivaatiolause <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span></div><input type="text" id="inQuote" placeholder="Mikä pitää sinut liikkeellä?"></div>
+    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Oma motivaatiolause <span style="color:var(--text-3);font-weight:300;text-transform:none;letter-spacing:0;font-size:9px;">(valinnainen)</span><button onclick="openSetupGuide('motivaatio')" style="background:rgba(124,92,191,0.12);border:1px solid rgba(124,92,191,0.3);color:var(--purple);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:inherit;margin-left:6px;">?</button></div><input type="text" id="inQuote" placeholder="Mikä pitää sinut liikkeellä?"></div>
     <button class="btn-primary" onclick="start()">Käynnistä</button>
     <div class="card card-accent" style="margin-top:16px;">
         <div class="lbl"><span class="lbl-dot"></span>Strategia-apuri</div>
@@ -1724,6 +1741,74 @@ function updateWeekChallenge(){
 }
 
 /* IDENTITY GUIDE */
+
+/* ══ SETUP GUIDE ══ */
+const SG={
+  tavoite:{
+    k:'Kenttä 1',t:'Tavoite',
+    b:['Kirjoita yksi selkeä ja konkreettinen tavoite. Ei listaa — yksi asia.',
+       'Hyvä tavoite on mitattava tai tunnistettava: kun olet valmis, tiedät sen. Se on sinulle merkityksellinen ja riittävän iso motivoidakseen — mutta riittävän realistinen jotta aloitat.'],
+    e:['Juoksen Cooperin testin 2 800 m ensi keväänä','Kirjoitan kirjan ensimmäisen version','Opin puhua espanjaa arjessa','Rakennan kannattavan sivubisnes'],
+    tip:'Vältä epämääräistä: "haluan tulla paremmaksi". Tee siitä konkreettinen — tiedät milloin olet maalissa.'
+  },
+  lahtotilanne:{
+    k:'Valinnainen — suositeltava',t:'Lähtötilanne',
+    b:['Kuvaile missä olet nyt, ennen kuin matka alkaa.',
+       'Lähtötilanne palvelee kolmea asiaa: ankkuroi lähtöpisteesi (kuukausien päästä näet kuinka pitkälle olet tullut), antaa AI-apurille paremman kuvan tilanteestasi, ja auttaa näkemään edistyksen kun se tuntuu hitaalta.'],
+    e:['En ole juossut 3 vuoteen. Kunto heikko, paino +8 kg.','Kirja on päässä, ei paperilla. En ole kirjoittanut vuosiin.','Nollatulot sivubisneksessä. Idea on, asiakkaita ei.'],
+    tip:'Kirjoita rehellisesti. Kukaan muu ei lue tätä. Yksityiskohdat tekevät siitä arvokkaan.'
+  },
+  miksi:{
+    k:'Valinnainen — voimakas',t:'Miksi tämä on tärkeää?',
+    b:['Tämä on motivaatiosi ankkuri vaikeina päivinä.',
+       'Motivaatio vaihtelee — energia, innostus, elämäntilanteet. Mutta "miksi" pysyy. Kun et jaksa, tarvitset muistutuksen siitä miksi aloitit.',
+       'Hyvä "miksi" on henkilökohtainen ja syvä. Simon Sinekin oivallus: kaikki pysyvä muutos alkaa syvästä miksi-kysymyksestä.'],
+    e:['Haluan olla energinen läsnä lasteni arjessa 20 vuoden päästä','Olen aina haaveillut tästä — nyt on aika','En halua katsoa taaksepäin ja miettiä mitä olisin voinut tehdä'],
+    tip:'Kysy itseltäsi "miksi" viisi kertaa peräkkäin. Viides vastaus on todellinen syy.'
+  },
+  tavoitepaiva:{
+    k:'Valinnainen — tehokas',t:'Tavoitepäivä',
+    b:['Aseta päivämäärä johon mennessä haluat saavuttaa tavoitteesi.',
+       'Tavoitepäivä laskee automaattisesti tarvittavan päivittäisen XP-tahdin ja näyttää sen pelisivulla laskurina. Se luo terveen paineen — konkreettisena muistutuksena ilman stressiä.'],
+    e:['Maraton ensi toukokuussa: 6 kk deadline','Kirja valmiina ennen syntymäpäivää','Kielikoe syyskuussa'],
+    tip:'Voit muuttaa tavoitepäivää koska tahansa. Aseta realistinen — mutta älä jätä liian löysää.'
+  },
+  rutiinit:{
+    k:'Toiminnan moottori',t:'Rutiinit',
+    b:['Rutiinit ovat ne pienet päivittäiset teot, joita tekemällä kerrytät XP:tä kohti tavoitettasi.',
+       'Joka kerta kun teet rutiinin ja painat nappia, XP kasvaa. Pienet teot päivittäin — XP kertyy, kertymäkerroin kasvaa, ja matka etenee varmasti.',
+       '1 XP — Mikrotehtävä (1–10 min): Pahin päivä, pienin teko. Edes tämä on voitto. 5 XP — Harppaus (15–30 min): Normaali päivittäinen teko. 20 XP — Panostus (45–90 min): Kun olet energinen. 50 XP — Uroteko (2–4 h): Intensiivisin suoritus.'],
+    e:['1 XP: Venyttely 10 min  |  5 XP: Lenkki 30 min  |  20 XP: Juoksu 8 km  |  50 XP: Pitkä juoksuharjoitus','1 XP: Lue 5 sivua  |  5 XP: Kirjoita 500 sanaa  |  20 XP: Kirjoitussessio 2h  |  50 XP: Intensiivinen kirjoituspäivä'],
+    tip:'Anna rutiineille omat nimet jotka kertovat täsmälleen mitä teet. Strategia-apuri ehdottaa valmiit rutiinit tavoitteesi perusteella.'
+  },
+  motivaatio:{
+    k:'Valinnainen',t:'Oma motivaatiolause',
+    b:['Lause joka toistuu pelisivulla joka päivä — muistutuksena miksi olet täällä.',
+       'Se voi olla oma lauseesi, lainaus joka resonoi, tai yksinkertainen muistutus tavoitteesi ytimestä. Hyvä lause on lyhyt ja terävä — ei kaunis, vaan tosi.'],
+    e:['Tee se nyt, kiitä itseäsi myöhemmin','Pienet teot päivittäin — suuri muutos väistämättä','En tarvitse motivaatiota — tarvitsen järjestelmän'],
+    tip:'Voit muuttaa tätä koska tahansa pelisivun motivaatiolause-kortissa.'
+  }
+};
+
+function openSetupGuide(key){
+    var d=SG[key]; if(!d) return;
+    document.getElementById('sgcKicker').innerText=d.k;
+    document.getElementById('sgcTitle').innerText=d.t;
+    var bodyHtml=d.b.map(function(p){
+        return '<p style="margin-bottom:10px;">'+p.replace(/\n/g,'<br>').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/&lt;br&gt;/g,'<br>')+'</p>';
+    }).join('');
+    var exHtml='<div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:14px 16px;margin:14px 0;">'+
+        '<div style="font-size:8px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:9px;">Esimerkkejä</div>'+
+        d.e.map(function(e){return '<div style="font-size:12px;color:var(--text-2);line-height:1.7;padding:2px 0;display:flex;gap:8px;"><span style="color:var(--cyan);font-size:10px;flex-shrink:0;margin-top:2px;">→</span><span>'+e.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</span></div>';}).join('')+
+        '</div>';
+    var tipHtml='<div style="background:linear-gradient(135deg,rgba(0,200,240,0.05),rgba(124,92,191,0.04));border:1px solid rgba(0,200,240,0.13);border-radius:10px;padding:12px 14px;margin-top:4px;">'+
+        '<div style="font-size:8px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:4px;">Vinkki</div>'+
+        '<div style="font-size:12px;color:var(--text-2);line-height:1.6;">'+d.tip.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</div></div>';
+    document.getElementById('sgcBody').innerHTML=bodyHtml+exHtml+tipHtml;
+    document.getElementById('setupGuideOverlay').style.display='flex';
+}
+function closeSetupGuide(){document.getElementById('setupGuideOverlay').style.display='none';}
+
 function openIdentityGuide(){document.getElementById('identityGuideOverlay').style.display='flex';}
 function closeIdentityGuide(){document.getElementById('identityGuideOverlay').style.display='none';}
  
