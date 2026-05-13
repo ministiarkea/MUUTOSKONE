@@ -616,12 +616,12 @@ function renderExpenseList(listId,arr,type){
   arr.forEach((item,idx)=>{
     const div=document.createElement('div');
     div.className='exp-row'+(item.paid?' is-paid':'');
+    const d=item.day!=null?parseInt(item.day)||0:0;
     const dayPill=item.paid
       ? '<span class="pill green" style="font-size:9px">✓ Maksettu'+(item.paidFrom==='kateis'?' (käteinen)':' (tili)')+'</span>'
-      : item.day>0
-        ? '<span class="pill '+(item.day>=todayDay?'orange':'gray')+'" style="font-size:9px">'+
-          (item.day>=todayDay?'⏳ '+item.day+'. pv':item.day+'. pv oli')+'</span>'
-        : '<span class="pill cyan" style="font-size:9px">Jatkuva</span>';
+      : d>0
+        ? '<span class="pill '+(d>=todayDay?'orange':'gray')+'" style="font-size:9px">'+(d>=todayDay?'⏳ Eräänt. '+d+'. pv':'Eräänt. oli '+d+'. pv')+'</span>'
+        : '<span class="pill cyan" style="font-size:9px">Jatkuva / ei eräpäivää</span>';
     div.innerHTML=
       '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">'+
         '<input type="text" value="'+esc(item.label)+'" placeholder="Meno"'+
@@ -639,7 +639,7 @@ function renderExpenseList(listId,arr,type){
       '</div>'+
       '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:7px">'+
         '<span style="font-size:9px;color:var(--text-3)">Eräpäivä:</span>'+
-        '<input type="number" value="'+(item.day||0)+'" min="0" max="31" placeholder="0"'+
+        '<input type="number" value="'+d+'" min="0" max="31" placeholder="0"'+
           ' style="width:40px;font-size:11px;padding:2px 5px;background:rgba(255,255,255,0.06);border-radius:5px;text-align:center"'+
           ' oninput="'+(type==='arki'?'S.expenses':'S.yritys')+'['+idx+'].day=parseInt(this.value)||0;save();update()">'+
         dayPill+
