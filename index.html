@@ -112,6 +112,7 @@ input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-ou
 /* Expense row - more complex with scheduling */
 .exp-row{background:rgba(255,255,255,0.028);border:1px solid var(--border);border-radius:11px;padding:11px 13px;margin-bottom:8px;transition:border-color 0.15s;}
 .exp-row:hover{border-color:rgba(0,200,240,0.12);}
+.exp-row.future-month{border-style:dashed;border-color:rgba(0,200,240,0.15);}
 .exp-row.is-paid{border-color:rgba(34,197,94,0.2);background:rgba(34,197,94,0.03);}
 .exp-row.is-paid .exp-label{color:var(--text-2);}
 .ai-panel{background:linear-gradient(135deg,rgba(124,92,191,0.08),rgba(0,200,240,0.04));border:1px solid rgba(124,92,191,0.25);border-radius:14px;padding:18px;}
@@ -361,6 +362,10 @@ input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-ou
     </table>
     <div class="tip mt8" id="daybudget-note">Käytetty: saldo + tulevat tulot − maksamattomat menot</div>
   </div>
+
+  <div class="sec-title">Tulevat kuukaudet</div>
+  <div class="tip" style="margin-bottom:12px">Kirjatut erät tuleville kuukausille — eivät vaikuta tämän kuun laskelmiin.</div>
+  <div id="futureSummary"></div>
 </div>
 
 <!-- ======= SUUNNITELMAT ======= -->
@@ -470,20 +475,20 @@ const DEF={
     {id:'i2',label:'Lapsilisä',amount:0,day:26,recurring:true,paid:false},
   ],
   expenses:[
-    {id:'e1',label:'Vuokra',amount:0,day:1,paid:false,paidFrom:null},
-    {id:'e2',label:'Sähkönsiirto',amount:0,day:5,paid:false,paidFrom:null},
-    {id:'e3',label:'Sähkö (kulutus)',amount:0,day:5,paid:false,paidFrom:null},
-    {id:'e4',label:'Kotivakuutus',amount:0,day:1,paid:false,paidFrom:null},
-    {id:'e5',label:'Puhelin/tietoliikenne',amount:0,day:10,paid:false,paidFrom:null},
-    {id:'e6',label:'Salikortti',amount:0,day:1,paid:false,paidFrom:null},
-    {id:'e7',label:'Junaliput',amount:0,day:0,paid:false,paidFrom:null},
-    {id:'e8',label:'Luottokortti/lainat',amount:0,day:15,paid:false,paidFrom:null},
+    {id:'e1',label:'Vuokra',amount:0,day:1,month:0,paid:false,paidFrom:null},
+    {id:'e2',label:'Sähkönsiirto',amount:0,day:5,month:0,paid:false,paidFrom:null},
+    {id:'e3',label:'Sähkö (kulutus)',amount:0,day:5,month:0,paid:false,paidFrom:null},
+    {id:'e4',label:'Kotivakuutus',amount:0,day:1,month:0,paid:false,paidFrom:null},
+    {id:'e5',label:'Puhelin/tietoliikenne',amount:0,day:10,month:0,paid:false,paidFrom:null},
+    {id:'e6',label:'Salikortti',amount:0,day:1,month:0,paid:false,paidFrom:null},
+    {id:'e7',label:'Junaliput',amount:0,day:0,month:0,paid:false,paidFrom:null},
+    {id:'e8',label:'Luottokortti/lainat',amount:0,day:15,month:0,paid:false,paidFrom:null},
   ],
   yritys:[
-    {id:'y1',label:'Nettisivut/hosting',amount:0,day:1,paid:false,paidFrom:null},
-    {id:'y2',label:'Palvelinmaksut',amount:0,day:1,paid:false,paidFrom:null},
-    {id:'y3',label:'Verkkokauppamaksut',amount:0,day:1,paid:false,paidFrom:null},
-    {id:'y4',label:'Kirjanpito',amount:0,day:1,paid:false,paidFrom:null},
+    {id:'y1',label:'Nettisivut/hosting',amount:0,day:1,month:0,paid:false,paidFrom:null},
+    {id:'y2',label:'Palvelinmaksut',amount:0,day:1,month:0,paid:false,paidFrom:null},
+    {id:'y3',label:'Verkkokauppamaksut',amount:0,day:1,month:0,paid:false,paidFrom:null},
+    {id:'y4',label:'Kirjanpito',amount:0,day:1,month:0,paid:false,paidFrom:null},
   ],
   alloc:[
     {id:'a1',label:'Hyväntekeväisyys',pct:5},
@@ -560,95 +565,149 @@ function payExpense(type,idx,method){
 }
 
 // ===== RENDER INCOME =====
+function incomeIsThisMonth(i){
+  const m=parseInt(i.month)||0;
+  return i.recurring || m===0 || m===(today.getMonth()+1);
+}
+function incomeIsFutureMonth(i){
+  const m=parseInt(i.month)||0;
+  return !i.recurring && m>0 && m!==(today.getMonth()+1);
+}
+
 function renderIncome(){
   const el=document.getElementById('incomeList');el.innerHTML='';
   S.income.forEach((item,idx)=>{
+    const m=parseInt(item.month)||0;
+    const isFuture=incomeIsFutureMonth(item);
     const div=document.createElement('div');
-    div.className='inc-row'+(item.paid?' is-paid':'');
-    div.innerHTML=`
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
-        <input type="text" value="${esc(item.label)}" placeholder="Tulolähde"
-          style="font-size:13px;font-weight:500;padding:0;flex:1;min-width:100px;border-bottom:1px solid var(--border);color:var(--text-1)"
-          onchange="S.income[${idx}].label=this.value;save();update()">
-        <div style="display:flex;align-items:center;gap:5px">
-          <input type="number" value="${item.amount||''}" placeholder="0"
-            style="width:90px;text-align:right;font-size:1rem;color:var(--cyan);padding:0"
-            oninput="S.income[${idx}].amount=parseFloat(this.value)||0;save();update()">
-          <span style="color:var(--text-3);font-size:0.85rem">€</span>
-          <button class="btn-del" onclick="S.income.splice(${idx},1);save();renderIncome();update()">✕</button>
-        </div>
-      </div>
-      <div class="inc-meta">
-        <span style="font-size:9px;color:var(--text-3)">Pv:</span>
-        <input type="number" value="${item.day||1}" min="1" max="31"
-          style="width:38px;font-size:11px;padding:2px 5px;background:rgba(255,255,255,0.06);border-radius:5px;text-align:center"
-          oninput="S.income[${idx}].day=parseInt(this.value)||1;save();update()">
-        <span class="chip ${item.recurring?'act-cyan':''}" onclick="S.income[${idx}].recurring=!S.income[${idx}].recurring;save();renderIncome();update()">
-          ↻ ${item.recurring?'Toistuva':'Kertaluonteinen'}
-        </span>
-        <span class="chip ${item.paid?'act-green':'act-orange'}" onclick="S.income[${idx}].paid=!S.income[${idx}].paid;save();renderIncome();update()">
-          ${item.paid?'✓ Saatu':'⏳ Tulossa'}
-        </span>
-      </div>
-      ${!item.paid?`<div class="tip" style="margin-top:4px">Ei lasketa käytettävissä olevaan saldoon</div>`:''}
-    `;
+    div.className='inc-row'+(item.paid?' is-paid':'')+(isFuture?' future-month':'');
+    div.innerHTML=
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;opacity:'+(isFuture?'0.55':'1')+'">'+
+        '<input type="text" value="'+esc(item.label)+'" placeholder="Tulolähde"'+
+          ' style="font-size:13px;font-weight:500;padding:0;flex:1;min-width:100px;border-bottom:1px solid var(--border);color:var(--text-1)"'+
+          ' onchange="S.income['+idx+'].label=this.value;save();update()">'+
+        '<div style="display:flex;align-items:center;gap:5px">'+
+          '<input type="number" value="'+(item.amount||'')+'" placeholder="0"'+
+            ' style="width:90px;text-align:right;font-size:1rem;color:'+(isFuture?'var(--text-3)':'var(--cyan)')+';padding:0"'+
+            ' oninput="S.income['+idx+'].amount=parseFloat(this.value)||0;save();update()">'+
+          '<span style="color:var(--text-3);font-size:0.85rem">€</span>'+
+          '<button class="btn-del" onclick="S.income.splice('+idx+',1);save();renderIncome();update()">✕</button>'+
+        '</div>'+
+      '</div>'+
+      '<div class="inc-meta">'+
+        // Month selector
+        '<select style="font-size:10px;padding:3px 6px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:6px;color:var(--text-2)"'+
+          ' onchange="S.income['+idx+'].month=parseInt(this.value);if(parseInt(this.value)>0){S.income['+idx+'].recurring=false;}save();renderIncome();update()">'+
+          '<option value="0"'+(m===0?' selected':'')+'>↻ Joka kuukausi</option>'+
+          [1,2,3,4,5,6,7,8,9,10,11,12].map(n=>'<option value="'+n+'"'+(m===n?' selected':'')+'>'+MONTH_NAMES[n]+'</option>').join('')+
+        '</select>'+
+        // Day input
+        '<span style="font-size:9px;color:var(--text-3)">Pv:</span>'+
+        '<input type="number" value="'+(item.day||1)+'" min="1" max="31"'+
+          ' style="width:38px;font-size:11px;padding:2px 5px;background:rgba(255,255,255,0.06);border-radius:5px;text-align:center"'+
+          ' oninput="S.income['+idx+'].day=parseInt(this.value)||1;save();update()">'+
+        // Recurring chip — hide if specific month chosen
+        (m===0?'<span class="chip act-cyan">↻ Toistuva</span>':
+          '<span class="pill '+(isFuture?'cyan':'orange')+'" style="font-size:9px">'+(isFuture?'📅 '+MONTH_NAMES[m]:'📌 Tämä kuu')+'</span>')+
+        // Paid chip — only for this month's income
+        (!isFuture?
+          '<span class="chip '+(item.paid?'act-green':'act-orange')+'" onclick="S.income['+idx+'].paid=!S.income['+idx+'].paid;save();renderIncome();update()">'+
+          (item.paid?'✓ Saatu':'⏳ Tulossa')+'</span>':
+          '<span class="pill cyan" style="font-size:9px">Ei vaikuta tähän kuuhun</span>')+
+      '</div>'+
+      (!item.paid&&!isFuture?'<div class="tip" style="margin-top:4px">Ei lasketa käytettävissä olevaan saldoon</div>':'');
     el.appendChild(div);
   });
-  const rec=S.income.filter(i=>i.recurring).reduce((s,i)=>s+(i.amount||0),0);
-  const one=S.income.filter(i=>!i.recurring).reduce((s,i)=>s+(i.amount||0),0);
+  const thisM=S.income.filter(incomeIsThisMonth);
+  const rec=thisM.filter(i=>i.recurring||parseInt(i.month||0)===0).reduce((s,i)=>s+(i.amount||0),0);
+  const one=S.income.filter(i=>!i.recurring&&parseInt(i.month||0)===(today.getMonth()+1)).reduce((s,i)=>s+(i.amount||0),0);
   if(document.getElementById('inc-recurring'))document.getElementById('inc-recurring').textContent=fmt(rec);
   if(document.getElementById('inc-onetime'))document.getElementById('inc-onetime').textContent=fmt(one);
 }
 function addIncome(){
-  S.income.push({id:'i'+Date.now(),label:'Uusi tulolähde',amount:0,day:1,recurring:true,paid:false});
+  S.income.push({id:'i'+Date.now(),label:'Uusi tulolähde',amount:0,day:1,month:0,recurring:true,paid:false});
   save();renderIncome();update();
 }
 
 // ===== RENDER EXPENSES =====
-function expPayBtns(type,idx,paid){
+function expPayBtns(type,idx,paid,isFutureMonth){
+  if(isFutureMonth) return '<span class="pill cyan" style="font-size:9px">📅 Tuleva — ei vaikuta tähän kuuhun</span>';
   if(paid) return '<button class="btn-pay paid" onclick="payExpense(\''+type+'\','+idx+',\'undo\')">↩ Peruuta</button>';
   return '<button class="btn-pay" onclick="payExpense(\''+type+'\','+idx+',\'tili\')" title="Vähennetään tilisaldosta">💳 Tili</button>'
        + '<button class="btn-pay" style="background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.2);color:rgba(34,197,94,0.7)" onclick="payExpense(\''+type+'\','+idx+',\'kateis\')" title="Vähennetään käteisestä">💵 Käteinen</button>';
 }
 
+const MONTH_NAMES=['—','Tam','Hel','Maa','Huh','Tou','Kes','Hei','Elo','Syy','Lok','Mar','Jou'];
+
 function renderExpenseList(listId,arr,type){
   const el=document.getElementById(listId);if(!el)return;el.innerHTML='';
+  const thisMonth=today.getMonth()+1; // 1-12
+
   arr.forEach((item,idx)=>{
-    const div=document.createElement('div');
-    div.className='exp-row'+(item.paid?' is-paid':'');
+    const m=parseInt(item.month)||0; // 0=toistuva, 1-12=tietty kuukausi
+    const isFutureMonth=m>0&&m!==thisMonth; // ei tämä kuukausi
+    const isPastMonth=m>0&&m<thisMonth;
     const d=item.day!=null?parseInt(item.day)||0:0;
-    const dayPill=item.paid
-      ? '<span class="pill green" style="font-size:9px">✓ Maksettu'+(item.paidFrom==='kateis'?' (käteinen)':' (tili)')+'</span>'
-      : d>0
-        ? '<span class="pill '+(d>=todayDay?'orange':'gray')+'" style="font-size:9px">'+(d>=todayDay?'⏳ Eräänt. '+d+'. pv':'Eräänt. oli '+d+'. pv')+'</span>'
-        : '<span class="pill cyan" style="font-size:9px">Jatkuva / ei eräpäivää</span>';
+
+    const div=document.createElement('div');
+    div.className='exp-row'+(item.paid?' is-paid':'')+(isFutureMonth?' future-month':'');
+
+    // Month badge
+    let monthBadge='';
+    if(m===0) monthBadge='<span class="pill cyan" style="font-size:9px">↻ Kuukausittain</span>';
+    else if(m===thisMonth) monthBadge='<span class="pill orange" style="font-size:9px">📌 Tämä kuu</span>';
+    else if(isFutureMonth) monthBadge='<span class="pill cyan" style="font-size:9px">📅 '+MONTH_NAMES[m]+'</span>';
+    else monthBadge='<span class="pill gray" style="font-size:9px">'+MONTH_NAMES[m]+' (mennyt)</span>';
+
+    // Day pill — only relevant if not future month
+    let dayPill='';
+    if(!isFutureMonth){
+      dayPill=item.paid
+        ? '<span class="pill green" style="font-size:9px">✓ Maksettu'+(item.paidFrom==='kateis'?' (käteinen)':' (tili)')+'</span>'
+        : d>0
+          ? '<span class="pill '+(d>=todayDay?'orange':'gray')+'" style="font-size:9px">'+(d>=todayDay?'⏳ Eräänt. '+d+'. pv':'Eräänt. oli '+d+'. pv')+'</span>'
+          : '<span class="pill cyan" style="font-size:9px">Jatkuva</span>';
+    }
+
     div.innerHTML=
-      '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;opacity:'+(isFutureMonth?'0.55':'1')+'">'+
         '<input type="text" value="'+esc(item.label)+'" placeholder="Meno"'+
           ' style="font-size:13px;font-weight:'+(item.paid?'300':'500')+';padding:0;flex:1;min-width:90px;'+
           'border-bottom:1px solid var(--border);color:var(--text-1);'+
-          'text-decoration:'+(item.paid?'line-through':'none')+';opacity:'+(item.paid?'0.5':'1')+'"'+
+          'text-decoration:'+(item.paid?'line-through':'none')+'"'+
           ' onchange="'+(type==='arki'?'S.expenses':'S.yritys')+'['+idx+'].label=this.value;save()">'+
         '<div style="display:flex;align-items:center;gap:5px">'+
           '<input type="number" value="'+(item.amount||'')+'" placeholder="0"'+
-            ' style="width:80px;text-align:right;font-size:1rem;color:'+(item.paid?'var(--text-3)':'var(--red)')+';padding:0"'+
+            ' style="width:80px;text-align:right;font-size:1rem;color:'+(item.paid?'var(--text-3)':isFutureMonth?'var(--text-3)':'var(--red)')+';padding:0"'+
             ' oninput="'+(type==='arki'?'S.expenses':'S.yritys')+'['+idx+'].amount=parseFloat(this.value)||0;save();update()">'+
           '<span style="color:var(--text-3);font-size:0.85rem">€</span>'+
           '<button class="btn-del" onclick="'+(type==='arki'?'S.expenses':'S.yritys')+'.splice('+idx+',1);save();renderAll()">✕</button>'+
         '</div>'+
       '</div>'+
       '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:7px">'+
-        '<span style="font-size:9px;color:var(--text-3)">Eräpäivä:</span>'+
-        '<input type="number" value="'+d+'" min="0" max="31" placeholder="0"'+
-          ' style="width:40px;font-size:11px;padding:2px 5px;background:rgba(255,255,255,0.06);border-radius:5px;text-align:center"'+
-          ' oninput="'+(type==='arki'?'S.expenses':'S.yritys')+'['+idx+'].day=parseInt(this.value)||0;save();update()">'+
+        // Month selector
+        '<select style="font-size:10px;padding:3px 6px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:6px;color:var(--text-2)"'+
+          ' onchange="'+(type==='arki'?'S.expenses':'S.yritys')+'['+idx+'].month=parseInt(this.value);save();renderAll()">'+
+          '<option value="0"'+(m===0?' selected':'')+'>↻ Joka kuukausi</option>'+
+          [1,2,3,4,5,6,7,8,9,10,11,12].map(n=>
+            '<option value="'+n+'"'+(m===n?' selected':'')+'>'+MONTH_NAMES[n]+'</option>'
+          ).join('')+
+        '</select>'+
+        // Day input — hidden for future months
+        (isFutureMonth?'':
+          '<input type="number" value="'+d+'" min="0" max="31" placeholder="pv"'+
+            ' style="width:38px;font-size:11px;padding:2px 5px;background:rgba(255,255,255,0.06);border-radius:5px;text-align:center"'+
+            ' oninput="'+(type==='arki'?'S.expenses':'S.yritys')+'['+idx+'].day=parseInt(this.value)||0;save();update()">')+
+        monthBadge+
         dayPill+
-        expPayBtns(type,idx,item.paid)+
+        expPayBtns(type,idx,item.paid,isFutureMonth)+
       '</div>';
     el.appendChild(div);
   });
-  const total=arr.reduce((s,m)=>s+(m.amount||0),0);
-  const paid=arr.filter(m=>m.paid).reduce((s,m)=>s+(m.amount||0),0);
+
+  const thisMonthItems=arr.filter(e=>{const m=parseInt(e.month)||0;return m===0||m===(today.getMonth()+1);});
+  const total=thisMonthItems.reduce((s,m)=>s+(m.amount||0),0);
+  const paid=thisMonthItems.filter(m=>m.paid).reduce((s,m)=>s+(m.amount||0),0);
   if(type==='arki'){
     if(document.getElementById('menot-total'))document.getElementById('menot-total').textContent=fmt(total);
     if(document.getElementById('menot-paid'))document.getElementById('menot-paid').textContent=fmt(paid);
@@ -658,7 +717,7 @@ function renderExpenseList(listId,arr,type){
   }
 }
 function addExpense(type){
-  (type==='arki'?S.expenses:S.yritys).push({id:'x'+Date.now(),label:'Uusi kulu',amount:0,day:1,paid:false});
+  (type==='arki'?S.expenses:S.yritys).push({id:'x'+Date.now(),label:'Uusi kulu',amount:0,day:1,month:0,paid:false,paidFrom:null});
   save();renderAll();
 }
 
@@ -789,13 +848,16 @@ function renderCalendar(){
 // ===== DAY BUDGET =====
 function renderDayBudget(){
   const saldo=(S.saldoTili||0)+(S.saldoKateis||0);
+  const thisM=today.getMonth()+1;
 
-  // REAL-TIME: how much per day until next income arrives
-  // Only use current saldo (cash in hand), subtract bills due before next payday
-  const nextInc=S.income.filter(i=>!i.paid&&i.day>=todayDay).sort((a,b)=>a.day-b.day)[0];
+  // REAL-TIME: only THIS month's unpaid income, only THIS month's unpaid expenses
+  const thisMonthUnpaidInc=S.income.filter(i=>incomeIsThisMonth(i)&&!i.paid&&i.day>=todayDay).sort((a,b)=>a.day-b.day);
+  const nextInc=thisMonthUnpaidInc[0];
   const nextIncDay=nextInc?nextInc.day:daysInMonth;
+
+  // Bills due before next income, this month only
   const unpaidExpBeforeNext=[...S.expenses,...S.yritys]
-    .filter(e=>!e.paid&&e.day>0&&e.day<nextIncDay)
+    .filter(e=>isThisMonth(e)&&!e.paid&&e.day>0&&e.day<nextIncDay)
     .reduce((s,e)=>s+(e.amount||0),0);
   const spendableNow=Math.max(0, saldo-unpaidExpBeforeNext);
 
@@ -805,30 +867,29 @@ function renderDayBudget(){
     if(document.getElementById('pb-realday'))document.getElementById('pb-realday').textContent=perDay.toFixed(2)+' €/pv';
     const extra=unpaidExpBeforeNext>0?' (laskut vähennetty: '+unpaidExpBeforeNext.toFixed(0)+' €)':'';
     if(document.getElementById('pb-realnote'))document.getElementById('pb-realnote').textContent=
-      saldo.toFixed(0)+' € saldo → käytettävissä '+spendableNow.toFixed(0)+' € ÷ '+daysUntil+' pv → '+nextInc.label+' '+nextInc.day+'. pv'+extra;
-    const span=nextInc.day;
-    const passed=span>0?Math.max(0,Math.min(100,(span-daysUntil)/span*100)):0;
+      saldo.toFixed(0)+' € → käytettävissä '+spendableNow.toFixed(0)+' € ÷ '+daysUntil+' pv → '+nextInc.label+' '+nextInc.day+'. pv'+extra;
+    const passed=nextInc.day>0?Math.max(0,Math.min(100,(nextInc.day-(nextInc.day-todayDay))/nextInc.day*100)):0;
     if(document.getElementById('nextIncLabel'))document.getElementById('nextIncLabel').textContent=nextInc.label+': '+(daysUntil===0?'tänään!':daysUntil+' pv');
     if(document.getElementById('nextIncBar'))document.getElementById('nextIncBar').style.width=passed+'%';
   } else {
     const perDay=daysLeft>0?spendableNow/daysLeft:0;
     if(document.getElementById('pb-realday'))document.getElementById('pb-realday').textContent=perDay.toFixed(2)+' €/pv';
     if(document.getElementById('pb-realnote'))document.getElementById('pb-realnote').textContent=spendableNow.toFixed(0)+' € käytettävissä ÷ '+daysLeft+' pv jäljellä';
-    if(document.getElementById('nextIncLabel'))document.getElementById('nextIncLabel').textContent='Ei tulevia tuloja';
+    if(document.getElementById('nextIncLabel'))document.getElementById('nextIncLabel').textContent='Ei tulevia tuloja tässä kuussa';
     if(document.getElementById('nextIncBar'))document.getElementById('nextIncBar').style.width='100%';
   }
 
-  // MONTHLY: recurring income minus ALL fixed expenses = true disposable
-  const totalRecInc=S.income.filter(i=>i.recurring).reduce((s,i)=>s+(i.amount||0),0);
-  const totalExp=S.expenses.reduce((s,e)=>s+(e.amount||0),0)+S.yritys.reduce((s,y)=>s+(y.amount||0),0);
-  const monthFree=totalRecInc-totalExp;
+  // MONTHLY FORECAST: this month recurring + one-off this month income vs expenses
+  const totalRecInc=S.income.filter(i=>incomeIsThisMonth(i)).reduce((s,i)=>s+(i.amount||0),0);
+  const totalThisExp=[...S.expenses,...S.yritys].filter(isThisMonth).reduce((s,e)=>s+(e.amount||0),0);
+  const monthFree=totalRecInc-totalThisExp;
   if(document.getElementById('pb-daysLeft'))document.getElementById('pb-daysLeft').textContent=daysLeft;
   const mfEl=document.getElementById('pb-monthfree');
   if(mfEl){mfEl.textContent=fmt(monthFree);mfEl.className='sval '+(monthFree>=0?'green':'red');}
 
-  // TABLE: saldo + all remaining income - all remaining unpaid expenses = net available
-  const allUnpaidInc=S.income.filter(i=>!i.paid).reduce((s,i)=>s+(i.amount||0),0);
-  const allUnpaidExp=[...S.expenses,...S.yritys].filter(e=>!e.paid&&e.day>0).reduce((s,e)=>s+(e.amount||0),0);
+  // TABLE: saldo + remaining unpaid THIS MONTH income - remaining unpaid THIS MONTH expenses
+  const allUnpaidInc=S.income.filter(i=>incomeIsThisMonth(i)&&!i.paid).reduce((s,i)=>s+(i.amount||0),0);
+  const allUnpaidExp=[...S.expenses,...S.yritys].filter(e=>isThisMonth(e)&&!e.paid&&e.day>0).reduce((s,e)=>s+(e.amount||0),0);
   const available=saldo+allUnpaidInc-allUnpaidExp;
 
   const targets=[10,15,20,25,30,35,40];
@@ -839,16 +900,57 @@ function renderDayBudget(){
     tr.innerHTML='<td><strong>'+t+' €/pv</strong></td><td>'+needed.toFixed(0)+' €</td><td>'+(ok?'<span class="pill green">✓ Riittää</span>':'<span class="pill red">✗ Ei riitä</span>')+'</td><td style="color:'+(ok?'var(--green)':'var(--red)')+'"> '+(ok?'+':'')+diff.toFixed(0)+' €</td>';
     tbody.appendChild(tr);
   });
-  // Update footnote
   const noteEl=document.getElementById('daybudget-note');
-  if(noteEl)noteEl.textContent='Netto: '+saldo.toFixed(0)+' € saldo + '+allUnpaidInc.toFixed(0)+' € tulevat tulot − '+allUnpaidExp.toFixed(0)+' € maksamattomat menot = '+available.toFixed(0)+' €';
+  if(noteEl)noteEl.textContent='Netto tässä kuussa: '+saldo.toFixed(0)+' € saldo + '+allUnpaidInc.toFixed(0)+' € tulevat tulot − '+allUnpaidExp.toFixed(0)+' € maksamattomat menot = '+available.toFixed(0)+' €';
+
+  // FUTURE MONTHS SUMMARY
+  renderFutureSummary();
+}
+
+// ===== FUTURE MONTHS SUMMARY =====
+function renderFutureSummary(){
+  const el=document.getElementById('futureSummary');if(!el)return;
+  const curM=today.getMonth()+1;
+  // Gather all future months that have entries
+  const futureMonths={};
+  [...S.income,...S.expenses,...S.yritys].forEach(item=>{
+    const m=parseInt(item.month)||0;
+    if(m>0&&m!==curM){
+      if(!futureMonths[m])futureMonths[m]={inc:0,exp:0,items:[]};
+      if(S.income.includes(item))futureMonths[m].inc+=(item.amount||0);
+      else futureMonths[m].exp+=(item.amount||0);
+      futureMonths[m].items.push(item);
+    }
+  });
+  const months=Object.keys(futureMonths).map(Number).sort((a,b)=>a-b);
+  if(!months.length){el.innerHTML='<div class="tip">Ei tulevia kuukausikohtaisia eriä kirjattu.</div>';return;}
+  el.innerHTML='';
+  months.forEach(m=>{
+    const d=futureMonths[m];
+    const net=d.inc-d.exp;
+    const card=document.createElement('div');
+    card.className='card';card.style.marginBottom='8px';
+    card.innerHTML=
+      '<div class="flex-between" style="margin-bottom:8px">'+
+        '<strong style="font-size:13px">'+MONTH_NAMES[m]+'</strong>'+
+        '<span class="sval '+(net>=0?'green':'red')+'" style="font-size:1rem">'+fmt(net)+'</span>'+
+      '</div>'+
+      '<div style="display:flex;gap:12px;font-size:11px;color:var(--text-2)">'+
+        '<span style="color:var(--green)">↑ '+fmt(d.inc)+'</span>'+
+        '<span style="color:var(--red)">↓ '+fmt(d.exp)+'</span>'+
+      '</div>'+
+      '<div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:5px">'+
+        d.items.map(i=>'<span class="pill '+(S.income.includes(i)?'green':'orange')+'" style="font-size:9px">'+esc(i.label)+' '+fmt(i.amount||0)+'</span>').join('')+
+      '</div>';
+    el.appendChild(card);
+  });
 }
 
 // ===== CHART =====
 let chartInst=null;
 function renderChart(){
   const ctx=document.getElementById('chartMenot');if(!ctx)return;
-  const items=[...S.expenses,...S.yritys].filter(m=>m.amount>0);
+  const items=[...S.expenses,...S.yritys].filter(m=>isThisMonth(m)&&m.amount>0);
   if(chartInst){chartInst.destroy();chartInst=null;}
   if(!items.length){
     if(document.getElementById('chartLegend'))document.getElementById('chartLegend').innerHTML='<span class="tip">Lisää menoja nähdäksesi jakauman.</span>';
@@ -924,18 +1026,26 @@ async function copyAI(){
 }
 
 // ===== MAIN UPDATE =====
+// Helper: is this expense relevant for the current month?
+function isThisMonth(e){
+  const m=parseInt(e.month)||0;
+  return m===0 || m===(today.getMonth()+1);
+}
+
 function update(){
   const saldo=(S.saldoTili||0)+(S.saldoKateis||0);
-  const totalInc=S.income.filter(i=>i.recurring).reduce((s,i)=>s+(i.amount||0),0);
-  const totalExp=S.expenses.reduce((s,e)=>s+(e.amount||0),0);
-  const totalYri=S.yritys.reduce((s,y)=>s+(y.amount||0),0);
+  // Only count expenses that belong to THIS month (month=0 = recurring, month=thisMonth = one-off this month)
+  const thisMonthExp=S.expenses.filter(isThisMonth);
+  const thisMonthYri=S.yritys.filter(isThisMonth);
+  const totalInc=S.income.filter(i=>incomeIsThisMonth(i)).reduce((s,i)=>s+(i.amount||0),0);
+  const totalExp=thisMonthExp.reduce((s,e)=>s+(e.amount||0),0);
+  const totalYri=thisMonthYri.reduce((s,e)=>s+(e.amount||0),0);
   const allExp=totalExp+totalYri;
   const jaa=totalInc-allExp;
-  const gotInc=S.income.filter(i=>i.paid).reduce((s,i)=>s+(i.amount||0),0);
-  const paidExp=[...S.expenses,...S.yritys].filter(e=>e.paid).reduce((s,e)=>s+(e.amount||0),0);
-  const upcomingInc=S.income.filter(i=>!i.paid).reduce((s,i)=>s+(i.amount||0),0);
-  const totalExpenses=allExp;
-  const pctExpDone=totalExpenses>0?Math.min(paidExp/totalExpenses*100,100):0;
+  const gotInc=S.income.filter(i=>incomeIsThisMonth(i)&&i.paid).reduce((s,i)=>s+(i.amount||0),0);
+  const paidExp=[...thisMonthExp,...thisMonthYri].filter(e=>e.paid).reduce((s,e)=>s+(e.amount||0),0);
+  const upcomingInc=S.income.filter(i=>incomeIsThisMonth(i)&&!i.paid).reduce((s,i)=>s+(i.amount||0),0);
+  const pctExpDone=allExp>0?Math.min(paidExp/allExp*100,100):0;
 
   // Tilanne tab
   const svts=document.getElementById('sv-total-saldo');if(svts)svts.textContent=fmt(saldo);
