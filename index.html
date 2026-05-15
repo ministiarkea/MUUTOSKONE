@@ -6,10 +6,11 @@
 <meta name="theme-color" content="#07070d">
 <title>RAHAKONE</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%237c5cbf'/><stop offset='100%25' stop-color='%2300c8f0'/></linearGradient></defs><rect width='100' height='100' rx='22' fill='%2307070d'/><rect x='18' y='38' width='64' height='38' rx='7' fill='none' stroke='url(%23g)' stroke-width='5'/><rect x='18' y='44' width='64' height='10' fill='url(%23g)' opacity='.35'/><circle cx='34' cy='57' r='5' fill='url(%23g)'/><rect x='44' y='53' width='22' height='4' rx='2' fill='url(%23g)' opacity='.6'/><path d='M62 38 L62 28 Q62 20 70 20 L82 20' stroke='url(%23g)' stroke-width='4' fill='none' stroke-linecap='round'/><circle cx='82' cy='20' r='5' fill='%2300c8f0'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><radialGradient id='core' cx='38%25' cy='35%25' r='60%25'><stop offset='0%25' stop-color='%23ffffff' stop-opacity='0.95'/><stop offset='30%25' stop-color='%2300e5ff'/><stop offset='65%25' stop-color='%237c5cbf'/><stop offset='100%25' stop-color='%23030310'/></radialGradient><radialGradient id='glow' cx='50%25' cy='50%25' r='50%25'><stop offset='60%25' stop-color='transparent'/><stop offset='100%25' stop-color='%237c5cbf' stop-opacity='0.6'/></radialGradient><filter id='blur'><feGaussianBlur stdDeviation='3'/></filter></defs><circle cx='50' cy='50' r='48' fill='%23030310'/><circle cx='50' cy='50' r='40' fill='url(%23glow)' filter='url(%23blur)'/><circle cx='50' cy='50' r='34' fill='url(%23core)'/><circle cx='38' cy='36' r='8' fill='white' opacity='0.18'/><circle cx='36' cy='34' r='4' fill='white' opacity='0.32'/></svg>">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Rahakone">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%237c5cbf'/><stop offset='100%25' stop-color='%2300c8f0'/></linearGradient></defs><rect width='180' height='180' rx='40' fill='%2307070d'/><rect x='32' y='68' width='116' height='68' rx='12' fill='none' stroke='url(%23g)' stroke-width='8'/><rect x='32' y='80' width='116' height='18' fill='url(%23g)' opacity='.3'/><circle cx='60' cy='102' r='9' fill='url(%23g)'/><rect x='78' y='96' width='40' height='7' rx='3.5' fill='url(%23g)' opacity='.55'/><path d='M110 68 L110 50 Q110 36 124 36 L148 36' stroke='url(%23g)' stroke-width='7' fill='none' stroke-linecap='round'/><circle cx='148' cy='36' r='9' fill='%2300c8f0'/></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><defs><radialGradient id='core' cx='38%25' cy='35%25' r='60%25'><stop offset='0%25' stop-color='%23ffffff' stop-opacity='0.95'/><stop offset='25%25' stop-color='%2300e5ff'/><stop offset='60%25' stop-color='%237c5cbf'/><stop offset='100%25' stop-color='%23030310'/></radialGradient><radialGradient id='glow' cx='50%25' cy='50%25' r='50%25'><stop offset='55%25' stop-color='transparent'/><stop offset='100%25' stop-color='%237c5cbf' stop-opacity='0.7'/></radialGradient><filter id='blur'><feGaussianBlur stdDeviation='6'/></filter></defs><rect width='180' height='180' rx='40' fill='%2307070d'/><circle cx='90' cy='90' r='72' fill='url(%23glow)' filter='url(%23blur)'/><circle cx='90' cy='90' r='60' fill='url(%23core)'/><circle cx='68' cy='64' r='15' fill='white' opacity='0.18'/><circle cx='64' cy='60' r='7' fill='white' opacity='0.35'/></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -133,7 +134,34 @@ input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-ou
 .split-box{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;}
 .tip{font-size:10px;color:var(--text-3);margin-top:3px;line-height:1.5;}
 
-/* FIRE meter */
+/* Help modal */
+.help-btn{background:none;border:1.5px solid rgba(0,200,240,0.3);border-radius:50%;color:var(--cyan);cursor:pointer;font-size:10px;font-weight:700;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;line-height:1;transition:all 0.15s;flex-shrink:0;font-family:inherit;vertical-align:middle;margin-left:6px;}
+.help-btn:hover{background:rgba(0,200,240,0.15);border-color:var(--cyan);}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:#0f0f1c;border:1px solid rgba(124,92,191,0.35);border-radius:18px;padding:22px 20px;max-width:420px;width:100%;max-height:85vh;overflow-y:auto;position:relative;box-shadow:0 0 60px rgba(124,92,191,0.2);}
+.modal-box::-webkit-scrollbar{width:3px;}
+.modal-box::-webkit-scrollbar-thumb{background:var(--border-2);}
+.modal-title{font-size:13px;font-weight:600;color:var(--cyan);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.modal-title span{font-size:1.1rem;}
+.modal-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--text-3);cursor:pointer;font-size:16px;line-height:1;transition:color 0.15s;font-family:inherit;}
+.modal-close:hover{color:var(--text-1);}
+.modal-row{display:flex;gap:10px;margin-bottom:11px;align-items:flex-start;font-size:12px;color:var(--text-2);line-height:1.6;}
+.modal-row .mi{font-size:1rem;flex-shrink:0;width:22px;text-align:center;margin-top:1px;}
+.modal-warn{background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.25);border-radius:10px;padding:10px 12px;font-size:11px;color:rgba(249,115,22,0.9);line-height:1.6;margin-top:10px;}
+.modal-info{background:rgba(0,200,240,0.06);border:1px solid rgba(0,200,240,0.18);border-radius:10px;padding:10px 12px;font-size:11px;color:rgba(0,200,240,0.85);line-height:1.6;margin-top:10px;}
+
+/* Dark mode toggle & export strip */
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;z-index:90;background:rgba(7,7,13,0.97);border-top:1px solid var(--border);padding:8px 16px;display:flex;justify-content:center;gap:8px;}
+.bb-btn{background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;color:var(--text-3);cursor:pointer;font-family:inherit;font-size:9px;font-weight:600;letter-spacing:0.5px;padding:6px 10px;transition:all 0.15s;text-transform:uppercase;}
+.bb-btn:hover{border-color:var(--cyan-line);color:var(--cyan);}
+
+/* Tip of the day */
+.totd{background:linear-gradient(135deg,rgba(124,92,191,0.07),rgba(0,200,240,0.04));border:1px solid rgba(0,200,240,0.15);border-radius:12px;padding:12px 14px;margin-bottom:10px;display:flex;gap:10px;align-items:flex-start;}
+.totd-icon{font-size:1.1rem;flex-shrink:0;}
+.totd-text{font-size:11px;color:var(--text-2);line-height:1.6;}
+.totd-text strong{color:var(--cyan);}
+
 .fire-meter{position:relative;width:140px;height:140px;margin:0 auto 12px;}
 .fire-meter svg{transform:rotate(-90deg);}
 .fire-meter-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;}
@@ -217,10 +245,11 @@ input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-ou
 
 <!-- ======= TILANNE ======= -->
 <div id="tab-tilanne" class="tab active">
+  <div id="totdBox"></div>
   <div id="alertBox"></div>
 
   <!-- Saldo inputs -->
-  <div class="sec-title">Saldo nyt</div>
+  <div class="sec-title">Saldo nyt <button class="help-btn" onclick="showHelp('tilanne')">?</button></div>
   <div class="card card-accent">
     <div class="saldo-wrap">
       <div class="saldo-part">
@@ -334,7 +363,7 @@ input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-ou
 
 <!-- ======= TULOT ======= -->
 <div id="tab-tulot" class="tab">
-  <div class="sec-title">Tulolähteet</div>
+  <div class="sec-title">Tulolähteet <button class="help-btn" onclick="showHelp('tulot')">?</button></div>
   <div id="incomeList"></div>
   <button class="btn mt12" onclick="addIncome()">+ Lisää tulolähde</button>
   <hr class="div">
@@ -352,7 +381,7 @@ input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-ou
 
 <!-- ======= MENOT ======= -->
 <div id="tab-menot" class="tab">
-  <div class="sec-title">Kiinteät arjen menot</div>
+  <div class="sec-title">Kiinteät arjen menot <button class="help-btn" onclick="showHelp('menot')">?</button></div>
   <div class="tip" style="margin-bottom:12px">Kun maksat menon, valitse maksoitko <strong>tililtä</strong> vai <strong>käteisellä</strong> — summa vähennetään automaattisesti oikeasta saldosta. Peruuta-nappi palauttaa sen takaisin.</div>
   <div id="menotList"></div>
   <button class="btn mt12" onclick="addExpense('arki')">+ Lisää meno</button>
@@ -369,7 +398,7 @@ input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-ou
 
 <!-- ======= YRITYS ======= -->
 <div id="tab-yritys" class="tab">
-  <div class="sec-title">Yrityksen kulut</div>
+  <div class="sec-title">Yrityksen kulut <button class="help-btn" onclick="showHelp('yritys')">?</button></div>
   <div id="yritysLista"></div>
   <button class="btn mt12" onclick="addExpense('yritys')">+ Lisää kulu</button>
   <hr class="div">
@@ -385,7 +414,7 @@ input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-ou
 
 <!-- ======= PÄIVÄBUDJETTI ======= -->
 <div id="tab-paiva" class="tab">
-  <div class="sec-title">Nyt — ennen seuraavia tuloja</div>
+  <div class="sec-title">Nyt — ennen seuraavia tuloja <button class="help-btn" onclick="showHelp('paiva')">?</button></div>
   <div class="card card-accent">
     <div class="lbl"><div class="lbl-dot"></div>Realistinen päiväbudjetti</div>
     <div class="big-num green" id="pb-realday">0 €/pv</div>
@@ -421,7 +450,7 @@ input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-ou
 
 <!-- ======= SUUNNITELMAT ======= -->
 <div id="tab-suunnitelmat" class="tab">
-  <div class="sec-title">Tulojen jako-ohjelma</div>
+  <div class="sec-title">Tulojen jako-ohjelma <button class="help-btn" onclick="showHelp('suunnitelmat')">?</button></div>
   <div class="card">
     <div class="lbl"><div class="lbl-dot"></div>% toistuvista kuukausituloista</div>
     <div id="allocList"></div>
@@ -440,7 +469,7 @@ input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-ou
 
 <!-- ======= JAKO ======= -->
 <div id="tab-jako" class="tab">
-  <div class="sec-title">Kulujen jako</div>
+  <div class="sec-title">Kulujen jako <button class="help-btn" onclick="showHelp('jako')">?</button></div>
   <div class="tip" style="margin-bottom:14px">Jaa mitä kuluja tahansa — esim. asumiskulut, matkakulut, tai vaikka yhteinen viikonloppureissu.</div>
   <div class="card">
     <div class="lbl"><div class="lbl-dot"></div>Valitse jaettavat kulut</div>
@@ -497,7 +526,7 @@ input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-ou
 
 <!-- ======= TAVOITTEET ======= -->
 <div id="tab-tavoitteet" class="tab">
-  <div class="sec-title">Säästötavoitteet</div>
+  <div class="sec-title">Säästötavoitteet <button class="help-btn" onclick="showHelp('tavoitteet')">?</button></div>
   <div class="tip" style="margin-bottom:14px">Aseta konkreettiset tavoitteet. Sovellus laskee automaattisesti milloin saavutat sen nykyisellä säästövauhdilla.</div>
   <div id="goalsList"></div>
   <button class="btn mt12" onclick="addGoal()">+ Lisää tavoite</button>
@@ -511,7 +540,7 @@ input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-ou
 
 <!-- ======= FIRE ======= -->
 <div id="tab-fire" class="tab">
-  <div class="sec-title">🔥 FIRE-laskenta</div>
+  <div class="sec-title">🔥 FIRE-laskenta <button class="help-btn" onclick="showHelp('fire')">?</button></div>
   <div class="tip" style="margin-bottom:14px">Financial Independence, Retire Early. Perustuu 4% nostosääntöön: tarvitset 25× vuosimenosi sijoitettuna saavuttaaksesi taloudellisen vapauden.</div>
 
   <div class="card card-accent">
@@ -581,7 +610,7 @@ input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-ou
 
 <!-- ======= VARALLISUUS ======= -->
 <div id="tab-varallisuus" class="tab">
-  <div class="sec-title">Nettovarallisuus</div>
+  <div class="sec-title">Nettovarallisuus <button class="help-btn" onclick="showHelp('varallisuus')">?</button></div>
   <div class="tip" style="margin-bottom:14px">Seuraa kokonaisvarallisuuttasi. Lisää omaisuuserät ja velat.</div>
 
   <div class="card card-accent" style="margin-bottom:10px">
@@ -621,7 +650,7 @@ input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-ou
 
 <!-- ======= AI ======= -->
 <div id="tab-ai" class="tab">
-  <div class="sec-title">AI-sparri</div>
+  <div class="sec-title">AI-sparri <button class="help-btn" onclick="showHelp('ai')">?</button></div>
   <div class="ai-panel">
     <div style="font-size:12px;color:rgba(180,160,255,0.8);margin-bottom:14px;line-height:1.7">
       Kopioi budjettitietosi ja liitä Claude.ai:hin, ChatGPT:hen, Geminiin tai muuhun AI:hin. Valitse kehote ensin.
@@ -640,7 +669,25 @@ input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-ou
 
 </div><!-- /main -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<!-- ======= HELP MODAL ======= -->
+<div class="modal-overlay" id="helpModal" onclick="if(event.target===this)closeHelp()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeHelp()">✕</button>
+    <div class="modal-title" id="helpModalTitle"><span>❓</span> Ohje</div>
+    <div id="helpModalBody"></div>
+  </div>
+</div>
+
+<!-- ======= BOTTOM BAR ======= -->
+<div class="bottom-bar">
+  <button class="bb-btn" onclick="exportJSON()">⬇ Vie tiedot</button>
+  <button class="bb-btn" onclick="importJSON()">⬆ Tuo tiedot</button>
+  <button class="bb-btn" onclick="showHelp('yleinen')">❓ Ohjeet</button>
+  <button class="bb-btn" onclick="if(confirm('Nollataanko kaikki tiedot? Tätä ei voi peruuttaa.'))resetAll()">🗑 Nollaa</button>
+</div>
+<input type="file" id="importFile" accept=".json" style="display:none" onchange="doImport(event)">
+
+
 <script>
 // ===== CONSTANTS =====
 const TODAY = new Date();
@@ -1368,6 +1415,205 @@ function renderAll(){
   renderExpenseList('menotList',   S.expenses,'arki');
   renderExpenseList('yritysLista', S.yritys,  'yritys');
   update();
+}
+
+// ===== HELP MODAL =====
+const HELP_CONTENT = {
+  yleinen:{
+    title:'❓ Rahakone — Pikaohjeet',
+    rows:[
+      {i:'📊',t:'<strong>Tilanne</strong> — kokonaiskuva: saldo, tulot, menot, tunnusluvut ja menojakauma.'},
+      {i:'💰',t:'<strong>Tulot</strong> — lisää kaikki tulolähteesi. Merkitse saaduksi kun raha on tilillä — saldo päivittyy automaattisesti.'},
+      {i:'🏠',t:'<strong>Menot</strong> — kiinteät arjen kulut. Maksa tililtä tai käteisellä — summa vähennetään saldosta heti.'},
+      {i:'🏢',t:'<strong>Yritys</strong> — yrityksen kulut erikseen. <em>Ei korvaa virallista kirjanpitoa.</em>'},
+      {i:'📅',t:'<strong>Päiväbudjetti</strong> — kuinka paljon voit käyttää päivässä ennen seuraavaa tuloa.'},
+      {i:'🎯',t:'<strong>Tavoitteet</strong> — aseta säästötavoitteita ja seuraa edistymistä.'},
+      {i:'🔥',t:'<strong>FIRE</strong> — laske milloin voisit saavuttaa taloudellisen vapauden.'},
+      {i:'💎',t:'<strong>Varallisuus</strong> — nettovarallisuus: omaisuus miinus velat.'},
+      {i:'🤖',t:'<strong>AI-sparri</strong> — kopioi budjettisi ja liitä tekoälyyn syvempää analyysia varten.'},
+      {i:'💾',t:'Kaikki tiedot tallennetaan <strong>vain tähän laitteeseen</strong> (selainmuistiin). Varmuuskopioi Vie/Tuo-napeilla alhaalla.'},
+    ]
+  },
+  tilanne:{
+    title:'📊 Tilanne-välilehti',
+    rows:[
+      {i:'💳',t:'Syötä <strong>tilin saldo</strong> ja <strong>käteinen</strong> — nämä ovat oikeasti hallussasi olevat rahat nyt.'},
+      {i:'📈',t:'<strong>Saadut tulot</strong> = tulot jotka olet merkinnyt "Saatu". <strong>Tulossa</strong> = maksamattomat tulot.'},
+      {i:'📉',t:'<strong>Loppukuun ennuste</strong> laskee kaikki kirjatut tulot ja menot kuulle — ei vain jo toteutuneet.'},
+      {i:'💡',t:'<strong>Säästämisaste</strong> = (tulot − menot) / tulot. Tavoittele yli 20%.'},
+      {i:'🍩',t:'Menojakauma-kaavio näyttää mihin rahasi menee. Lisää menoja Menot-välilehdellä.'},
+    ],
+    info:'Saldo päivittyy automaattisesti kun merkitset tuloja saaduiksi tai maksat menoja.'
+  },
+  tulot:{
+    title:'💰 Tulot-välilehti',
+    rows:[
+      {i:'➕',t:'Paina <strong>+ Lisää tulolähde</strong> lisätäksesi uuden tulon.'},
+      {i:'↻',t:'Valitse <strong>Joka kuukausi</strong> toistuvalle tulolle (palkka, lapsilisä jne).'},
+      {i:'📅',t:'Valitse kuukausi kertaluonteiselle tulolle — se ei vaikuta muiden kuukausien laskelmiin.'},
+      {i:'✓',t:'Merkitse tulo <strong>Saatu</strong> kun raha on tilillä — se lisätään käytettävissä olevaan saldoon.'},
+      {i:'🗓',t:'<strong>Pv</strong>-kenttä = päivä kuussa, jolloin tulo yleensä saapuu. Näkyy maksukalenterissa.'},
+    ]
+  },
+  menot:{
+    title:'🏠 Menot-välilehti',
+    rows:[
+      {i:'➕',t:'Lisää kaikki toistuvat kiinteät kulut: vuokra, lainanlyhennys, tilaukset jne.'},
+      {i:'↻',t:'<strong>Joka kuukausi</strong> = toistuva kulu. Voit myös valita yksittäisen kuukauden kertaluonteiselle menolle.'},
+      {i:'💳',t:'Kun maksat laskun, paina <strong>Tili</strong> tai <strong>Käteinen</strong> — summa vähennetään saldosta automaattisesti.'},
+      {i:'↩',t:'<strong>Peruuta</strong>-nappi palauttaa summan saldoon, jos merkitsit vahingossa.'},
+      {i:'🗓',t:'<strong>Pv</strong>-kenttä = eräpäivä. Näkyy punaisena kalenterissa ja lajitellaan aikajanalle.'},
+    ]
+  },
+  yritys:{
+    title:'🏢 Yrityksen kulut',
+    rows:[
+      {i:'📋',t:'Listaa yrityksesi toistuvat kulut: hosting, kirjanpito, ohjelmistot jne.'},
+      {i:'💳',t:'Toimii samoin kuin arjen menot — merkitse maksetuksi tililtä tai käteisellä.'},
+      {i:'📊',t:'Yrityksen kulut näkyvät myös menojakaumassa ja FIRE-laskennassa.'},
+    ],
+    warn:'⚠️ <strong>Huom!</strong> Rahakone on henkilökohtainen budjettiapuri — sitä <strong>ei suositella käytettäväksi viralliseen kirjanpitoon</strong>. Yritystoimintaan tarvitaan asianmukainen kirjanpito-ohjelma tai kirjanpitäjä. Rahakone ei laske ALV:ia, poistoja tai muita kirjanpidon erityisvaatimuksia.'
+  },
+  paiva:{
+    title:'📅 Päiväbudjetti',
+    rows:[
+      {i:'💡',t:'<strong>Realistinen päiväbudjetti</strong> = käytettävissä oleva saldo jaettuna päivillä seuraavaan tuloon.'},
+      {i:'🧾',t:'Ennen laskua vähennetään kaikki laskut, jotka erääntyvät ennen seuraavaa tuloa.'},
+      {i:'📊',t:'Taulukko näyttää eri päiväbudjettitasoille, riittääkö raha kuun loppuun.'},
+      {i:'📆',t:'<strong>Tulevat kuukaudet</strong> näyttää jo kirjatut erät tuleville kuukausille.'},
+    ],
+    info:'Päiväbudjetti on arvio — se ei seuraa päivittäistä kulutusta automaattisesti.'
+  },
+  suunnitelmat:{
+    title:'🎯 Jako-ohjelma',
+    rows:[
+      {i:'💡',t:'Jako-ohjelma jakaa kuukausitulosi prosenteilla eri tarkoituksiin.'},
+      {i:'📝',t:'Esimerkki: 10% sijoituksiin, 10% säästöihin, 5% hyväntekeväisyyteen.'},
+      {i:'💰',t:'Euromäärä lasketaan automaattisesti kuukausituloistasi.'},
+      {i:'⚖️',t:'Tavoittele, että jako-ohjelma + menot ≤ 100% tuloista. Ylijäämä on vapaa.'},
+    ]
+  },
+  jako:{
+    title:'🤝 Kulujen jako',
+    rows:[
+      {i:'☑️',t:'Valitse listalta kulut, jotka haluat jakaa esim. kumppanin tai kämppiksen kanssa.'},
+      {i:'➕',t:'Lisää myös kuluihin kuulumattomia eriä "Muita jakoon" -kohtaan.'},
+      {i:'⇄',t:'Säädä jakosuhde — oletuksena 50/50. Muuta "Sinä %"-kenttää.'},
+      {i:'💰',t:'Sovellus laskee automaattisesti molempien osuudet yhteensä.'},
+    ]
+  },
+  tavoitteet:{
+    title:'🎯 Säästötavoitteet',
+    rows:[
+      {i:'➕',t:'Lisää tavoite: nimi, tavoitesumma ja jo säästetty määrä.'},
+      {i:'⏱',t:'Sovellus laskee automaattisesti kuinka monta kuukautta tavoitteeseen menee nykyisellä vapaalla rahalla.'},
+      {i:'🎨',t:'Valitse emoji kuvastamaan tavoitettasi — matka ✈️, asunto 🏠, auto 🚗...'},
+      {i:'✅',t:'Kun edistymispalkki saavuttaa 100%, tavoite merkitään saavutetuksi.'},
+      {i:'💡',t:'Kasvata vapaata rahaa pienentämällä menoja tai lisäämällä tuloja — aika lyhenee!'},
+    ]
+  },
+  fire:{
+    title:'🔥 FIRE-laskenta',
+    rows:[
+      {i:'🎯',t:'<strong>FIRE-numero</strong> = kuukausimenot × 12 × 25. Tämä on sijoitettava summa taloudelliseen vapauteen.'},
+      {i:'📈',t:'Perustuu <strong>4% nostosääntöön</strong>: sijoituksistasi voi nostaa 4%/v loputtomiin tilastollisesti.'},
+      {i:'💰',t:'Syötä nykyinen salkku, kuukausisäästö ja tuotto-odotus — sovellus laskee vuodet FIRE:een.'},
+      {i:'⚡',t:'<strong>7% tuotto-odotus</strong> on S&P 500:n historiallinen reaalikorjattu pitkän aikavälin keskiarvo.'},
+      {i:'🛣',t:'Pienennä menoja tai lisää säästöä → FIRE-vuodet vähenevät huomattavasti.'},
+    ],
+    warn:'⚠️ FIRE-laskenta on suuntaa-antava arvio. Markkinat vaihtelevat eikä historiallinen tuotto takaa tulevaa. Kysy tarvittaessa neuvoa sijoitusneuvojalta.'
+  },
+  varallisuus:{
+    title:'💎 Nettovarallisuus',
+    rows:[
+      {i:'🏦',t:'<strong>Omaisuuserät</strong> = kaikki mitä omistat: sijoitukset, asunto, ajoneuvot, säästöt.'},
+      {i:'💳',t:'<strong>Velat</strong> = kaikki mitä olet velkaa: asuntolaina, opintolaina, kulutusluotto.'},
+      {i:'📊',t:'<strong>Nettovarallisuus</strong> = omaisuus − velat. Tavoittele positiivista lukua ja kasvua kuukausittain.'},
+      {i:'💡',t:'Tilisaldo ja käteinen päivittyvät automaattisesti Tilanne-välilehden saldosta.'},
+      {i:'📉',t:'<strong>Velkaaste</strong> = velat / omaisuus. Alle 30% on hyvä, yli 60% on korkea.'},
+    ]
+  },
+  ai:{
+    title:'🤖 AI-sparri',
+    rows:[
+      {i:'1️⃣',t:'Valitse ensin kehotetyyppi: yleisanalyysi, säästövinkit, lisätulot tai 3kk strategia.'},
+      {i:'2️⃣',t:'Paina <strong>Kopioi leikepöydälle</strong> — budjettitietosi kopioidaan tekstinä.'},
+      {i:'3️⃣',t:'Avaa <strong>Claude.ai</strong>, ChatGPT tai muu tekoäly ja liitä teksti sinne.'},
+      {i:'🔒',t:'Tietoja ei lähetetä automaattisesti mihinkään — sinä päätät mitä jaat.'},
+      {i:'💡',t:'Voit myös muokata kopioitua tekstiä ennen liittämistä tai lisätä omia kysymyksiä.'},
+    ]
+  },
+};
+
+function showHelp(key){
+  const d=HELP_CONTENT[key]||HELP_CONTENT['yleinen'];
+  const modal=document.getElementById('helpModal');
+  const title=document.getElementById('helpModalTitle');
+  const body=document.getElementById('helpModalBody');
+  title.innerHTML='<span>❓</span> '+d.title;
+  body.innerHTML=d.rows.map(r=>'<div class="modal-row"><div class="mi">'+r.i+'</div><div>'+r.t+'</div></div>').join('')
+    +(d.warn?'<div class="modal-warn">'+d.warn+'</div>':'')
+    +(d.info?'<div class="modal-info">ℹ️ '+d.info+'</div>':'');
+  modal.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeHelp(){
+  document.getElementById('helpModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeHelp(); });
+
+// ===== TIP OF THE DAY =====
+const TIPS=[
+  {i:'💡',t:'<strong>Säästämisaste yli 20%</strong> tarkoittaa, että olet oikealla tiellä. Yli 50% on FIRE-vauhti!'},
+  {i:'📅',t:'<strong>Automatisoi säästäminen</strong> — siirrä säästöt heti palkanmaksupäivänä, ennen kuin ehdit kuluttaa.'},
+  {i:'☕',t:'<strong>Latte-efekti</strong>: 4€ kahvi päivittäin = 1460€ vuodessa. Pienet kulut kertyvät.'},
+  {i:'📈',t:'<strong>Koronkorko</strong>: 200€/kk @ 7%/v kasvaa 240 000€:ksi 30 vuodessa.'},
+  {i:'🎯',t:'<strong>50/30/20-sääntö</strong>: 50% tarpeisiin, 30% haluihin, 20% säästöihin.'},
+  {i:'🔥',t:'<strong>FIRE</strong>: Jokainen säästetty euro on askel lähemmäs taloudellista vapautta.'},
+  {i:'💳',t:'<strong>Velkojen korjausjärjestys</strong>: maksa ensin korkokorkein velka pois — säästät eniten.'},
+  {i:'🛒',t:'<strong>24h sääntö</strong>: Odota vuorokausi ennen isoja ostoksia. Impulssiostos vai oikea tarve?'},
+  {i:'📊',t:'<strong>Menojakauma</strong> paljastaa yllättäviä kulueriä. Katso kaavio Tilanne-välilehdeltä!'},
+  {i:'🏦',t:'<strong>Hätärahasto</strong>: tavoittele 3-6kk menojen verran likvidinä varalla. Se on turvaverkko.'},
+];
+function renderTOTD(){
+  const el=document.getElementById('totdBox'); if(!el) return;
+  const t=TIPS[TODAY_DAY % TIPS.length];
+  el.innerHTML='<div class="totd"><div class="totd-icon">'+t.i+'</div><div class="totd-text"><strong style="color:var(--cyan);font-size:9px;text-transform:uppercase;letter-spacing:1.5px">Päivän vinkki</strong><br>'+t.t+'</div></div>';
+}
+
+// ===== EXPORT / IMPORT / RESET =====
+function exportJSON(){
+  const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='rahakone-varmuuskopio-'+new Date().toISOString().slice(0,10)+'.json';
+  a.click();
+}
+function importJSON(){ document.getElementById('importFile').click(); }
+function doImport(e){
+  const file=e.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    try{
+      const data=JSON.parse(ev.target.result);
+      if(confirm('Korvataanko nykyiset tiedot tiedostolla "'+file.name+'"?')){
+        S=Object.assign(JSON.parse(JSON.stringify(DEF)),data);
+        save(true);
+        const sti=document.getElementById('saldoTili');   if(sti) sti.value=S.saldoTili||'';
+        const ska=document.getElementById('saldoKateis'); if(ska) ska.value=S.saldoKateis||'';
+        renderIncome(); renderAll();
+        alert('✅ Tiedot tuotu onnistuneesti!');
+      }
+    }catch(err){ alert('❌ Virhe: tiedosto ei ole kelvollinen Rahakone-varmuuskopio.'); }
+  };
+  reader.readAsText(file);
+  e.target.value='';
+}
+function resetAll(){
+  S=JSON.parse(JSON.stringify(DEF));
+  try{ localStorage.removeItem('rahakone_v5'); }catch(e){}
+  location.reload();
 }
 
 // ===== INIT =====
