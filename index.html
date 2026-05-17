@@ -240,6 +240,7 @@ input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-ou
   .pill{font-size:8px;padding:2px 6px;}
 }
 </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
 <body>
 
@@ -915,8 +916,12 @@ function load(){
     const raw = d || d4;
     if(raw){ S = Object.assign(JSON.parse(JSON.stringify(DEF)), JSON.parse(raw)); }
   }catch(e){}
-  // normalize: ensure all items have month field
-  [...S.income,...S.expenses,...S.yritys].forEach(x=>{ if(x.month==null) x.month=0; });
+  // normalize: ensure all items have month field AND amount is always a number
+  [...S.income,...S.expenses,...S.yritys].forEach(x=>{
+    if(x.month==null) x.month=0;
+    x.amount = parseFloat(x.amount)||0;
+    x.day    = parseInt(x.day)||0;
+  });
   // remove legacy recurring field confusion — month=0 means recurring now
   S.income.forEach(i=>{ delete i.recurring; });
   // normalize new fields
@@ -1218,7 +1223,7 @@ function renderDayBudget(){
     .sort((a,b)=>a.day-b.day)[0];
   const nextIncDay = nextInc ? nextInc.day : DAYS_IN_MONTH+1;
 
-  // Subtract bills due BETWEEN today and next income (not past overdue ones)
+  // Subtract bills due strictly BEFORE next income (this month only)
   const billsBeforeNext = [...S.expenses,...S.yritys]
     .filter(e=>forThisMonth(e)&&!e.paid&&e.day>=TODAY_DAY&&e.day<nextIncDay)
     .reduce((s,e)=>s+(e.amount||0),0);
@@ -1973,7 +1978,11 @@ function doImport(e){
       if(confirm('Korvataanko nykyiset tiedot tiedostolla "'+file.name+'"?')){
         S=Object.assign(JSON.parse(JSON.stringify(DEF)),data);
         // Normalize imported data same as load()
-        [...S.income,...S.expenses,...S.yritys].forEach(x=>{ if(x.month==null) x.month=0; });
+        [...S.income,...S.expenses,...S.yritys].forEach(x=>{
+          if(x.month==null) x.month=0;
+          x.amount = parseFloat(x.amount)||0;
+          x.day    = parseInt(x.day)||0;
+        });
         // Fix old recurring field: recurring=true → month=0 (joka kuukausi)
         S.income.forEach(i=>{ if(i.recurring===true||i.recurring==null) i.month=i.month||0; delete i.recurring; });
         if(!S.goals) S.goals=[];
