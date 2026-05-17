@@ -1,2149 +1,575 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#07070d">
-<title>RAHAKONE</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%237c5cbf'/><stop offset='100%25' stop-color='%2300c8f0'/></linearGradient></defs><rect width='100' height='100' rx='22' fill='%2307070d'/><rect x='18' y='38' width='64' height='38' rx='7' fill='none' stroke='url(%23g)' stroke-width='5'/><rect x='18' y='44' width='64' height='10' fill='url(%23g)' opacity='.35'/><circle cx='34' cy='57' r='5' fill='url(%23g)'/><rect x='44' y='53' width='22' height='4' rx='2' fill='url(%23g)' opacity='.6'/><path d='M62 38 L62 28 Q62 20 70 20 L82 20' stroke='url(%23g)' stroke-width='4' fill='none' stroke-linecap='round'/><circle cx='82' cy='20' r='5' fill='%2300c8f0'/></svg>">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><radialGradient id='core' cx='38%25' cy='35%25' r='60%25'><stop offset='0%25' stop-color='%23ffffff' stop-opacity='0.95'/><stop offset='30%25' stop-color='%2300e5ff'/><stop offset='65%25' stop-color='%237c5cbf'/><stop offset='100%25' stop-color='%23030310'/></radialGradient><radialGradient id='glow' cx='50%25' cy='50%25' r='50%25'><stop offset='60%25' stop-color='transparent'/><stop offset='100%25' stop-color='%237c5cbf' stop-opacity='0.6'/></radialGradient><filter id='blur'><feGaussianBlur stdDeviation='3'/></filter></defs><circle cx='50' cy='50' r='48' fill='%23030310'/><circle cx='50' cy='50' r='40' fill='url(%23glow)' filter='url(%23blur)'/><circle cx='50' cy='50' r='34' fill='url(%23core)'/><circle cx='38' cy='36' r='8' fill='white' opacity='0.18'/><circle cx='36' cy='34' r='4' fill='white' opacity='0.32'/></svg>">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Rahakone">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><defs><radialGradient id='core' cx='38%25' cy='35%25' r='60%25'><stop offset='0%25' stop-color='%23ffffff' stop-opacity='0.95'/><stop offset='25%25' stop-color='%2300e5ff'/><stop offset='60%25' stop-color='%237c5cbf'/><stop offset='100%25' stop-color='%23030310'/></radialGradient><radialGradient id='glow' cx='50%25' cy='50%25' r='50%25'><stop offset='55%25' stop-color='transparent'/><stop offset='100%25' stop-color='%237c5cbf' stop-opacity='0.7'/></radialGradient><filter id='blur'><feGaussianBlur stdDeviation='6'/></filter></defs><rect width='180' height='180' rx='40' fill='%2307070d'/><circle cx='90' cy='90' r='72' fill='url(%23glow)' filter='url(%23blur)'/><circle cx='90' cy='90' r='60' fill='url(%23core)'/><circle cx='68' cy='64' r='15' fill='white' opacity='0.18'/><circle cx='64' cy='60' r='7' fill='white' opacity='0.35'/></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#07070d;--surface:rgba(255,255,255,0.042);--surface-2:rgba(255,255,255,0.07);
-  --cyan:#00c8f0;--cyan-line:rgba(0,200,240,0.24);
-  --purple:#7c5cbf;--green:#22c55e;--orange:#f97316;--red:#ef4444;
-  --grad:linear-gradient(135deg,#7c5cbf 0%,#059fbf 60%,#00c8f0 100%);
-  --grad-text:linear-gradient(135deg,#b09fe0 0%,#4dcce4 100%);
-  --border:rgba(255,255,255,0.07);--border-2:rgba(255,255,255,0.11);
-  --text-1:rgba(255,255,255,0.93);--text-2:rgba(255,255,255,0.62);--text-3:rgba(255,255,255,0.38);
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);
-  background-image:radial-gradient(ellipse 70% 40% at 50% -10%,rgba(124,92,191,0.11),transparent),
-  radial-gradient(ellipse 50% 30% at 90% 90%,rgba(0,200,240,0.07),transparent);
-  color:var(--text-1);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
-.header{text-align:center;padding:32px 14px 18px;}
-.neon-logo{font-size:1.3rem;font-weight:200;text-transform:uppercase;letter-spacing:10px;margin-left:10px;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.sub-logo{font-size:9px;text-transform:uppercase;letter-spacing:3px;color:var(--text-3);margin-top:5px;}
-.nav{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;padding:0 6px;position:sticky;top:0;z-index:99;background:rgba(7,7,13,0.95);backdrop-filter:blur(14px);}
-.nav::-webkit-scrollbar{display:none;}
-.nav-btn{flex-shrink:0;background:none;border:none;border-bottom:2px solid transparent;color:var(--text-3);cursor:pointer;font-family:inherit;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:11px 11px;transition:all 0.15s;white-space:nowrap;}
-.nav-btn:hover{color:var(--text-2);}
-.nav-btn.active{color:var(--cyan);border-bottom-color:var(--cyan);}
-.nav-group{display:flex;align-items:center;flex-shrink:0;}
-.nav-group-lbl{font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3);padding:0 4px 0 8px;white-space:nowrap;border-right:1px solid var(--border);margin-right:2px;line-height:1;align-self:center;}
-.nav-sep{width:1px;background:var(--border);height:28px;flex-shrink:0;margin:0 2px;}
-.main{max-width:680px;margin:0 auto;padding:18px 14px 100px;}
-.tab{display:none;}.tab.active{display:block;}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 16px;margin-bottom:10px;}
-.card-accent{background:linear-gradient(135deg,rgba(124,92,191,0.06),rgba(0,200,240,0.022));border-color:rgba(124,92,191,0.18);}
-.card-green{background:rgba(34,197,94,0.04);border-color:rgba(34,197,94,0.16);}
-.card-red{background:rgba(239,68,68,0.04);border-color:rgba(239,68,68,0.16);}
-.lbl{font-size:10px;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;display:flex;align-items:center;gap:7px;}
-.lbl-dot{width:3px;height:3px;background:var(--cyan);border-radius:50%;flex-shrink:0;}
-.big-num{font-size:2.2rem;font-weight:200;letter-spacing:-1px;}
-.big-num.green{background:linear-gradient(135deg,#4ade80,#22c55e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.big-num.red{background:linear-gradient(135deg,#f87171,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.big-num.cyan{background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.big-num.orange{background:linear-gradient(135deg,#fdba74,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;}
-.sb{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px;}
-.slbl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3);margin-bottom:5px;}
-.sval{font-size:1.3rem;font-weight:300;}
-.sval.green{color:var(--green);}.sval.red{color:var(--red);}.sval.cyan{color:var(--cyan);}.sval.orange{color:var(--orange);}
-.xp-row{display:flex;align-items:center;background:rgba(255,255,255,0.028);border:1px solid var(--border);border-radius:10px;margin-bottom:6px;overflow:hidden;transition:border-color 0.15s;}
-.xp-row:hover{border-color:rgba(0,200,240,0.2);}
-.xp-tag{font-size:9px;font-weight:700;min-width:38px;color:var(--cyan);flex-shrink:0;padding:0 8px;align-self:stretch;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--border);}
-input,select{background:transparent;border:none;color:var(--text-1);font-size:13px;font-weight:300;padding:9px 10px;outline:none;font-family:inherit;}
-select option{background:#12121e;color:#fff;}
-input::placeholder{color:var(--text-3);}
-input[type="number"]{-moz-appearance:textfield;}
-input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none;}
-.chip{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;padding:3px 9px;border-radius:20px;cursor:pointer;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text-3);transition:all 0.15s;user-select:none;white-space:nowrap;}
-.chip.act-green{background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.4);color:var(--green);}
-.chip.act-orange{background:rgba(249,115,22,0.15);border-color:rgba(249,115,22,0.4);color:var(--orange);}
-.chip.act-cyan{background:rgba(0,200,240,0.15);border-color:rgba(0,200,240,0.4);color:var(--cyan);}
-.chip.act-red{background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.4);color:var(--red);}
-.btn{background:rgba(255,255,255,0.06);border:1px solid var(--border-2);border-radius:9px;color:var(--text-2);cursor:pointer;font-family:inherit;font-size:12px;font-weight:500;padding:8px 14px;transition:all 0.15s;}
-.btn:hover{border-color:var(--cyan-line);color:var(--cyan);}
-.btn-grad{background:var(--grad);border:none;color:#fff;font-weight:600;font-size:13px;padding:11px 18px;border-radius:10px;cursor:pointer;font-family:inherit;transition:opacity 0.15s;width:100%;}
-.btn-grad:hover{opacity:0.85;}
-.btn-pay{background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.3);border-radius:8px;color:var(--green);cursor:pointer;font-family:inherit;font-size:10px;font-weight:600;padding:4px 10px;transition:all 0.15s;white-space:nowrap;letter-spacing:0.5px;text-transform:uppercase;}
-.btn-pay:hover{background:rgba(34,197,94,0.25);border-color:var(--green);}
-.btn-pay.paid{background:rgba(255,255,255,0.04);border-color:var(--border);color:var(--text-3);}
-.btn-sm{font-size:11px;padding:5px 10px;border-radius:7px;}
-.btn-del{background:none;border:none;color:rgba(239,68,68,0.4);cursor:pointer;font-size:13px;padding:0 8px;transition:color 0.15s;line-height:1;}
-.btn-del:hover{color:var(--red);}
-/* Expense type badge */
-.type-badge{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;flex-shrink:0;cursor:pointer;}
-.type-badge.kiintea{background:rgba(124,92,191,0.2);color:rgba(180,160,255,0.9);}
-.type-badge.muuttuva{background:rgba(249,115,22,0.15);color:rgba(253,186,116,0.9);}
-.cat-select{font-size:10px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:6px;color:var(--text-2);padding:2px 6px;cursor:pointer;font-family:inherit;}
-.cat-select option{background:#0f0f1c;}
-.bench-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:12px;}
-.bench-row:last-child{border-bottom:none;}
-.bench-diff.pos{color:var(--green);font-weight:500;}
-.bench-diff.neg{color:var(--red);font-weight:500;}
-.bench-diff.ok{color:var(--text-3);}
-.xp-bar-wrap{background:rgba(255,255,255,0.06);border-radius:99px;height:8px;overflow:hidden;margin:6px 0;}
-.xp-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#7c5cbf,#00c8f0);transition:width 0.6s cubic-bezier(.4,2,.6,1);}
-.xp-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(124,92,191,0.15);border:1px solid rgba(124,92,191,0.3);border-radius:20px;padding:3px 10px;font-size:10px;color:rgba(180,160,255,0.9);}
-.xp-toast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,rgba(124,92,191,0.97),rgba(0,200,240,0.92));color:#fff;font-size:12px;font-weight:600;padding:9px 20px;border-radius:99px;z-index:9999;pointer-events:none;opacity:0;transition:opacity 0.3s;white-space:nowrap;}
-.xp-toast.show{opacity:1;}
-.scenario-card{background:rgba(0,200,240,0.04);border:1px solid rgba(0,200,240,0.14);border-radius:12px;padding:13px;margin-bottom:8px;}
-.scenario-num{font-size:1.4rem;font-weight:200;color:var(--cyan);}
-.split-bar-wrap{border-radius:99px;overflow:hidden;height:16px;display:flex;margin:8px 0;}
-.split-bar-seg{height:100%;transition:width 0.5s ease;}
-.prog-lbl{display:flex;justify-content:space-between;font-size:10px;color:var(--text-3);margin-bottom:4px;font-weight:500;}
-.prog-bar{background:rgba(255,255,255,0.06);border-radius:100px;height:5px;overflow:hidden;}
-.prog-fill{height:100%;border-radius:100px;transition:width 0.5s ease;}
-.prog-fill.cyan{background:var(--grad);}
-.prog-fill.green{background:linear-gradient(90deg,#16a34a,#22c55e);}
-.prog-fill.red{background:linear-gradient(90deg,#b91c1c,#ef4444);}
-.prog-fill.orange{background:linear-gradient(90deg,#c2410c,#f97316);}
-.tbl{width:100%;border-collapse:collapse;}
-.tbl th{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3);padding:5px 5px;border-bottom:1px solid var(--border);text-align:left;}
-.tbl th:not(:first-child){text-align:right;}
-.tbl td{padding:8px 5px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:12px;font-weight:300;}
-.tbl td:not(:first-child){text-align:right;}
-.tbl tr:last-child td{border-bottom:none;}
-.pill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:9px;font-weight:600;}
-.pill.green{background:rgba(34,197,94,0.15);color:var(--green);}
-.pill.red{background:rgba(239,68,68,0.15);color:var(--red);}
-.pill.orange{background:rgba(249,115,22,0.15);color:var(--orange);}
-.pill.cyan{background:rgba(0,200,240,0.12);color:var(--cyan);}
-.pill.gray{background:rgba(255,255,255,0.06);color:var(--text-3);}
-.div{border:none;border-top:1px solid var(--border);margin:14px 0;}
-.flex-between{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;}
-.mt8{margin-top:8px;}.mt12{margin-top:12px;}.mt16{margin-top:16px;}
-.sec-title{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:2.5px;color:var(--text-3);margin:20px 0 12px;display:flex;align-items:center;gap:8px;}
-.sec-title::after{content:'';flex:1;height:1px;background:var(--border);}
-.alert{border-radius:10px;padding:11px 14px;margin-bottom:10px;font-size:12px;display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
-.alert.info{background:rgba(0,200,240,0.07);border:1px solid rgba(0,200,240,0.2);color:rgba(0,200,240,0.9);}
-.alert.warn{background:rgba(249,115,22,0.07);border:1px solid rgba(249,115,22,0.25);color:rgba(249,115,22,0.9);}
-.alert.danger{background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.25);color:rgba(239,68,68,0.9);}
-.alert.success{background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.25);color:rgba(34,197,94,0.9);}
-.inc-row{background:rgba(255,255,255,0.028);border:1px solid var(--border);border-radius:11px;padding:11px 13px;margin-bottom:8px;transition:border-color 0.15s;}
-.inc-row:hover{border-color:rgba(0,200,240,0.15);}
-.inc-meta{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px;align-items:center;}
-/* Expense row - more complex with scheduling */
-.exp-row{background:rgba(255,255,255,0.028);border:1px solid var(--border);border-radius:11px;padding:11px 13px;margin-bottom:8px;transition:border-color 0.15s;}
-.exp-row:hover{border-color:rgba(0,200,240,0.12);}
-.exp-row.future-month{border-style:dashed;border-color:rgba(0,200,240,0.15);}
-.exp-row.is-paid{border-color:rgba(34,197,94,0.2);background:rgba(34,197,94,0.03);}
-.exp-row.is-paid .exp-label{color:var(--text-2);}
-.ai-panel{background:linear-gradient(135deg,rgba(124,92,191,0.08),rgba(0,200,240,0.04));border:1px solid rgba(124,92,191,0.25);border-radius:14px;padding:18px;}
-.ai-box{background:rgba(0,0,0,0.4);border:1px solid var(--border-2);border-radius:10px;padding:13px;font-size:11px;color:var(--text-2);line-height:1.7;white-space:pre-wrap;max-height:280px;overflow-y:auto;margin-top:11px;font-family:inherit;}
-.ai-box::-webkit-scrollbar{width:3px;}
-.ai-box::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:2px;}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:10px;}
-.cal-cell{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:7px;font-size:10px;background:rgba(255,255,255,0.03);border:1px solid transparent;position:relative;}
-.cal-cell.hdr{background:none;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-3);aspect-ratio:auto;padding:3px 0;}
-.cal-cell.today{border-color:var(--cyan);color:var(--cyan);font-weight:600;}
-.cal-cell.past{opacity:0.3;}
-.cal-cell.income-day{background:rgba(34,197,94,0.1);border-color:rgba(34,197,94,0.3);}
-.cal-cell.expense-day{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.25);}
-.cal-cell.both-day{background:rgba(124,92,191,0.12);border-color:rgba(124,92,191,0.3);}
-.cal-dot{width:4px;height:4px;border-radius:50%;background:var(--green);margin-top:1px;}
-.cal-dot.red{background:var(--red);}
-.split-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
-.split-box{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;}
-.tip{font-size:10px;color:var(--text-3);margin-top:3px;line-height:1.5;}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>MUUTOSKONE</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #06060a;
+            --card: rgba(255, 255, 255, 0.03);
+            --card-hover: rgba(255, 255, 255, 0.06);
+            --input-bg: rgba(255, 255, 255, 0.05);
+            --cyan: #00d4ff;
+            --cyan-glow: rgba(0, 212, 255, 0.4);
+            --purple: #8b5cf6;
+            --purple-glow: rgba(139, 92, 246, 0.4);
+            --pink: #ec4899;
+            --pink-glow: rgba(236, 72, 153, 0.4);
+            --grad: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 50%, #00d4ff 100%);
+            --grad-reverse: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%);
+            --border: rgba(255, 255, 255, 0.06);
+            --border-glow: rgba(255, 255, 255, 0.1);
+            --text-dim: rgba(255, 255, 255, 0.4);
+            --text-medium: rgba(255, 255, 255, 0.6);
+        }
 
-/* Help modal */
-.help-btn{background:none;border:1.5px solid rgba(0,200,240,0.3);border-radius:50%;color:var(--cyan);cursor:pointer;font-size:10px;font-weight:700;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;line-height:1;transition:all 0.15s;flex-shrink:0;font-family:inherit;vertical-align:middle;margin-left:6px;}
-.help-btn:hover{background:rgba(0,200,240,0.15);border-color:var(--cyan);}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px;}
-.modal-overlay.open{display:flex;}
-.modal-box{background:#0f0f1c;border:1px solid rgba(124,92,191,0.35);border-radius:18px;padding:22px 20px;max-width:420px;width:100%;max-height:85vh;overflow-y:auto;position:relative;box-shadow:0 0 60px rgba(124,92,191,0.2);}
-.modal-box::-webkit-scrollbar{width:3px;}
-.modal-box::-webkit-scrollbar-thumb{background:var(--border-2);}
-.modal-title{font-size:13px;font-weight:600;color:var(--cyan);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-.modal-title span{font-size:1.1rem;}
-.modal-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--text-3);cursor:pointer;font-size:16px;line-height:1;transition:color 0.15s;font-family:inherit;}
-.modal-close:hover{color:var(--text-1);}
-.modal-row{display:flex;gap:10px;margin-bottom:11px;align-items:flex-start;font-size:12px;color:var(--text-2);line-height:1.6;}
-.modal-row .mi{font-size:1rem;flex-shrink:0;width:22px;text-align:center;margin-top:1px;}
-.modal-warn{background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.25);border-radius:10px;padding:10px 12px;font-size:11px;color:rgba(249,115,22,0.9);line-height:1.6;margin-top:10px;}
-.modal-info{background:rgba(0,200,240,0.06);border:1px solid rgba(0,200,240,0.18);border-radius:10px;padding:10px 12px;font-size:11px;color:rgba(0,200,240,0.85);line-height:1.6;margin-top:10px;}
+        * { box-sizing: border-box; }
 
-/* Dark mode toggle & export strip */
-.bottom-bar{position:fixed;bottom:0;left:0;right:0;z-index:90;background:rgba(7,7,13,0.97);border-top:1px solid var(--border);padding:8px 16px;display:flex;justify-content:center;gap:8px;}
-.bb-btn{background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;color:var(--text-3);cursor:pointer;font-family:inherit;font-size:9px;font-weight:600;letter-spacing:0.5px;padding:6px 10px;transition:all 0.15s;text-transform:uppercase;}
-.bb-btn:hover{border-color:var(--cyan-line);color:var(--cyan);}
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            background-image: 
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 92, 246, 0.15), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 100%, rgba(0, 212, 255, 0.1), transparent);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+        }
 
-/* Tip of the day */
-.totd{background:linear-gradient(135deg,rgba(124,92,191,0.07),rgba(0,200,240,0.04));border:1px solid rgba(0,200,240,0.15);border-radius:12px;padding:12px 14px;margin-bottom:10px;display:flex;gap:10px;align-items:flex-start;}
-.totd-icon{font-size:1.1rem;flex-shrink:0;}
-.totd-text{font-size:11px;color:var(--text-2);line-height:1.6;}
-.totd-text strong{color:var(--cyan);}
+        .container {
+            max-width: 420px;
+            width: 100%;
+            padding: 20px;
+        }
 
-.fire-meter{position:relative;width:140px;height:140px;margin:0 auto 12px;}
-.fire-meter svg{transform:rotate(-90deg);}
-.fire-meter-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;}
+        .logo-area {
+            text-align: center;
+            margin: 50px 0 45px;
+            position: relative;
+        }
 
-/* Goal cards */
-.goal-card{background:rgba(255,255,255,0.032);border:1px solid var(--border);border-radius:13px;padding:14px;margin-bottom:8px;transition:border-color 0.15s;}
-.goal-card:hover{border-color:rgba(0,200,240,0.18);}
-.goal-card.done{border-color:rgba(34,197,94,0.35);background:rgba(34,197,94,0.04);}
-.goal-emoji{font-size:1.5rem;margin-right:8px;}
+        .logo-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 120px;
+            background: radial-gradient(ellipse, var(--cyan-glow), transparent 70%);
+            filter: blur(40px);
+            pointer-events: none;
+            opacity: 0.5;
+        }
 
-/* Net worth */
-.nw-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:12px;}
-.nw-row:last-child{border-bottom:none;}
+        /* SIRO TEKSTILOGO */
+        .neon-logo {
+            font-size: 1.8rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            line-height: 1;
+            margin: 0;
+            margin-left: 10px; /* Kompensoi letter-spacingiä keskityksessä */
+            position: relative;
+            background: linear-gradient(135deg, #fff 0%, var(--cyan) 50%, var(--purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 20px var(--cyan-glow));
+        }
 
-/* Savings rate gauge */
-.sr-ring{display:flex;align-items:center;justify-content:center;gap:20px;margin:8px 0;}
+        .sub-logo {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--text-dim);
+            margin-top: 15px;
+            font-weight: 400;
+        }
 
-/* Tabs badge */
-.nav-badge{display:inline-block;background:var(--cyan);color:#07070d;border-radius:20px;font-size:7px;font-weight:700;padding:1px 5px;margin-left:3px;vertical-align:middle;}
+        .glass-card {
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
 
-/* Saldo input section */
-.saldo-wrap{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;}
-.saldo-part{flex:1;min-width:130px;}
-.saldo-lbl{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3);margin-bottom:5px;}
-.saldo-inp{font-size:1.6rem;font-weight:200;padding:0;width:100%;color:var(--cyan);}
-.saldo-inp.green{color:var(--green);}
+        .setup-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-/* Transaction log */
-.txn{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:12px;}
-.txn:last-child{border-bottom:none;}
-.txn-neg{color:var(--red);}
-.txn-pos{color:var(--green);}
+        .setup-label::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--cyan);
+        }
 
-@media(max-width:480px){
-  .header{padding:22px 12px 14px;}
-  .neon-logo{font-size:1.1rem;letter-spacing:7px;}
-  .nav-btn{font-size:9px;padding:10px 8px;letter-spacing:0.5px;}
-  .main{padding:14px 11px 100px;}
-  .card{padding:13px 13px;border-radius:12px;}
-  .g2{gap:7px;}.g3{grid-template-columns:1fr 1fr;gap:7px;}
-  .sb{padding:10px 11px;}
-  .slbl{font-size:8px;}
-  .sval{font-size:1.15rem;}
-  .big-num{font-size:1.8rem;}
-  .saldo-inp{font-size:1.4rem !important;}
-  .inc-row,.exp-row{padding:10px 11px;}
-  .chip{font-size:8px;padding:3px 7px;}
-  .btn{font-size:11px;padding:7px 12px;}
-  .btn-grad{font-size:12px;padding:10px 14px;}
-  .tbl th{font-size:8px;padding:4px 4px;}
-  .tbl td{font-size:11px;padding:7px 4px;}
-  .split-box div:last-child{font-size:1.4rem !important;}
-  .sec-title{font-size:8px;letter-spacing:1.5px;margin:16px 0 10px;}
-  .pill{font-size:8px;padding:2px 6px;}
-}
-</style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+        .ai-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(0, 212, 255, 0.03));
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            margin-top: 25px;
+        }
+        
+        .ai-text, .ai-instruction, .ai-steps {
+            font-size: 14px;
+            color: var(--text-medium);
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .ai-steps {
+            margin: 10px 0 20px 0;
+            padding-left: 20px;
+        }
+
+        .ai-steps li { margin-bottom: 8px; }
+
+        .setup-indent {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .xp-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--input-bg);
+            border-radius: 16px;
+            padding: 6px 16px;
+            border: 1px solid var(--border);
+        }
+
+        .xp-tag {
+            font-weight: 700;
+            font-size: 12px;
+            min-width: 50px;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        input, select {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 300;
+            padding: 12px 0;
+            outline: none;
+            width: 100%;
+        }
+
+        .status-box {
+            background: linear-gradient(180deg, rgba(139, 92, 246, 0.08) 0%, rgba(0, 212, 255, 0.05) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 32px;
+            padding: 32px 28px;
+            border: 1px solid var(--border);
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .m-val {
+            font-size: 88px;
+            font-weight: 200;
+            line-height: 0.85;
+            letter-spacing: -5px;
+            margin: 12px 0 8px;
+            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .m-lbl { font-size: 11px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 3px; font-weight: 600; }
+
+        .level-display { font-size: 28px; font-weight: 300; letter-spacing: 2px; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 16px; }
+
+        .bar-bg { height: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 20px; overflow: hidden; border: 1px solid var(--border); }
+        .bar-fill { height: 100%; width: 0%; background: var(--grad); transition: width 0.8s ease; box-shadow: 0 0 20px var(--cyan-glow); }
+
+        .stats-row { display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; color: var(--text-dim); margin-top: 12px; text-transform: uppercase; letter-spacing: 1px; }
+
+        .bonus-badge { position: absolute; top: 16px; right: 16px; background: linear-gradient(135deg, var(--pink), var(--purple)); color: white; padding: 8px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; box-shadow: 0 4px 20px var(--pink-glow); }
+
+        .task-btn {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 20px 24px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .task-btn:active { transform: scale(0.98); }
+
+        .task-name { font-weight: 400; font-size: 15px; }
+        .task-xp { font-weight: 700; font-size: 14px; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .task-xp.highlight { background: linear-gradient(135deg, var(--pink), #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+        /* YHTENEVÄ MAIN BUTTON SIROON LOGOON */
+        .btn-main { 
+            background: rgba(0, 212, 255, 0.05); 
+            color: #fff; 
+            border: 1px solid var(--cyan); 
+            padding: 20px; 
+            border-radius: 16px; 
+            width: 100%; 
+            font-size: 15px; 
+            font-weight: 300; 
+            letter-spacing: 4px;
+            text-transform: uppercase; 
+            cursor: pointer; 
+            margin-top: 10px; 
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.1), inset 0 0 10px rgba(0, 212, 255, 0.1); 
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        .btn-main:active { transform: scale(0.98); box-shadow: 0 0 10px rgba(0, 212, 255, 0.2); }
+
+        .btn-secondary { background: var(--card); border: 1px solid var(--border); color: var(--text-medium); padding: 18px; border-radius: 16px; width: 100%; font-size: 14px; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; margin-top: 12px; }
+        .btn-sub { background: transparent; border: 1px solid var(--border); color: var(--text-dim); padding: 14px; border-radius: 12px; font-size: 11px; text-transform: uppercase; cursor: pointer; font-weight: 600; letter-spacing: 1px; }
+        .btn-danger { border-color: rgba(239, 68, 68, 0.2); color: rgba(239, 68, 68, 0.5); }
+        .btn-ai { background: rgba(139, 92, 246, 0.1); border: 1px solid var(--purple); color: #fff; padding: 16px; border-radius: 16px; width: 100%; font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; box-shadow: inset 0 0 10px rgba(139, 92, 246, 0.1); }
+        .btn-ai:active { transform: scale(0.98); }
+
+        #lvlOverlay, #victoryOverlay { position: fixed; inset: 0; z-index: 5000; display: none; flex-direction: column; align-items: center; justify-content: center; background: rgba(6,6,10,0.95); backdrop-filter: blur(20px); text-align: center; }
+
+        .xp-fly { position: absolute; font-weight: 700; font-size: 24px; pointer-events: none; animation: fly 0.8s forwards; z-index: 7000; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        @keyframes fly { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-100px); opacity: 0; } }
+
+        .footer-actions { margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="neon-logo">Rahakone</div>
-  <div class="sub-logo" id="todaySub">—</div>
+<div id="lvlOverlay">
+    <div style="padding: 20px;">
+        <p style="letter-spacing: 5px; color: var(--cyan); font-weight: 600; font-size: 12px;">LEVEL UP!</p>
+        <h1 style="font-size: 3rem; margin: 0; font-weight: 200;">TASO NOUSI!</h1>
+        <h2 id="popLvlText" style="margin-bottom: 30px; font-weight: 300; letter-spacing: 2px;">LEVEL 2</h2>
+        <button class="btn-main" onclick="closeLvl()">JATKA ⚔️</button>
+    </div>
 </div>
 
-<nav class="nav">
-  <div class="nav-group">
-    <span class="nav-group-lbl">Perustiedot</span>
-    <button class="nav-btn active" onclick="showTab('tilanne',this)">📊 Tilanne</button>
-    <button class="nav-btn" onclick="showTab('tulot',this)">💰 Tulot</button>
-    <button class="nav-btn" onclick="showTab('menot',this)">🏠 Menot</button>
-    <button class="nav-btn" onclick="showTab('yritys',this)">🏢 Yritys</button>
-  </div>
-  <div class="nav-sep"></div>
-  <div class="nav-group">
-    <span class="nav-group-lbl">Seuranta</span>
-    <button class="nav-btn" onclick="showTab('paiva',this)">📅 Päiväbudjetti</button>
-    <button class="nav-btn" onclick="showTab('kalenteri',this)">🗓 Kalenteri</button>
-    <button class="nav-btn" onclick="showTab('historia',this)">📈 Historia</button>
-  </div>
-  <div class="nav-sep"></div>
-  <div class="nav-group">
-    <span class="nav-group-lbl">Tavoitteet</span>
-    <button class="nav-btn" onclick="showTab('tavoitteet',this)">🎯 Tavoitteet</button>
-    <button class="nav-btn" onclick="showTab('suunnitelmat',this)">🗂 Suunnitelmat</button>
-    <button class="nav-btn" onclick="showTab('jako',this)">🤝 Jako</button>
-  </div>
-  <div class="nav-sep"></div>
-  <div class="nav-group">
-    <span class="nav-group-lbl">Tulevaisuus</span>
-    <button class="nav-btn" onclick="showTab('fire',this)">🔥 FIRE</button>
-    <button class="nav-btn" onclick="showTab('varallisuus',this)">💎 Varallisuus</button>
-    <button class="nav-btn" onclick="showTab('ai',this)">🤖 AI-sparraaja</button>
-  </div>
-</nav>
-
-<div class="main">
-
-<!-- ======= TILANNE ======= -->
-<div id="tab-tilanne" class="tab active">
-  <div id="totdBox"></div>
-  <div id="alertBox"></div>
-
-  <!-- Saldo inputs -->
-  <div class="sec-title">Saldo nyt <button class="help-btn" onclick="showHelp('tilanne')">?</button></div>
-  <div class="card card-accent">
-    <div class="saldo-wrap">
-      <div class="saldo-part">
-        <div class="saldo-lbl">💳 Tili</div>
-        <div style="display:flex;align-items:flex-end;gap:5px">
-          <input type="number" id="saldoTili" class="saldo-inp" placeholder="0" oninput="save();update()">
-          <span style="color:var(--text-3);padding-bottom:3px;font-size:1rem">€</span>
-        </div>
-      </div>
-      <div class="saldo-part">
-        <div class="saldo-lbl">💵 Käteinen</div>
-        <div style="display:flex;align-items:flex-end;gap:5px">
-          <input type="number" id="saldoKateis" class="saldo-inp green" placeholder="0" oninput="save();update()">
-          <span style="color:var(--text-3);padding-bottom:3px;font-size:1rem">€</span>
-        </div>
-      </div>
-    </div>
-    <hr class="div" style="margin:12px 0 8px">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <span style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3)">Yhteensä käytettävissä</span>
-      <span class="sval cyan" id="sv-total-saldo">0 €</span>
-    </div>
-    <div class="tip">Vain tilillä ja kädessä olevat rahat — ei tulevia tuloja</div>
-  </div>
-
-  <!-- Real-time snapshot -->
-  <div class="sec-title">Tähän mennessä tässä kuussa</div>
-  <div class="g3">
-    <div class="sb">
-      <div class="slbl">Saadut tulot</div>
-      <div class="sval green" id="sv-got-inc">0 €</div>
-      <div class="tip">Merkitty maksetuksi</div>
-    </div>
-    <div class="sb">
-      <div class="slbl">Maksetut menot</div>
-      <div class="sval red" id="sv-paid-exp">0 €</div>
-      <div class="tip">Merkitty maksetuksi</div>
-    </div>
-    <div class="sb">
-      <div class="slbl">Tulossa vielä</div>
-      <div class="sval orange" id="sv-coming">0 €</div>
-      <div class="tip">Maksamattomat tulot</div>
-    </div>
-  </div>
-
-  <!-- End of month forecast -->
-  <div class="sec-title">Loppukuun ennuste</div>
-  <div class="g3">
-    <div class="sb">
-      <div class="slbl">Tulot / kk</div>
-      <div class="sval cyan" id="sv-tulot">0 €</div>
-    </div>
-    <div class="sb">
-      <div class="slbl">Menot / kk</div>
-      <div class="sval red" id="sv-menot">0 €</div>
-    </div>
-    <div class="sb">
-      <div class="slbl">Jää</div>
-      <div class="sval green" id="sv-jaa">0 €</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="prog-wrap">
-      <div class="prog-lbl"><span>Menot tuloista</span><span id="p-menotpct">0%</span></div>
-      <div class="prog-bar"><div class="prog-fill red" id="pb-menot" style="width:0%"></div></div>
-    </div>
-    <div class="prog-wrap">
-      <div class="prog-lbl"><span>Kuukausi kulunut</span><span id="p-kuupct">0%</span></div>
-      <div class="prog-bar"><div class="prog-fill cyan" id="pb-kuu" style="width:0%"></div></div>
-    </div>
-    <div class="prog-wrap">
-      <div class="prog-lbl"><span>Menot maksettu</span><span id="p-expdonepct">0%</span></div>
-      <div class="prog-bar"><div class="prog-fill green" id="pb-expdone" style="width:0%"></div></div>
-    </div>
-  </div>
-
-  <!-- Savings rate -->
-  <div class="sec-title">Tunnusluvut</div>
-  <div class="g2">
-    <div class="sb" style="text-align:center">
-      <div class="slbl">Säästämisaste</div>
-      <div class="sval cyan" id="sv-saastopct" style="font-size:1.6rem">—</div>
-      <div class="tip" id="sv-saasto-tip">tuloista säästöön</div>
-    </div>
-    <div class="sb" style="text-align:center">
-      <div class="slbl">Vapaa / pv</div>
-      <div class="sval green" id="sv-freepd">—</div>
-      <div class="tip">vapaa raha päivässä</div>
-    </div>
-  </div>
-  <div class="g2">
-    <div class="sb" style="text-align:center">
-      <div class="slbl">Menosuhde</div>
-      <div class="sval orange" id="sv-exprate">—</div>
-      <div class="tip">menot / tulot</div>
-    </div>
-    <div class="sb" style="text-align:center">
-      <div class="slbl">Nettoansiot / vuosi</div>
-      <div class="sval green" id="sv-yearfree">—</div>
-      <div class="tip">säästö vuositasolla</div>
-    </div>
-  </div>
-
-  <!-- XP panel -->
-  <div class="card" style="margin-bottom:10px">
-    <div class="lbl"><div class="lbl-dot"></div>Talousprofiilisi</div>
-    <div id="xp-panel"></div>
-  </div>
-
-  <!-- Menorakenne -->
-  <div class="sec-title">Menorakenne <button class="help-btn" onclick="showHelp('menorakenne')">?</button></div>
-  <div class="card">
-    <div id="menorakenne-wrap"></div>
-  </div>
-
-  <div class="card">
-    <div class="lbl"><div class="lbl-dot"></div>Menojakauma</div>
-    <canvas id="chartMenot" height="180" style="display:none"></canvas>
-    <div id="chartLegend" style="margin-top:10px;display:flex;flex-wrap:wrap;gap:7px;"></div>
-  </div>
-
-  <!-- Benchmarking -->
-  <div class="sec-title">Viitearvot <button class="help-btn" onclick="showHelp('benchmark')">?</button></div>
-  <div class="card">
-    <div style="font-size:10px;color:var(--text-3);margin-bottom:8px">Takuusäätiön kohtuullinen minimi — yksinasuva aikuinen</div>
-    <div id="benchmark-list"></div>
-  </div>
-</div>
-
-<!-- ======= TULOT ======= -->
-<div id="tab-tulot" class="tab">
-  <div class="sec-title">Tulolähteet <button class="help-btn" onclick="showHelp('tulot')">?</button></div>
-  <div id="incomeList"></div>
-  <button class="btn mt12" onclick="addIncome()">+ Lisää tulolähde</button>
-  <hr class="div">
-  <div class="flex-between">
+<div id="victoryOverlay">
     <div>
-      <div style="font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3)">Toistuvat / kk</div>
-      <div class="big-num cyan mt8" id="inc-recurring">0 €</div>
+        <h1 style="font-size: 4rem; color: #22c55e; font-weight: 200;">VOITTO! 🎉</h1>
+        <p style="font-weight: 300; letter-spacing: 1px;">Tavoite saavutettu</p>
+        <button class="btn-main" onclick="reset()">UUSI PELI</button>
     </div>
-    <div style="text-align:right">
-      <div style="font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3)">Kertaluonteiset</div>
-      <div style="font-size:1.3rem;font-weight:200;color:var(--orange);margin-top:6px" id="inc-onetime">0 €</div>
-    </div>
-  </div>
 </div>
 
-<!-- ======= MENOT ======= -->
-<div id="tab-menot" class="tab">
-  <div class="sec-title">Kiinteät arjen menot <button class="help-btn" onclick="showHelp('menot')">?</button></div>
-  <div class="tip" style="margin-bottom:12px">Kun maksat menon, valitse maksoitko <strong>tililtä</strong> vai <strong>käteisellä</strong> — summa vähennetään automaattisesti oikeasta saldosta. Peruuta-nappi palauttaa sen takaisin.</div>
-  <div id="menotList"></div>
-  <button class="btn mt12" onclick="addExpense('arki')">+ Lisää meno</button>
-  <hr class="div">
-  <div class="flex-between">
-    <span style="font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3)">Yhteensä / kk</span>
-    <div class="sval red" id="menot-total">0 €</div>
-  </div>
-  <div class="flex-between mt8">
-    <span style="font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3)">Maksettu tässä kuussa</span>
-    <div class="sval green" id="menot-paid">0 €</div>
-  </div>
-</div>
-
-<!-- ======= YRITYS ======= -->
-<div id="tab-yritys" class="tab">
-  <div class="sec-title">Yrityksen kulut <button class="help-btn" onclick="showHelp('yritys')">?</button></div>
-  <div id="yritysLista"></div>
-  <button class="btn mt12" onclick="addExpense('yritys')">+ Lisää kulu</button>
-  <hr class="div">
-  <div class="flex-between">
-    <span style="font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3)">Yhteensä / kk</span>
-    <div class="sval red" id="yritys-total">0 €</div>
-  </div>
-  <div class="flex-between mt8">
-    <span style="font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3)">Maksettu tässä kuussa</span>
-    <div class="sval green" id="yritys-paid">0 €</div>
-  </div>
-</div>
-
-<!-- ======= PÄIVÄBUDJETTI ======= -->
-<div id="tab-paiva" class="tab">
-  <div class="sec-title">Nyt — ennen seuraavia tuloja <button class="help-btn" onclick="showHelp('paiva')">?</button></div>
-  <div class="card card-accent">
-    <div class="lbl"><div class="lbl-dot"></div>Realistinen päiväbudjetti</div>
-    <div class="big-num green" id="pb-realday">0 €/pv</div>
-    <div class="tip mt8" id="pb-realnote"></div>
-    <div class="prog-wrap mt12">
-      <div class="prog-lbl"><span>Seuraavaan tuloon</span><span id="nextIncLabel">—</span></div>
-      <div class="prog-bar"><div class="prog-fill cyan" id="nextIncBar" style="width:0%"></div></div>
-    </div>
-  </div>
-  <div class="sec-title">Koko kuukauden laskuri</div>
-  <div class="card">
-    <div class="g2" style="margin-bottom:12px">
-      <div class="sb">
-        <div class="slbl">Päiviä jäljellä</div>
-        <div class="sval cyan" id="pb-daysLeft">—</div>
-      </div>
-      <div class="sb">
-        <div class="slbl">Vapaata / kk</div>
-        <div class="sval green" id="pb-monthfree">0 €</div>
-      </div>
-    </div>
-    <table class="tbl">
-      <thead><tr><th>Tavoite/pv</th><th>Tarvitaan</th><th>Tilanne</th><th>Ero</th></tr></thead>
-      <tbody id="dayBudgetTable"></tbody>
-    </table>
-    <div class="tip mt8" id="daybudget-note">Käytetty: saldo + tulevat tulot − maksamattomat menot</div>
-  </div>
-
-  <div class="sec-title">Tulevat kuukaudet</div>
-  <div class="tip" style="margin-bottom:12px">Kirjatut erät tuleville kuukausille — eivät vaikuta tämän kuun laskelmiin.</div>
-  <div id="futureSummary"></div>
-</div>
-
-<!-- ======= SUUNNITELMAT ======= -->
-<div id="tab-suunnitelmat" class="tab">
-  <div class="sec-title">Tulojen jako-ohjelma <button class="help-btn" onclick="showHelp('suunnitelmat')">?</button></div>
-  <div class="card">
-    <div class="lbl"><div class="lbl-dot"></div>% toistuvista kuukausituloista</div>
-    <div id="allocList"></div>
-    <button class="btn mt12" onclick="addAlloc()">+ Lisää</button>
-    <hr class="div">
-    <div class="flex-between">
-      <span style="font-size:12px;color:var(--text-2)">Jaettu yhteensä</span>
-      <span id="alloc-pct-total" style="color:var(--text-2)">0%</span>
-    </div>
-    <div class="flex-between mt8">
-      <span style="font-size:12px;color:var(--text-2)">Vapaa käyttö</span>
-      <span class="sval green" id="alloc-free">0 €</span>
-    </div>
-  </div>
-</div>
-
-<!-- ======= JAKO ======= -->
-<div id="tab-jako" class="tab">
-  <div class="sec-title">Kulujen jako <button class="help-btn" onclick="showHelp('jako')">?</button></div>
-  <div class="tip" style="margin-bottom:14px">Jaa mitä kuluja tahansa — esim. asumiskulut, matkakulut, tai vaikka yhteinen viikonloppureissu.</div>
-  <div class="card">
-    <div class="lbl"><div class="lbl-dot"></div>Valitse jaettavat kulut</div>
-    <div id="jakoCheckboxes" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px"></div>
-    <hr class="div">
-    <div class="lbl"><div class="lbl-dot"></div>Muita jakoon (ei listalla)</div>
-    <div id="jakoExtras"></div>
-    <button class="btn btn-sm mt8" onclick="addJakoExtra()">+ Lisää muu kulu</button>
-    <hr class="div">
-    <div class="lbl"><div class="lbl-dot"></div>Jakosuhde</div>
-    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-      <div>
-        <div class="saldo-lbl" style="margin-bottom:5px">Sinä %</div>
-        <div class="xp-row" style="width:100px">
-          <input type="number" id="jakoSplit" value="50" min="0" max="100" style="text-align:center;font-size:1rem;padding:8px" oninput="renderJako()">
+<div class="container">
+    <div id="viewSetup">
+        <div class="logo-area">
+            <div class="logo-glow"></div>
+            <h1 class="neon-logo">MUUTOSKONE</h1>
+            <div class="sub-logo">Strateginen analyysityökalu</div>
         </div>
-      </div>
-      <div style="color:var(--text-3);font-size:1rem;margin-top:14px">⇄</div>
-      <div>
-        <div class="saldo-lbl" style="margin-bottom:5px">Kumppani %</div>
-        <div style="font-size:1.2rem;font-weight:200;color:var(--text-2);padding:8px 0" id="jakoSplitPartner">50%</div>
-      </div>
+
+        <div class="glass-card">
+            <label class="setup-label">Tavoitteesi</label>
+            <input type="text" id="inGoal" placeholder="esim. Taloudellinen vapaus">
+        </div>
+
+        <div class="glass-card">
+            <label class="setup-label">Rutiinit (1, 5, 20, 50 XP)</label>
+            <div class="setup-indent">
+                <div class="xp-row"><span class="xp-tag">1 XP</span><input type="text" id="inR1" placeholder="Pikkutehtävä 1-10min"></div>
+                <div class="xp-row"><span class="xp-tag">5 XP</span><input type="text" id="inR5" placeholder="Ryhtiliike  15-30min"></div>
+                <div class="xp-row"><span class="xp-tag">20 XP</span><input type="text" id="inR20" placeholder="Kunnon rutistus 45-90min"></div>
+                <div class="xp-row"><span class="xp-tag">50 XP</span><input type="text" id="inR50" placeholder="Päivän uroteko 2-4h"></div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <label class="setup-label">Vaikeusaste (V)</label>
+            <select id="inV">
+                <option value="1000">Uusi rutiini (1 000 XP)</option>
+                <option value="5000" selected>Merkittävä muutos (5 000 XP)</option>
+                <option value="10000">Elämänmuutos (10 000 XP)</option>
+                <option value="100000">Mestari taso (100 000 XP)</option>
+            </select>
+        </div>
+
+        <button class="btn-main" onclick="start()">KÄYNNISTÄ PELI</button>
+
+        <div class="glass-card ai-card">
+            <label class="setup-label">Strategia-apuri (AI)</label>
+            <p class="ai-text">Epäröitkö vaikeusastetta tai rutiineja? Anna tekoälyn analysoida tilanteesi ja luoda valmis polku.</p>
+            <p class="ai-instruction">Toimi näin:</p>
+            <ol class="ai-steps">
+                <li>Kopioi alta <b>Strategia-kehote</b>.</li>
+                <li>Liitä se <a href="https://gemini.google.com" target="_blank" style="color:var(--cyan); text-decoration:none; font-weight:600;">Geminille tästä</a>.</li>
+                <li>Palaa takaisin ja täytä AI:n antamat arvot.</li>
+            </ol>
+            <button class="btn-ai" id="copyAiBtn" onclick="copyAiPrompt()">KOPIOI STRATEGIA-KEHOTE 📋</button>
+        </div>
     </div>
-    <div class="split-grid">
-      <div class="split-box">
-        <div style="font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3);margin-bottom:7px">Sinun osuus</div>
-        <div style="font-size:1.8rem;font-weight:200;color:var(--cyan)" id="splitMine">0 €</div>
-      </div>
-      <div class="split-box">
-        <div style="font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3);margin-bottom:7px">Kumppanin osuus</div>
-        <div style="font-size:1.8rem;font-weight:200;color:var(--purple)" id="splitPartner">0 €</div>
-      </div>
+
+    <div id="viewGame" style="display:none;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+            <span id="txtGoal" style="color: var(--cyan); font-weight: 600; letter-spacing: 1px;"></span>
+            <span id="txtV" style="color: var(--text-dim); font-size: 12px; font-weight: 600; letter-spacing: 1px;"></span>
+        </div>
+
+        <div class="status-box">
+            <div id="bonusBadge" class="bonus-badge">×1.00</div>
+            <div class="m-lbl">Päiviä maaliin</div>
+            <div class="m-val" id="valM">--</div>
+            
+            <div style="text-align: left; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 20px;">
+                <div class="level-display" id="valLvl">LEVEL 1</div>
+                <div class="bar-bg"><div class="bar-fill" id="barXP"></div></div>
+                <div class="stats-row">
+                    <span>XP: <span id="valTotal">0</span></span>
+                    <span>PÄIVÄ <span id="valDays">1</span></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="taskList"></div>
+
+        <button class="btn-secondary" onclick="nextDay()">☀️ Seuraava päivä</button>
+
+        <div class="footer-actions">
+            <button class="btn-sub" onclick="modifyRoutines()">⚙️ Muokkaa rutiineja</button>
+            <button class="btn-sub" onclick="exportData()">💾 Varmuuskopio</button>
+            <button class="btn-sub" onclick="document.getElementById('fileIn').click()">📁 Tuo</button>
+            <button class="btn-sub btn-danger" onclick="reset()">🗑️ Nollaa</button>
+            <input type="file" id="fileIn" style="display:none" onchange="importData(event)">
+        </div>
     </div>
-    <div style="text-align:center;margin-top:9px;font-size:11px;color:var(--text-3)">
-      Yhteensä: <span style="color:var(--text-2)" id="splitTotal">0 €</span>
-    </div>
-  </div>
 </div>
-
-<!-- ======= KALENTERI ======= -->
-<div id="tab-kalenteri" class="tab">
-  <div class="sec-title" id="calTitle">Maksukalenteri</div>
-  <div class="card">
-    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px;font-size:10px;">
-      <span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:rgba(34,197,94,0.3);margin-right:4px"></span>Tuloja</span>
-      <span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:rgba(239,68,68,0.25);margin-right:4px"></span>Menoja</span>
-      <span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:rgba(124,92,191,0.3);margin-right:4px"></span>Molempia</span>
-    </div>
-    <div class="cal-grid" id="calGrid"></div>
-  </div>
-  <div class="sec-title">Tapahtumat</div>
-  <div id="calEvents"></div>
-</div>
-
-<!-- ======= TAVOITTEET ======= -->
-<div id="tab-tavoitteet" class="tab">
-  <div class="sec-title">Säästötavoitteet <button class="help-btn" onclick="showHelp('tavoitteet')">?</button></div>
-  <div class="tip" style="margin-bottom:14px">Aseta konkreettiset tavoitteet. Sovellus laskee automaattisesti milloin saavutat sen nykyisellä säästövauhdilla.</div>
-  <div id="goalsList"></div>
-  <button class="btn mt12" onclick="addGoal()">+ Lisää tavoite</button>
-
-  <div class="sec-title mt16">Vinkki</div>
-  <div class="card" style="font-size:12px;color:var(--text-2);line-height:1.7">
-    💡 Tavoite lasketaan: <strong style="color:var(--cyan)">vapaata rahaa / kk</strong> × kuukaudet = tavoitesumma.<br>
-    Muuta tuloja tai menoja Tilanne-välilehdeltä vauhdittaaksesi edistymistä.
-  </div>
-</div>
-
-<!-- ======= FIRE ======= -->
-<div id="tab-fire" class="tab">
-  <div class="sec-title">🔥 FIRE-laskenta <button class="help-btn" onclick="showHelp('fire')">?</button></div>
-  <div class="tip" style="margin-bottom:14px">Financial Independence, Retire Early. Perustuu 4% nostosääntöön: tarvitset 25× vuosimenosi sijoitettuna saavuttaaksesi taloudellisen vapauden.</div>
-
-  <div class="card card-accent">
-    <div class="lbl"><div class="lbl-dot"></div>FIRE-numero</div>
-    <div class="big-num cyan" id="fire-number">0 €</div>
-    <div class="tip mt8" id="fire-number-tip">= vuosimenot × 25</div>
-  </div>
-
-  <div class="g2" style="margin-top:10px">
-    <div class="sb" style="text-align:center">
-      <div class="slbl">Vuosimenot</div>
-      <div class="sval red" id="fire-yearexp">0 €</div>
-    </div>
-    <div class="sb" style="text-align:center">
-      <div class="slbl">Kuukausimenot</div>
-      <div class="sval orange" id="fire-monexp">0 €</div>
-    </div>
-  </div>
-
-  <div class="card" style="margin-top:10px">
-    <div class="lbl"><div class="lbl-dot"></div>FIRE-asetukset</div>
-    <div class="xp-row" style="margin-bottom:8px">
-      <div class="xp-tag" style="min-width:130px;font-size:9px;text-align:left;padding-left:10px">Nykyinen sijoitussalkku (€)</div>
-      <input type="number" id="fire-portfolio" placeholder="0" style="flex:1;text-align:right" oninput="S.firePortfolio=parseFloat(this.value)||0;save();renderFIRE()">
-      <span style="padding:0 10px;color:var(--text-3)">€</span>
-    </div>
-    <div class="xp-row" style="margin-bottom:8px">
-      <div class="xp-tag" style="min-width:130px;font-size:9px;text-align:left;padding-left:10px">Kuukausisäästö sijoituksiin (€)</div>
-      <input type="number" id="fire-monthly" placeholder="0" style="flex:1;text-align:right" oninput="S.fireMonthlySave=parseFloat(this.value)||0;save();renderFIRE()">
-      <span style="padding:0 10px;color:var(--text-3)">€</span>
-    </div>
-    <div class="xp-row">
-      <div class="xp-tag" style="min-width:130px;font-size:9px;text-align:left;padding-left:10px">Vuotuinen tuotto-odotus (%)</div>
-      <input type="number" id="fire-return" value="7" min="0" max="30" style="flex:1;text-align:right" oninput="S.fireReturn=parseFloat(this.value)||7;save();renderFIRE()">
-      <span style="padding:0 10px;color:var(--text-3)">%</span>
-    </div>
-  </div>
-
-  <div class="card card-green" style="margin-top:10px">
-    <div class="lbl"><div class="lbl-dot"></div>Tilanne</div>
-    <div class="g2">
-      <div class="sb" style="text-align:center">
-        <div class="slbl">FI-aste</div>
-        <div class="sval cyan" id="fire-pct">0%</div>
-        <div class="tip">salkku / FIRE-numero</div>
-      </div>
-      <div class="sb" style="text-align:center">
-        <div class="slbl">Vuosia FIRE:een</div>
-        <div class="sval green" id="fire-years">—</div>
-        <div class="tip" id="fire-year-label">nykyisellä vauhdilla</div>
-      </div>
-    </div>
-    <div class="prog-wrap mt12">
-      <div class="prog-lbl"><span>Polku taloudelliseen vapauteen</span><span id="fire-pct-lbl">0%</span></div>
-      <div class="prog-bar"><div class="prog-fill cyan" id="pb-fire" style="width:0%"></div></div>
-    </div>
-    <div class="tip mt8" id="fire-detail">Syötä salkun arvo ja kuukausisäästö laskeaksesi.</div>
-  </div>
-
-  <div class="sec-title mt16">Tiesitkö?</div>
-  <div class="card" style="font-size:12px;color:var(--text-2);line-height:1.8">
-    🔥 <strong style="color:var(--cyan)">4% sääntö</strong>: Voit nostaa sijoituksistasi 4% vuodessa loputtomiin tilastollisesti turvallisesti.<br>
-    📈 <strong style="color:var(--green)">Koronkorko</strong>: 7%/v tuotto-odotus on S&P 500:n historiallinen reaalikorjattu keskiarvo.<br>
-    ⚡ <strong style="color:var(--orange)">Säästämisaste</strong>: 50% säästämisasteella FIRE saavutetaan ~17 vuodessa nollasta.
-  </div>
-</div>
-
-<!-- ======= VARALLISUUS ======= -->
-<div id="tab-varallisuus" class="tab">
-  <div class="sec-title">Nettovarallisuus <button class="help-btn" onclick="showHelp('varallisuus')">?</button></div>
-  <div class="tip" style="margin-bottom:14px">Seuraa kokonaisvarallisuuttasi. Lisää omaisuuserät ja velat.</div>
-
-  <div class="card card-accent" style="margin-bottom:10px">
-    <div class="lbl"><div class="lbl-dot"></div>Nettovarallisuus</div>
-    <div class="big-num" id="nw-net" style="background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">0 €</div>
-    <div class="tip mt8" id="nw-tip">omaisuus − velat</div>
-  </div>
-
-  <div class="g2">
-    <div class="sb" style="text-align:center">
-      <div class="slbl">Omaisuus yhteensä</div>
-      <div class="sval green" id="nw-assets">0 €</div>
-    </div>
-    <div class="sb" style="text-align:center">
-      <div class="slbl">Velat yhteensä</div>
-      <div class="sval red" id="nw-debts">0 €</div>
-    </div>
-  </div>
-
-  <div class="sec-title mt12">Omaisuuserät</div>
-  <div id="assetsList"></div>
-  <button class="btn mt8" onclick="addAsset()">+ Lisää omaisuuserä</button>
-
-  <div class="sec-title mt16">Velat</div>
-  <div id="debtsList"></div>
-  <button class="btn mt8" onclick="addDebt()">+ Lisää velka</button>
-
-  <div class="sec-title mt16">Velkaaste</div>
-  <div class="card">
-    <div class="prog-wrap">
-      <div class="prog-lbl"><span>Velat / omaisuus</span><span id="nw-debtratio">0%</span></div>
-      <div class="prog-bar"><div class="prog-fill" id="pb-debtratio" style="width:0%"></div></div>
-    </div>
-    <div class="tip mt8" id="nw-advice">—</div>
-  </div>
-</div>
-
-<!-- ======= HISTORIA ======= -->
-<div id="tab-historia" class="tab">
-  <div class="sec-title">Kuukausihistoria <button class="help-btn" onclick="showHelp('historia')">?</button></div>
-  <div class="tip" style="margin-bottom:12px">Tallenna kuukauden tilanne ennen kuin vaihdat kuukautta. Näet trendit ja kehityksen ajan myötä.</div>
-
-  <div class="card card-accent" style="margin-bottom:10px">
-    <div class="lbl"><div class="lbl-dot"></div>Tallenna tämä kuukausi</div>
-    <div style="font-size:12px;color:var(--text-2);margin-bottom:12px;line-height:1.6">
-      Ottaa tilannekuvan nykyisistä luvuista: tulot, menot, saldo ja säästämisaste.
-    </div>
-    <button class="btn-grad" onclick="saveMonthSnapshot()">📸 Tallenna kuukausi</button>
-  </div>
-
-  <div id="histList"></div>
-
-  <div class="sec-title mt16" id="histChartTitle" style="display:none">Kehitys</div>
-  <div class="card" id="histChartCard" style="display:none">
-    <canvas id="histChart" height="180"></canvas>
-  </div>
-</div>
-
-<!-- ======= AI ======= -->
-<div id="tab-ai" class="tab">
-  <div class="sec-title">AI-sparraaja <button class="help-btn" onclick="showHelp('ai')">?</button></div>
-  <div class="ai-panel">
-    <div style="font-size:12px;color:rgba(180,160,255,0.8);margin-bottom:14px;line-height:1.7">
-      Kopioi budjettitietosi ja liitä Claude.ai:hin, ChatGPT:hen, Geminiin tai muuhun AI:hin. Valitse kehote ensin.
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px">
-      <button class="btn btn-sm" onclick="setPrompt('yleinen')">🔍 Yleisanalyysi</button>
-      <button class="btn btn-sm" onclick="setPrompt('saasta')">💡 Säästövinkit</button>
-      <button class="btn btn-sm" onclick="setPrompt('lisatulot')">🚀 Lisätulot</button>
-      <button class="btn btn-sm" onclick="setPrompt('strategia')">♟ 3kk strategia</button>
-    </div>
-    <div class="ai-box" id="aiCopyBox">Valitse kehote yllä...</div>
-    <button class="btn-grad mt12" onclick="copyAI()">📋 Kopioi leikepöydälle</button>
-    <div id="copiedMsg" style="text-align:center;font-size:11px;color:var(--green);margin-top:8px;display:none">✓ Kopioitu!</div>
-  </div>
-</div>
-
-</div><!-- /main -->
-
-<!-- ======= PIKASTARTTI WIZARD ======= -->
-<div class="modal-overlay" id="wizardModal">
-  <div class="modal-box" style="max-width:460px">
-    <div class="modal-title" style="font-size:15px;margin-bottom:4px">👋 Tervetuloa Rahakoneeseen!</div>
-    <div style="font-size:12px;color:var(--text-2);margin-bottom:20px;line-height:1.6">Täytetään perustiedot yhdessä — kestää alle minuutin. Voit muuttaa kaikkea myöhemmin.</div>
-
-    <!-- Step 1 -->
-    <div class="wiz-step" id="wiz-1">
-      <div style="font-size:11px;color:var(--cyan);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px">Vaihe 1 / 3 — Tulot</div>
-      <div style="font-size:13px;font-weight:500;color:var(--text-1);margin-bottom:16px">Mikä on kuukausitulosi (netto)?</div>
-      <div class="xp-row" style="margin-bottom:10px">
-        <div class="xp-tag">💰</div>
-        <input type="number" id="wiz-palkka" placeholder="esim. 2400" style="flex:1;font-size:1.1rem;padding:12px">
-        <span style="padding:0 14px;color:var(--text-3)">€/kk</span>
-      </div>
-      <div style="font-size:11px;color:var(--text-3);margin-bottom:20px">Palkka, etuudet tai muu säännöllinen tulo. Syötä 0 jos epävarma — voit lisätä myöhemmin.</div>
-      <div style="display:flex;gap:8px">
-        <button class="btn-grad" onclick="wizNext(2)" style="flex:1">Seuraava →</button>
-      </div>
-    </div>
-
-    <!-- Step 2 -->
-    <div class="wiz-step" id="wiz-2" style="display:none">
-      <div style="font-size:11px;color:var(--cyan);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px">Vaihe 2 / 3 — Asuminen</div>
-      <div style="font-size:13px;font-weight:500;color:var(--text-1);margin-bottom:16px">Paljonko maksat asumisesta kuukaudessa?</div>
-      <div class="xp-row" style="margin-bottom:10px">
-        <div class="xp-tag">🏠</div>
-        <input type="number" id="wiz-vuokra" placeholder="esim. 750" style="flex:1;font-size:1.1rem;padding:12px">
-        <span style="padding:0 14px;color:var(--text-3)">€/kk</span>
-      </div>
-      <div style="font-size:11px;color:var(--text-3);margin-bottom:20px">Vuokra tai lainanlyhennys + vastike yhteensä.</div>
-      <div style="display:flex;gap:8px">
-        <button class="btn" onclick="wizNext(1)" style="flex:0 0 auto">← Takaisin</button>
-        <button class="btn-grad" onclick="wizNext(3)" style="flex:1">Seuraava →</button>
-      </div>
-    </div>
-
-    <!-- Step 3 -->
-    <div class="wiz-step" id="wiz-3" style="display:none">
-      <div style="font-size:11px;color:var(--cyan);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px">Vaihe 3 / 3 — Muut isot menot</div>
-      <div style="font-size:13px;font-weight:500;color:var(--text-1);margin-bottom:16px">Arvioi muut kuukausittaiset menosi:</div>
-      <div class="xp-row" style="margin-bottom:8px">
-        <div class="xp-tag" style="font-size:9px;min-width:52px">🛒 Ruoka</div>
-        <input type="number" id="wiz-ruoka" placeholder="300" style="flex:1;padding:10px">
-        <span style="padding:0 12px;color:var(--text-3);font-size:12px">€</span>
-      </div>
-      <div class="xp-row" style="margin-bottom:8px">
-        <div class="xp-tag" style="font-size:9px;min-width:52px">🚗 Liikk.</div>
-        <input type="number" id="wiz-liikkuminen" placeholder="80" style="flex:1;padding:10px">
-        <span style="padding:0 12px;color:var(--text-3);font-size:12px">€</span>
-      </div>
-      <div class="xp-row" style="margin-bottom:16px">
-        <div class="xp-tag" style="font-size:9px;min-width:52px">📱 Puhelin</div>
-        <input type="number" id="wiz-puhelin" placeholder="30" style="flex:1;padding:10px">
-        <span style="padding:0 12px;color:var(--text-3);font-size:12px">€</span>
-      </div>
-      <div style="display:flex;gap:8px">
-        <button class="btn" onclick="wizNext(2)" style="flex:0 0 auto">← Takaisin</button>
-        <button class="btn-grad" onclick="wizFinish()" style="flex:1">✅ Valmis — aloita!</button>
-      </div>
-    </div>
-
-    <div style="text-align:center;margin-top:14px">
-      <button class="bb-btn" onclick="wizSkip()">Ohita — täytän itse</button>
-    </div>
-  </div>
-</div>
-
-<!-- ======= HELP MODAL ======= -->
-<div class="modal-overlay" id="helpModal" onclick="if(event.target===this)closeHelp()">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeHelp()">✕</button>
-    <div class="modal-title" id="helpModalTitle"><span>❓</span> Ohje</div>
-    <div id="helpModalBody"></div>
-  </div>
-</div>
-
-<!-- ======= BOTTOM BAR ======= -->
-<div class="bottom-bar">
-  <button class="bb-btn" onclick="exportJSON()">⬇ Vie tiedot</button>
-  <button class="bb-btn" onclick="importJSON()">⬆ Tuo tiedot</button>
-  <button class="bb-btn" onclick="showHelp('yleinen')">❓ Ohjeet</button>
-  <button class="bb-btn" onclick="if(confirm('Nollataanko kaikki tiedot? Tätä ei voi peruuttaa.'))resetAll()">🗑 Nollaa</button>
-</div>
-<input type="file" id="importFile" accept=".json" style="display:none" onchange="doImport(event)">
-
 
 <script>
-// ===== CONSTANTS =====
-const TODAY = new Date();
-const TODAY_DAY = TODAY.getDate();
-const CUR_MONTH = TODAY.getMonth() + 1; // 1-12
-const DAYS_IN_MONTH = new Date(TODAY.getFullYear(), TODAY.getMonth()+1, 0).getDate();
-const DAYS_LEFT = DAYS_IN_MONTH - TODAY_DAY + 1;
+    let g = { active: false, goal: "", r1: "", r5: "", r20: "", r50: "", v: 5000, total: 0, days: 1, lvl: 1, initialEstimate: null, lowestEstimate: null };
 
-const MN = ['—','Tam','Hel','Maa','Huh','Tou','Kes','Hei','Elo','Syy','Lok','Mar','Jou'];
-const MF = ['—','Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kesäkuu',
-            'Heinäkuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulukuu'];
-
-// ===== MONTH HELPERS =====
-// month=0 → toistuu joka kuukausi
-// month=1-12 → vain se kuukausi
-function itemM(x){ return parseInt(x.month)||0; }
-function forThisMonth(x){ const m=itemM(x); return m===0||m===CUR_MONTH; }
-function forFuture(x){ const m=itemM(x); return m>0&&m!==CUR_MONTH; }
-
-// ===== STATE =====
-const DEF = {
-  saldoTili:0, saldoKateis:0,
-  income:[
-    {id:'i1',label:'Palkka',   amount:0,day:25,month:0,paid:false},
-    {id:'i2',label:'Lapsilisä',amount:0,day:26,month:0,paid:false},
-  ],
-  expenses:[
-    {id:'e1',label:'Vuokra',              amount:0,day:1, month:0,paid:false,paidFrom:null,cat:'asuminen',   type:'kiintea'},
-    {id:'e2',label:'Sähkönsiirto',        amount:0,day:5, month:0,paid:false,paidFrom:null,cat:'asuminen',   type:'kiintea'},
-    {id:'e3',label:'Sähkö (kulutus)',     amount:0,day:5, month:0,paid:false,paidFrom:null,cat:'asuminen',   type:'kiintea'},
-    {id:'e4',label:'Kotivakuutus',        amount:0,day:1, month:0,paid:false,paidFrom:null,cat:'asuminen',   type:'kiintea'},
-    {id:'e5',label:'Puhelin/netti',       amount:0,day:10,month:0,paid:false,paidFrom:null,cat:'liikkuminen',type:'kiintea'},
-    {id:'e6',label:'Salikortti',          amount:0,day:1, month:0,paid:false,paidFrom:null,cat:'terveys',    type:'kiintea'},
-    {id:'e7',label:'Junaliput',           amount:0,day:0, month:0,paid:false,paidFrom:null,cat:'liikkuminen',type:'muuttuva'},
-    {id:'e8',label:'Luottokortti/lainat', amount:0,day:15,month:0,paid:false,paidFrom:null,cat:'asuminen',   type:'kiintea'},
-  ],
-  yritys:[
-    {id:'y1',label:'Nettisivut/hosting',   amount:0,day:1,month:0,paid:false,paidFrom:null},
-    {id:'y2',label:'Palvelinmaksut',       amount:0,day:1,month:0,paid:false,paidFrom:null},
-    {id:'y3',label:'Verkkokauppamaksut',   amount:0,day:1,month:0,paid:false,paidFrom:null},
-    {id:'y4',label:'Kirjanpito',           amount:0,day:1,month:0,paid:false,paidFrom:null},
-  ],
-  alloc:[
-    {id:'a1',label:'Hyväntekeväisyys',pct:5},
-    {id:'a2',label:'Sijoitukset',     pct:10},
-    {id:'a3',label:'Säästöt',         pct:10},
-  ],
-  jakoSelected:[], jakoExtras:[], jakoSplit:50,
-  goals:[],
-  assets:[
-    {id:'as1',label:'Saldo (tili + käteinen)',amount:0,auto:true},
-    {id:'as2',label:'Sijoitukset / rahasto',amount:0},
-    {id:'as3',label:'Asunto / kiinteistö',amount:0},
-  ],
-  debts:[
-    {id:'db1',label:'Opintolaina',amount:0},
-    {id:'db2',label:'Asuntolaina',amount:0},
-    {id:'db3',label:'Kulutusluotto',amount:0},
-  ],
-  firePortfolio:0, fireMonthlySave:0, fireReturn:7,
-  history:[],
-  wizardDone:false,
-};
-let S = JSON.parse(JSON.stringify(DEF));
-
-// ===== PERSIST =====
-function save(skipDom){
-  if(!skipDom){
-    S.saldoTili   = parseFloat(document.getElementById('saldoTili')?.value)||0;
-    S.saldoKateis = parseFloat(document.getElementById('saldoKateis')?.value)||0;
-  }
-  try{ localStorage.setItem('rahakone_v5', JSON.stringify(S)); }catch(e){}
-}
-function load(){
-  try{
-    const d = localStorage.getItem('rahakone_v5');
-    // also try old key and migrate
-    const d4 = !d && localStorage.getItem('rahakone_v4');
-    const raw = d || d4;
-    if(raw){ S = Object.assign(JSON.parse(JSON.stringify(DEF)), JSON.parse(raw)); }
-  }catch(e){}
-  // normalize: ensure all items have month field AND amount is always a number
-  [...S.income,...S.expenses,...S.yritys].forEach(x=>{
-    if(x.month==null) x.month=0;
-    x.amount = parseFloat(x.amount)||0;
-    x.day    = parseInt(x.day)||0;
-  });
-  // remove legacy recurring field confusion — month=0 means recurring now
-  S.income.forEach(i=>{ delete i.recurring; });
-  // normalize new fields
-  if(!S.goals) S.goals=[];
-  if(!S.assets) S.assets=JSON.parse(JSON.stringify(DEF.assets));
-  if(!S.debts)  S.debts=JSON.parse(JSON.stringify(DEF.debts));
-  if(S.firePortfolio==null) S.firePortfolio=0;
-  if(S.fireMonthlySave==null) S.fireMonthlySave=0;
-  if(S.fireReturn==null) S.fireReturn=7;
-  if(!S.history) S.history=[];
-  if(S.wizardDone==null) S.wizardDone=false;
-  // normalize expense categories
-  S.expenses.forEach(e=>{ if(!e.cat) e.cat='muut'; if(!e.type) e.type='kiintea'; });
-  S.yritys.forEach(e=>{ if(!e.cat) e.cat='yritys'; if(!e.type) e.type='kiintea'; });
-}
-
-// ===== TABS =====
-document.getElementById('todaySub').textContent =
-  TODAY.toLocaleDateString('fi-FI',{weekday:'long',year:'numeric',month:'long',day:'numeric'}).toUpperCase();
-
-function showTab(name,btn){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
-  if(btn) btn.classList.add('active');
-  update();
-}
-function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
-function fmt(n){ return (isNaN(n)?0:n).toFixed(2)+' €'; }
-
-// ===== MONTH SELECT HTML =====
-function monthSelect(currentM, onChange){
-  return '<select style="font-size:10px;padding:3px 6px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:6px;color:var(--text-2)" onchange="'+onChange+'">'
-    +'<option value="0"'+(currentM===0?' selected':'')+'>↻ Joka kuukausi</option>'
-    +[1,2,3,4,5,6,7,8,9,10,11,12].map(n=>'<option value="'+n+'"'+(currentM===n?' selected':'')+'>'+MN[n]+'</option>').join('')
-    +'</select>';
-}
-
-// ===== RENDER INCOME =====
-function renderIncome(){
-  const el = document.getElementById('incomeList'); if(!el) return; el.innerHTML='';
-  S.income.forEach((item, idx)=>{
-    const m = itemM(item);
-    const future = forFuture(item);
-    const div = document.createElement('div');
-    div.className = 'inc-row'+(future?' future-month':item.paid?' is-paid':'');
-    div.innerHTML =
-      '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;opacity:'+(future?'0.5':'1')+'">'
-        +'<input type="text" value="'+esc(item.label)+'" placeholder="Tulolähde"'
-          +' style="font-size:13px;font-weight:500;padding:0;flex:1;min-width:100px;border-bottom:1px solid var(--border);color:var(--text-1)"'
-          +' onchange="S.income['+idx+'].label=this.value;save()">'
-        +'<div style="display:flex;align-items:center;gap:5px">'
-          +'<input type="number" value="'+(item.amount||'')+'" placeholder="0"'
-            +' style="width:90px;text-align:right;font-size:1rem;color:'+(future?'var(--text-3)':'var(--cyan)')+';padding:0"'
-            +' oninput="S.income['+idx+'].amount=parseFloat(this.value)||0;save();update()">'
-          +'<span style="color:var(--text-3);font-size:.85rem">€</span>'
-          +'<button class="btn-del" onclick="S.income.splice('+idx+',1);save();renderIncome();update()">✕</button>'
-        +'</div>'
-      +'</div>'
-      +'<div class="inc-meta">'
-        + monthSelect(m, 'S.income['+idx+'].month=parseInt(this.value);save();renderIncome();update()')
-        +'<span style="font-size:9px;color:var(--text-3)">Pv:</span>'
-        +'<input type="number" value="'+(item.day||1)+'" min="1" max="31"'
-          +' style="width:38px;font-size:11px;padding:2px 5px;background:rgba(255,255,255,0.06);border-radius:5px;text-align:center"'
-          +' oninput="S.income['+idx+'].day=parseInt(this.value)||1;save();update()">'
-        +(future
-          ? '<span class="pill cyan" style="font-size:9px">📅 '+MF[m]+' — ei vaikuta tähän kuuhun</span>'
-          : '<span class="chip '+(item.paid?'act-green':'act-orange')+'" onclick="S.income['+idx+'].paid=!S.income['+idx+'].paid;save();renderIncome();update()">'
-            +(item.paid?'✓ Saatu':'⏳ Tulossa')+'</span>'
-        )
-      +'</div>'
-      +(!item.paid&&!future?'<div class="tip" style="margin-top:3px">Ei lasketa käytettävissä olevaan saldoon</div>':'');
-    el.appendChild(div);
-  });
-  // Totals — only this month
-  const rec = S.income.filter(i=>forThisMonth(i)&&itemM(i)===0).reduce((s,i)=>s+(i.amount||0),0);
-  const one = S.income.filter(i=>forThisMonth(i)&&itemM(i)===CUR_MONTH).reduce((s,i)=>s+(i.amount||0),0);
-  const el2=document.getElementById('inc-recurring'); if(el2) el2.textContent=fmt(rec);
-  const el3=document.getElementById('inc-onetime');   if(el3) el3.textContent=fmt(one);
-}
-function addIncome(){
-  S.income.push({id:'i'+Date.now(),label:'Uusi tulolähde',amount:0,day:1,month:0,paid:false});
-  save(); renderIncome(); update();
-}
-
-// ===== PAY EXPENSE =====
-function payExpense(type, idx, method){
-  const arr = type==='arki' ? S.expenses : S.yritys;
-  const item = arr[idx];
-  const amt = Math.round((item.amount||0)*100)/100;
-  if(method==='undo'){
-    if(item.paidFrom==='kateis') S.saldoKateis = Math.round((S.saldoKateis+amt)*100)/100;
-    else                         S.saldoTili   = Math.round((S.saldoTili+amt)*100)/100;
-    item.paid=false; item.paidFrom=null;
-  } else {
-    item.paid=true; item.paidFrom=method;
-    if(method==='kateis') S.saldoKateis = Math.round((S.saldoKateis-amt)*100)/100;
-    else                  S.saldoTili   = Math.round((S.saldoTili-amt)*100)/100;
-  }
-  save(true); // don't overwrite S.saldoTili from DOM
-  const tiEl=document.getElementById('saldoTili');   if(tiEl) tiEl.value=S.saldoTili||'';
-  const kaEl=document.getElementById('saldoKateis'); if(kaEl) kaEl.value=S.saldoKateis||'';
-  renderAll();
-  if(method!=='undo') checkXPToast();
-}
-
-// ===== RENDER EXPENSES =====
-function expBtns(type, idx, paid, future){
-  if(future) return '<span class="pill cyan" style="font-size:9px">📅 Tuleva — ei vaikuta tähän kuuhun</span>';
-  if(paid)   return '<button class="btn-pay paid" onclick="payExpense(\''+type+'\','+idx+',\'undo\')">↩ Peruuta</button>';
-  return '<button class="btn-pay" onclick="payExpense(\''+type+'\','+idx+',\'tili\')">💳 Tili</button>'
-        +'<button class="btn-pay" style="background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.2);color:rgba(34,197,94,.7)" onclick="payExpense(\''+type+'\','+idx+',\'kateis\')">💵 Käteinen</button>';
-}
-
-function renderExpenseList(listId, arr, type){
-  const el=document.getElementById(listId); if(!el) return; el.innerHTML='';
-  arr.forEach((item, idx)=>{
-    const m = itemM(item);
-    const future = forFuture(item);
-    const d = parseInt(item.day)||0;
-    const div = document.createElement('div');
-    div.className = 'exp-row'+(future?' future-month':item.paid?' is-paid':'');
-
-    // Status pill
-    let statusPill;
-    if(future){
-      statusPill = '<span class="pill cyan" style="font-size:9px">📅 '+MF[m]+'</span>';
-    } else if(item.paid){
-      statusPill = '<span class="pill green" style="font-size:9px">✓ Maksettu'+(item.paidFrom==='kateis'?' (käteinen)':' (tili)')+'</span>';
-    } else if(d>0){
-      statusPill = '<span class="pill '+(d>=TODAY_DAY?'orange':'gray')+'" style="font-size:9px">'
-                 +(d>=TODAY_DAY?'⏳ Eräänt. '+d+'. pv':'Eräänt. oli '+d+'. pv')+'</span>';
-    } else {
-      statusPill = '<span class="pill cyan" style="font-size:9px">Jatkuva</span>';
-    }
-
-    div.innerHTML =
-      '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;opacity:'+(future?'0.5':'1')+'">'
-        +'<input type="text" value="'+esc(item.label)+'" placeholder="Meno"'
-          +' style="font-size:13px;font-weight:'+(item.paid?'300':'500')+';padding:0;flex:1;min-width:90px;'
-          +'border-bottom:1px solid var(--border);color:var(--text-1);text-decoration:'+(item.paid?'line-through':'none')+'"'
-          +' onchange="'+(type==='arki'?'S.expenses':'S.yritys')+'['+idx+'].label=this.value;save()">'
-        +'<div style="display:flex;align-items:center;gap:5px">'
-          +'<input type="number" value="'+(item.amount||'')+'" placeholder="0"'
-            +' style="width:80px;text-align:right;font-size:1rem;color:'+(item.paid||future?'var(--text-3)':'var(--red)')+';padding:0"'
-            +' oninput="'+(type==='arki'?'S.expenses':'S.yritys')+'['+idx+'].amount=parseFloat(this.value)||0;save();update()">'
-          +'<span style="color:var(--text-3);font-size:.85rem">€</span>'
-          +'<button class="btn-del" onclick="'+(type==='arki'?'S.expenses':'S.yritys')+'.splice('+idx+',1);save();renderAll()">✕</button>'
-        +'</div>'
-      +'</div>'
-      +'<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:7px">'
-        + monthSelect(m, (type==='arki'?'S.expenses':'S.yritys')+'['+idx+'].month=parseInt(this.value);save();renderAll()')
-        +(future?'':
-          '<input type="number" value="'+d+'" min="0" max="31" placeholder="pv"'
-            +' style="width:38px;font-size:11px;padding:2px 5px;background:rgba(255,255,255,.06);border-radius:5px;text-align:center"'
-            +' oninput="'+(type==='arki'?'S.expenses':'S.yritys')+'['+idx+'].day=parseInt(this.value)||0;save();update()">'
-        )
-        +(type==='arki'
-          ? '<select class="cat-select" onchange="S.expenses['+idx+'].cat=this.value;save();renderAll()">'
-            +['asuminen','ruoka','liikkuminen','terveys','harrastukset','muut'].map(c=>'<option value="'+c+'"'+(item.cat===c?' selected':'')+'>'+{asuminen:'🏠 Asuminen',ruoka:'🛒 Ruoka',liikkuminen:'🚗 Liikkuminen',terveys:'💊 Terveys',harrastukset:'🎮 Harrastukset',muut:'📦 Muut'}[c]+'</option>').join('')
-            +'</select>'
-            +'<span class="type-badge '+(item.type||'kiintea')+'" title="Klikkaa vaihtaaksesi" onclick="var arr=S.expenses;arr['+idx+'].type=arr['+idx+'].type===\'kiintea\'?\'muuttuva\':\'kiintea\';save();renderAll()">'+(item.type==='muuttuva'?'muuttuva':'kiinteä')+'</span>'
-          : '')
-        + statusPill
-        + expBtns(type, idx, item.paid, future)
-      +'</div>';
-    el.appendChild(div);
-  });
-  // Totals — only this month's items
-  const thisArr = arr.filter(forThisMonth);
-  const total = thisArr.reduce((s,e)=>s+(e.amount||0),0);
-  const paid  = thisArr.filter(e=>e.paid).reduce((s,e)=>s+(e.amount||0),0);
-  if(type==='arki'){
-    const t=document.getElementById('menot-total'); if(t) t.textContent=fmt(total);
-    const p=document.getElementById('menot-paid');  if(p) p.textContent=fmt(paid);
-  } else {
-    const t=document.getElementById('yritys-total'); if(t) t.textContent=fmt(total);
-    const p=document.getElementById('yritys-paid');  if(p) p.textContent=fmt(paid);
-  }
-}
-function addExpense(type){
-  (type==='arki'?S.expenses:S.yritys).push({id:'x'+Date.now(),label:'Uusi kulu',amount:0,day:1,month:0,paid:false,paidFrom:null,cat:'muut',type:'kiintea'});
-  save(); renderAll();
-}
-
-// ===== ALLOC =====
-function renderAlloc(){
-  const el=document.getElementById('allocList'); if(!el) return; el.innerHTML='';
-  const totalInc = S.income.filter(forThisMonth).reduce((s,i)=>s+(i.amount||0),0);
-  let totalPct=0;
-  S.alloc.forEach((item,idx)=>{
-    totalPct += item.pct||0;
-    const eur = ((item.pct||0)/100*totalInc).toFixed(0);
-    const row=document.createElement('div'); row.className='xp-row';
-    row.innerHTML=
-      '<div class="xp-tag">'+(item.pct||0)+'%</div>'
-      +'<input type="text" value="'+esc(item.label)+'" style="flex:1;border-right:1px solid var(--border)" onchange="S.alloc['+idx+'].label=this.value;save()">'
-      +'<input type="number" value="'+(item.pct||0)+'" min="0" max="100" style="width:50px;text-align:center;border-right:1px solid var(--border)" oninput="S.alloc['+idx+'].pct=parseFloat(this.value)||0;save();renderAlloc()">'
-      +'<span style="padding:0 10px;color:var(--green);font-size:12px;min-width:65px;text-align:right">'+eur+' €</span>'
-      +'<button class="btn-del" style="padding:0 9px" onclick="S.alloc.splice('+idx+',1);save();renderAlloc()">✕</button>';
-    el.appendChild(row);
-  });
-  const totalExp=[...S.expenses,...S.yritys].filter(forThisMonth).reduce((s,e)=>s+(e.amount||0),0);
-  const free = totalInc - totalExp - (totalPct/100*totalInc);
-  const p=document.getElementById('alloc-pct-total'); if(p) p.textContent=totalPct.toFixed(0)+'%';
-  const f=document.getElementById('alloc-free');      if(f) f.textContent=fmt(free);
-}
-function addAlloc(){ S.alloc.push({id:'a'+Date.now(),label:'Uusi jako',pct:0}); save(); renderAlloc(); }
-
-// ===== JAKO =====
-function renderJakoCheckboxes(){
-  const el=document.getElementById('jakoCheckboxes'); if(!el) return; el.innerHTML='';
-  [...S.expenses,...S.yritys].filter(e=>e.amount>0).forEach(item=>{
-    const sel=(S.jakoSelected||[]).includes(item.id);
-    const chip=document.createElement('span');
-    chip.className='chip '+(sel?'act-cyan':'');
-    chip.textContent=item.label+' ('+item.amount+' €)';
-    chip.onclick=()=>{
-      if(!S.jakoSelected) S.jakoSelected=[];
-      S.jakoSelected=S.jakoSelected.includes(item.id)?S.jakoSelected.filter(x=>x!==item.id):[...S.jakoSelected,item.id];
-      save(); renderJakoCheckboxes(); renderJako();
+    window.onload = () => {
+        const saved = localStorage.getItem('mk_god_v4');
+        if (saved) { g = JSON.parse(saved); if (g.active) render(); }
     };
-    el.appendChild(chip);
-  });
-}
-function renderJakoExtras(){
-  const el=document.getElementById('jakoExtras'); if(!el) return; el.innerHTML='';
-  (S.jakoExtras||[]).forEach((item,idx)=>{
-    const row=document.createElement('div'); row.className='xp-row'; row.style.marginBottom='6px';
-    row.innerHTML=
-      '<input type="text" value="'+esc(item.label)+'" placeholder="Kulu" style="flex:1;border-right:1px solid var(--border)" onchange="S.jakoExtras['+idx+'].label=this.value;save();renderJako()">'
-      +'<input type="number" value="'+(item.amount||'')+'" placeholder="0" style="width:75px;text-align:right" oninput="S.jakoExtras['+idx+'].amount=parseFloat(this.value)||0;save();renderJako()">'
-      +'<span style="padding:0 7px;color:var(--text-3);font-size:12px">€</span>'
-      +'<button class="btn-del" style="padding:0 9px" onclick="S.jakoExtras.splice('+idx+',1);save();renderJakoExtras();renderJako()">✕</button>';
-    el.appendChild(row);
-  });
-}
-function addJakoExtra(){
-  if(!S.jakoExtras) S.jakoExtras=[];
-  S.jakoExtras.push({id:'j'+Date.now(),label:'Kulu',amount:0});
-  save(); renderJakoExtras(); renderJako();
-}
-function renderJako(){
-  const pct=parseFloat(document.getElementById('jakoSplit')?.value)||50;
-  S.jakoSplit=pct; save();
-  const sp=document.getElementById('jakoSplitPartner'); if(sp) sp.textContent=(100-pct).toFixed(0)+'%';
-  const allItems=[...S.expenses,...S.yritys];
-  const fromList=(S.jakoSelected||[]).reduce((s,id)=>{ const it=allItems.find(x=>x.id===id); return s+(it?it.amount||0:0); },0);
-  const fromExtras=(S.jakoExtras||[]).reduce((s,e)=>s+(e.amount||0),0);
-  const total=fromList+fromExtras;
-  const st=document.getElementById('splitTotal');   if(st) st.textContent=fmt(total);
-  const sm=document.getElementById('splitMine');    if(sm) sm.textContent=fmt(total*pct/100);
-  const spar=document.getElementById('splitPartner');if(spar) spar.textContent=fmt(total*(100-pct)/100);
-}
 
-// ===== CALENDAR =====
-function renderCalendar(){
-  const grid=document.getElementById('calGrid'); if(!grid) return;
-  const ct=document.getElementById('calTitle'); if(ct) ct.textContent=MF[CUR_MONTH]+' '+TODAY.getFullYear();
-  grid.innerHTML='';
-  ['Ma','Ti','Ke','To','Pe','La','Su'].forEach(d=>{ const h=document.createElement('div'); h.className='cal-cell hdr'; h.textContent=d; grid.appendChild(h); });
-  let fdow=new Date(TODAY.getFullYear(),TODAY.getMonth(),1).getDay(); fdow=fdow===0?6:fdow-1;
-  for(let i=0;i<fdow;i++){ const e=document.createElement('div'); e.className='cal-cell'; e.style.cssText='background:none;border:none'; grid.appendChild(e); }
-  const incDays=new Set(S.income.filter(forThisMonth).map(i=>i.day));
-  const expDays=new Set([...S.expenses,...S.yritys].filter(e=>forThisMonth(e)&&e.day>0).map(e=>e.day));
-  for(let d=1;d<=DAYS_IN_MONTH;d++){
-    const cell=document.createElement('div');
-    const hasI=incDays.has(d), hasE=expDays.has(d);
-    let cls='cal-cell'+(d===TODAY_DAY?' today':'')+(d<TODAY_DAY?' past':'')+(hasI&&hasE?' both-day':hasI?' income-day':hasE?' expense-day':'');
-    cell.className=cls;
-    const iNames=S.income.filter(i=>forThisMonth(i)&&i.day===d).map(i=>i.label).join(', ');
-    const eNames=[...S.expenses,...S.yritys].filter(e=>forThisMonth(e)&&e.day===d&&e.day>0).map(e=>e.label).join(', ');
-    cell.title=[iNames,eNames].filter(Boolean).join(' | ');
-    cell.innerHTML='<span>'+d+'</span>'+(hasI?'<div class="cal-dot"></div>':'')+(hasE?'<div class="cal-dot red"></div>':'');
-    grid.appendChild(cell);
-  }
-  const evEl=document.getElementById('calEvents'); if(!evEl) return; evEl.innerHTML='';
-  const allEvents=[
-    ...S.income.filter(forThisMonth).map(i=>({...i,type:'income',du:i.day>=TODAY_DAY?i.day-TODAY_DAY:DAYS_IN_MONTH-TODAY_DAY+i.day})),
-    ...[...S.expenses,...S.yritys].filter(e=>forThisMonth(e)&&e.day>0&&!e.paid).map(e=>({...e,type:'expense',du:e.day>=TODAY_DAY?e.day-TODAY_DAY:DAYS_IN_MONTH-TODAY_DAY+e.day}))
-  ].sort((a,b)=>a.du-b.du);
-  allEvents.forEach(i=>{
-    const div=document.createElement('div'); div.className='card'; div.style.marginBottom='8px';
-    const badge=i.du===0?'<span class="pill green">Tänään</span>':i.du===1?'<span class="pill orange">Huomenna</span>':'<span class="pill cyan">'+i.du+' pv</span>';
-    const tTag=i.type==='income'?'<span class="pill green">↑ Tulo</span>':'<span class="pill red">↓ Meno</span>';
-    const sTag=i.paid?'<span class="pill gray">✓ Valmis</span>':'<span class="pill orange">⏳ Tulossa</span>';
-    div.innerHTML='<div class="flex-between"><div><div style="font-weight:500;font-size:13px">'+esc(i.label)+'</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:5px">'+badge+tTag+sTag+'</div></div><div style="text-align:right"><div style="font-size:1.2rem;font-weight:200;color:'+(i.type==='income'?'var(--green)':'var(--red)')+'"> '+(i.type==='income'?'+':'-')+(i.amount||0).toFixed(0)+' €</div><div class="tip">'+(i.day>0?i.day+'. pv':'—')+'</div></div></div>';
-    evEl.appendChild(div);
-  });
-}
+    function copyAiPrompt() {
+        const prompt = `Toimi MUUTOSKONE-metodin strategisena haastattelijana. Tehtäväsi on auttaa minua määrittämään tavoitteeni parametrit askel kerrallaan.
+Käytä analyysisi pohjana seuraavia laskennallisia periaatteita:
+1. VAIKEUSKERROIN (V):
+- 1 000 XP (Uusi rutiini): n. 100 h työtä. Tavoitteena tavan automatisointi.
+- 5 000 XP (Merkittävä muutos): n. 500 h työtä. Selkeä, mitattava tulos.
+- 10 000 XP (Elämänmuutos): n. 1 000 h työtä. Identiteetin ja elämäntavan muutos.
+- 100 000 XP (Mestari-taso): n. 10 000 h työtä. Maailmanluokan huippuosaaminen.
 
-// ===== DAY BUDGET =====
-function renderDayBudget(){
-  const saldo = (S.saldoTili||0)+(S.saldoKateis||0);
+2. RUTIINITASOT (T):
+- 1 XP (Pikkutehtävä): 1–10 min. (Matalin kynnys, ei voi sanoa ei).
+- 5 XP (Ryhtiliike): 15–30 min. (Arjen moottori).
+- 20 XP (Kunnon rutistus): 45–90 min. (Päivän tärkein suoritus).
+- 50 XP (Päivän uroteko): 2–4 h tai suuri henkinen voitto.
 
-  // --- REAL-TIME: saldo ÷ days until NEXT income THIS month ---
-  const nextInc = S.income
-    .filter(i=>forThisMonth(i)&&!i.paid&&i.day>=TODAY_DAY)
-    .sort((a,b)=>a.day-b.day)[0];
-  const nextIncDay = nextInc ? nextInc.day : DAYS_IN_MONTH+1;
+ÄLÄ anna kaikkia vastauksia kerralla. Etene näin:
+1. TERVEHDYS: Tervehdi minua ja kerro lyhyesti, että autat minua määrittämään tavoitteeni Vaikeuskertoimen (V), Rutiinit (T) ja Ennusteen (M).
+2. KYSYMYS 1: Kysy, mikä on tavoitteeni. (Odota vastaustani).
+3. KYSYMYS 2: Kun olen vastannut, kysy mikä on lähtötilanteeni ja mahdolliset arjen rajoitteet. (Odota vastaustani).
+4. KYSYMYS 3: Kysy, kuinka paljon XP:tä haluaisin tavoitella päivittäin (esim. 20–50 XP). (Odota vastaustani).
 
-  // Subtract bills due strictly BEFORE next income (this month only)
-  const billsBeforeNext = [...S.expenses,...S.yritys]
-    .filter(e=>forThisMonth(e)&&!e.paid&&e.day>=TODAY_DAY&&e.day<nextIncDay)
-    .reduce((s,e)=>s+(e.amount||0),0);
-  const spendable = Math.max(0, saldo - billsBeforeNext);
+LOPPUTULOS: Kun olet saanut kaikki tiedot, tee analyysi:
+- Määritä Vaikeuskerroin (V) ja perustele se peilaten tavoitteen vaatimaan tuntimäärään.
+- Luo konkreettinen Rutiinikirjasto juuri minun tavoitteeseeni sopien (1, 5, 20 ja 50 XP tasoille).
+- Laske Ennuste (M) eli päivät maaliin (huomioi 84 päivän kertymäkerroin 1.0 -> 2.0).
+- Anna yksi Power-up -vinkki.
 
-  if(nextInc){
-    const daysUntil = nextInc.day - TODAY_DAY; // 0 = palkkapäivä on tänään
-    // Jos palkka tulee tänään, jaetaan vain huomispäivän budjetin (1 pv)
-    const divisor = Math.max(1, daysUntil);
-    const perDay = spendable / divisor;
-    const el=document.getElementById('pb-realday');
-    if(el){ el.textContent=perDay.toFixed(2)+' €/pv'; el.className='big-num '+(perDay<5?'red':perDay<15?'orange':'green'); }
-    const note=document.getElementById('pb-realnote');
-    if(note) note.textContent=saldo.toFixed(0)+'€ saldo'+(billsBeforeNext>0?' − '+billsBeforeNext.toFixed(0)+'€ laskut':'')
-      +' = '+spendable.toFixed(0)+'€ ÷ '+divisor+' pv → '+nextInc.label+' '+nextInc.day+'. pv'+(daysUntil===0?' (tänään!)':'');
-    const passed=nextInc.day>0?Math.max(0,Math.min(100,(nextInc.day-daysUntil)/nextInc.day*100)):0;
-    const lbl=document.getElementById('nextIncLabel'); if(lbl) lbl.textContent=nextInc.label+': '+(daysUntil===0?'tänään!':daysUntil+' pv');
-    const bar=document.getElementById('nextIncBar');   if(bar) bar.style.width=passed+'%';
-  } else {
-    const perDay = DAYS_LEFT>0 ? spendable/DAYS_LEFT : 0;
-    const el=document.getElementById('pb-realday');
-    if(el){ el.textContent=perDay.toFixed(2)+' €/pv'; el.className='big-num '+(perDay<5?'red':perDay<15?'orange':'green'); }
-    const note=document.getElementById('pb-realnote'); if(note) note.textContent=spendable.toFixed(0)+'€ ÷ '+DAYS_LEFT+' pv jäljellä kuussa';
-    const lbl=document.getElementById('nextIncLabel'); if(lbl) lbl.textContent='Ei tulevia tuloja tässä kuussa';
-    const bar=document.getElementById('nextIncBar');   if(bar) bar.style.width='100%';
-  }
+Oletko valmis? Aloita tervehtimällä minua ja kysymällä ensimmäinen kysymys.`;
 
-  // --- MONTHLY FORECAST: this month income − this month expenses ---
-  const monthInc = S.income.filter(forThisMonth).reduce((s,i)=>s+(i.amount||0),0);
-  const monthExp = [...S.expenses,...S.yritys].filter(forThisMonth).reduce((s,e)=>s+(e.amount||0),0);
-  const monthFree = monthInc - monthExp;
-  const dl=document.getElementById('pb-daysLeft'); if(dl) dl.textContent=DAYS_LEFT;
-  const mf=document.getElementById('pb-monthfree');
-  if(mf){ mf.textContent=fmt(monthFree); mf.className='sval '+(monthFree>=0?'green':'red'); }
-
-  // --- TABLE: saldo + this month unpaid income − this month unpaid expenses ---
-  // (Shows month-end scenario including all expected income)
-  const unpaidInc = S.income.filter(i=>forThisMonth(i)&&!i.paid).reduce((s,i)=>s+(i.amount||0),0);
-  const unpaidExp = [...S.expenses,...S.yritys].filter(e=>forThisMonth(e)&&!e.paid&&e.day>=TODAY_DAY).reduce((s,e)=>s+(e.amount||0),0);
-  const available = saldo + unpaidInc - unpaidExp;
-
-  const tbody=document.getElementById('dayBudgetTable'); if(!tbody) return; tbody.innerHTML='';
-  // Days left starting from tomorrow (spending budget for remaining days)
-  const daysForBudget = Math.max(1, DAYS_LEFT);
-  [5,10,15,20,25,30,40].forEach(t=>{
-    const needed=t*daysForBudget, diff=available-needed, ok=diff>=0;
-    const tr=document.createElement('tr');
-    tr.innerHTML='<td><strong>'+t+' €/pv</strong></td><td>'+needed.toFixed(0)+'€</td>'
-      +'<td>'+(ok?'<span class="pill green">✓ Riittää</span>':'<span class="pill red">✗ Ei riitä</span>')+'</td>'
-      +'<td style="color:'+(ok?'var(--green)':'var(--red)')+'"> '+(ok?'+':'')+diff.toFixed(0)+'€</td>';
-    tbody.appendChild(tr);
-  });
-  const n=document.getElementById('daybudget-note');
-  if(n) n.textContent='Saldo '+saldo.toFixed(0)+'€ + tulossa '+unpaidInc.toFixed(0)+'€ − maksamatta '+unpaidExp.toFixed(0)+'€ = '+available.toFixed(0)+'€ jäljellä '+daysForBudget+' päivälle';
-
-  renderFutureSummary();
-}
-
-// ===== FUTURE MONTHS SUMMARY =====
-function renderFutureSummary(){
-  const el=document.getElementById('futureSummary'); if(!el) return; el.innerHTML='';
-  const future={};
-  S.income.forEach(i=>{ const m=itemM(i); if(m>0&&m!==CUR_MONTH){ if(!future[m]) future[m]={inc:0,exp:0,items:[]}; future[m].inc+=(i.amount||0); future[m].items.push({...i,type:'income'}); } });
-  [...S.expenses,...S.yritys].forEach(e=>{ const m=itemM(e); if(m>0&&m!==CUR_MONTH){ if(!future[m]) future[m]={inc:0,exp:0,items:[]}; future[m].exp+=(e.amount||0); future[m].items.push({...e,type:'expense'}); } });
-  const months=Object.keys(future).map(Number).sort((a,b)=>a-b);
-  if(!months.length){ el.innerHTML='<div class="tip">Ei tulevia kuukausikohtaisia eriä kirjattu.</div>'; return; }
-  months.forEach(m=>{
-    const d=future[m]; const net=d.inc-d.exp;
-    const card=document.createElement('div'); card.className='card'; card.style.marginBottom='8px';
-    card.innerHTML='<div class="flex-between" style="margin-bottom:8px"><strong>'+MF[m]+'</strong><span class="sval '+(net>=0?'green':'red')+'" style="font-size:1rem">'+fmt(net)+'</span></div>'
-      +'<div style="display:flex;gap:14px;font-size:11px;color:var(--text-2)"><span style="color:var(--green)">↑ '+fmt(d.inc)+'</span><span style="color:var(--red)">↓ '+fmt(d.exp)+'</span></div>'
-      +'<div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:5px">'
-        +d.items.map(i=>'<span class="pill '+(i.type==='income'?'green':'orange')+'" style="font-size:9px">'+esc(i.label)+' '+fmt(i.amount||0)+'</span>').join('')
-      +'</div>';
-    el.appendChild(card);
-  });
-}
-
-// ===== CHART =====
-let chartInst=null;
-function renderChart(){
-  const ctx=document.getElementById('chartMenot'); if(!ctx) return;
-  const items=[...S.expenses,...S.yritys].filter(e=>forThisMonth(e)&&e.amount>0);
-  if(chartInst){ chartInst.destroy(); chartInst=null; }
-  if(!items.length){
-    const lg=document.getElementById('chartLegend'); if(lg) lg.innerHTML='<span class="tip">Lisää menoja nähdäksesi jakauman.</span>';
-    ctx.style.display='none'; return;
-  }
-  ctx.style.display='block';
-  const colors=['#00c8f0','#7c5cbf','#22c55e','#f97316','#ef4444','#f59e0b','#8b5cf6','#06b6d4','#10b981','#ec4899','#6366f1','#84cc16'];
-  chartInst=new Chart(ctx,{type:'doughnut',data:{labels:items.map(m=>m.label),datasets:[{data:items.map(m=>m.amount),backgroundColor:colors.slice(0,items.length),borderColor:'rgba(7,7,13,.8)',borderWidth:2}]},options:{responsive:true,cutout:'65%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.label+': '+c.raw+' €'}}}}});
-  const lg=document.getElementById('chartLegend');
-  if(lg) lg.innerHTML=items.map((m,i)=>'<span style="display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--text-2)"><span style="width:7px;height:7px;border-radius:50%;background:'+colors[i]+';flex-shrink:0"></span>'+m.label+'</span>').join('');
-}
-
-// ===== TUNNUSLUVUT (SAVINGS RATE ETC) =====
-function renderTunnusluvut(totalInc, totalExp, jaa){
-  if(totalInc<=0){ ['sv-saastopct','sv-freepd','sv-exprate','sv-yearfree'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent='—';}); return; }
-  const saastoPct = Math.max(0, jaa/totalInc*100);
-  const expRate   = Math.min(100, totalExp/totalInc*100);
-  const freePd    = jaa/DAYS_IN_MONTH;
-  const yearFree  = jaa*12;
-  const set=(id,v,cls)=>{const e=document.getElementById(id);if(e){e.textContent=v;if(cls)e.className=cls;}};
-  set('sv-saastopct', saastoPct.toFixed(1)+'%', 'sval '+(saastoPct>=20?'green':saastoPct>=10?'cyan':'orange'));
-  set('sv-freepd',    freePd.toFixed(2)+' €/pv', 'sval '+(freePd>=0?'green':'red'));
-  set('sv-exprate',   expRate.toFixed(1)+'%', 'sval '+(expRate<70?'green':expRate<90?'orange':'red'));
-  set('sv-yearfree',  yearFree.toFixed(0)+' €', 'sval '+(yearFree>=0?'green':'red'));
-  const tip=document.getElementById('sv-saasto-tip');
-  if(tip) tip.textContent = saastoPct>=30?'🔥 Erinomainen!':saastoPct>=20?'👍 Hyvä taso':saastoPct>=10?'🆗 Kohtalainen':'⚠️ Alle tavoitteen';
-}
-
-// ===== FIRE =====
-function renderFIRE(){
-  const totalExp=[...S.expenses,...S.yritys].filter(forThisMonth).reduce((s,e)=>s+(e.amount||0),0);
-  const yearExp=totalExp*12;
-  const fireNum=yearExp*25;
-  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
-  set('fire-yearexp', yearExp.toFixed(0)+' €');
-  set('fire-monexp', fmt(totalExp));
-  set('fire-number', fireNum>=1e6?(fireNum/1e6).toFixed(2)+' M€':fireNum.toFixed(0)+' €');
-  set('fire-number-tip','= '+totalExp.toFixed(0)+' €/kk × 12 × 25');
-
-  // Restore inputs if set
-  const pi=document.getElementById('fire-portfolio');   if(pi&&!pi._touched) pi.value=S.firePortfolio||'';
-  const mi=document.getElementById('fire-monthly');     if(mi&&!mi._touched) mi.value=S.fireMonthlySave||'';
-  const ri=document.getElementById('fire-return');      if(ri&&!ri._touched) ri.value=S.fireReturn||7;
-  ['fire-portfolio','fire-monthly','fire-return'].forEach(id=>{const e=document.getElementById(id);if(e){e.addEventListener('focus',()=>e._touched=true,{once:true});}});
-
-  const portfolio=S.firePortfolio||0;
-  const monthly=S.fireMonthlySave||0;
-  const annualRet=(S.fireReturn||7)/100;
-  const monthlyRet=annualRet/12;
-
-  const pct=fireNum>0?Math.min(100,portfolio/fireNum*100):0;
-  set('fire-pct', pct.toFixed(1)+'%');
-  set('fire-pct-lbl', pct.toFixed(1)+'%');
-  const pb=document.getElementById('pb-fire'); if(pb){pb.style.width=Math.min(100,pct)+'%'; pb.className='prog-fill '+(pct>=100?'green':pct>=50?'cyan':'orange');}
-
-  if(fireNum>0 && monthly>0){
-    const remaining=Math.max(0,fireNum-portfolio);
-    let months=0;
-    if(monthlyRet>0){
-      months=Math.log(1+(remaining*monthlyRet)/monthly)/Math.log(1+monthlyRet);
-    } else {
-      months=remaining/monthly;
-    }
-    const years=months/12;
-    set('fire-years', years<=0?'Saavutettu! 🎉':years.toFixed(1)+' v');
-    const fireYear=new Date().getFullYear()+Math.ceil(years);
-    set('fire-year-label', years<=0?'Olet taloudellisesti vapaa!':'n. vuonna '+fireYear);
-    set('fire-detail',`Salkku ${portfolio.toFixed(0)} € + ${monthly.toFixed(0)} €/kk @ ${(S.fireReturn||7)}%/v → ${remaining.toFixed(0)} € puuttuu`);
-  } else if(fireNum<=0){
-    set('fire-years','—'); set('fire-detail','Syötä menot Menot-välilehdellä.');
-  } else {
-    set('fire-years','—'); set('fire-detail','Syötä kuukausisäästö laskeaksesi.');
-  }
-}
-
-// ===== NET WORTH =====
-function renderNetWorth(){
-  const saldo=(S.saldoTili||0)+(S.saldoKateis||0);
-  // auto-update saldo asset
-  const saldoAsset=S.assets.find(a=>a.auto);
-  if(saldoAsset) saldoAsset.amount=saldo;
-
-  const totalAssets=S.assets.reduce((s,a)=>s+(a.amount||0),0);
-  const totalDebts =S.debts.reduce((s,d)=>s+(d.amount||0),0);
-  const net=totalAssets-totalDebts;
-  const set=(id,v,cls)=>{const e=document.getElementById(id);if(e){e.textContent=v;if(cls)e.className=cls;}};
-  set('nw-assets', fmt(totalAssets));
-  set('nw-debts',  fmt(totalDebts));
-  const ne=document.getElementById('nw-net');
-  if(ne){ne.textContent=net.toFixed(0)+' €'; ne.style.color=net>=0?'':'var(--red)';}
-  const tip=document.getElementById('nw-tip');
-  if(tip) tip.textContent=totalAssets.toFixed(0)+'€ − '+totalDebts.toFixed(0)+'€ = '+net.toFixed(0)+'€';
-  const ratio=totalAssets>0?Math.min(100,totalDebts/totalAssets*100):0;
-  set('nw-debtratio', ratio.toFixed(1)+'%');
-  const pb=document.getElementById('pb-debtratio'); if(pb){pb.style.width=ratio+'%'; pb.className='prog-fill '+(ratio<30?'green':ratio<60?'orange':'red');}
-  const adv=document.getElementById('nw-advice'); if(adv) adv.textContent=ratio<20?'🟢 Velkaaste matala — erinomainen':ratio<40?'🟡 Kohtuullinen velkaaste':ratio<70?'🟠 Korkea velkaaste — vähennä velkaa':'🔴 Kriittisen korkea velkaaste';
-
-  renderAssets(); renderDebts();
-}
-
-function renderAssets(){
-  const el=document.getElementById('assetsList'); if(!el) return; el.innerHTML='';
-  S.assets.forEach((a,idx)=>{
-    const row=document.createElement('div'); row.className='nw-row';
-    row.innerHTML=
-      (a.auto?'<span style="color:var(--text-2);font-size:12px">💳 '+esc(a.label)+'</span>'
-            :'<input type="text" value="'+esc(a.label||'')+'" style="font-size:12px;color:var(--text-2);padding:0;border-bottom:1px solid var(--border);flex:1" onchange="S.assets['+idx+'].label=this.value;save()">')
-      +'<div style="display:flex;align-items:center;gap:5px">'
-        +(a.auto?'<span style="color:var(--green)">'+(a.amount||0).toFixed(0)+' €</span>'
-                :'<input type="number" value="'+(a.amount||'')+'" placeholder="0" style="width:90px;text-align:right;color:var(--green);font-size:12px" oninput="S.assets['+idx+'].amount=parseFloat(this.value)||0;save();renderNetWorth()">'
-                +'<span style="color:var(--text-3);font-size:11px">€</span>'
-                +'<button class="btn-del" onclick="S.assets.splice('+idx+',1);save();renderNetWorth()">✕</button>')
-      +'</div>';
-    el.appendChild(row);
-  });
-}
-function addAsset(){ S.assets.push({id:'as'+Date.now(),label:'Uusi omaisuuserä',amount:0}); save(); renderNetWorth(); }
-
-function renderDebts(){
-  const el=document.getElementById('debtsList'); if(!el) return; el.innerHTML='';
-  S.debts.forEach((d,idx)=>{
-    const row=document.createElement('div'); row.className='nw-row';
-    row.innerHTML=
-      '<input type="text" value="'+esc(d.label||'')+'" style="font-size:12px;color:var(--text-2);padding:0;border-bottom:1px solid var(--border);flex:1" onchange="S.debts['+idx+'].label=this.value;save()">'
-      +'<div style="display:flex;align-items:center;gap:5px">'
-        +'<input type="number" value="'+(d.amount||'')+'" placeholder="0" style="width:90px;text-align:right;color:var(--red);font-size:12px" oninput="S.debts['+idx+'].amount=parseFloat(this.value)||0;save();renderNetWorth()">'
-        +'<span style="color:var(--text-3);font-size:11px">€</span>'
-        +'<button class="btn-del" onclick="S.debts.splice('+idx+',1);save();renderNetWorth()">✕</button>'
-      +'</div>';
-    el.appendChild(row);
-  });
-}
-function addDebt(){ S.debts.push({id:'db'+Date.now(),label:'Uusi velka',amount:0}); save(); renderNetWorth(); }
-
-// ===== ALERTS =====
-function renderAlerts(totalInc, totalExp, jaa){
-  const el=document.getElementById('alertBox'); if(!el) return; el.innerHTML='';
-  if(totalInc===0){ el.innerHTML='<div class="alert info"><span>ℹ️</span><span>Syötä tulosi Tulot-välilehdellä.</span></div>'; return; }
-  const r=totalExp/totalInc;
-  if(r>0.9) el.innerHTML+='<div class="alert danger"><span>🚨</span><span>Kiinteät menot yli 90 % tuloista — kriittinen tilanne.</span></div>';
-  else if(r>0.7) el.innerHTML+='<div class="alert warn"><span>⚠️</span><span>Menot yli 70 % tuloista — vähän liikkumavaraa.</span></div>';
-  else if(jaa>0) el.innerHTML+='<div class="alert success"><span>✅</span><span>Menot katettu. Vapaata arjelle <strong>'+jaa.toFixed(0)+' €/kk</strong>.</span></div>';
-}
-
-// ===== AI COPY =====
-function getBudgetData(){
-  const totalInc=[...S.income].filter(forThisMonth).reduce((s,i)=>s+(i.amount||0),0);
-  const totalExp=[...S.expenses,...S.yritys].filter(forThisMonth).reduce((s,e)=>s+(e.amount||0),0);
-  return 'RAHAKONE — '+TODAY.toLocaleDateString('fi-FI')+'\nPäivä: '+TODAY_DAY+'. / '+DAYS_LEFT+' pv jäljellä\n\nSALDO: tili '+(S.saldoTili||0)+'€ + käteinen '+(S.saldoKateis||0)+'€ = '+((S.saldoTili||0)+(S.saldoKateis||0))+'€\n\nTULOT (tämä kuu): '+totalInc+'€\n'
-    +S.income.filter(forThisMonth).map(i=>'  - '+i.label+': '+(i.amount||0)+'€ (pv '+i.day+', '+(i.paid?'saatu':'tulossa')+')').join('\n')
-    +'\n\nMENOT (tämä kuu): '+totalExp+'€\n'
-    +[...S.expenses,...S.yritys].filter(forThisMonth).map(e=>'  - '+e.label+': '+(e.amount||0)+'€ ('+(e.paid?'maksettu':'maksamatta')+')').join('\n')
-    +'\n\nTASAPAINO: '+totalInc+'€ − '+totalExp+'€ = '+(totalInc-totalExp)+'€\n\nJAKO-OHJELMA:\n'
-    +S.alloc.map(a=>'  - '+a.label+': '+a.pct+'% = '+((a.pct/100)*totalInc).toFixed(0)+'€').join('\n');
-}
-const PROMPTS={
-  yleinen:d=>'Analysoi tämä budjetti rehellisesti suomeksi. Numeropohjaisia havaintoja.\n\n'+d,
-  saasta: d=>'Anna 5 konkreettista säästövinkkiä euroissa laskettuna. Suomeksi.\n\n'+d,
-  lisatulot:d=>'Ehdota 5 realistista tapaa lisätä tuloja. Suomeksi.\n\n'+d,
-  strategia:d=>'Luo 3kk talousstrategia kuukausi kerrallaan. Suomeksi.\n\n'+d,
-};
-function setPrompt(mode){ const b=document.getElementById('aiCopyBox'); if(b) b.textContent=PROMPTS[mode](getBudgetData()); }
-async function copyAI(){
-  const txt=document.getElementById('aiCopyBox')?.textContent||'';
-  try{ await navigator.clipboard.writeText(txt); const m=document.getElementById('copiedMsg'); if(m){m.style.display='block';setTimeout(()=>m.style.display='none',2500);} }
-  catch(e){ alert('Kopioi manuaalisesti: valitse kaikki ja kopioi'); }
-}
-
-// ===== MAIN UPDATE =====
-function update(){
-  const saldo=(S.saldoTili||0)+(S.saldoKateis||0);
-  const totalInc=S.income.filter(forThisMonth).reduce((s,i)=>s+(i.amount||0),0);
-  const thisExp=[...S.expenses,...S.yritys].filter(forThisMonth);
-  const totalExp=thisExp.reduce((s,e)=>s+(e.amount||0),0);
-  const jaa=totalInc-totalExp;
-  const gotInc=S.income.filter(i=>forThisMonth(i)&&i.paid).reduce((s,i)=>s+(i.amount||0),0);
-  const paidExp=thisExp.filter(e=>e.paid).reduce((s,e)=>s+(e.amount||0),0);
-  const upcomingInc=S.income.filter(i=>forThisMonth(i)&&!i.paid).reduce((s,i)=>s+(i.amount||0),0);
-  const pctExpDone=totalExp>0?Math.min(paidExp/totalExp*100,100):0;
-
-  const set=(id,v,cls)=>{ const e=document.getElementById(id); if(e){e.textContent=v; if(cls)e.className=cls;} };
-  set('sv-total-saldo', fmt(saldo));
-  set('sv-got-inc',     fmt(gotInc));
-  set('sv-paid-exp',    fmt(paidExp));
-  set('sv-coming',      fmt(upcomingInc));
-  set('sv-tulot',       fmt(totalInc));
-  set('sv-menot',       fmt(totalExp));
-  set('sv-jaa',         fmt(jaa), 'sval '+(jaa>=0?'green':'red'));
-
-  const pctM=totalInc>0?Math.min(totalExp/totalInc*100,100):0;
-  const pctK=TODAY_DAY/DAYS_IN_MONTH*100;
-  set('p-menotpct', pctM.toFixed(0)+'%');
-  set('p-kuupct',   pctK.toFixed(0)+'%');
-  set('p-expdonepct', pctExpDone.toFixed(0)+'%');
-
-  const pbm=document.getElementById('pb-menot');
-  if(pbm){pbm.style.width=pctM+'%';pbm.className='prog-fill '+(pctM>90?'red':pctM>70?'orange':'green');}
-  const pbk=document.getElementById('pb-kuu');    if(pbk) pbk.style.width=pctK+'%';
-  const pbd=document.getElementById('pb-expdone');if(pbd) pbd.style.width=pctExpDone+'%';
-
-  renderAlerts(totalInc,totalExp,jaa);
-  renderChart();
-  renderDayBudget();
-  renderAlloc();
-  renderCalendar();
-  renderJakoCheckboxes();
-  renderJakoExtras();
-  renderJako();
-  renderTunnusluvut(totalInc, totalExp, jaa);
-  renderFIRE();
-  renderNetWorth();
-  renderGoals(jaa);
-  renderMenorakenne(totalInc, totalExp);
-  renderBenchmarking();
-  renderXP();
-  renderHistoria();
-}
-
-function renderAll(){
-  renderExpenseList('menotList',   S.expenses,'arki');
-  renderExpenseList('yritysLista', S.yritys,  'yritys');
-  update();
-}
-
-// ===== TAKUUSÄÄTIÖ REFERENCE VALUES =====
-// Kohtuullinen minimi — yksinasuva aikuinen (2024 viitearvot, euroa/kk)
-const REFERENCE_VALUES = {
-  asuminen:    { label:'Asuminen',     ref:620,  icon:'🏠' },
-  ruoka:       { label:'Ruoka & talous',ref:310,  icon:'🛒' },
-  liikkuminen: { label:'Liikkuminen',  ref:80,   icon:'🚗' },
-  terveys:     { label:'Terveys',      ref:55,   icon:'💊' },
-  harrastukset:{ label:'Harrastukset', ref:65,   icon:'🎮' },
-};
-
-function calculateReferenceValues(){
-  const catTotals={};
-  S.expenses.filter(forThisMonth).forEach(e=>{
-    const c=e.cat||'muut';
-    catTotals[c]=(catTotals[c]||0)+(e.amount||0);
-  });
-  return catTotals;
-}
-
-// ===== MENORAKENNE (kiinteät vs muuttuvat) =====
-function renderMenorakenne(totalInc, totalExp){
-  const el=document.getElementById('menorakenne-wrap'); if(!el) return;
-  const kiinteat = S.expenses.filter(e=>forThisMonth(e)&&e.type!=='muuttuva').reduce((s,e)=>s+(e.amount||0),0);
-  const muuttuvat = S.expenses.filter(e=>forThisMonth(e)&&e.type==='muuttuva').reduce((s,e)=>s+(e.amount||0),0);
-  const yritysTotal = S.yritys.filter(forThisMonth).reduce((s,e)=>s+(e.amount||0),0);
-  const vapaa = Math.max(0, totalInc - totalExp);
-  const total = kiinteat + muuttuvat + yritysTotal + vapaa || 1;
-  const pK=kiinteat/total*100, pM=muuttuvat/total*100, pY=yritysTotal/total*100, pV=vapaa/total*100;
-  el.innerHTML=
-    '<div class="split-bar-wrap">'
-      +'<div class="split-bar-seg" style="width:'+pK.toFixed(1)+'%;background:rgba(124,92,191,0.7)" title="Kiinteät '+kiinteat.toFixed(0)+'€"></div>'
-      +'<div class="split-bar-seg" style="width:'+pM.toFixed(1)+'%;background:rgba(249,115,22,0.65)" title="Muuttuvat '+muuttuvat.toFixed(0)+'€"></div>'
-      +'<div class="split-bar-seg" style="width:'+pY.toFixed(1)+'%;background:rgba(0,100,160,0.55)" title="Yritys '+yritysTotal.toFixed(0)+'€"></div>'
-      +'<div class="split-bar-seg" style="width:'+pV.toFixed(1)+'%;background:rgba(34,197,94,0.45)" title="Vapaa '+vapaa.toFixed(0)+'€"></div>'
-    +'</div>'
-    +'<div style="display:flex;flex-wrap:wrap;gap:10px;font-size:10px;margin-top:6px">'
-      +'<span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:rgba(124,92,191,0.7);margin-right:4px"></span>Kiinteät '+kiinteat.toFixed(0)+'€ ('+pK.toFixed(0)+'%)</span>'
-      +'<span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:rgba(249,115,22,0.65);margin-right:4px"></span>Muuttuvat '+muuttuvat.toFixed(0)+'€ ('+pM.toFixed(0)+'%)</span>'
-      +(yritysTotal>0?'<span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:rgba(0,100,160,0.55);margin-right:4px"></span>Yritys '+yritysTotal.toFixed(0)+'€ ('+pY.toFixed(0)+'%)</span>':'')
-      +'<span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:rgba(34,197,94,0.45);margin-right:4px"></span>Vapaa '+vapaa.toFixed(0)+'€ ('+pV.toFixed(0)+'%)</span>'
-    +'</div>';
-}
-
-// ===== BENCHMARKING =====
-function renderBenchmarking(){
-  const el=document.getElementById('benchmark-list'); if(!el) return;
-  const cats=calculateReferenceValues();
-  el.innerHTML='';
-  let anyData=false;
-  Object.entries(REFERENCE_VALUES).forEach(([key,rv])=>{
-    const actual=cats[key]||0;
-    if(actual===0) return;
-    anyData=true;
-    const diff=actual-rv.ref;
-    const diffTxt=diff>0?'+'+diff.toFixed(0)+'€ yli':diff<0?Math.abs(diff.toFixed(0))+'€ alle':'= viitearvo';
-    const cls=diff<=-10?'pos':diff>=20?'neg':'ok';
-    const row=document.createElement('div'); row.className='bench-row';
-    row.innerHTML=
-      '<div style="display:flex;align-items:center;gap:7px">'
-        +'<span>'+rv.icon+'</span>'
-        +'<div>'
-          +'<div style="color:var(--text-1)">'+rv.label+'</div>'
-          +'<div style="font-size:10px;color:var(--text-3)">Viitearvo: '+rv.ref+'€/kk (yksinasuva)</div>'
-        +'</div>'
-      +'</div>'
-      +'<div class="bench-diff '+cls+'">'+actual.toFixed(0)+'€<div style="font-size:10px;font-weight:400">'+diffTxt+'</div></div>';
-    el.appendChild(row);
-  });
-  if(!anyData) el.innerHTML='<div class="tip" style="text-align:center;padding:16px 0">Lisää menoja ja aseta kategoriat Menot-välilehdellä nähdäksesi vertailun. 🎯</div>';
-}
-
-// ===== XP SYSTEM =====
-const XP_LEVELS=[0,100,250,500,900,1500,2500,4000,6000,9000,14000];
-const XP_TITLES=['Aloittelija','Budjetoija','Säästäjä','Talousviisas','Rahahaltija','Finanssiatleta','Puskuriprinssi','FIRE-lähtijä','Sijoitusguru','Taloudellisesti vapaa','Legenda 💎'];
-
-function calcXP(){
-  let xp=0;
-  const totalInc=S.income.filter(forThisMonth).reduce((s,i)=>s+(i.amount||0),0);
-  const totalExp=[...S.expenses,...S.yritys].filter(forThisMonth).reduce((s,e)=>s+(e.amount||0),0);
-  const jaa=totalInc-totalExp;
-  if(totalInc>0) xp+=50;
-  if(totalExp>0) xp+=30;
-  if(jaa>0) xp+=80;
-  const saastoPct=totalInc>0?jaa/totalInc:0;
-  if(saastoPct>=0.1) xp+=100;
-  if(saastoPct>=0.2) xp+=150;
-  if(saastoPct>=0.3) xp+=200;
-  if(saastoPct>=0.5) xp+=300;
-  if((S.goals||[]).length>0) xp+=50;
-  if((S.goals||[]).some(g=>g.target>0&&g.saved>=g.target)) xp+=200;
-  const nwAssets=S.assets.reduce((s,a)=>s+(a.amount||0),0);
-  const nwDebts=S.debts.reduce((s,d)=>s+(d.amount||0),0);
-  if(nwAssets>nwDebts&&nwAssets>0) xp+=120;
-  if(S.firePortfolio>0) xp+=80;
-  const firePct=S.firePortfolio>0&&totalExp>0?S.firePortfolio/(totalExp*12*25):0;
-  if(firePct>=0.25) xp+=200;
-  if(firePct>=0.5)  xp+=300;
-  if(firePct>=1.0)  xp+=500;
-  // hätärahasto: 3kk menot
-  const pusturi=nwAssets-(nwDebts>0?nwDebts:0);
-  if(pusturi>=totalExp*3) xp+=200;
-  return xp;
-}
-
-function renderXP(){
-  const el=document.getElementById('xp-panel'); if(!el) return;
-  const xp=calcXP();
-  let level=0;
-  for(let i=0;i<XP_LEVELS.length-1;i++){ if(xp>=XP_LEVELS[i]) level=i; }
-  const nextXP=XP_LEVELS[level+1]||XP_LEVELS[XP_LEVELS.length-1];
-  const prevXP=XP_LEVELS[level]||0;
-  const pct=Math.min(100,(xp-prevXP)/(nextXP-prevXP)*100);
-  const title=XP_TITLES[level]||XP_TITLES[XP_TITLES.length-1];
-  el.innerHTML=
-    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">'
-      +'<span class="xp-badge">⚡ Taso '+(level+1)+' — '+title+'</span>'
-      +'<span style="font-size:11px;color:var(--cyan)">'+xp+' XP</span>'
-    +'</div>'
-    +'<div class="xp-bar-wrap"><div class="xp-bar-fill" style="width:'+pct+'%"></div></div>'
-    +'<div style="font-size:10px;color:var(--text-3);margin-top:4px">'+(nextXP-xp)+' XP seuraavaan tasoon ('+(level+1)+' → '+(level+2)+')</div>';
-}
-
-let _prevXP=0;
-function checkXPToast(){
-  const xp=calcXP();
-  if(_prevXP>0&&xp>_prevXP){
-    const diff=xp-_prevXP;
-    showXPToast('+'+diff+' XP 🎉');
-  }
-  _prevXP=xp;
-}
-function showXPToast(msg){
-  let t=document.getElementById('xpToast');
-  if(!t){ t=document.createElement('div'); t.id='xpToast'; t.className='xp-toast'; document.body.appendChild(t); }
-  t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2200);
-}
-
-// ===== SMART SAVINGS CALCULATOR (goals update) =====
-function renderGoals(freePerMonth){
-  const el=document.getElementById('goalsList'); if(!el) return; el.innerHTML='';
-  if(!S.goals||!S.goals.length){
-    el.innerHTML='<div class="tip" style="text-align:center;padding:20px 0">Ei tavoitteita — lisää ensimmäinen! 🎯</div>';
-    return;
-  }
-  S.goals.forEach((g,idx)=>{
-    const target=g.target||0;
-    const saved=g.saved||0;
-    const pct=target>0?Math.min(100,saved/target*100):0;
-    const remaining=Math.max(0,target-saved);
-    const done=pct>=100;
-
-    // Scenario 1: months to goal at current savings rate
-    const monthsLeft=freePerMonth>0&&!done?remaining/freePerMonth:null;
-    // Scenario 2: monthly savings needed to reach goal in X months
-    const targetMonths=g.targetMonths||12;
-    const neededPerMonth=target>0&&targetMonths>0?remaining/targetMonths:null;
-
-    // Compound interest growth (if investing savings)
-    const ret=(g.returnPct||0)/100/12;
-    let ciValue=saved;
-    if(monthsLeft&&ret>0){
-      ciValue=saved*Math.pow(1+ret,Math.ceil(monthsLeft))+freePerMonth*(Math.pow(1+ret,Math.ceil(monthsLeft))-1)/ret;
-    }
-
-    const div=document.createElement('div');
-    div.className='goal-card'+(done?' done':'');
-    div.innerHTML=
-      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">'
-        +'<div style="display:flex;align-items:center;flex:1;min-width:150px">'
-          +'<span class="goal-emoji">'+(g.emoji||'🎯')+'</span>'
-          +'<div>'
-            +'<input type="text" value="'+esc(g.label||'Tavoite')+'" style="font-size:13px;font-weight:500;padding:0;border-bottom:1px solid var(--border);color:var(--text-1);min-width:120px" onchange="S.goals['+idx+'].label=this.value;save();renderGoals('+freePerMonth+')">'
-          +'</div>'
-        +'</div>'
-        +'<button class="btn-del" onclick="S.goals.splice('+idx+',1);save();renderGoals('+freePerMonth+')">✕</button>'
-      +'</div>'
-      +'<div class="prog-wrap" style="margin-top:10px">'
-        +'<div class="prog-lbl"><span style="color:'+(done?'var(--green)':'var(--text-3)')+'">'+pct.toFixed(1)+'%</span><span style="color:var(--text-3)">'+saved.toFixed(0)+' / '+target.toFixed(0)+' €</span></div>'
-        +'<div class="prog-bar"><div class="prog-fill '+(done?'green':pct>50?'cyan':'orange')+'" style="width:'+pct+'%"></div></div>'
-      +'</div>'
-      // Summat
-      +'<div class="g2" style="margin-top:8px">'
-        +'<div style="font-size:10px;color:var(--text-3)">Säästetty <input type="number" value="'+(saved||'')+'" placeholder="0" style="width:70px;font-size:12px;color:var(--green);text-align:right;padding:0;border-bottom:1px solid var(--border)" oninput="S.goals['+idx+'].saved=parseFloat(this.value)||0;save();renderGoals('+freePerMonth+')" onchange="checkXPToast()"> €</div>'
-        +'<div style="font-size:10px;color:var(--text-3)">Tavoite <input type="number" value="'+(target||'')+'" placeholder="0" style="width:70px;font-size:12px;color:var(--cyan);text-align:right;padding:0;border-bottom:1px solid var(--border)" oninput="S.goals['+idx+'].target=parseFloat(this.value)||0;save();renderGoals('+freePerMonth+')"> €</div>'
-      +'</div>'
-      // Skenaario 1
-      +(done?'<div style="color:var(--green);font-size:12px;margin-top:8px;text-align:center">✅ Tavoite saavutettu!</div>':
-        '<div class="scenario-card" style="margin-top:10px">'
-          +'<div style="font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3);margin-bottom:4px">📅 Nykyisellä säästövauhdilla</div>'
-          +(freePerMonth>0
-            ?'<div class="scenario-num">'+Math.ceil(monthsLeft||0)+' kk</div>'
-              +'<div style="font-size:11px;color:var(--text-2)">= '+(monthsLeft!=null?Math.ceil(monthsLeft*30.4):0)+' päivää — vapaa '+freePerMonth.toFixed(0)+'€/kk</div>'
-            :'<div style="font-size:11px;color:var(--orange)">Ei vapaata rahaa. Vähennä menoja tai lisää tuloja.</div>')
-        +'</div>'
-      )
-      // Skenaario 2
-      +(!done?
-        '<div class="scenario-card">'
-          +'<div style="font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3);margin-bottom:6px">🎯 Halusin saavuttaa tavoitteen</div>'
-          +'<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">'
-            +'<input type="number" value="'+(g.targetMonths||12)+'" min="1" style="width:55px;text-align:center;border:1px solid var(--border);border-radius:7px;padding:4px;font-size:13px" oninput="S.goals['+idx+'].targetMonths=parseInt(this.value)||12;save();renderGoals('+freePerMonth+')">'
-            +'<span style="color:var(--text-3);font-size:12px">kuukaudessa → tarvitset</span>'
-            +'<span class="scenario-num" style="font-size:1.1rem">'+(neededPerMonth!=null?neededPerMonth.toFixed(0):0)+'€/kk</span>'
-          +'</div>'
-        +'</div>'
-      :'')
-      // Emoji picker
-      +'<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">'
-        +['🎯','✈️','🏠','🚗','💻','🎓','💍','🌴','📱','🐕','🎸','🚀'].map(em=>
-          '<span style="cursor:pointer;font-size:1.1rem;opacity:'+(g.emoji===em?'1':'0.4')+'" onclick="S.goals['+idx+'].emoji=\''+em+'\';save();renderGoals('+freePerMonth+')">'+em+'</span>'
-        ).join('')
-        // Koronkorko-toggle
-        +'<span style="margin-left:auto;font-size:10px;color:var(--text-3);display:flex;align-items:center;gap:5px">📈 Korko% <input type="number" value="'+(g.returnPct||0)+'" placeholder="0" min="0" max="30" style="width:38px;font-size:11px;border-bottom:1px solid var(--border);text-align:center;padding:0" oninput="S.goals['+idx+'].returnPct=parseFloat(this.value)||0;save();renderGoals('+freePerMonth+')">/v</span>'
-      +'</div>';
-    el.appendChild(div);
-  });
-}
-function addGoal(){
-  if(!S.goals) S.goals=[];
-  S.goals.push({id:'g'+Date.now(),label:'Uusi tavoite',target:1000,saved:0,emoji:'🎯'});
-  save(); update();
-}
-
-// ===== HELP MODAL =====
-const HELP_CONTENT = {
-  yleinen:{
-    title:'❓ Rahakone — Pikaohjeet',
-    rows:[
-      {i:'📊',t:'<strong>Tilanne</strong> — kokonaiskuva: saldo, tunnusluvut, talousprofiili (XP-taso), menorakenne ja Takuusäätiön viitearvot.'},
-      {i:'💰',t:'<strong>Tulot</strong> — lisää tulolähteesi. Merkitse "Saatu" kun raha on tilillä — saldo päivittyy automaattisesti.'},
-      {i:'🏠',t:'<strong>Menot</strong> — arjen kiinteät kulut. Valitse kategoria ja tyyppi (kiinteä/muuttuva). Maksa tililtä tai käteisellä.'},
-      {i:'🏢',t:'<strong>Yritys</strong> — yrityksen kulut erikseen. <em>Ei korvaa virallista kirjanpitoa.</em>'},
-      {i:'📅',t:'<strong>Päiväbudjetti</strong> — kuinka paljon voit käyttää päivässä ennen seuraavaa tuloa.'},
-      {i:'🎯',t:'<strong>Suunnitelmat</strong> — jaa tulosi automaattisesti esim. sijoituksiin ja säästöihin prosentein.'},
-      {i:'🤝',t:'<strong>Jako</strong> — laske kulut jaettuna kumppanin tai kämppiksen kanssa haluamallasi suhteella.'},
-      {i:'🗓',t:'<strong>Kalenteri</strong> — näkee tulojen ja menojen eräpäivät kalenterinäkymässä.'},
-      {i:'🎯',t:'<strong>Tavoitteet</strong> — säästötavoitteet kahdella skenaariolla: "kuinka kauan?" ja "paljonko/kk?". Koronkorkolaskenta mukana.'},
-      {i:'🔥',t:'<strong>FIRE</strong> — laske FIRE-numerosi ja vuodet taloudelliseen vapauteen sijoitusten kasvulla.'},
-      {i:'💎',t:'<strong>Varallisuus</strong> — nettovarallisuus: omaisuuserät miinus velat. Tilisaldo synkronoituu automaattisesti.'},
-      {i:'🤖',t:'<strong>AI-sparraaja</strong> — kopioi budjettisi tekoälylle syvempää analyysiä varten.'},
-      {i:'💾',t:'Kaikki tiedot tallennetaan <strong>vain tähän laitteeseen</strong>. Varmuuskopioi ⬇ Vie / ⬆ Tuo -napeilla alhaalla.'},
-    ]
-  },
-  tilanne:{
-    title:'📊 Tilanne-välilehti',
-    rows:[
-      {i:'💳',t:'Syötä <strong>tilin saldo</strong> ja <strong>käteinen</strong> — nämä ovat oikeasti hallussasi olevat rahat juuri nyt.'},
-      {i:'📈',t:'<strong>Saadut tulot</strong> = Tulot-välilehdellä "Saatu"-merkityt. <strong>Tulossa</strong> = vielä maksamattomat tulot.'},
-      {i:'📉',t:'<strong>Loppukuun ennuste</strong> laskee kaikki kirjatut tulot ja menot — ei vain jo toteutuneet.'},
-      {i:'💡',t:'<strong>Tunnusluvut</strong>: Säästämisaste = (tulot − menot) / tulot. Tavoittele yli 20%. "Nettoansiot/vuosi" = vapaa raha vuositasolla.'},
-      {i:'⚡',t:'<strong>Talousprofiili</strong> — XP-taso kasvaa oikeista talousteoista: säästäminen, tavoitteiden saavuttaminen, puskurirahaston täyttyminen, FIRE-asteen kasvu.'},
-      {i:'🟣',t:'<strong>Menorakenne</strong> — värikoodattu palkki: kiinteät / muuttuvat / yritys / vapaa raha. Kategorisointi tehdään Menot-välilehdellä.'},
-      {i:'📏',t:'<strong>Viitearvot</strong> — vertaa omia menojasi Takuusäätiön kohtuullisen minimin viitebudjettiin kategorioittain.'},
-      {i:'🍩',t:'<strong>Menojakauma</strong> — ympyräkaavio näyttää mihin rahasi menee. Täydentyy kun lisäät menoja.'},
-    ],
-    info:'Saldo päivittyy automaattisesti kun merkitset tuloja saaduiksi tai maksat menoja Tili/Käteinen-napeilla.'
-  },
-  tulot:{
-    title:'💰 Tulot-välilehti',
-    rows:[
-      {i:'➕',t:'Paina <strong>+ Lisää tulolähde</strong> lisätäksesi uuden tulon.'},
-      {i:'↻',t:'Valitse <strong>Joka kuukausi</strong> toistuvalle tulolle (palkka, etuudet jne). Valitse yksittäinen kuukausi kertaluonteiselle.'},
-      {i:'✓',t:'Merkitse tulo <strong>Saatu</strong> kun raha on tilillä — se lisätään tilisaldoon automaattisesti.'},
-      {i:'⏳',t:'<strong>Tulossa</strong>-tilassa oleva tulo näkyy loppukuun ennusteessa mutta ei käytettävissä olevassa saldossa.'},
-      {i:'🗓',t:'<strong>Pv</strong>-kenttä = päivä kuussa, jolloin tulo yleensä saapuu. Näkyy maksukalenterissa värikoodattuna.'},
-    ]
-  },
-  menot:{
-    title:'🏠 Menot-välilehti',
-    rows:[
-      {i:'➕',t:'Lisää kaikki toistuvat kulut: vuokra, lainanlyhennys, tilaukset jne.'},
-      {i:'🗂',t:'Valitse jokaiselle menolle <strong>kategoria</strong> (Asuminen, Ruoka, Liikkuminen, Terveys, Harrastukset) — näkyy Tilanne-välilehden viitearvovertailussa.'},
-      {i:'🟣🟠',t:'Valitse <strong>tyyppi</strong> — <em>kiinteä</em> (vuokra, vakuutus) tai <em>muuttuva</em> (ruoka, viihde). Klikkaa violettia/oranssia merkkiä vaihtaaksesi. Näkyy menorakenne-palkissa.'},
-      {i:'💳',t:'Kun maksat laskun, paina <strong>💳 Tili</strong> tai <strong>💵 Käteinen</strong> — summa vähennetään oikeasta saldosta automaattisesti.'},
-      {i:'↩',t:'<strong>Peruuta</strong>-nappi palauttaa summan saldoon jos merkitsit vahingossa.'},
-      {i:'🗓',t:'<strong>Pv</strong>-kenttä = eräpäivä. Näkyy kalenterissa ja vaikuttaa päiväbudjettilaskentaan.'},
-    ]
-  },
-  yritys:{
-    title:'🏢 Yrityksen kulut',
-    rows:[
-      {i:'📋',t:'Listaa yrityksesi toistuvat kulut: hosting, kirjanpito-ohjelma, tilaukset jne.'},
-      {i:'💳',t:'Toimii samoin kuin arjen menot — merkitse maksetuksi tililtä tai käteisellä, summa vähennetään saldosta.'},
-      {i:'📊',t:'Yrityskulut lasketaan mukaan menoihin, menojakaumaan, menorakenteeseen ja FIRE-laskentaan.'},
-    ],
-    warn:'⚠️ <strong>Huom!</strong> Rahakone on henkilökohtainen budjettiapuri — sitä <strong>ei suositella käytettäväksi viralliseen kirjanpitoon</strong>. Yritystoimintaan tarvitaan asianmukainen kirjanpito-ohjelma tai kirjanpitäjä. Rahakone ei laske ALV:ia, poistoja tai muita kirjanpidon erityisvaatimuksia.'
-  },
-  paiva:{
-    title:'📅 Päiväbudjetti',
-    rows:[
-      {i:'💡',t:'<strong>Realistinen päiväbudjetti</strong> = käytettävissä oleva saldo jaettuna päivillä seuraavaan tuloon. Erääntyvät laskut vähennetään ensin.'},
-      {i:'📊',t:'<strong>Taulukko</strong> näyttää eri päiväbudjettitasoille (5–30 €/pv) riittääkö raha ja mikä on ero nykytilanteeseen.'},
-      {i:'⏳',t:'<strong>Seuraavaan tuloon</strong> -palkki näyttää kuinka suuri osa ajasta on kulunut ennen seuraavaa tuloa.'},
-      {i:'📆',t:'<strong>Tulevat kuukaudet</strong> -osio näyttää jo kirjatut tulot ja menot tuleville kuukausille — ne eivät vaikuta tämän kuun laskelmiin.'},
-    ],
-    info:'Päiväbudjetti on arvio — se ei seuraa päivittäistä kulutusta automaattisesti. Pidä saldo ajan tasalla Tilanne-välilehdellä.'
-  },
-  suunnitelmat:{
-    title:'🎯 Suunnitelmat — Jako-ohjelma',
-    rows:[
-      {i:'💡',t:'<strong>Jako-ohjelma</strong> jakaa kuukausitulosi automaattisesti eri tarkoituksiin prosenteilla.'},
-      {i:'📝',t:'Esimerkki: 10% sijoituksiin, 10% säästöihin, 5% puskurirahastoon — sovellus laskee euroina.'},
-      {i:'➕',t:'Lisää haluamasi jako-erät <strong>+ Lisää</strong> -napilla. Nimeä vapaasti ja aseta prosentti.'},
-      {i:'⚖️',t:'Tavoittele, että jako-ohjelma + kaikki menot ≤ 100% tuloista. "Vapaa käyttö" näyttää ylijäämän.'},
-    ]
-  },
-  jako:{
-    title:'🤝 Kulujen jako',
-    rows:[
-      {i:'☑️',t:'Valitse listalta menot ja yrityskulut, jotka haluat jakaa esim. kumppanin tai kämppiksen kanssa.'},
-      {i:'➕',t:'Lisää myös kuluja jotka eivät ole listalla kohtaan <strong>"Muita jakoon"</strong>.'},
-      {i:'⇄',t:'Säädä jakosuhde <strong>Sinä %</strong> -kentällä — oletuksena 50/50. Kumppanin osuus lasketaan automaattisesti.'},
-      {i:'💰',t:'Yhteissumma ja molempien osuudet näkyvät reaaliajassa alla.'},
-    ]
-  },
-  tavoitteet:{
-    title:'🎯 Säästötavoitteet',
-    rows:[
-      {i:'➕',t:'Lisää tavoite <strong>+ Lisää tavoite</strong> -napilla. Anna nimi, tavoitesumma ja jo säästetty määrä.'},
-      {i:'📅',t:'<strong>Skenaario 1</strong>: "Kuinka kauan kestää?" — lasketaan nykyisellä vapaalla rahalla (tulot − menot).'},
-      {i:'🎯',t:'<strong>Skenaario 2</strong>: "Paljonko pitää säästää/kk?" — syötä haluamasi kuukausimäärä, sovellus laskee tarvittavan summan.'},
-      {i:'📈',t:'<strong>Koronkorko %</strong> — syötä vuotuinen tuotto-odotus (esim. 7), jos sijoitat säästöt. Laskee koronkoron vaikutuksen.'},
-      {i:'🎨',t:'Valitse emoji tavoitteen alle kuvastamaan unelmaasi — matka ✈️, asunto 🏠, auto 🚗, koira 🐕...'},
-      {i:'✅',t:'Kun edistymispalkki saavuttaa 100%, tavoite merkitään saavutetuksi — ja saat XP-pisteitä!'},
-    ]
-  },
-  fire:{
-    title:'🔥 FIRE-laskenta',
-    rows:[
-      {i:'🎯',t:'<strong>FIRE-numero</strong> = kuukausimenot × 12 × 25. Tämä on sijoitettava kokonaissumma taloudelliseen vapauteen.'},
-      {i:'📈',t:'Perustuu <strong>4% nostosääntöön</strong>: sijoituksistasi voi nostaa 4% vuodessa tilastollisesti loputtomiin.'},
-      {i:'💰',t:'Syötä <strong>nykyinen sijoitussalkku</strong>, <strong>kuukausisäästö sijoituksiin</strong> ja <strong>tuotto-odotus %</strong> — sovellus laskee vuodet FIRE:een koronkorolla.'},
-      {i:'📊',t:'<strong>FI-aste</strong> = salkku / FIRE-numero. Edistymispalkki näyttää missä kohtaa matkaa olet.'},
-      {i:'⚡',t:'<strong>7% tuotto-odotus</strong> on S&P 500:n historiallinen reaalikorjattu pitkän aikavälin keskiarvo. Muuta kenttää tarpeen mukaan.'},
-      {i:'🛣',t:'Pienennä menoja tai kasvata kuukausisäästöä → FIRE-vuodet vähenevät merkittävästi.'},
-    ],
-    warn:'⚠️ FIRE-laskenta on suuntaa-antava arvio. Markkinat vaihtelevat eikä historiallinen tuotto takaa tulevaa. Harkitse sijoitusneuvojan konsultointia ennen suuria päätöksiä.'
-  },
-  varallisuus:{
-    title:'💎 Nettovarallisuus',
-    rows:[
-      {i:'🏦',t:'<strong>Omaisuuserät</strong> = kaikki mitä omistat: sijoitukset, asunto, ajoneuvot, säästöt jne.'},
-      {i:'💳',t:'<strong>Velat</strong> = kaikki mitä olet velkaa: asuntolaina, opintolaina, kulutusluotto jne.'},
-      {i:'📊',t:'<strong>Nettovarallisuus</strong> = omaisuus − velat. Positiivinen ja kasvava luku on tavoite.'},
-      {i:'🔄',t:'<strong>Tilisaldo ja käteinen</strong> päivittyvät automaattisesti Tilanne-välilehden saldosta — ei tarvitse syöttää erikseen.'},
-      {i:'📉',t:'<strong>Velkaaste</strong> = velat / omaisuus. Alle 30% hyvä, 30–60% kohtalainen, yli 60% korkea.'},
-    ]
-  },
-  menorakenne:{
-    title:'📊 Menorakenne-palkki',
-    rows:[
-      {i:'🟣',t:'<strong>Kiinteät kulut</strong> = toistuvat, ennustettavat menot joihin on vaikea vaikuttaa lyhyellä aikavälillä. Esim. vuokra, vakuutukset, lainanlyhennys.'},
-      {i:'🟠',t:'<strong>Muuttuvat kulut</strong> = vaihtelevat menot joihin pystyt helpoimmin vaikuttamaan. Esim. ruoka, vaatteet, viihde, ravintolat.'},
-      {i:'🔵',t:'<strong>Yrityskulut</strong> näkyvät omana osuutenaan jos sinulla on Yritys-välilehdellä kuluja.'},
-      {i:'🟢',t:'<strong>Vapaa raha</strong> = tulot − kaikki menot. Tämä on säästettävissä tai käytettävissä vapaasti.'},
-      {i:'💡',t:'Vaihda kulun tyyppi klikkaamalla violettia (kiinteä) tai oranssia (muuttuva) -merkkiä suoraan Menot-välilehdellä.'},
-    ],
-    info:'Pyri pitämään kiinteät menot alle 50% tuloista — se antaa joustavuutta muuttuviin kuluihin ja yllättäviin menoihin.'
-  },
-  benchmark:{
-    title:'📏 Takuusäätiön viitearvot',
-    rows:[
-      {i:'📋',t:'Viitearvot perustuvat Takuusäätiön <strong>kohtuullisen minimin viitebudjettiin</strong> yksinasuvalle aikuiselle (2024).'},
-      {i:'🗂',t:'Vertailu toimii vain kategorioille joille olet merkinnyt menoja — lisää kategoriat Menot-välilehdellä.'},
-      {i:'🟢',t:'<strong>Alle viitearvon</strong> = hyvä. Voi tarkoittaa säästöpotentiaalia tai edullista elämäntilannetta.'},
-      {i:'🔴',t:'<strong>Yli viitearvon</strong> = ei välttämättä ongelma, mutta kannattaa miettiä löytyykö säästövaraa.'},
-    ],
-    warn:'⚠️ Viitearvot ovat suuntaa-antavia ja vaihtelevat paikkakunnittain ja elämäntilanteen mukaan. Ne on laadittu yksinasuvalle — perheellisille tai erityistarpeita omaaville ne eivät sovi sellaisenaan.'
-  },
-  historia:{
-    title:'📈 Kuukausihistoria',
-    rows:[
-      {i:'📸',t:'Paina <strong>Tallenna kuukausi</strong> ennen kuin vaihdat kuukautta tai nollaat tietoja — sovellus ottaa tilannekuvan.'},
-      {i:'📊',t:'Tallennettu snapshot sisältää: tulot, menot, vapaan rahan ja tilisaldon kyseiseltä hetkeltä.'},
-      {i:'📈',t:'Pylväskaavio näyttää kehityksen ajan yli — näet helposti onko säästäminen parantunut.'},
-      {i:'✕',t:'Poista yksittäinen kuukausi klikkaamalla ✕-nappia kuukausikortin oikeasta yläkulmasta.'},
-    ],
-    info:'Muista tallentaa ennen kuun vaihtoa — sovellus ei tallenna automaattisesti historiaa, koska kaikki data on vain sinun laitteellasi.'
-  },
-  ai:{
-    title:'🤖 AI-sparraaja',
-    rows:[
-      {i:'1️⃣',t:'Valitse ensin kehotetyyppi: <strong>Yleisanalyysi</strong>, <strong>Säästövinkit</strong>, <strong>Lisätulot</strong> tai <strong>3kk strategia</strong>.'},
-      {i:'2️⃣',t:'Paina <strong>📋 Kopioi leikepöydälle</strong> — budjettitietosi kopioidaan tekstinä muistiin.'},
-      {i:'3️⃣',t:'Avaa <strong>Claude.ai</strong>, ChatGPT tai muu tekoäly ja liitä (Ctrl+V / ⌘+V) teksti sinne.'},
-      {i:'🔒',t:'Tietoja ei lähetetä automaattisesti mihinkään — sinä päätät mitä jaat ja kenelle.'},
-      {i:'💡',t:'Voit muokata kopioitua tekstiä ennen liittämistä tai lisätä omia tarkentavia kysymyksiä.'},
-    ]
-  },
-};
-
-function showHelp(key){
-  const d=HELP_CONTENT[key]||HELP_CONTENT['yleinen'];
-  const modal=document.getElementById('helpModal');
-  const title=document.getElementById('helpModalTitle');
-  const body=document.getElementById('helpModalBody');
-  title.innerHTML='<span>❓</span> '+d.title;
-  body.innerHTML=d.rows.map(r=>'<div class="modal-row"><div class="mi">'+r.i+'</div><div>'+r.t+'</div></div>').join('')
-    +(d.warn?'<div class="modal-warn">'+d.warn+'</div>':'')
-    +(d.info?'<div class="modal-info">ℹ️ '+d.info+'</div>':'');
-  modal.classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeHelp(){
-  document.getElementById('helpModal').classList.remove('open');
-  document.body.style.overflow='';
-}
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeHelp(); });
-
-// ===== TIP OF THE DAY =====
-const TIPS=[
-  {i:'💡',t:'<strong>Säästämisaste yli 20%</strong> tarkoittaa, että olet oikealla tiellä. Yli 50% on FIRE-vauhti!'},
-  {i:'📅',t:'<strong>Automatisoi säästäminen</strong> — siirrä säästöt heti palkanmaksupäivänä, ennen kuin ehdit kuluttaa.'},
-  {i:'☕',t:'<strong>Latte-efekti</strong>: 4€ kahvi päivittäin = 1460€ vuodessa. Pienet kulut kertyvät.'},
-  {i:'📈',t:'<strong>Koronkorko</strong>: 200€/kk @ 7%/v kasvaa 240 000€:ksi 30 vuodessa.'},
-  {i:'🎯',t:'<strong>50/30/20-sääntö</strong>: 50% tarpeisiin, 30% haluihin, 20% säästöihin.'},
-  {i:'🔥',t:'<strong>FIRE</strong>: Jokainen säästetty euro on askel lähemmäs taloudellista vapautta.'},
-  {i:'💳',t:'<strong>Velkojen korjausjärjestys</strong>: maksa ensin korkokorkein velka pois — säästät eniten.'},
-  {i:'🛒',t:'<strong>24h sääntö</strong>: Odota vuorokausi ennen isoja ostoksia. Impulssiostos vai oikea tarve?'},
-  {i:'📊',t:'<strong>Menojakauma</strong> paljastaa yllättäviä kulueriä. Katso kaavio Tilanne-välilehdeltä!'},
-  {i:'🏦',t:'<strong>Hätärahasto</strong>: tavoittele 3-6kk menojen verran likvidinä varalla. Se on turvaverkko.'},
-];
-function renderTOTD(){
-  const el=document.getElementById('totdBox'); if(!el) return;
-  const t=TIPS[TODAY_DAY % TIPS.length];
-  el.innerHTML='<div class="totd"><div class="totd-icon">'+t.i+'</div><div class="totd-text"><strong style="color:var(--cyan);font-size:9px;text-transform:uppercase;letter-spacing:1.5px">Päivän vinkki</strong><br>'+t.t+'</div></div>';
-}
-
-// ===== EXPORT / IMPORT / RESET =====
-function exportJSON(){
-  const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='rahakone-varmuuskopio-'+new Date().toISOString().slice(0,10)+'.json';
-  a.click();
-}
-function importJSON(){ document.getElementById('importFile').click(); }
-function doImport(e){
-  const file=e.target.files[0]; if(!file) return;
-  const reader=new FileReader();
-  reader.onload=ev=>{
-    try{
-      const data=JSON.parse(ev.target.result);
-      if(confirm('Korvataanko nykyiset tiedot tiedostolla "'+file.name+'"?')){
-        S=Object.assign(JSON.parse(JSON.stringify(DEF)),data);
-        // Normalize imported data same as load()
-        [...S.income,...S.expenses,...S.yritys].forEach(x=>{
-          if(x.month==null) x.month=0;
-          x.amount = parseFloat(x.amount)||0;
-          x.day    = parseInt(x.day)||0;
+        navigator.clipboard.writeText(prompt).then(() => {
+            const btn = document.getElementById('copyAiBtn');
+            btn.innerText = "KOPIOITU! ✅";
+            btn.style.borderColor = "var(--cyan)";
+            btn.style.color = "var(--cyan)";
+            setTimeout(() => {
+                btn.innerText = "KOPIOI STRATEGIA-KEHOTE 📋";
+                btn.style.borderColor = "var(--purple)";
+                btn.style.color = "#fff";
+            }, 2000);
         });
-        // Fix old recurring field: recurring=true → month=0 (joka kuukausi)
-        S.income.forEach(i=>{ if(i.recurring===true||i.recurring==null) i.month=i.month||0; delete i.recurring; });
-        if(!S.goals) S.goals=[];
-        if(!S.assets) S.assets=JSON.parse(JSON.stringify(DEF.assets));
-        if(!S.debts)  S.debts=JSON.parse(JSON.stringify(DEF.debts));
-        if(!S.history) S.history=[];
-        S.expenses.forEach(e=>{ if(!e.cat) e.cat='muut'; if(!e.type) e.type='kiintea'; });
-        S.yritys.forEach(e=>{ if(!e.cat) e.cat='yritys'; if(!e.type) e.type='kiintea'; });
-        save(true);
-        const sti=document.getElementById('saldoTili');   if(sti) sti.value=S.saldoTili||'';
-        const ska=document.getElementById('saldoKateis'); if(ska) ska.value=S.saldoKateis||'';
-        renderIncome(); renderAll();
-        alert('✅ Tiedot tuotu onnistuneesti!');
-      }
-    }catch(err){ alert('❌ Virhe: tiedosto ei ole kelvollinen Rahakone-varmuuskopio.'); }
-  };
-  reader.readAsText(file);
-  e.target.value='';
-}
-function resetAll(){
-  S=JSON.parse(JSON.stringify(DEF));
-  try{ localStorage.removeItem('rahakone_v5'); }catch(e){}
-  location.reload();
-}
-
-// ===== KUUKAUSIHISTORIA =====
-let _histChart = null;
-function saveMonthSnapshot(){
-  const totalInc = S.income.filter(forThisMonth).reduce((s,i)=>s+(i.amount||0),0);
-  const totalExp = [...S.expenses,...S.yritys].filter(forThisMonth).reduce((s,e)=>s+(e.amount||0),0);
-  const jaa = totalInc - totalExp;
-  const saasto = totalInc>0 ? jaa/totalInc*100 : 0;
-  const saldo = (S.saldoTili||0)+(S.saldoKateis||0);
-  const key = MF[CUR_MONTH]+' '+TODAY.getFullYear();
-  // prevent duplicates — overwrite same month
-  const existing = S.history.findIndex(h=>h.key===key);
-  const snap = { key, month:CUR_MONTH, year:TODAY.getFullYear(), tulot:totalInc, menot:totalExp, jaa, saasto, saldo, ts:Date.now() };
-  if(existing>=0) S.history[existing]=snap;
-  else S.history.push(snap);
-  S.history.sort((a,b)=>a.year!==b.year?a.year-b.year:a.month-b.month);
-  save(); renderHistoria();
-  showXPToast('📸 Kuukausi tallennettu! +50 XP');
-}
-
-function renderHistoria(){
-  const el=document.getElementById('histList'); if(!el) return; el.innerHTML='';
-  if(!S.history||!S.history.length){
-    el.innerHTML='<div class="tip" style="text-align:center;padding:24px 0;color:var(--text-3)">Ei vielä tallennettuja kuukausia.<br>Paina "Tallenna kuukausi" ylhäältä.</div>';
-    const cc=document.getElementById('histChartCard'); if(cc) cc.style.display='none';
-    const ct=document.getElementById('histChartTitle'); if(ct) ct.style.display='none';
-    return;
-  }
-  // Show chart
-  const cc=document.getElementById('histChartCard'); if(cc) cc.style.display='block';
-  const ct=document.getElementById('histChartTitle'); if(ct) ct.style.display='block';
-
-  // Cards newest first
-  [...S.history].reverse().forEach((h,idx)=>{
-    const realIdx = S.history.length-1-idx;
-    const card=document.createElement('div');
-    card.className='card'; card.style.marginBottom='8px';
-    const jaaColor = h.jaa>=0?'var(--green)':'var(--red)';
-    const saastoColor = h.saasto>=20?'var(--green)':h.saasto>=10?'var(--cyan)':'var(--orange)';
-    card.innerHTML=
-      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">'
-        +'<div style="font-size:13px;font-weight:500;color:var(--text-1)">'+h.key+'</div>'
-        +'<div style="display:flex;align-items:center;gap:8px">'
-          +'<span style="font-size:10px;color:'+saastoColor+'">'+h.saasto.toFixed(1)+'% säästöaste</span>'
-          +'<button class="btn-del" title="Poista" onclick="S.history.splice('+realIdx+',1);save();renderHistoria()">✕</button>'
-        +'</div>'
-      +'</div>'
-      +'<div class="g2">'
-        +'<div class="sb" style="text-align:center"><div class="slbl">Tulot</div><div class="sval cyan">'+fmt(h.tulot)+'</div></div>'
-        +'<div class="sb" style="text-align:center"><div class="slbl">Menot</div><div class="sval red">'+fmt(h.menot)+'</div></div>'
-      +'</div>'
-      +'<div class="g2" style="margin-top:6px">'
-        +'<div class="sb" style="text-align:center"><div class="slbl">Vapaa</div><div class="sval" style="color:'+jaaColor+'">'+fmt(h.jaa)+'</div></div>'
-        +'<div class="sb" style="text-align:center"><div class="slbl">Saldo</div><div class="sval cyan">'+fmt(h.saldo)+'</div></div>'
-      +'</div>'
-      +'<div class="prog-wrap" style="margin-top:10px">'
-        +'<div class="prog-lbl"><span>Säästämisaste</span><span style="color:'+saastoColor+'">'+h.saasto.toFixed(1)+'%</span></div>'
-        +'<div class="prog-bar"><div class="prog-fill" style="width:'+Math.min(100,Math.max(0,h.saasto))+'%;background:'+saastoColor+'"></div></div>'
-      +'</div>';
-    el.appendChild(card);
-  });
-
-  // Render chart
-  const canvas=document.getElementById('histChart'); if(!canvas) return;
-  const labels=S.history.map(h=>h.key.replace(' ','<br>'));
-  const tulotData=S.history.map(h=>h.tulot);
-  const menotData=S.history.map(h=>h.menot);
-  const jaaData=S.history.map(h=>h.jaa);
-  if(_histChart) _histChart.destroy();
-  _histChart = new Chart(canvas,{
-    type:'bar',
-    data:{
-      labels:S.history.map(h=>h.key),
-      datasets:[
-        {label:'Tulot',data:tulotData,backgroundColor:'rgba(0,200,240,0.35)',borderColor:'rgba(0,200,240,0.8)',borderWidth:1.5,borderRadius:4},
-        {label:'Menot',data:menotData,backgroundColor:'rgba(239,68,68,0.3)',borderColor:'rgba(239,68,68,0.7)',borderWidth:1.5,borderRadius:4},
-        {label:'Vapaa',data:jaaData,type:'line',borderColor:'rgba(34,197,94,0.9)',backgroundColor:'rgba(34,197,94,0.08)',borderWidth:2,pointRadius:4,pointBackgroundColor:'rgba(34,197,94,0.9)',tension:0.3,fill:true},
-      ]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:true,
-      plugins:{legend:{labels:{color:'rgba(255,255,255,0.5)',font:{size:10}}}},
-      scales:{
-        x:{ticks:{color:'rgba(255,255,255,0.45)',font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}},
-        y:{ticks:{color:'rgba(255,255,255,0.45)',font:{size:9},callback:v=>v+'€'},grid:{color:'rgba(255,255,255,0.06)'}},
-      }
     }
-  });
-}
 
-// ===== PIKASTARTTI WIZARD =====
-function wizNext(step){
-  document.querySelectorAll('.wiz-step').forEach(s=>s.style.display='none');
-  const el=document.getElementById('wiz-'+step);
-  if(el) el.style.display='block';
-}
-function wizSkip(){
-  document.getElementById('wizardModal').classList.remove('open');
-  document.body.style.overflow='';
-  S.wizardDone=true; save();
-}
-function wizFinish(){
-  const palkka = parseFloat(document.getElementById('wiz-palkka')?.value)||0;
-  const vuokra = parseFloat(document.getElementById('wiz-vuokra')?.value)||0;
-  const ruoka  = parseFloat(document.getElementById('wiz-ruoka')?.value)||0;
-  const liikk  = parseFloat(document.getElementById('wiz-liikkuminen')?.value)||0;
-  const puh    = parseFloat(document.getElementById('wiz-puhelin')?.value)||0;
+    function start() {
+        g.goal = document.getElementById('inGoal').value || "Muutos";
+        g.r1 = document.getElementById('inR1').value || "Pikkutehtävä 1-10min";
+        g.r5 = document.getElementById('inR5').value || "Ryhtiliike 15-30min";
+        g.r20 = document.getElementById('inR20').value || "Kunnon rutistus 45-90min";
+        g.r50 = document.getElementById('inR50').value || "Päivän uroteko 2-4h";
+        g.v = parseInt(document.getElementById('inV').value);
+        g.active = true;
+        g.initialEstimate = null;
+        g.lowestEstimate = null;
+        save(); render();
+    }
 
-  // Set income
-  if(palkka>0){ const i=S.income.find(x=>x.id==='i1'); if(i) i.amount=palkka; }
-  // Set expenses
-  if(vuokra>0){ const e=S.expenses.find(x=>x.id==='e1'); if(e) e.amount=vuokra; }
-  if(puh>0){    const e=S.expenses.find(x=>x.id==='e5'); if(e) e.amount=puh; }
-  // Add ruoka and liikkuminen if filled
-  if(ruoka>0)  S.expenses.push({id:'wiz-r',label:'Ruoka & talous',amount:ruoka,day:0,month:0,paid:false,paidFrom:null,cat:'ruoka',type:'muuttuva'});
-  if(liikk>0)  S.expenses.push({id:'wiz-l',label:'Liikkuminen',amount:liikk,day:0,month:0,paid:false,paidFrom:null,cat:'liikkuminen',type:'muuttuva'});
+    function render() {
+        document.getElementById('viewSetup').style.display = 'none';
+        document.getElementById('viewGame').style.display = 'block';
+        document.getElementById('txtGoal').innerText = g.goal.toUpperCase();
+        document.getElementById('txtV').innerText = `${g.v.toLocaleString('fi-FI')} XP`;
+        updateUI();
+    }
 
-  S.wizardDone=true; save();
-  document.getElementById('wizardModal').classList.remove('open');
-  document.body.style.overflow='';
-  renderIncome(); renderAll();
-  showXPToast('🚀 Tervetuloa! +100 XP aloituksesta');
-}
-function maybeShowWizard(){
-  if(!S.wizardDone){
-    document.getElementById('wizardModal').classList.add('open');
-    document.body.style.overflow='hidden';
-  }
-}
+    function getMultiplier() { return 1 + (Math.min(g.days, 84) - 1) * (1 / 83); }
 
-// ===== INIT =====
-load();
-const sti=document.getElementById('saldoTili');   if(sti&&S.saldoTili)   sti.value=S.saldoTili;
-const ska=document.getElementById('saldoKateis'); if(ska&&S.saldoKateis) ska.value=S.saldoKateis;
-renderIncome(); renderAll();
-renderTOTD();
-setTimeout(()=>{ _prevXP=calcXP(); maybeShowWizard(); },300);
+    function calculateDaysToGoal() {
+        if (g.total >= g.v) return 0;
+        if (g.total === 0 || g.days === 0) return null;
+        
+        let avg = g.total / g.days;
+        if (avg <= 0) return null;
+        
+        return Math.ceil((g.v - g.total) / avg);
+    }
+
+    function addXP(baseAmt, e) {
+        let multi = getMultiplier();
+        let finalAmt = Math.round(baseAmt * multi);
+        g.total += finalAmt;
+
+        const pop = document.createElement('div');
+        pop.className = 'xp-fly'; pop.innerText = `+${finalAmt}`;
+        pop.style.left = `${e.pageX}px`; pop.style.top = `${e.pageY}px`;
+        document.body.appendChild(pop); setTimeout(() => pop.remove(), 800);
+
+        let newLvl = Math.floor(g.total / 200) + 1;
+        if (newLvl > g.lvl) { g.lvl = newLvl; showPop(); }
+        if (g.total >= g.v) document.getElementById('victoryOverlay').style.display = 'flex';
+        
+        let currentEstimate = calculateDaysToGoal();
+        if (currentEstimate !== null) {
+            if (g.initialEstimate === null) {
+                g.initialEstimate = currentEstimate;
+                g.lowestEstimate = currentEstimate;
+            } else if (currentEstimate < g.lowestEstimate) {
+                g.lowestEstimate = currentEstimate;
+            }
+        }
+        
+        save(); updateUI();
+    }
+
+    function modifyRoutines() {
+        const n1 = prompt("Uusi 1 XP rutiini:", g.r1);
+        if (n1 !== null) g.r1 = n1;
+        const n5 = prompt("Uusi 5 XP rutiini:", g.r5);
+        if (n5 !== null) g.r5 = n5;
+        const n20 = prompt("Uusi 20 XP rutiini:", g.r20);
+        if (n20 !== null) g.r20 = n20;
+        const n50 = prompt("Uusi 50 XP rutiini:", g.r50);
+        if (n50 !== null) g.r50 = n50;
+        save(); updateUI();
+    }
+
+    function updateUI() {
+        let multi = getMultiplier();
+        document.getElementById('bonusBadge').innerText = `×${multi.toFixed(2)}`;
+        document.getElementById('valDays').innerText = g.days;
+        document.getElementById('barXP').style.width = `${((g.total % 200) / 200) * 100}%`;
+        document.getElementById('valTotal').innerText = g.total.toLocaleString('fi-FI');
+        document.getElementById('valLvl').innerText = `LEVEL ${g.lvl}`;
+
+        let currentEstimate = calculateDaysToGoal();
+        let displayValue = "--";
+        
+        if (g.total >= g.v) {
+            displayValue = "0";
+        } else if (currentEstimate !== null) {
+            if (g.lowestEstimate !== null) {
+                displayValue = Math.min(currentEstimate, g.lowestEstimate);
+            } else {
+                displayValue = currentEstimate;
+            }
+        }
+        
+        document.getElementById('valM').innerText = displayValue;
+
+        document.getElementById('taskList').innerHTML = `
+            <div class="task-btn" onclick="addXP(1, event)">
+                <span class="task-name">💧 ${g.r1}</span>
+                <span class="task-xp">+${Math.round(1*multi)}</span>
+            </div>
+            <div class="task-btn" onclick="addXP(5, event)">
+                <span class="task-name">🌱 ${g.r5}</span>
+                <span class="task-xp">+${Math.round(5*multi)}</span>
+            </div>
+            <div class="task-btn" onclick="addXP(20, event)">
+                <span class="task-name">🏃 ${g.r20}</span>
+                <span class="task-xp">+${Math.round(20*multi)}</span>
+            </div>
+            <div class="task-btn" onclick="addXP(50, event)">
+                <span class="task-name">🔥 ${g.r50}</span>
+                <span class="task-xp highlight">+${Math.round(50*multi)}</span>
+            </div>
+        `;
+    }
+
+    function nextDay() { 
+        g.days++; 
+        
+        let currentEstimate = calculateDaysToGoal();
+        if (currentEstimate !== null && g.lowestEstimate !== null) {
+            if (currentEstimate < g.lowestEstimate) {
+                g.lowestEstimate = currentEstimate;
+            }
+        }
+        
+        save(); updateUI(); window.scrollTo(0,0); 
+    }
+    
+    function save() { localStorage.setItem('mk_god_v4', JSON.stringify(g)); }
+    function showPop() { document.getElementById('popLvlText').innerText = `LEVEL ${g.lvl}`; document.getElementById('lvlOverlay').style.display = 'flex'; }
+    function closeLvl() { document.getElementById('lvlOverlay').style.display = 'none'; }
+    function reset() { if(confirm("Nollataanko kaikki?")) { localStorage.clear(); location.reload(); } }
+    function exportData() {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(g));
+        const dl = document.createElement('a'); dl.setAttribute("href", dataStr); dl.setAttribute("download", "muutoskone_v4.json"); dl.click();
+    }
+    function importData(event) {
+        const reader = new FileReader();
+        reader.onload = (e) => { g = JSON.parse(e.target.result); save(); render(); };
+        reader.readAsText(event.target.files[0]);
+    }
 </script>
 </body>
 </html>
