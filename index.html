@@ -70,6 +70,21 @@
         .days-lbl{font-size:9px;text-transform:uppercase;color:var(--text-2);letter-spacing:2.5px;}
         .days-pct{font-size:13px;font-weight:400;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
         .days-xp{font-size:11px;color:var(--text-3);}
+        /* ── JAR ANIMATION ── */
+        .jar-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;margin-left:8px;}
+        .jar-svg{width:44px;height:56px;filter:drop-shadow(0 0 6px rgba(0,200,240,0.0));transition:filter 0.6s ease;}
+        .jar-wrap.glowing .jar-svg{filter:drop-shadow(0 0 10px rgba(0,200,240,0.45));}
+        .jar-label{font-size:8px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;transition:color 0.6s;}
+        .jar-wrap.glowing .jar-label{color:var(--cyan);}
+        .jar-liquid{transition:height 1.2s cubic-bezier(0.34,1.56,0.64,1),y 1.2s cubic-bezier(0.34,1.56,0.64,1),fill 1.2s ease;}
+        .jar-bubble{animation:jarBubble 2.4s ease-in-out infinite;opacity:0;transition:opacity 0.8s;}
+        .jar-wrap.active .jar-bubble{opacity:0.7;}
+        @keyframes jarBubble{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+        .jar-shine{animation:jarShine 3s ease-in-out infinite;}
+        @keyframes jarShine{0%,100%{opacity:0.18}50%{opacity:0.38}}
+        .jar-ripple{animation:none;opacity:0;transition:opacity 0.4s;}
+        .jar-wrap.just-added .jar-ripple{animation:jarRipple 0.6s ease-out forwards;}
+        @keyframes jarRipple{0%{opacity:0.6;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1.18)}}
         .milestones{display:flex;gap:4px;margin-bottom:3px;}
         .ms{flex:1;height:2px;border-radius:1px;background:rgba(255,255,255,0.07);transition:background 0.6s;}
         .ms.done{background:var(--grad);} .ms.near{background:rgba(0,200,240,0.3);}
@@ -739,6 +754,40 @@
                 <div class="days-pct" id="pctVal" onclick="openStatGuide('pct')" style="cursor:pointer;">0% <button class="stat-help-btn">?</button></div>
                 <div class="days-xp" id="xpDisplay">0 XP</div>
             </div>
+            <!-- JAR VISUAL -->
+            <div class="jar-wrap" id="jarWrap">
+                <svg class="jar-svg" id="jarSvg" viewBox="0 0 44 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <clipPath id="jarClip"><rect x="5" y="14" width="34" height="36" rx="7"/></clipPath>
+                        <linearGradient id="liqGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#4dcce4"/>
+                            <stop offset="100%" stop-color="#7c5cbf"/>
+                        </linearGradient>
+                        <linearGradient id="liqGradFull" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#22c55e"/>
+                            <stop offset="100%" stop-color="#00c8f0"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- jar body -->
+                    <rect x="5" y="14" width="34" height="36" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+                    <!-- liquid fill — y and height animated by JS -->
+                    <g clip-path="url(#jarClip)">
+                        <rect id="jarLiquid" class="jar-liquid" x="5" y="50" width="34" height="0" fill="url(#liqGrad)" rx="0"/>
+                        <!-- ripple on top of liquid -->
+                        <ellipse id="jarRipple" class="jar-ripple" cx="22" cy="50" rx="14" ry="3" fill="rgba(255,255,255,0.25)"/>
+                        <!-- bubbles -->
+                        <circle class="jar-bubble" cx="14" cy="42" r="2" fill="rgba(255,255,255,0.28)" style="animation-delay:0s"/>
+                        <circle class="jar-bubble" cx="28" cy="38" r="1.4" fill="rgba(255,255,255,0.20)" style="animation-delay:0.8s"/>
+                        <circle class="jar-bubble" cx="20" cy="44" r="1" fill="rgba(255,255,255,0.16)" style="animation-delay:1.5s"/>
+                        <!-- shine -->
+                        <rect class="jar-shine" x="8" y="16" width="4" height="20" rx="2" fill="rgba(255,255,255,0.12)"/>
+                    </g>
+                    <!-- lid -->
+                    <rect x="9" y="9" width="26" height="7" rx="3.5" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                    <rect x="14" y="5" width="16" height="5" rx="2.5" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+                </svg>
+                <div class="jar-label" id="jarLabel">0%</div>
+            </div>
         </div>
         <div class="milestones"><div class="ms" id="ms10"></div><div class="ms" id="ms25"></div><div class="ms" id="ms50"></div><div class="ms" id="ms75"></div><div class="ms" id="ms100"></div></div>
         <div class="ms-labels"><span class="ms-lbl" id="mslbl10">10%</span><span class="ms-lbl" id="mslbl25">25%</span><span class="ms-lbl" id="mslbl50">50%</span><span class="ms-lbl" id="mslbl75">75%</span><span class="ms-lbl" id="mslbl100">100%</span></div>
@@ -1243,6 +1292,7 @@ function calculateDaysToGoal(){if(g().total>=g().v)return 0;if(!g().total||!g().
 
 function addXP(baseAmt,label,e){
     if(navigator.vibrate)navigator.vibrate(baseAmt===50?[30,15,50]:25);
+    playXPSound(baseAmt);
     const multi=getMultiplier(),finalAmt=Math.round(baseAmt*multi);
     g().lastXP=finalAmt;g().lastXPLabel=label;g().total+=finalAmt;
     const today=getTodayStr();g().weekLog[today]=(g().weekLog[today]||0)+finalAmt;
@@ -1266,6 +1316,7 @@ function addXP(baseAmt,label,e){
     checkMilestones();checkCustomMilestones();if(g().total>=g().v)document.getElementById('victoryOverlay').style.display='flex';
     const est=calculateDaysToGoal();if(est!==null){if(g().initialEstimate===null){g().initialEstimate=est;g().lowestEstimate=est;}else if(est<g().lowestEstimate)g().lowestEstimate=est;}
     save();updateUI();
+    const pct=g().v>0?(g().total/g().v)*100:0;updateJar(pct,true);
     document.getElementById('undoMsg').innerText=`${label} · +${finalAmt} XP`;
     document.getElementById('undoBar').classList.add('visible');clearTimeout(window._undoT);window._undoT=setTimeout(()=>document.getElementById('undoBar').classList.remove('visible'),6000);
 }
@@ -1624,6 +1675,63 @@ function openGuide(key){const GUIDE_CONTENTS={streak:{title:'Aktiivisuusputki',b
 function escQ(s){return(s||'').replace(/'/g,"\\'");}
 function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
 function save(){try{localStorage.setItem('mk_v11',JSON.stringify(state));}catch(e){}}
+
+/* ── SOUND ENGINE ── */
+let _audioCtx=null;
+function getAudioCtx(){if(!_audioCtx)_audioCtx=new(window.AudioContext||window.webkitAudioContext)();return _audioCtx;}
+function playXPSound(baseAmt){
+    try{
+        const ctx=getAudioCtx();
+        const gain=ctx.createGain();gain.connect(ctx.destination);
+        const freqs=baseAmt===1?[440,554]:baseAmt===5?[523,659,784]:baseAmt===20?[659,830,988,1109]:[784,988,1244,1480,1760];
+        const dur=baseAmt===1?0.08:baseAmt===5?0.12:baseAmt===20?0.18:0.28;
+        freqs.forEach((freq,i)=>{
+            const osc=ctx.createOscillator();const g2=ctx.createGain();
+            osc.connect(g2);g2.connect(gain);
+            osc.type=baseAmt>=20?'sine':'triangle';
+            osc.frequency.setValueAtTime(freq,ctx.currentTime+i*dur*0.55);
+            const vol=baseAmt===1?0.06:baseAmt===5?0.07:baseAmt===20?0.08:0.09;
+            g2.gain.setValueAtTime(0,ctx.currentTime+i*dur*0.55);
+            g2.gain.linearRampToValueAtTime(vol,ctx.currentTime+i*dur*0.55+0.015);
+            g2.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+i*dur*0.55+dur);
+            osc.start(ctx.currentTime+i*dur*0.55);osc.stop(ctx.currentTime+i*dur*0.55+dur+0.05);
+        });
+        // master fade
+        gain.gain.setValueAtTime(1,ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+freqs.length*dur*0.55+dur+0.1);
+    }catch(e){}
+}
+
+/* ── JAR UPDATE ── */
+function updateJar(pct,justAdded){
+    const wrap=document.getElementById('jarWrap');
+    const liq=document.getElementById('jarLiquid');
+    const ripple=document.getElementById('jarRipple');
+    const lbl=document.getElementById('jarLabel');
+    if(!wrap||!liq)return;
+    // jar interior: y=14 to y=50, height=36px total
+    const jarTop=14,jarBot=50,jarH=36;
+    const fillH=Math.min(pct/100,1)*jarH;
+    const fillY=jarBot-fillH;
+    liq.setAttribute('y',fillY);
+    liq.setAttribute('height',fillH);
+    // ripple position
+    if(ripple){ripple.setAttribute('cy',fillY);}
+    // color gradient: shift to green when near full
+    const fillEl=document.getElementById('jarLiquid');
+    if(pct>=100){fillEl.setAttribute('fill','url(#liqGradFull)');wrap.classList.add('glowing');}
+    else{fillEl.setAttribute('fill','url(#liqGrad)');if(pct<95)wrap.classList.remove('glowing');}
+    // label
+    if(lbl)lbl.innerText=pct>=100?'TÄYNNÄ!':Math.round(pct)+'%';
+    // bubble & glow when active
+    if(pct>0)wrap.classList.add('active'); else wrap.classList.remove('active');
+    // ripple flash on new XP
+    if(justAdded){
+        wrap.classList.remove('just-added');void wrap.offsetWidth;
+        wrap.classList.add('just-added');
+        setTimeout(()=>wrap.classList.remove('just-added'),700);
+    }
+}
 function exportData(){const a=document.createElement('a');a.href='data:text/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(state));a.download='muutoskone_v11.json';a.click();}
 function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.parse(e.target.result);if(p.goals){state=p;}else{state.goals=[p];state.activeIdx=0;}state.goals.forEach(migrateGoal);save();render();}catch(err){alert('Tiedoston lukeminen epäonnistui.');}};r.readAsText(ev.target.files[0]);}
 </script>
