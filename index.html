@@ -64,11 +64,11 @@
         .micro-val-orange{font-size:13px;font-weight:400;color:var(--orange);}
         .micro-val-cyan{font-size:13px;font-weight:400;color:var(--cyan);}
         .micro-lbl{font-size:9px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;}
-        .days-row{display:flex;align-items:baseline;gap:12px;margin-bottom:11px;}
+        .days-row{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
         .days-val{font-size:66px;font-weight:200;line-height:1;letter-spacing:-3px;color:var(--text-1);}
-        .days-right{display:flex;flex-direction:column;gap:3px;justify-content:flex-end;padding-bottom:4px;}
-        .days-lbl{font-size:9px;text-transform:uppercase;color:var(--text-2);letter-spacing:2.5px;}
-        .days-pct{font-size:13px;font-weight:400;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        .days-right{display:flex;flex-direction:column;gap:2px;justify-content:center;flex:1;}
+        .days-lbl{font-size:9px;text-transform:uppercase;color:var(--text-2);letter-spacing:2px;}
+        .days-pct{font-size:15px;font-weight:400;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
         .days-xp{font-size:11px;color:var(--text-3);}
         /* ── JAR ANIMATION ── */
         .jar-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;margin-left:8px;}
@@ -111,14 +111,14 @@
         .momentum-track{flex:1;height:3px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden;}
         .momentum-fill{height:100%;border-radius:2px;transition:width 0.8s ease,background 0.8s ease;}
         .momentum-val{font-size:12px;font-weight:600;flex-shrink:0;min-width:36px;text-align:right;}
-        .identity-card{background:linear-gradient(135deg,rgba(124,92,191,0.10),rgba(0,200,240,0.04));border:1px solid rgba(124,92,191,0.28);border-radius:14px;padding:14px 18px;margin-bottom:9px;cursor:pointer;position:relative;overflow:hidden;}
+        .identity-card{background:linear-gradient(135deg,rgba(124,92,191,0.10),rgba(0,200,240,0.04));border:1px solid rgba(124,92,191,0.28);border-radius:14px;padding:9px 14px;margin-bottom:9px;cursor:pointer;position:relative;overflow:hidden;}
         .identity-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--grad);opacity:0.4;}
-        .identity-kicker{font-size:8px;color:var(--purple);letter-spacing:3px;text-transform:uppercase;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+        .identity-kicker{font-size:8px;color:var(--purple);letter-spacing:3px;text-transform:uppercase;font-weight:600;margin-bottom:3px;display:flex;align-items:center;gap:6px;}
         .identity-kicker::before{content:'';width:4px;height:4px;background:var(--purple);border-radius:50%;box-shadow:0 0 6px var(--purple);}
-        .identity-text{font-size:15px;font-weight:300;color:var(--text-1);line-height:1.5;}
+        .identity-text{font-size:14px;font-weight:300;color:var(--text-1);line-height:1.4;}
         .identity-text.placeholder{color:var(--text-3);font-size:13px;}
-        .identity-edit{display:none;width:100%;background:transparent;border:none;color:var(--text-1);font-size:15px;font-weight:300;outline:none;resize:none;font-family:inherit;line-height:1.5;}
-        .identity-hint{font-size:9px;color:var(--text-3);margin-top:8px;letter-spacing:1px;}
+        .identity-edit{display:none;width:100%;background:transparent;border:none;color:var(--text-1);font-size:14px;font-weight:300;outline:none;resize:none;font-family:inherit;line-height:1.4;}
+        .identity-hint{font-size:8px;color:var(--text-3);margin-top:4px;letter-spacing:1px;}
         .signal-card{border-radius:12px;padding:11px 16px;margin-bottom:9px;font-size:12px;font-weight:300;line-height:1.5;display:none;align-items:center;gap:10px;}
         .signal-card.show{display:flex;}
         .signal-card.warning{background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.2);color:rgba(249,115,22,0.85);}
@@ -164,6 +164,23 @@
         .ms-add-btn{background:var(--cyan-dim);border:1px solid var(--cyan-line);color:var(--cyan);padding:8px 14px;border-radius:9px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;}
         .routine-fav-badge{display:inline-block;background:rgba(0,200,240,0.10);border:1px solid rgba(0,200,240,0.22);border-radius:5px;padding:1px 6px;font-size:8px;color:var(--cyan);font-weight:600;letter-spacing:1px;margin-left:5px;vertical-align:middle;}
         .why-card{background:linear-gradient(135deg,rgba(124,92,191,0.08),rgba(0,200,240,0.03));border:1px solid rgba(124,92,191,0.22);border-radius:12px;padding:11px 16px;margin-bottom:9px;display:none;}
+        /* ── MENTOR CARD ── */
+        .mentor-list{display:flex;flex-direction:column;gap:7px;margin-bottom:10px;}
+        .mentor-item{display:flex;align-items:flex-start;gap:10px;background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:10px;padding:10px 13px;position:relative;}
+        .mentor-avatar{width:28px;height:28px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#fff;flex-shrink:0;letter-spacing:0;}
+        .mentor-info{flex:1;min-width:0;}
+        .mentor-name{font-size:13px;font-weight:400;color:var(--text-1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+        .mentor-role{font-size:11px;color:var(--text-3);margin-top:2px;line-height:1.4;}
+        .mentor-contact{font-size:10px;color:var(--cyan);margin-top:3px;opacity:0.8;}
+        .mentor-del{background:none;border:none;color:var(--text-3);font-size:16px;cursor:pointer;padding:0 2px;line-height:1;flex-shrink:0;margin-top:1px;}
+        .mentor-del:hover{color:var(--danger);}
+        .mentor-add-form{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:11px 13px;margin-bottom:8px;}
+        .mentor-field{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 11px;margin-bottom:6px;font-size:12px;color:var(--text-1);font-family:inherit;outline:none;width:100%;}
+        .mentor-field::placeholder{color:var(--text-3);}
+        .mentor-field:last-child{margin-bottom:0;}
+        .mentor-add-btn{background:var(--cyan-dim);border:1px solid var(--cyan-line);color:var(--cyan);padding:8px 16px;border-radius:8px;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;width:100%;margin-top:8px;}
+        .mentor-add-btn:active{background:rgba(0,200,240,0.22);}
+        .mentor-empty{font-size:11px;color:var(--text-3);padding:4px 0;line-height:1.6;}
         .why-label{font-size:8px;color:var(--purple);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:4px;}
         .why-text{font-size:12px;color:var(--text-2);line-height:1.55;font-style:italic;font-weight:300;}
         .quote-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 18px;margin-bottom:9px;cursor:pointer;}
@@ -746,17 +763,19 @@
             <div class="micro-item" onclick="openStatGuide('streak')" style="cursor:pointer;"><span class="micro-val-orange" id="streakNum">0</span><span class="micro-lbl">pv putki <button class="stat-help-btn">?</button></span></div>
             <div class="micro-item" onclick="openStatGuide('mult')" style="cursor:pointer;"><span class="micro-lbl">kerroin <button class="stat-help-btn">?</button></span><span class="micro-val-cyan" id="multNum">×1.00</span></div>
         </div>
+        <!-- COMPACT TOP ROW: iso numero + tehty + purkki -->
         <div class="days-row">
             <div class="days-val" id="valM">—</div>
             <div class="days-right">
-                <div class="days-lbl" style="display:flex;align-items:center;gap:4px;">Päiviä<br>maaliin <button onclick="openStatGuide('days')" class="stat-help-btn">?</button></div>
-                <div class="days-lbl" style="margin-top:8px;letter-spacing:1.5px;color:var(--text-3);">Tehty</div>
-                <div class="days-pct" id="pctVal" onclick="openStatGuide('pct')" style="cursor:pointer;">0% <button class="stat-help-btn">?</button></div>
-                <div class="days-xp" id="xpDisplay">0 XP</div>
+                <div class="days-lbl" style="display:flex;align-items:center;gap:4px;">Päiviä maaliin <button onclick="openStatGuide('days')" class="stat-help-btn">?</button></div>
+                <div style="display:flex;align-items:baseline;gap:8px;margin-top:6px;">
+                    <div class="days-pct" id="pctVal" onclick="openStatGuide('pct')" style="cursor:pointer;">0%</div>
+                    <div class="days-xp" id="xpDisplay">0 XP</div>
+                </div>
             </div>
-            <!-- JAR VISUAL -->
-            <div class="jar-wrap" id="jarWrap">
-                <svg class="jar-svg" id="jarSvg" viewBox="0 0 44 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- JAR — kompakti, oikeassa reunassa -->
+            <div class="jar-wrap" id="jarWrap" style="margin-left:auto;">
+                <svg class="jar-svg" id="jarSvg" viewBox="0 0 44 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:44px;height:56px;">
                     <defs>
                         <clipPath id="jarClip"><rect x="5" y="14" width="34" height="36" rx="7"/></clipPath>
                         <linearGradient id="liqGrad" x1="0" y1="0" x2="0" y2="1">
@@ -768,21 +787,15 @@
                             <stop offset="100%" stop-color="#00c8f0"/>
                         </linearGradient>
                     </defs>
-                    <!-- jar body -->
                     <rect x="5" y="14" width="34" height="36" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
-                    <!-- liquid fill — y and height animated by JS -->
                     <g clip-path="url(#jarClip)">
                         <rect id="jarLiquid" class="jar-liquid" x="5" y="50" width="34" height="0" fill="url(#liqGrad)" rx="0"/>
-                        <!-- ripple on top of liquid -->
                         <ellipse id="jarRipple" class="jar-ripple" cx="22" cy="50" rx="14" ry="3" fill="rgba(255,255,255,0.25)"/>
-                        <!-- bubbles -->
                         <circle class="jar-bubble" cx="14" cy="42" r="2" fill="rgba(255,255,255,0.28)" style="animation-delay:0s"/>
                         <circle class="jar-bubble" cx="28" cy="38" r="1.4" fill="rgba(255,255,255,0.20)" style="animation-delay:0.8s"/>
                         <circle class="jar-bubble" cx="20" cy="44" r="1" fill="rgba(255,255,255,0.16)" style="animation-delay:1.5s"/>
-                        <!-- shine -->
                         <rect class="jar-shine" x="8" y="16" width="4" height="20" rx="2" fill="rgba(255,255,255,0.12)"/>
                     </g>
-                    <!-- lid -->
                     <rect x="9" y="9" width="26" height="7" rx="3.5" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
                     <rect x="14" y="5" width="16" height="5" rx="2.5" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
                 </svg>
@@ -797,12 +810,8 @@
             <div class="lvl-lbl">Päivä <span class="lvl-val" id="valDays">1</span></div>
         </div>
         <div class="bar-track"><div class="bar-fill" id="barXP"></div></div>
-        <div class="sc-bottom">
-            <div class="sb-item" onclick="openStatGuide('avg')" style="cursor:pointer;"><div class="sb-val" id="statAvg">—</div><div class="sb-lbl">XP / pv <button class="stat-help-btn">?</button></div></div>
-            <div class="sb-item" onclick="openStatGuide('best')" style="cursor:pointer;"><div class="sb-val" id="statBest">—</div><div class="sb-lbl">Paras pv <button class="stat-help-btn">?</button></div></div>
-            <div class="sb-item" onclick="openStatGuide('bestStreak')" style="cursor:pointer;"><div class="sb-val" id="statBestStreak">—</div><div class="sb-lbl">Paras putki <button class="stat-help-btn">?</button></div></div>
-            <div class="sb-item" onclick="openStatGuide('weekXP')" style="cursor:pointer;"><div class="sb-val" id="statWeekXP">—</div><div class="sb-lbl">Tällä vk <button class="stat-help-btn">?</button></div></div>
-        </div>
+        <!-- tilastot löytyvät Tilastot-välilehdestä alla -->
+    </div>
     </div>
 
     <!-- DAILY XP GOAL -->
@@ -905,6 +914,22 @@
         <div style="font-size:10px;color:var(--text-3);margin-top:10px;">Nollaa peli muokataksesi lähtötilannetta.</div>
     </div>
 
+    <!-- ASIANTUNTIJA / MENTORI -->
+    <div class="toggle-row" onclick="togglePanel('mentor')">
+        <div class="toggle-row-lbl"><span class="lbl-dot"></span>Kuka voi auttaa?<span class="toggle-preview" id="mentorPreview"></span></div>
+        <span class="toggle-arrow" id="mentorArrow">▾</span>
+    </div>
+    <div class="toggle-body" id="mentorBody">
+        <div style="font-size:11px;color:var(--text-2);margin-bottom:10px;line-height:1.6;">Kuka on jo tehnyt sen, mitä sinä tavoittelet? Valmentaja, asiantuntija tai joku jonka voi tavoittaa ja pyytää neuvoa.</div>
+        <div class="mentor-list" id="mentorList"></div>
+        <div class="mentor-add-form" id="mentorForm">
+            <input class="mentor-field" id="mentorName" type="text" placeholder="Nimi — esim. Mari Turpela" maxlength="60">
+            <input class="mentor-field" id="mentorRole" type="text" placeholder="Miksi juuri tämä? — esim. valmentaa lisäpainoleuanvetoa" maxlength="100">
+            <input class="mentor-field" id="mentorContact" type="text" placeholder="Miten tavoitan? — esim. @mariturpela / kuntosali" maxlength="100">
+            <button class="mentor-add-btn" onclick="addMentor()">+ Lisää henkilö</button>
+        </div>
+    </div>
+
     <!-- HEAT MAP -->
     <div class="heatmap-card">
         <div class="heatmap-header">
@@ -916,6 +941,20 @@
             <span class="hm-legend-label">Vähemmän</span>
             <div class="hm-legend-cell hm-0"></div><div class="hm-legend-cell hm-1"></div><div class="hm-legend-cell hm-2"></div><div class="hm-legend-cell hm-3"></div><div class="hm-legend-cell hm-4"></div>
             <span class="hm-legend-label">Enemmän</span>
+        </div>
+    </div>
+
+    <!-- TILASTOT ACCORDION -->
+    <div class="toggle-row" onclick="togglePanel('stats')">
+        <div class="toggle-row-lbl"><span class="lbl-dot"></span>Tilastot</div>
+        <span class="toggle-arrow" id="statsArrow">▾</span>
+    </div>
+    <div class="toggle-body" id="statsBody">
+        <div class="sc-bottom" style="justify-content:space-between;padding:4px 0 8px;">
+            <div class="sb-item" onclick="openStatGuide('avg')" style="cursor:pointer;"><div class="sb-val" id="statAvg">—</div><div class="sb-lbl">XP / pv <button class="stat-help-btn">?</button></div></div>
+            <div class="sb-item" onclick="openStatGuide('best')" style="cursor:pointer;"><div class="sb-val" id="statBest">—</div><div class="sb-lbl">Paras pv <button class="stat-help-btn">?</button></div></div>
+            <div class="sb-item" onclick="openStatGuide('bestStreak')" style="cursor:pointer;"><div class="sb-val" id="statBestStreak">—</div><div class="sb-lbl">Paras putki <button class="stat-help-btn">?</button></div></div>
+            <div class="sb-item" onclick="openStatGuide('weekXP')" style="cursor:pointer;"><div class="sb-val" id="statWeekXP">—</div><div class="sb-lbl">Tällä vk <button class="stat-help-btn">?</button></div></div>
         </div>
     </div>
 
@@ -982,7 +1021,7 @@ function getLevelThreshold(lvl){if(lvl<LVL_THRESHOLDS.length)return LVL_THRESHOL
 function getLevelProgress(xp){const lvl=getLevelForXP(xp),curr=getLevelThreshold(lvl),next=getLevelThreshold(lvl+1);return{pct:Math.min(1,(xp-curr)/(next-curr)),nextAt:next,lvl};}
 const LVL_MSGS=['Systemaattinen tekeminen toimii.','Olet rakentamassa uutta identiteettiä.','Pienet teot, suuret seuraukset.','Kerryttäminen on taito — ja sinulla se on.','Putki rakentaa ihmistä. Tämä on se hetki.','Matka on enemmän kuin maali. Jatka.','Harva pääsee näin pitkälle. Sinä olet.','Jokainen teko jättää jäljen. Tämä on todiste.','Taso on vain numero — tekeminen on totta.','Olet vahvempi kuin viime viikolla.'];
 
-const GOAL_TEMPLATE=()=>({id:Date.now(),goal:'',baseline:'',quote:'',why:'',identity:'',deadline:null,r1:'',r5:'',r20:'',r50:'',v:5000,total:0,days:1,lvl:1,initialEstimate:null,lowestEstimate:null,startDate:null,streak:0,bestStreak:0,lastActivityDate:null,graceDayUsed:null,lastXP:null,lastXPLabel:null,weekLog:{},passedMilestones:[],bestDay:0,bestWeekXP:0,routineCount:{r1:0,r5:0,r20:0,r50:0},recoveryLog:[],customMilestones:[],intentioDate:null,intentioText:'',reflectionDate:null,reflectionText:'',recoveryShown:false,dayNotes:{},dailyGoal:0,mseditorOpen:false,intentioOpen:false,baselineOpen:false,daynoteOpen:false,done:false,weekChallengeIdx:0});
+const GOAL_TEMPLATE=()=>({id:Date.now(),goal:'',baseline:'',quote:'',why:'',identity:'',deadline:null,r1:'',r5:'',r20:'',r50:'',v:5000,total:0,days:1,lvl:1,initialEstimate:null,lowestEstimate:null,startDate:null,streak:0,bestStreak:0,lastActivityDate:null,graceDayUsed:null,lastXP:null,lastXPLabel:null,weekLog:{},passedMilestones:[],bestDay:0,bestWeekXP:0,routineCount:{r1:0,r5:0,r20:0,r50:0},recoveryLog:[],customMilestones:[],intentioDate:null,intentioText:'',reflectionDate:null,reflectionText:'',recoveryShown:false,dayNotes:{},dailyGoal:0,mseditorOpen:false,intentioOpen:false,baselineOpen:false,daynoteOpen:false,mentorOpen:false,mentors:[],statsOpen:false,done:false,weekChallengeIdx:0});
 
 let state={goals:[],activeIdx:0,quote:''};
 let draft={baseline:'',goal:'',quote:'',why:'',identity:''};
@@ -1014,6 +1053,8 @@ function migrateGoal(goal){
     if(!goal.mseditorOpen)goal.mseditorOpen=false;
     if(goal.deadline===undefined)goal.deadline=null;
     if(goal.weekChallengeIdx===undefined)goal.weekChallengeIdx=0;
+    if(!goal.mentors)goal.mentors=[];
+    if(goal.mentorOpen===undefined)goal.mentorOpen=false;
     goal.lvl=getLevelForXP(goal.total);
 }
 
@@ -1109,7 +1150,7 @@ function addNewGoal(){
 }
 
 function togglePanel(id){
-    const keyMap={intentio:'intentioOpen',baseline:'baselineOpen',daynote:'daynoteOpen',mseditor:'mseditorOpen'};
+    const keyMap={intentio:'intentioOpen',baseline:'baselineOpen',daynote:'daynoteOpen',mseditor:'mseditorOpen',mentor:'mentorOpen',stats:'statsOpen'};
     const key=keyMap[id]||id+'Open';g()[key]=!g()[key];save();
     document.getElementById(id+'Body').classList.toggle('open',g()[key]);
     document.getElementById(id+'Arrow').classList.toggle('open',g()[key]);
@@ -1117,6 +1158,7 @@ function togglePanel(id){
     if(id==='intentio')updateIntentioPreview();
     if(id==='daynote'&&g()[key])renderDaynotes();
     if(id==='mseditor'&&g()[key])renderCustomMilestones();
+    if(id==='mentor'&&g()[key])renderMentors();
 }
 function initIntentio(){
     const el=document.getElementById('intentioInput');const today=getTodayStr();
@@ -1128,6 +1170,55 @@ function initIntentio(){
 }
 function updateIntentioPreview(){const prev=document.getElementById('intentioPreview');const today=getTodayStr();prev.innerText=(!g().intentioOpen&&g().intentioDate===today&&g().intentioText)?'— '+g().intentioText.slice(0,28)+(g().intentioText.length>28?'…':''):'';}
 function initBaseline(){document.getElementById('baselineText').innerText=g().baseline||'—';document.getElementById('baselineBody').classList.toggle('open',!!g().baselineOpen);document.getElementById('baselineArrow').classList.toggle('open',!!g().baselineOpen);}
+
+function initStats(){
+    document.getElementById('statsBody').classList.toggle('open',!!g().statsOpen);
+    document.getElementById('statsArrow').classList.toggle('open',!!g().statsOpen);
+}
+function initMentor(){
+    document.getElementById('mentorBody').classList.toggle('open',!!g().mentorOpen);
+    document.getElementById('mentorArrow').classList.toggle('open',!!g().mentorOpen);
+    const count=g().mentors?g().mentors.length:0;
+    document.getElementById('mentorPreview').innerText=count>0?`— ${count} henkilö${count>1?'ä':''}`:'';;
+    if(g().mentorOpen)renderMentors();
+}
+function renderMentors(){
+    const list=document.getElementById('mentorList');
+    const mentors=g().mentors||[];
+    if(!mentors.length){list.innerHTML='<div class="mentor-empty">Ei vielä ketään. Kuka tietää enemmän kuin sinä tästä aiheesta?</div>';return;}
+    list.innerHTML=mentors.map((m,i)=>{
+        const initials=(m.name||'?').trim().split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+        return`<div class="mentor-item">
+            <div class="mentor-avatar">${initials}</div>
+            <div class="mentor-info">
+                <div class="mentor-name">${escHtml(m.name)}</div>
+                ${m.role?`<div class="mentor-role">${escHtml(m.role)}</div>`:''}
+                ${m.contact?`<div class="mentor-contact">→ ${escHtml(m.contact)}</div>`:''}
+            </div>
+            <button class="mentor-del" onclick="deleteMentor(${i})" title="Poista">×</button>
+        </div>`;
+    }).join('');
+}
+function addMentor(){
+    const name=document.getElementById('mentorName').value.trim();
+    if(!name){document.getElementById('mentorName').focus();return;}
+    const role=document.getElementById('mentorRole').value.trim();
+    const contact=document.getElementById('mentorContact').value.trim();
+    if(!g().mentors)g().mentors=[];
+    if(g().mentors.length>=8){showToast('Max 8 henkilöä');return;}
+    g().mentors.push({name,role,contact});
+    document.getElementById('mentorName').value='';
+    document.getElementById('mentorRole').value='';
+    document.getElementById('mentorContact').value='';
+    save();renderMentors();
+    document.getElementById('mentorPreview').innerText=`— ${g().mentors.length} henkilö${g().mentors.length>1?'ä':''}`;
+}
+function deleteMentor(idx){
+    if(!g().mentors)return;
+    g().mentors.splice(idx,1);save();renderMentors();
+    const count=g().mentors.length;
+    document.getElementById('mentorPreview').innerText=count>0?`— ${count} henkilö${count>1?'ä':''}`:'' ;
+}
 
 function initDaynote(){
     document.getElementById('daynoteBody').classList.toggle('open',!!g().daynoteOpen);
@@ -1284,7 +1375,7 @@ function start(){
 function render(){
     document.getElementById('viewSetup').style.display='none';document.getElementById('viewGame').style.display='block';
     renderTabs();document.getElementById('txtGoal').innerText=g().goal.toUpperCase();document.getElementById('txtV').innerText=`${g().v.toLocaleString('fi-FI')} XP`;
-    initIntentio();initBaseline();initQuote();initWhy();initIdentity();initDaynote();
+    initIntentio();initBaseline();initQuote();initWhy();initIdentity();initDaynote();initMentor();initStats();
     updateUI();checkWeeklyReflection();checkRecovery();initCustomMilestones();setTimeout(checkComebackOverlay,1200);
 }
 function getMultiplier(){return 1+(Math.min(g().days,84)-1)/83;}
@@ -1582,7 +1673,8 @@ function copyMentorPrompt(){
     const todayNote=g().dayNotes&&g().dayNotes[today]?g().dayNotes[today]:'';
     const identityLine=g().identity?`· Identiteetti: "${g().identity}"\n`:'';const whyLine=g().why?`· Miksi tämä on tärkeää: "${g().why}"\n`:'';
     const dgLine=g().dailyGoal?`· Päivätavoite: ${todayXP}/${g().dailyGoal} XP\n`:'';
-    const txt=`Olet MUUTOSKONE-järjestelmän sparrauskumppani.\n\nTämänhetkinen datani:\n· Tavoite: ${g().goal}\n${identityLine}${whyLine}· Edistyminen: ${g().total.toLocaleString('fi-FI')} / ${g().v.toLocaleString('fi-FI')} XP (${pct}%)\n· Päivä: ${g().days} | Putki: ${g().streak} pv | Momentum: ${momentum}%\n${dgLine}· Keskitahti: ${avg} XP/pv | Tänään: ${todayXP} XP | Paras pv: ${g().bestDay} XP\n· Kertymäkerroin: ×${getMultiplier().toFixed(2)}\n· Tämän päivän intentio: "${intentioTxt}"${todayNote?'\n· Päivän muistiinpano: "'+todayNote.slice(0,200)+'"':''}${getBaselinePart()}\n\nTärkeää: Tarkista eteneekö käyttäjä oikeaan suuntaan oikeilla rutiineilla. Jos rutiinit näyttävät liian helpolta suhteessa tavoitteeseen (esim. pelkkä venyttely kun tavoitteena on Cooper-testi), nosta tämä esiin.\n\nTyyli: Ole lämmin mutta suora. Fokus eteenpäin.\n\n1. Kerro yksi positiivinen asia datasta. Kysy: mikä tuntuu haastavimmalta?\n2. Anna 2–3 konkreettista ideaa seuraavaan askeleeseen.\n3. Arvioi onko nykyinen tekeminen linjassa tavoitteen kanssa.\n4. Lopeta yhdellä lauseella.\n\nAloita kohdasta 1.`;
+    const mentorLine=(g().mentors&&g().mentors.length)?`· Tunnistetut asiantuntijat: ${g().mentors.map(m=>m.name+(m.role?' ('+m.role+')':'')).join(', ')}\n`:'';
+    const txt=`Olet MUUTOSKONE-järjestelmän sparrauskumppani.\n\nTämänhetkinen datani:\n· Tavoite: ${g().goal}\n${identityLine}${whyLine}· Edistyminen: ${g().total.toLocaleString('fi-FI')} / ${g().v.toLocaleString('fi-FI')} XP (${pct}%)\n· Päivä: ${g().days} | Putki: ${g().streak} pv | Momentum: ${momentum}%\n${dgLine}· Keskitahti: ${avg} XP/pv | Tänään: ${todayXP} XP | Paras pv: ${g().bestDay} XP\n· Kertymäkerroin: ×${getMultiplier().toFixed(2)}\n${mentorLine}· Tämän päivän intentio: "${intentioTxt}"${todayNote?'\n· Päivän muistiinpano: "'+todayNote.slice(0,200)+'"':''}${getBaselinePart()}\n\nTärkeää: Tarkista eteneekö käyttäjä oikeaan suuntaan oikeilla rutiineilla. Jos rutiinit näyttävät liian helpolta suhteessa tavoitteeseen (esim. pelkkä venyttely kun tavoitteena on Cooper-testi), nosta tämä esiin.${(g().mentors&&g().mentors.length)?'\n\nAsiantuntijat: Jos käyttäjä ei ole vielä ottanut yhteyttä listatuille asiantuntijoille, kysy siitä suoraan — mitä estää?':''}\n\nTyyli: Ole lämmin mutta suora. Fokus eteenpäin.\n\n1. Kerro yksi positiivinen asia datasta. Kysy: mikä tuntuu haastavimmalta?\n2. Anna 2–3 konkreettista ideaa seuraavaan askeleeseen.\n3. Arvioi onko nykyinen tekeminen linjassa tavoitteen kanssa.\n4. Lopeta yhdellä lauseella.\n\nAloita kohdasta 1.`;
     navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyMentorBtn');b.innerText='Kopioitu';setTimeout(()=>{b.innerText='Kopioi sparrauskehote';},2200);});
 }
 
