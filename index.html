@@ -1403,7 +1403,12 @@ function render(){
     updateUI();checkWeeklyReflection();checkRecovery();initCustomMilestones();setTimeout(checkComebackOverlay,1200);
 }
 function getMultiplier(){return 1+(Math.min(g().days,84)-1)/83;}
-function calculateDaysToGoal(){if(g().total>=g().v)return 0;if(!g().total||!g().days)return null;const avg=g().total/g().days;if(avg<=0)return null;return Math.ceil((g().v-g().total)/avg);}
+function getActiveDays(){
+    // Laske päivät joina on tehty jotain weekLogista
+    const entries=Object.values(g().weekLog||{}).filter(v=>v>0);
+    return Math.max(entries.length,1);
+}
+function calculateDaysToGoal(){if(g().total>=g().v)return 0;if(!g().total)return null;const avg=g().total/getActiveDays();if(avg<=0)return null;return Math.ceil((g().v-g().total)/avg);}
 
 function addXP(baseAmt,label,e){
     if(navigator.vibrate)navigator.vibrate(baseAmt===50?[30,15,50]:25);
@@ -1781,7 +1786,7 @@ function closeDiffGuide(){document.getElementById('diffGuideOverlay').classList.
 function selectDiffTier(el,val){document.querySelectorAll('.dg-tier').forEach(t=>t.classList.remove('selected'));el.classList.add('selected');_diffSelected=val;document.getElementById('diffGuideSelectBtn').style.display='block';}
 function applyDiffTier(){if(!_diffSelected)return;const sel=_diffCtx==='setup'?document.getElementById('inV'):document.getElementById('ngV');if(sel)sel.value=_diffSelected;closeDiffGuide();}
 
-function updateForecast(){const dateEl=document.getElementById('forecastDate');const paceEl=document.getElementById('forecastPace');if(!dateEl||!paceEl)return;if(g().total>=g().v){dateEl.innerText='Tavoite saavutettu';paceEl.innerText='';return;}const avg=g().days>0?g().total/g().days:0;if(avg<=0){dateEl.innerText='Lisää dataa';paceEl.innerText='';return;}const daysLeft=Math.ceil((g().v-g().total)/avg);const arrival=new Date();arrival.setDate(arrival.getDate()+daysLeft);dateEl.innerText=arrival.toLocaleDateString('fi-FI',{day:'numeric',month:'long',year:'numeric'});paceEl.innerText=Math.round(avg)+' XP/pv';}
+function updateForecast(){const dateEl=document.getElementById('forecastDate');const paceEl=document.getElementById('forecastPace');if(!dateEl||!paceEl)return;if(g().total>=g().v){dateEl.innerText='Tavoite saavutettu';paceEl.innerText='';return;}const activeDays=getActiveDays();const avg=g().total/activeDays;if(avg<=0){dateEl.innerText='Lisää dataa';paceEl.innerText='';return;}const daysLeft=Math.ceil((g().v-g().total)/avg);const arrival=new Date();arrival.setDate(arrival.getDate()+daysLeft);dateEl.innerText=arrival.toLocaleDateString('fi-FI',{day:'numeric',month:'long',year:'numeric'});paceEl.innerText=Math.round(avg)+' XP/pv';}
 
 function calcHealth(){
     const avg=g().days>0?g().total/g().days:0;const today=getTodayStr();const todayXP=g().weekLog[today]||0;
