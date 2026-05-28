@@ -85,6 +85,9 @@
         .jar-ripple{animation:none;opacity:0;transition:opacity 0.4s;}
         .jar-wrap.just-added .jar-ripple{animation:jarRipple 0.6s ease-out forwards;}
         @keyframes jarRipple{0%{opacity:0.6;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1.18)}}
+        /* ── PISARA TIPPUU PURKKIIN ── */
+        .jar-drop{animation:jarDrop var(--drop-dur) cubic-bezier(0.4,0,1,1) forwards;}
+        @keyframes jarDrop{0%{opacity:0.9;transform:translateY(0) scale(1)}80%{opacity:0.8;transform:translateY(var(--drop-dist)) scale(0.8)}100%{opacity:0;transform:translateY(var(--drop-dist)) scale(0.3)}}
         /* ── KRIITTINEN ISKU — kultainen mutta tyylikäs ── */
         .crit-fly{position:fixed;font-size:28px;font-weight:300;color:#C9A84C;letter-spacing:-1px;pointer-events:none;z-index:9001;animation:critFly 1.2s cubic-bezier(0.22,1,0.36,1) forwards;}
         @keyframes critFly{0%{opacity:1;transform:translateY(0) scale(1.2)}60%{opacity:1;transform:translateY(-50px) scale(1)}100%{opacity:0;transform:translateY(-80px) scale(0.85)}}
@@ -1865,30 +1868,52 @@ function playXPSound(baseAmt){
 }
 
 /* ── JAR UPDATE ── */
+function dropIntoJar(pct){
+    const svg=document.getElementById('jarSvg');
+    if(!svg)return;
+    const jarTop=14,jarBot=50,jarH=36;
+    const fillH=Math.min(pct/100,1)*jarH;
+    const fillY=jarBot-fillH;
+    // Pisara tippuu kannen alta alas nestepinnan tasolle
+    const dropDist=fillY-10; // matka kannen alapuolelta nestepintaan
+    const cols=['rgba(77,204,228,0.85)','rgba(124,92,191,0.8)','rgba(0,200,240,0.9)'];
+    const col=cols[Math.floor(Math.random()*cols.length)];
+    const cx=12+Math.random()*20; // satunnainen x purkin sisällä
+    const drop=document.createElementNS('http://www.w3.org/2000/svg','ellipse');
+    drop.setAttribute('cx',cx);
+    drop.setAttribute('cy','12');
+    drop.setAttribute('rx','2.5');
+    drop.setAttribute('ry','3.5');
+    drop.setAttribute('fill',col);
+    drop.setAttribute('clip-path','url(#jarClip)');
+    drop.style.setProperty('--drop-dist',`${Math.max(dropDist,4)}px`);
+    drop.style.setProperty('--drop-dur','0.45s');
+    drop.classList.add('jar-drop');
+    svg.appendChild(drop);
+    setTimeout(()=>drop.remove(),500);
+}
+
 function updateJar(pct,justAdded){
     const wrap=document.getElementById('jarWrap');
     const liq=document.getElementById('jarLiquid');
     const ripple=document.getElementById('jarRipple');
     const lbl=document.getElementById('jarLabel');
     if(!wrap||!liq)return;
-    // jar interior: y=14 to y=50, height=36px total
     const jarTop=14,jarBot=50,jarH=36;
     const fillH=Math.min(pct/100,1)*jarH;
     const fillY=jarBot-fillH;
     liq.setAttribute('y',fillY);
     liq.setAttribute('height',fillH);
-    // ripple position
     if(ripple){ripple.setAttribute('cy',fillY);}
-    // color gradient: shift to green when near full
     const fillEl=document.getElementById('jarLiquid');
     if(pct>=100){fillEl.setAttribute('fill','url(#liqGradFull)');wrap.classList.add('glowing');}
     else{fillEl.setAttribute('fill','url(#liqGrad)');if(pct<95)wrap.classList.remove('glowing');}
-    // label
     if(lbl)lbl.innerText=pct>=100?'TÄYNNÄ!':Math.round(pct)+'%';
-    // bubble & glow when active
     if(pct>0)wrap.classList.add('active'); else wrap.classList.remove('active');
-    // ripple flash on new XP
     if(justAdded){
+        // Pisara tippuu
+        dropIntoJar(pct);
+        // Ripple nestepinnalla
         wrap.classList.remove('just-added');void wrap.offsetWidth;
         wrap.classList.add('just-added');
         setTimeout(()=>wrap.classList.remove('just-added'),700);
@@ -1898,80 +1923,84 @@ function explodeJar(){
     const wrap=document.getElementById('jarWrap');
     const svg=document.getElementById('jarSvg');
     if(!wrap||!svg)return;
-    const rect=svg.getBoundingClientRect();
-    const cx=rect.left+rect.width/2, cy=rect.top+rect.height/2;
 
-    // 1. Täytä purkki ensin kokonaan
+    // 1. Täytä purkki kokonaan ensin
     updateJar(100,false);
 
-    // 2. Luo iso purkki ruudun keskelle räjähdystä varten
-    const bigJar=document.createElement('div');
-    bigJar.style.cssText=`position:fixed;inset:0;z-index:8500;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;`;
-    bigJar.innerHTML=`
-        <div id="bigJarEmoji" style="font-size:80px;line-height:1;transition:transform 0.3s;filter:drop-shadow(0 0 20px rgba(0,200,240,0.5));">🫙</div>
-        <div id="bigJarLabel" style="font-size:11px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;margin-top:8px;opacity:0.8;">TÄYNNÄ!</div>
-    `;
-    document.body.appendChild(bigJar);
+    // 2. Suurenna sama purkki ruudun keskelle CSS-transformilla
+    const rect=svg.getBoundingClientRect();
+    const scaleX=(window.innerWidth*0.55)/rect.width;
+    const scaleY=(window.innerWidth*0.55)/rect.height;
+    const scale=Math.min(scaleX,scaleY);
+    const targetX=window.innerWidth/2-(rect.left+rect.width/2);
+    const targetY=window.innerHeight/2-(rect.top+rect.height/2);
+
+    svg.style.transition='transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';
+    svg.style.transformOrigin='center center';
+    svg.style.transform=`translate(${targetX}px,${targetY}px) scale(${scale})`;
+    svg.style.zIndex='8500';
+    svg.style.position='relative';
+    wrap.style.overflow='visible';
+    wrap.style.zIndex='8500';
+    wrap.style.position='relative';
+
+    if(navigator.vibrate)navigator.vibrate([20,10,60,10,100]);
 
     setTimeout(()=>{
-        // Shake pieni purkki
-        svg.classList.add('jar-explode');
-        if(navigator.vibrate)navigator.vibrate([20,10,60,10,100]);
+        // 3. Shake
+        svg.style.transition='transform 0.05s ease-in-out';
+        let shakes=0;
+        const shakeInt=setInterval(()=>{
+            const off=(Math.random()-0.5)*14;
+            svg.style.transform=`translate(${targetX+off}px,${targetY}px) scale(${scale})`;
+            if(++shakes>6){
+                clearInterval(shakeInt);
 
-        // Iso purkki shakkaa ensin
-        const emoji=document.getElementById('bigJarEmoji');
-        if(emoji){
-            emoji.style.animation='jarShake 0.3s ease-in-out';
-            setTimeout(()=>{
-                // Räjähdys!
-                emoji.style.transform='scale(1.4)';
-                emoji.style.transition='transform 0.15s ease-out';
+                // 4. Kansi lentää ylös — animoidaan SVG lid-elementtejä
+                const lid1=svg.querySelector('rect:last-child');
+                const lid2=svg.querySelectorAll('rect')[svg.querySelectorAll('rect').length-2];
+                [lid1,lid2].forEach(el=>{if(el){el.style.transition='transform 0.6s cubic-bezier(0.22,1,0.36,1)';el.style.transformOrigin='center';el.style.transform='translateY(-80px) rotate(-15deg)';}});
+
+                // 5. Purkki paisuu ja räjähtää
                 setTimeout(()=>{
-                    emoji.style.transform='scale(0)';
-                    emoji.style.transition='transform 0.4s ease-in';
-                    const lbl=document.getElementById('bigJarLabel');
-                    if(lbl){lbl.innerText='💥';lbl.style.fontSize='14px';}
-                },150);
-            },300);
-        }
+                    svg.style.transition='transform 0.15s ease-out';
+                    svg.style.transform=`translate(${targetX}px,${targetY}px) scale(${scale*1.25})`;
+                    setTimeout(()=>{
+                        svg.style.transition='transform 0.4s ease-in, opacity 0.4s ease-in';
+                        svg.style.transform=`translate(${targetX}px,${targetY}px) scale(${scale*0.1})`;
+                        svg.style.opacity='0';
 
-        // Kansi lentää ylös (iso versio)
-        const lid=document.createElement('div');
-        lid.style.cssText=`position:fixed;font-size:40px;left:${window.innerWidth/2-20}px;top:${window.innerHeight/2-40}px;pointer-events:none;z-index:8600;animation:lidFly 0.9s cubic-bezier(0.22,1,0.36,1) forwards;`;
-        lid.innerText='🫙';
-        document.body.appendChild(lid);setTimeout(()=>lid.remove(),1000);
+                        // 6. Roiskeet lähtevät purkin sijainnista
+                        const cx=window.innerWidth/2, cy=window.innerHeight/2;
+                        const splashCols=['#4dcce4','#7c5cbf','#00c8f0','#a78bfa','#22c55e','#C9A84C'];
+                        for(let i=0;i<22;i++){
+                            const s=document.createElement('div');s.className='jar-splash';
+                            const angle=(i/22)*Math.PI*2;
+                            const dist=70+Math.random()*130;
+                            const size=5+Math.random()*10;
+                            const dur=(0.5+Math.random()*0.5).toFixed(2);
+                            s.style.cssText=`width:${size}px;height:${size}px;background:${splashCols[i%splashCols.length]};left:${cx}px;top:${cy}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist-50}px;--dur:${dur}s;border-radius:50%;`;
+                            document.body.appendChild(s);setTimeout(()=>s.remove(),1100);
+                        }
 
-        // Nesteroiskeet isona — 20 pisaraa ympäri ruutua
-        const splashCols=['#4dcce4','#7c5cbf','#00c8f0','#a78bfa','#22c55e','#C9A84C'];
-        for(let i=0;i<20;i++){
-            const s=document.createElement('div');s.className='jar-splash';
-            const angle=(i/20)*Math.PI*2;
-            const dist=80+Math.random()*120;
-            const size=5+Math.random()*9;
-            const dur=(0.5+Math.random()*0.5).toFixed(2);
-            s.style.cssText=`width:${size}px;height:${size}px;background:${splashCols[i%splashCols.length]};left:${window.innerWidth/2}px;top:${window.innerHeight/2}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist-40}px;--dur:${dur}s;`;
-            document.body.appendChild(s);setTimeout(()=>s.remove(),1100);
-        }
-
-        // Sirpaleet
-        const shardShapes=['▲','◆','▸','●','◀'];
-        for(let i=0;i<10;i++){
-            const sh=document.createElement('div');sh.className='jar-shard';
-            const angle=(i/10)*Math.PI*2+0.3;const dist=60+Math.random()*80;
-            const dur=(0.6+Math.random()*0.4).toFixed(2);
-            sh.style.cssText=`font-size:${8+Math.random()*8}px;color:rgba(255,255,255,0.4);left:${window.innerWidth/2}px;top:${window.innerHeight/2}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist}px;--rot:${(Math.random()-0.5)*360}deg;--dur:${dur}s;`;
-            sh.innerText=shardShapes[i%shardShapes.length];
-            document.body.appendChild(sh);setTimeout(()=>sh.remove(),1100);
-        }
-
-        // Poista iso purkki räjähdyksen jälkeen
-        setTimeout(()=>bigJar.remove(),1400);
-
-        // Pieni purkki-label
-        const lbl=document.getElementById('jarLabel');
-        if(lbl){lbl.innerText='💥';setTimeout(()=>{if(lbl)lbl.innerText='VALMIS!';},600);}
-
-    },400);
+                        // 7. Palauta purkki normaaliksi victoryä varten
+                        setTimeout(()=>{
+                            svg.style.transition='none';
+                            svg.style.transform='';
+                            svg.style.opacity='1';
+                            svg.style.zIndex='';
+                            svg.style.position='';
+                            wrap.style.overflow='';
+                            wrap.style.zIndex='';
+                            wrap.style.position='';
+                            const lbl=document.getElementById('jarLabel');
+                            if(lbl)lbl.innerText='VALMIS!';
+                        },500);
+                    },150);
+                },200);
+            }
+        },60);
+    },500);
 }
 function exportData(){const a=document.createElement('a');a.href='data:text/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(state));a.download='muutoskone_v11.json';a.click();}
 function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.parse(e.target.result);if(p.goals){state=p;}else{state.goals=[p];state.activeIdx=0;}state.goals.forEach(migrateGoal);save();render();}catch(err){alert('Tiedoston lukeminen epäonnistui.');}};r.readAsText(ev.target.files[0]);}
