@@ -1473,7 +1473,7 @@ function addXP(baseAmt,label,e){
     checkMilestones();checkCustomMilestones();
     if(g().total>=g().v){
         explodeJar();
-        setTimeout(()=>document.getElementById('victoryOverlay').style.display='flex',900);
+        setTimeout(()=>document.getElementById('victoryOverlay').style.display='flex',2200);
     }
     const est=calculateDaysToGoal();if(est!==null){if(g().initialEstimate===null){g().initialEstimate=est;g().lowestEstimate=est;}else if(est<g().lowestEstimate)g().lowestEstimate=est;}
     save();updateUI();
@@ -1904,45 +1904,74 @@ function explodeJar(){
     // 1. Täytä purkki ensin kokonaan
     updateJar(100,false);
 
-    // 2. Pieni shake sitten pop
+    // 2. Luo iso purkki ruudun keskelle räjähdystä varten
+    const bigJar=document.createElement('div');
+    bigJar.style.cssText=`position:fixed;inset:0;z-index:8500;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;`;
+    bigJar.innerHTML=`
+        <div id="bigJarEmoji" style="font-size:80px;line-height:1;transition:transform 0.3s;filter:drop-shadow(0 0 20px rgba(0,200,240,0.5));">🫙</div>
+        <div id="bigJarLabel" style="font-size:11px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;margin-top:8px;opacity:0.8;">TÄYNNÄ!</div>
+    `;
+    document.body.appendChild(bigJar);
+
     setTimeout(()=>{
+        // Shake pieni purkki
         svg.classList.add('jar-explode');
         if(navigator.vibrate)navigator.vibrate([20,10,60,10,100]);
 
-        // 3. Kansi lentää ylös
+        // Iso purkki shakkaa ensin
+        const emoji=document.getElementById('bigJarEmoji');
+        if(emoji){
+            emoji.style.animation='jarShake 0.3s ease-in-out';
+            setTimeout(()=>{
+                // Räjähdys!
+                emoji.style.transform='scale(1.4)';
+                emoji.style.transition='transform 0.15s ease-out';
+                setTimeout(()=>{
+                    emoji.style.transform='scale(0)';
+                    emoji.style.transition='transform 0.4s ease-in';
+                    const lbl=document.getElementById('bigJarLabel');
+                    if(lbl){lbl.innerText='💥';lbl.style.fontSize='14px';}
+                },150);
+            },300);
+        }
+
+        // Kansi lentää ylös (iso versio)
         const lid=document.createElement('div');
-        lid.className='jar-lid-fly';lid.innerText='🫙';
-        lid.style.cssText=`left:${cx-12}px;top:${cy-30}px;`;
+        lid.style.cssText=`position:fixed;font-size:40px;left:${window.innerWidth/2-20}px;top:${window.innerHeight/2-40}px;pointer-events:none;z-index:8600;animation:lidFly 0.9s cubic-bezier(0.22,1,0.36,1) forwards;`;
+        lid.innerText='🫙';
         document.body.appendChild(lid);setTimeout(()=>lid.remove(),1000);
 
-        // 4. Nesteroiskeet — 14 pisaraa
-        const splashCols=['#4dcce4','#7c5cbf','#00c8f0','#a78bfa','#22c55e'];
-        for(let i=0;i<14;i++){
+        // Nesteroiskeet isona — 20 pisaraa ympäri ruutua
+        const splashCols=['#4dcce4','#7c5cbf','#00c8f0','#a78bfa','#22c55e','#C9A84C'];
+        for(let i=0;i<20;i++){
             const s=document.createElement('div');s.className='jar-splash';
-            const angle=(i/14)*Math.PI*2;
-            const dist=40+Math.random()*60;
-            const size=4+Math.random()*6;
-            const dur=(0.4+Math.random()*0.4).toFixed(2);
-            s.style.cssText=`width:${size}px;height:${size}px;background:${splashCols[i%splashCols.length]};left:${cx}px;top:${cy}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist-30}px;--dur:${dur}s;`;
-            document.body.appendChild(s);setTimeout(()=>s.remove(),900);
+            const angle=(i/20)*Math.PI*2;
+            const dist=80+Math.random()*120;
+            const size=5+Math.random()*9;
+            const dur=(0.5+Math.random()*0.5).toFixed(2);
+            s.style.cssText=`width:${size}px;height:${size}px;background:${splashCols[i%splashCols.length]};left:${window.innerWidth/2}px;top:${window.innerHeight/2}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist-40}px;--dur:${dur}s;`;
+            document.body.appendChild(s);setTimeout(()=>s.remove(),1100);
         }
 
-        // 5. Lasinsirpaleet — 8 kappaletta
+        // Sirpaleet
         const shardShapes=['▲','◆','▸','●','◀'];
-        for(let i=0;i<8;i++){
+        for(let i=0;i<10;i++){
             const sh=document.createElement('div');sh.className='jar-shard';
-            const angle=(i/8)*Math.PI*2+0.3;const dist=35+Math.random()*45;
-            const dur=(0.5+Math.random()*0.35).toFixed(2);
-            sh.style.cssText=`font-size:${7+Math.random()*6}px;color:rgba(255,255,255,0.35);left:${cx}px;top:${cy}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist}px;--rot:${(Math.random()-0.5)*360}deg;--dur:${dur}s;`;
+            const angle=(i/10)*Math.PI*2+0.3;const dist=60+Math.random()*80;
+            const dur=(0.6+Math.random()*0.4).toFixed(2);
+            sh.style.cssText=`font-size:${8+Math.random()*8}px;color:rgba(255,255,255,0.4);left:${window.innerWidth/2}px;top:${window.innerHeight/2}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist}px;--rot:${(Math.random()-0.5)*360}deg;--dur:${dur}s;`;
             sh.innerText=shardShapes[i%shardShapes.length];
-            document.body.appendChild(sh);setTimeout(()=>sh.remove(),900);
+            document.body.appendChild(sh);setTimeout(()=>sh.remove(),1100);
         }
 
-        // 6. Purkki-label muuttuu
+        // Poista iso purkki räjähdyksen jälkeen
+        setTimeout(()=>bigJar.remove(),1400);
+
+        // Pieni purkki-label
         const lbl=document.getElementById('jarLabel');
         if(lbl){lbl.innerText='💥';setTimeout(()=>{if(lbl)lbl.innerText='VALMIS!';},600);}
 
-    },200);
+    },400);
 }
 function exportData(){const a=document.createElement('a');a.href='data:text/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(state));a.download='muutoskone_v11.json';a.click();}
 function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.parse(e.target.result);if(p.goals){state=p;}else{state.goals=[p];state.activeIdx=0;}state.goals.forEach(migrateGoal);save();render();}catch(err){alert('Tiedoston lukeminen epäonnistui.');}};r.readAsText(ev.target.files[0]);}
