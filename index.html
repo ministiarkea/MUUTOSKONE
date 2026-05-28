@@ -85,6 +85,26 @@
         .jar-ripple{animation:none;opacity:0;transition:opacity 0.4s;}
         .jar-wrap.just-added .jar-ripple{animation:jarRipple 0.6s ease-out forwards;}
         @keyframes jarRipple{0%{opacity:0.6;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1.18)}}
+        /* ── KRIITTINEN ISKU — kultainen mutta tyylikäs ── */
+        .crit-fly{position:fixed;font-size:28px;font-weight:300;color:#C9A84C;letter-spacing:-1px;pointer-events:none;z-index:9001;animation:critFly 1.2s cubic-bezier(0.22,1,0.36,1) forwards;}
+        @keyframes critFly{0%{opacity:1;transform:translateY(0) scale(1.2)}60%{opacity:1;transform:translateY(-50px) scale(1)}100%{opacity:0;transform:translateY(-80px) scale(0.85)}}
+        .crit-particle{position:fixed;pointer-events:none;z-index:9000;border-radius:50%;animation:critPart var(--dur) ease-out forwards;}
+        @keyframes critPart{0%{opacity:0.8;transform:translate(0,0)}100%{opacity:0;transform:translate(var(--tx),var(--ty))}}
+        .rbtn.crit-glow{animation:critGlow 0.6s ease-out;}
+        @keyframes critGlow{0%{box-shadow:0 0 0 0 rgba(201,168,76,0)}30%{box-shadow:0 0 18px 4px rgba(201,168,76,0.45)}100%{box-shadow:0 0 0 0 rgba(201,168,76,0)}}
+        /* ── PURKKI RÄJÄHTÄÄ ── */
+        .jar-explode{animation:jarShake 0.3s ease-in-out, jarPop 0.5s 0.3s ease-out forwards;}
+        @keyframes jarShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-4px)}40%{transform:translateX(4px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+        @keyframes jarPop{0%{transform:scale(1);opacity:1}40%{transform:scale(1.3);opacity:1}100%{transform:scale(0);opacity:0}}
+        .jar-shard{position:fixed;pointer-events:none;z-index:9002;animation:shardFly var(--dur) ease-out forwards;}
+        @keyframes shardFly{0%{opacity:1;transform:translate(0,0) rotate(0deg)}100%{opacity:0;transform:translate(var(--tx),var(--ty)) rotate(var(--rot))}}
+        .jar-splash{position:fixed;pointer-events:none;z-index:9001;border-radius:50%;animation:splashFly var(--dur) ease-out forwards;}
+        @keyframes splashFly{0%{opacity:0.9;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--tx),var(--ty)) scale(0.2)}}
+        .jar-lid-fly{position:fixed;pointer-events:none;z-index:9003;font-size:18px;animation:lidFly 0.9s cubic-bezier(0.22,1,0.36,1) forwards;}
+        @keyframes lidFly{0%{opacity:1;transform:translateY(0) rotate(0deg)}100%{opacity:0;transform:translateY(-120px) rotate(-40deg)}}
+        /* ── ENSIMMÄINEN TEKO ── */
+        .first-toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:linear-gradient(135deg,rgba(34,197,94,0.22),rgba(0,200,240,0.12));border:1px solid rgba(34,197,94,0.4);border-radius:12px;padding:10px 20px;font-size:12px;color:#22c55e;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;z-index:8000;opacity:0;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;white-space:nowrap;}
+        .first-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
         .milestones{display:flex;gap:4px;margin-bottom:3px;}
         .ms{flex:1;height:2px;border-radius:1px;background:rgba(255,255,255,0.07);transition:background 0.6s;}
         .ms.done{background:var(--grad);} .ms.near{background:rgba(0,200,240,0.3);}
@@ -703,6 +723,7 @@
 </div>
 
 <div id="dayToast" class="day-toast">Uusi päivä</div>
+<div id="firstToast" class="first-toast">🔥 Ensimmäinen teko tänään!</div>
 <div id="offlineBadge">Offline — data tallennettu</div>
 
 <div class="container">
@@ -1008,11 +1029,11 @@ const MINS={1:'1–10 min',5:'15–30 min',20:'45–90 min',50:'2–4 h'};
 const XP_LABELS={1:'Mikrotehtävä',5:'Harppaus',20:'Panostus',50:'Uroteko'};
 const MILESTONES=[10,25,50,75,100];
 const MS_DATA={
-    10:{kicker:'Ensimmäinen virstanpylväs',title:'10 %',sub:'Järjestelmä toimii. Jokainen napautus vie sinua eteenpäin — ja se näkyy jo nyt.'},
-    25:{kicker:'Virstanpylväs',title:'25 %',sub:'Neljäsosa matkasta suoritettu. Useimmat eivät pääse edes tähän. Sinä olet.'},
-    50:{kicker:'Puoliväli',title:'50 %',sub:'Tässä kohtaa useimmat lopettavat. Sinä et. Puolet on takana — olet jo eri ihminen kuin alussa.'},
-    75:{kicker:'Virstanpylväs',title:'75 %',sub:'Kolme neljäsosaa tehty. Maali on näkyvissä. Älä nyt hellitä.'},
-    100:{kicker:'Tavoite saavutettu',title:'100 %',sub:'Teit sen. Systemaattinen päivittäinen tekeminen voitti.'}
+    10:{kicker:'⚡ Muutoskynnys ylitetty',title:'10 % tehty',sub:'Tässä kohtaa useimmat ovat jo luovuttaneet. Sinä et. Systeemi toimii — ja se näkyy jo numeroissa.'},
+    25:{kicker:'🔥 Neljäsosa matkasta',title:'25 % tehty',sub:'Olet jo pidemmällä kuin 80 % ihmisistä jotka aloittivat saman tavoitteen. Tämä ei ole sattumaa. Se on sinun tekemistäsi.'},
+    50:{kicker:'💥 Puoliväli — tässä monet lopettavat',title:'50 % tehty',sub:'Puolet on takana. Tämä on se hetki johon harvat yltävät. Olet jo eri ihminen kuin alussa — vaikka et ehkä vielä tunne sitä.'},
+    75:{kicker:'🎯 Maali näkyvissä',title:'75 % tehty',sub:'Kolme neljäsosaa suoritettu. Tässä kohtaa keho haluaa hellittää. Älä. Viimeinen neljännes ratkaisee kaiken.'},
+    100:{kicker:'🏆 Tavoite saavutettu',title:'100 % — VALMIS',sub:'Teit sen. Systemaattinen päivittäinen tekeminen voitti epäilyn, laiskuuden ja huonot päivät. Tämä on todiste siitä, kuka olet.'}
 };
 
 const LVL_THRESHOLDS=[0,0,500,1500,3000,5500,9000,14000,21000,30000,42000];
@@ -1384,9 +1405,18 @@ function calculateDaysToGoal(){if(g().total>=g().v)return 0;if(!g().total||!g().
 function addXP(baseAmt,label,e){
     if(navigator.vibrate)navigator.vibrate(baseAmt===50?[30,15,50]:25);
     playXPSound(baseAmt);
-    const multi=getMultiplier(),finalAmt=Math.round(baseAmt*multi);
+
+    // ── ENSIMMÄINEN TEKO TÄNÄÄN ──
+    const today=getTodayStr();
+    const isFirstToday=!g().weekLog[today]||g().weekLog[today]===0;
+
+    // ── KRIITTINEN ISKU (1/8 todennäköisyys) ──
+    const isCrit=Math.random()<0.125;
+    const critMult=isCrit?2:1;
+
+    const multi=getMultiplier(),finalAmt=Math.round(baseAmt*multi*critMult);
     g().lastXP=finalAmt;g().lastXPLabel=label;g().total+=finalAmt;
-    const today=getTodayStr();g().weekLog[today]=(g().weekLog[today]||0)+finalAmt;
+    g().weekLog[today]=(g().weekLog[today]||0)+finalAmt;
     const prevBest=g().bestDay;if(g().weekLog[today]>g().bestDay)g().bestDay=g().weekLog[today];
     if(g().lastActivityDate!==today){
         const yest=new Date();yest.setDate(yest.getDate()-1);const twoAgo=new Date();twoAgo.setDate(twoAgo.getDate()-2);const thisWeek=getISOWeekStr();
@@ -1399,12 +1429,52 @@ function addXP(baseAmt,label,e){
     const rkey=baseAmt===1?'r1':baseAmt===5?'r5':baseAmt===20?'r20':'r50';
     if(!g().routineCount)g().routineCount={r1:0,r5:0,r20:0,r50:0};
     g().routineCount[rkey]=(g().routineCount[rkey]||0)+1;
-    const fly=document.createElement('div');fly.className='xp-fly';fly.innerText=`+${finalAmt}`;fly.style.cssText=`left:${e.clientX-20}px;top:${e.clientY-20}px;`;document.body.appendChild(fly);setTimeout(()=>fly.remove(),800);
+    const fly=document.createElement('div');
+    fly.className='xp-fly';
+    fly.innerText=`+${finalAmt}`;
+    if(isCrit){fly.style.color='#C9A84C';fly.style.fontSize='20px';fly.style.fontWeight='400';}
+    fly.style.cssText+=`left:${e.clientX-20}px;top:${e.clientY-20}px;`;
+    document.body.appendChild(fly);setTimeout(()=>fly.remove(),800);
+
+    // Kriittinen isku — kultainen mutta tyylikäs
+    if(isCrit){
+        if(navigator.vibrate)navigator.vibrate([15,10,40]);
+        // Iso kultainen numero
+        const critLbl=document.createElement('div');
+        critLbl.className='crit-fly';
+        critLbl.innerText=`+${finalAmt}`;
+        critLbl.style.cssText=`left:${e.clientX-30}px;top:${e.clientY-40}px;`;
+        document.body.appendChild(critLbl);
+        setTimeout(()=>critLbl.remove(),1300);
+        // Pieni partikkelisuihku — 8 hiukkasta
+        const cols=['#C9A84C','#E8C97A','#B8975A','#00c8f0','#7c5cbf'];
+        for(let i=0;i<8;i++){
+            const p=document.createElement('div');p.className='crit-particle';
+            const angle=(i/8)*Math.PI*2;const dist=35+Math.random()*25;
+            const dur=(0.5+Math.random()*0.3).toFixed(2);
+            p.style.cssText=`width:4px;height:4px;background:${cols[i%cols.length]};left:${e.clientX}px;top:${e.clientY}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist-20}px;--dur:${dur}s;`;
+            document.body.appendChild(p);setTimeout(()=>p.remove(),800);
+        }
+        // Nappi hehkuu kultaisena
+        const btn=e.currentTarget;
+        if(btn){btn.classList.remove('crit-glow');void btn.offsetWidth;btn.classList.add('crit-glow');setTimeout(()=>btn.classList.remove('crit-glow'),700);}
+    }
+
+    // Ensimmäinen teko tänään
+    if(isFirstToday){
+        const ft=document.getElementById('firstToast');
+        ft.classList.add('show');
+        setTimeout(()=>ft.classList.remove('show'),2800);
+    }
     if(baseAmt===50)spawnParticles(e.clientX,e.clientY);
     const btn=e.currentTarget;if(btn){btn.classList.remove('flash');void btn.offsetWidth;btn.classList.add('flash');}
     const newLvl=getLevelForXP(g().total);if(newLvl>g().lvl){g().lvl=newLvl;showLvlPop();}
     if(g().weekLog[today]>prevBest&&prevBest>0){document.getElementById('bestDayVal').innerText=g().weekLog[today]+' XP';document.getElementById('bestDayOverlay').style.display='flex';if(navigator.vibrate)navigator.vibrate([30,20,60]);}
-    checkMilestones();checkCustomMilestones();if(g().total>=g().v)document.getElementById('victoryOverlay').style.display='flex';
+    checkMilestones();checkCustomMilestones();
+    if(g().total>=g().v){
+        explodeJar();
+        setTimeout(()=>document.getElementById('victoryOverlay').style.display='flex',900);
+    }
     const est=calculateDaysToGoal();if(est!==null){if(g().initialEstimate===null){g().initialEstimate=est;g().lowestEstimate=est;}else if(est<g().lowestEstimate)g().lowestEstimate=est;}
     save();updateUI();
     const pct=g().v>0?(g().total/g().v)*100:0;updateJar(pct,true);
@@ -1823,6 +1893,56 @@ function updateJar(pct,justAdded){
         wrap.classList.add('just-added');
         setTimeout(()=>wrap.classList.remove('just-added'),700);
     }
+}
+function explodeJar(){
+    const wrap=document.getElementById('jarWrap');
+    const svg=document.getElementById('jarSvg');
+    if(!wrap||!svg)return;
+    const rect=svg.getBoundingClientRect();
+    const cx=rect.left+rect.width/2, cy=rect.top+rect.height/2;
+
+    // 1. Täytä purkki ensin kokonaan
+    updateJar(100,false);
+
+    // 2. Pieni shake sitten pop
+    setTimeout(()=>{
+        svg.classList.add('jar-explode');
+        if(navigator.vibrate)navigator.vibrate([20,10,60,10,100]);
+
+        // 3. Kansi lentää ylös
+        const lid=document.createElement('div');
+        lid.className='jar-lid-fly';lid.innerText='🫙';
+        lid.style.cssText=`left:${cx-12}px;top:${cy-30}px;`;
+        document.body.appendChild(lid);setTimeout(()=>lid.remove(),1000);
+
+        // 4. Nesteroiskeet — 14 pisaraa
+        const splashCols=['#4dcce4','#7c5cbf','#00c8f0','#a78bfa','#22c55e'];
+        for(let i=0;i<14;i++){
+            const s=document.createElement('div');s.className='jar-splash';
+            const angle=(i/14)*Math.PI*2;
+            const dist=40+Math.random()*60;
+            const size=4+Math.random()*6;
+            const dur=(0.4+Math.random()*0.4).toFixed(2);
+            s.style.cssText=`width:${size}px;height:${size}px;background:${splashCols[i%splashCols.length]};left:${cx}px;top:${cy}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist-30}px;--dur:${dur}s;`;
+            document.body.appendChild(s);setTimeout(()=>s.remove(),900);
+        }
+
+        // 5. Lasinsirpaleet — 8 kappaletta
+        const shardShapes=['▲','◆','▸','●','◀'];
+        for(let i=0;i<8;i++){
+            const sh=document.createElement('div');sh.className='jar-shard';
+            const angle=(i/8)*Math.PI*2+0.3;const dist=35+Math.random()*45;
+            const dur=(0.5+Math.random()*0.35).toFixed(2);
+            sh.style.cssText=`font-size:${7+Math.random()*6}px;color:rgba(255,255,255,0.35);left:${cx}px;top:${cy}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist}px;--rot:${(Math.random()-0.5)*360}deg;--dur:${dur}s;`;
+            sh.innerText=shardShapes[i%shardShapes.length];
+            document.body.appendChild(sh);setTimeout(()=>sh.remove(),900);
+        }
+
+        // 6. Purkki-label muuttuu
+        const lbl=document.getElementById('jarLabel');
+        if(lbl){lbl.innerText='💥';setTimeout(()=>{if(lbl)lbl.innerText='VALMIS!';},600);}
+
+    },200);
 }
 function exportData(){const a=document.createElement('a');a.href='data:text/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(state));a.download='muutoskone_v11.json';a.click();}
 function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.parse(e.target.result);if(p.goals){state=p;}else{state.goals=[p];state.activeIdx=0;}state.goals.forEach(migrateGoal);save();render();}catch(err){alert('Tiedoston lukeminen epäonnistui.');}};r.readAsText(ev.target.files[0]);}
