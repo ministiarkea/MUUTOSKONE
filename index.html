@@ -1400,6 +1400,7 @@ function render(){
     document.getElementById('viewSetup').style.display='none';document.getElementById('viewGame').style.display='block';
     renderTabs();document.getElementById('txtGoal').innerText=g().goal.toUpperCase();document.getElementById('txtV').innerText=`${g().v.toLocaleString('fi-FI')} XP`;
     initIntentio();initBaseline();initQuote();initWhy();initIdentity();initDaynote();initMentor();initStats();
+    const pct=g().v>0?(g().total/g().v)*100:0;updateJar(pct,false);
     updateUI();checkWeeklyReflection();checkRecovery();initCustomMilestones();setTimeout(checkComebackOverlay,1200);
 }
 function getMultiplier(){return 1+(Math.min(g().days,84)-1)/83;}
