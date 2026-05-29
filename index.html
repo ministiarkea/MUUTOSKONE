@@ -64,12 +64,50 @@
         .micro-val-orange{font-size:13px;font-weight:400;color:var(--orange);}
         .micro-val-cyan{font-size:13px;font-weight:400;color:var(--cyan);}
         .micro-lbl{font-size:9px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;}
-        .days-row{display:flex;align-items:baseline;gap:12px;margin-bottom:11px;}
+        .days-row{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
         .days-val{font-size:66px;font-weight:200;line-height:1;letter-spacing:-3px;color:var(--text-1);}
-        .days-right{display:flex;flex-direction:column;gap:3px;justify-content:flex-end;padding-bottom:4px;}
-        .days-lbl{font-size:9px;text-transform:uppercase;color:var(--text-2);letter-spacing:2.5px;}
-        .days-pct{font-size:13px;font-weight:400;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        .days-right{display:flex;flex-direction:column;gap:2px;justify-content:center;flex:1;}
+        .days-lbl{font-size:9px;text-transform:uppercase;color:var(--text-2);letter-spacing:2px;}
+        .days-pct{font-size:15px;font-weight:400;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
         .days-xp{font-size:11px;color:var(--text-3);}
+        /* ── JAR ANIMATION ── */
+        .jar-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;margin-left:8px;}
+        .jar-svg{width:44px;height:56px;filter:drop-shadow(0 0 6px rgba(0,200,240,0.0));transition:filter 0.6s ease;}
+        .jar-wrap.glowing .jar-svg{filter:drop-shadow(0 0 10px rgba(0,200,240,0.45));}
+        .jar-label{font-size:8px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;transition:color 0.6s;}
+        .jar-wrap.glowing .jar-label{color:var(--cyan);}
+        .jar-liquid{transition:height 1.2s cubic-bezier(0.34,1.56,0.64,1),y 1.2s cubic-bezier(0.34,1.56,0.64,1),fill 1.2s ease;}
+        .jar-bubble{animation:jarBubble 2.4s ease-in-out infinite;opacity:0;transition:opacity 0.8s;}
+        .jar-wrap.active .jar-bubble{opacity:0.7;}
+        @keyframes jarBubble{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+        .jar-shine{animation:jarShine 3s ease-in-out infinite;}
+        @keyframes jarShine{0%,100%{opacity:0.18}50%{opacity:0.38}}
+        .jar-ripple{animation:none;opacity:0;transition:opacity 0.4s;}
+        .jar-wrap.just-added .jar-ripple{animation:jarRipple 0.6s ease-out forwards;}
+        @keyframes jarRipple{0%{opacity:0.6;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1.18)}}
+        /* ── PISARA TIPPUU PURKKIIN ── */
+        .jar-drop{animation:jarDrop var(--drop-dur) cubic-bezier(0.4,0,1,1) forwards;}
+        @keyframes jarDrop{0%{opacity:0.9;transform:translateY(0) scale(1)}80%{opacity:0.8;transform:translateY(var(--drop-dist)) scale(0.8)}100%{opacity:0;transform:translateY(var(--drop-dist)) scale(0.3)}}
+        /* ── KRIITTINEN ISKU — kultainen mutta tyylikäs ── */
+        .crit-fly{position:fixed;font-size:28px;font-weight:300;color:#C9A84C;letter-spacing:-1px;pointer-events:none;z-index:9001;animation:critFly 1.2s cubic-bezier(0.22,1,0.36,1) forwards;}
+        @keyframes critFly{0%{opacity:1;transform:translateY(0) scale(1.2)}60%{opacity:1;transform:translateY(-50px) scale(1)}100%{opacity:0;transform:translateY(-80px) scale(0.85)}}
+        .crit-particle{position:fixed;pointer-events:none;z-index:9000;border-radius:50%;animation:critPart var(--dur) ease-out forwards;}
+        @keyframes critPart{0%{opacity:0.8;transform:translate(0,0)}100%{opacity:0;transform:translate(var(--tx),var(--ty))}}
+        .rbtn.crit-glow{animation:critGlow 0.6s ease-out;}
+        @keyframes critGlow{0%{box-shadow:0 0 0 0 rgba(201,168,76,0)}30%{box-shadow:0 0 18px 4px rgba(201,168,76,0.45)}100%{box-shadow:0 0 0 0 rgba(201,168,76,0)}}
+        /* ── PURKKI RÄJÄHTÄÄ ── */
+        .jar-explode{animation:jarShake 0.3s ease-in-out, jarPop 0.5s 0.3s ease-out forwards;}
+        @keyframes jarShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-4px)}40%{transform:translateX(4px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+        @keyframes jarPop{0%{transform:scale(1);opacity:1}40%{transform:scale(1.3);opacity:1}100%{transform:scale(0);opacity:0}}
+        .jar-shard{position:fixed;pointer-events:none;z-index:9002;animation:shardFly var(--dur) ease-out forwards;}
+        @keyframes shardFly{0%{opacity:1;transform:translate(0,0) rotate(0deg)}100%{opacity:0;transform:translate(var(--tx),var(--ty)) rotate(var(--rot))}}
+        .jar-splash{position:fixed;pointer-events:none;z-index:9001;border-radius:50%;animation:splashFly var(--dur) ease-out forwards;}
+        @keyframes splashFly{0%{opacity:0.9;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--tx),var(--ty)) scale(0.2)}}
+        .jar-lid-fly{position:fixed;pointer-events:none;z-index:9003;font-size:18px;animation:lidFly 0.9s cubic-bezier(0.22,1,0.36,1) forwards;}
+        @keyframes lidFly{0%{opacity:1;transform:translateY(0) rotate(0deg)}100%{opacity:0;transform:translateY(-120px) rotate(-40deg)}}
+        /* ── ENSIMMÄINEN TEKO ── */
+        .first-toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:linear-gradient(135deg,rgba(34,197,94,0.22),rgba(0,200,240,0.12));border:1px solid rgba(34,197,94,0.4);border-radius:12px;padding:10px 20px;font-size:12px;color:#22c55e;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;z-index:8000;opacity:0;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;white-space:nowrap;}
+        .first-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
         .milestones{display:flex;gap:4px;margin-bottom:3px;}
         .ms{flex:1;height:2px;border-radius:1px;background:rgba(255,255,255,0.07);transition:background 0.6s;}
         .ms.done{background:var(--grad);} .ms.near{background:rgba(0,200,240,0.3);}
@@ -96,14 +134,14 @@
         .momentum-track{flex:1;height:3px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden;}
         .momentum-fill{height:100%;border-radius:2px;transition:width 0.8s ease,background 0.8s ease;}
         .momentum-val{font-size:12px;font-weight:600;flex-shrink:0;min-width:36px;text-align:right;}
-        .identity-card{background:linear-gradient(135deg,rgba(124,92,191,0.10),rgba(0,200,240,0.04));border:1px solid rgba(124,92,191,0.28);border-radius:14px;padding:14px 18px;margin-bottom:9px;cursor:pointer;position:relative;overflow:hidden;}
+        .identity-card{background:linear-gradient(135deg,rgba(124,92,191,0.10),rgba(0,200,240,0.04));border:1px solid rgba(124,92,191,0.28);border-radius:14px;padding:9px 14px;margin-bottom:9px;cursor:pointer;position:relative;overflow:hidden;}
         .identity-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--grad);opacity:0.4;}
-        .identity-kicker{font-size:8px;color:var(--purple);letter-spacing:3px;text-transform:uppercase;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+        .identity-kicker{font-size:8px;color:var(--purple);letter-spacing:3px;text-transform:uppercase;font-weight:600;margin-bottom:3px;display:flex;align-items:center;gap:6px;}
         .identity-kicker::before{content:'';width:4px;height:4px;background:var(--purple);border-radius:50%;box-shadow:0 0 6px var(--purple);}
-        .identity-text{font-size:15px;font-weight:300;color:var(--text-1);line-height:1.5;}
+        .identity-text{font-size:14px;font-weight:300;color:var(--text-1);line-height:1.4;}
         .identity-text.placeholder{color:var(--text-3);font-size:13px;}
-        .identity-edit{display:none;width:100%;background:transparent;border:none;color:var(--text-1);font-size:15px;font-weight:300;outline:none;resize:none;font-family:inherit;line-height:1.5;}
-        .identity-hint{font-size:9px;color:var(--text-3);margin-top:8px;letter-spacing:1px;}
+        .identity-edit{display:none;width:100%;background:transparent;border:none;color:var(--text-1);font-size:14px;font-weight:300;outline:none;resize:none;font-family:inherit;line-height:1.4;}
+        .identity-hint{font-size:8px;color:var(--text-3);margin-top:4px;letter-spacing:1px;}
         .signal-card{border-radius:12px;padding:11px 16px;margin-bottom:9px;font-size:12px;font-weight:300;line-height:1.5;display:none;align-items:center;gap:10px;}
         .signal-card.show{display:flex;}
         .signal-card.warning{background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.2);color:rgba(249,115,22,0.85);}
@@ -149,6 +187,23 @@
         .ms-add-btn{background:var(--cyan-dim);border:1px solid var(--cyan-line);color:var(--cyan);padding:8px 14px;border-radius:9px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;}
         .routine-fav-badge{display:inline-block;background:rgba(0,200,240,0.10);border:1px solid rgba(0,200,240,0.22);border-radius:5px;padding:1px 6px;font-size:8px;color:var(--cyan);font-weight:600;letter-spacing:1px;margin-left:5px;vertical-align:middle;}
         .why-card{background:linear-gradient(135deg,rgba(124,92,191,0.08),rgba(0,200,240,0.03));border:1px solid rgba(124,92,191,0.22);border-radius:12px;padding:11px 16px;margin-bottom:9px;display:none;}
+        /* ── MENTOR CARD ── */
+        .mentor-list{display:flex;flex-direction:column;gap:7px;margin-bottom:10px;}
+        .mentor-item{display:flex;align-items:flex-start;gap:10px;background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:10px;padding:10px 13px;position:relative;}
+        .mentor-avatar{width:28px;height:28px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#fff;flex-shrink:0;letter-spacing:0;}
+        .mentor-info{flex:1;min-width:0;}
+        .mentor-name{font-size:13px;font-weight:400;color:var(--text-1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+        .mentor-role{font-size:11px;color:var(--text-3);margin-top:2px;line-height:1.4;}
+        .mentor-contact{font-size:10px;color:var(--cyan);margin-top:3px;opacity:0.8;}
+        .mentor-del{background:none;border:none;color:var(--text-3);font-size:16px;cursor:pointer;padding:0 2px;line-height:1;flex-shrink:0;margin-top:1px;}
+        .mentor-del:hover{color:var(--danger);}
+        .mentor-add-form{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:11px 13px;margin-bottom:8px;}
+        .mentor-field{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 11px;margin-bottom:6px;font-size:12px;color:var(--text-1);font-family:inherit;outline:none;width:100%;}
+        .mentor-field::placeholder{color:var(--text-3);}
+        .mentor-field:last-child{margin-bottom:0;}
+        .mentor-add-btn{background:var(--cyan-dim);border:1px solid var(--cyan-line);color:var(--cyan);padding:8px 16px;border-radius:8px;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;width:100%;margin-top:8px;}
+        .mentor-add-btn:active{background:rgba(0,200,240,0.22);}
+        .mentor-empty{font-size:11px;color:var(--text-3);padding:4px 0;line-height:1.6;}
         .why-label{font-size:8px;color:var(--purple);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:4px;}
         .why-text{font-size:12px;color:var(--text-2);line-height:1.55;font-style:italic;font-weight:300;}
         .quote-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 18px;margin-bottom:9px;cursor:pointer;}
@@ -289,8 +344,8 @@
         .refl-xp{font-size:11px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
         .refl-prompt{font-size:11px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;font-weight:600;}
         .refl-input{background:transparent;border:none;color:var(--text-1);font-size:14px;font-weight:300;outline:none;width:100%;font-family:inherit;resize:none;line-height:1.6;min-height:60px;}
-        #newGoalOverlay{z-index:6000;overflow-y:auto;padding:20px;}
-        .ng-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:24px;width:100%;max-width:390px;text-align:left;max-height:92vh;overflow-y:auto;scrollbar-width:none;}
+        #newGoalOverlay{z-index:6000;overflow-y:auto;padding:20px;justify-content:flex-start;align-items:center;-webkit-overflow-scrolling:touch;}
+        .ng-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:24px;width:100%;max-width:390px;text-align:left;margin:auto;}
         .ng-card::-webkit-scrollbar{display:none;}
         .ng-title{font-size:13px;font-weight:500;color:var(--text-1);letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px;}
         .ng-title::before{content:'';width:3px;height:3px;background:var(--cyan);border-radius:50%;}
@@ -671,6 +726,7 @@
 </div>
 
 <div id="dayToast" class="day-toast">Uusi päivä</div>
+<div id="firstToast" class="first-toast">🔥 Ensimmäinen teko tänään!</div>
 <div id="offlineBadge">Offline — data tallennettu</div>
 
 <div class="container">
@@ -731,13 +787,43 @@
             <div class="micro-item" onclick="openStatGuide('streak')" style="cursor:pointer;"><span class="micro-val-orange" id="streakNum">0</span><span class="micro-lbl">pv putki <button class="stat-help-btn">?</button></span></div>
             <div class="micro-item" onclick="openStatGuide('mult')" style="cursor:pointer;"><span class="micro-lbl">kerroin <button class="stat-help-btn">?</button></span><span class="micro-val-cyan" id="multNum">×1.00</span></div>
         </div>
+        <!-- COMPACT TOP ROW: iso numero + tehty + purkki -->
         <div class="days-row">
             <div class="days-val" id="valM">—</div>
             <div class="days-right">
-                <div class="days-lbl" style="display:flex;align-items:center;gap:4px;">Päiviä<br>maaliin <button onclick="openStatGuide('days')" class="stat-help-btn">?</button></div>
-                <div class="days-lbl" style="margin-top:8px;letter-spacing:1.5px;color:var(--text-3);">Tehty</div>
-                <div class="days-pct" id="pctVal" onclick="openStatGuide('pct')" style="cursor:pointer;">0% <button class="stat-help-btn">?</button></div>
-                <div class="days-xp" id="xpDisplay">0 XP</div>
+                <div class="days-lbl" style="display:flex;align-items:center;gap:4px;">Päiviä maaliin <button onclick="openStatGuide('days')" class="stat-help-btn">?</button></div>
+                <div style="display:flex;align-items:baseline;gap:8px;margin-top:6px;">
+                    <div class="days-pct" id="pctVal" onclick="openStatGuide('pct')" style="cursor:pointer;">0%</div>
+                    <div class="days-xp" id="xpDisplay">0 XP</div>
+                </div>
+            </div>
+            <!-- JAR — kompakti, oikeassa reunassa -->
+            <div class="jar-wrap" id="jarWrap" style="margin-left:auto;">
+                <svg class="jar-svg" id="jarSvg" viewBox="0 0 44 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:44px;height:56px;">
+                    <defs>
+                        <clipPath id="jarClip"><rect x="5" y="14" width="34" height="36" rx="7"/></clipPath>
+                        <linearGradient id="liqGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#4dcce4"/>
+                            <stop offset="100%" stop-color="#7c5cbf"/>
+                        </linearGradient>
+                        <linearGradient id="liqGradFull" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#22c55e"/>
+                            <stop offset="100%" stop-color="#00c8f0"/>
+                        </linearGradient>
+                    </defs>
+                    <rect x="5" y="14" width="34" height="36" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+                    <g clip-path="url(#jarClip)">
+                        <rect id="jarLiquid" class="jar-liquid" x="5" y="50" width="34" height="0" fill="url(#liqGrad)" rx="0"/>
+                        <ellipse id="jarRipple" class="jar-ripple" cx="22" cy="50" rx="14" ry="3" fill="rgba(255,255,255,0.25)"/>
+                        <circle class="jar-bubble" cx="14" cy="42" r="2" fill="rgba(255,255,255,0.28)" style="animation-delay:0s"/>
+                        <circle class="jar-bubble" cx="28" cy="38" r="1.4" fill="rgba(255,255,255,0.20)" style="animation-delay:0.8s"/>
+                        <circle class="jar-bubble" cx="20" cy="44" r="1" fill="rgba(255,255,255,0.16)" style="animation-delay:1.5s"/>
+                        <rect class="jar-shine" x="8" y="16" width="4" height="20" rx="2" fill="rgba(255,255,255,0.12)"/>
+                    </g>
+                    <rect x="9" y="9" width="26" height="7" rx="3.5" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                    <rect x="14" y="5" width="16" height="5" rx="2.5" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+                </svg>
+                <div class="jar-label" id="jarLabel">0%</div>
             </div>
         </div>
         <div class="milestones"><div class="ms" id="ms10"></div><div class="ms" id="ms25"></div><div class="ms" id="ms50"></div><div class="ms" id="ms75"></div><div class="ms" id="ms100"></div></div>
@@ -748,12 +834,8 @@
             <div class="lvl-lbl">Päivä <span class="lvl-val" id="valDays">1</span></div>
         </div>
         <div class="bar-track"><div class="bar-fill" id="barXP"></div></div>
-        <div class="sc-bottom">
-            <div class="sb-item" onclick="openStatGuide('avg')" style="cursor:pointer;"><div class="sb-val" id="statAvg">—</div><div class="sb-lbl">XP / pv <button class="stat-help-btn">?</button></div></div>
-            <div class="sb-item" onclick="openStatGuide('best')" style="cursor:pointer;"><div class="sb-val" id="statBest">—</div><div class="sb-lbl">Paras pv <button class="stat-help-btn">?</button></div></div>
-            <div class="sb-item" onclick="openStatGuide('bestStreak')" style="cursor:pointer;"><div class="sb-val" id="statBestStreak">—</div><div class="sb-lbl">Paras putki <button class="stat-help-btn">?</button></div></div>
-            <div class="sb-item" onclick="openStatGuide('weekXP')" style="cursor:pointer;"><div class="sb-val" id="statWeekXP">—</div><div class="sb-lbl">Tällä vk <button class="stat-help-btn">?</button></div></div>
-        </div>
+        <!-- tilastot löytyvät Tilastot-välilehdestä alla -->
+    </div>
     </div>
 
     <!-- DAILY XP GOAL -->
@@ -856,6 +938,22 @@
         <div style="font-size:10px;color:var(--text-3);margin-top:10px;">Nollaa peli muokataksesi lähtötilannetta.</div>
     </div>
 
+    <!-- ASIANTUNTIJA / MENTORI -->
+    <div class="toggle-row" onclick="togglePanel('mentor')">
+        <div class="toggle-row-lbl"><span class="lbl-dot"></span>Kuka voi auttaa?<span class="toggle-preview" id="mentorPreview"></span></div>
+        <span class="toggle-arrow" id="mentorArrow">▾</span>
+    </div>
+    <div class="toggle-body" id="mentorBody">
+        <div style="font-size:11px;color:var(--text-2);margin-bottom:10px;line-height:1.6;">Kuka on jo tehnyt sen, mitä sinä tavoittelet? Valmentaja, asiantuntija tai joku jonka voi tavoittaa ja pyytää neuvoa.</div>
+        <div class="mentor-list" id="mentorList"></div>
+        <div class="mentor-add-form" id="mentorForm">
+            <input class="mentor-field" id="mentorName" type="text" placeholder="Nimi — esim. Mari Turpela" maxlength="60">
+            <input class="mentor-field" id="mentorRole" type="text" placeholder="Miksi juuri tämä? — esim. valmentaa lisäpainoleuanvetoa" maxlength="100">
+            <input class="mentor-field" id="mentorContact" type="text" placeholder="Miten tavoitan? — esim. @mariturpela / kuntosali" maxlength="100">
+            <button class="mentor-add-btn" onclick="addMentor()">+ Lisää henkilö</button>
+        </div>
+    </div>
+
     <!-- HEAT MAP -->
     <div class="heatmap-card">
         <div class="heatmap-header">
@@ -867,6 +965,20 @@
             <span class="hm-legend-label">Vähemmän</span>
             <div class="hm-legend-cell hm-0"></div><div class="hm-legend-cell hm-1"></div><div class="hm-legend-cell hm-2"></div><div class="hm-legend-cell hm-3"></div><div class="hm-legend-cell hm-4"></div>
             <span class="hm-legend-label">Enemmän</span>
+        </div>
+    </div>
+
+    <!-- TILASTOT ACCORDION -->
+    <div class="toggle-row" onclick="togglePanel('stats')">
+        <div class="toggle-row-lbl"><span class="lbl-dot"></span>Tilastot</div>
+        <span class="toggle-arrow" id="statsArrow">▾</span>
+    </div>
+    <div class="toggle-body" id="statsBody">
+        <div class="sc-bottom" style="justify-content:space-between;padding:4px 0 8px;">
+            <div class="sb-item" onclick="openStatGuide('avg')" style="cursor:pointer;"><div class="sb-val" id="statAvg">—</div><div class="sb-lbl">XP / pv <button class="stat-help-btn">?</button></div></div>
+            <div class="sb-item" onclick="openStatGuide('best')" style="cursor:pointer;"><div class="sb-val" id="statBest">—</div><div class="sb-lbl">Paras pv <button class="stat-help-btn">?</button></div></div>
+            <div class="sb-item" onclick="openStatGuide('bestStreak')" style="cursor:pointer;"><div class="sb-val" id="statBestStreak">—</div><div class="sb-lbl">Paras putki <button class="stat-help-btn">?</button></div></div>
+            <div class="sb-item" onclick="openStatGuide('weekXP')" style="cursor:pointer;"><div class="sb-val" id="statWeekXP">—</div><div class="sb-lbl">Tällä vk <button class="stat-help-btn">?</button></div></div>
         </div>
     </div>
 
@@ -920,11 +1032,11 @@ const MINS={1:'1–10 min',5:'15–30 min',20:'45–90 min',50:'2–4 h'};
 const XP_LABELS={1:'Mikrotehtävä',5:'Harppaus',20:'Panostus',50:'Uroteko'};
 const MILESTONES=[10,25,50,75,100];
 const MS_DATA={
-    10:{kicker:'Ensimmäinen virstanpylväs',title:'10 %',sub:'Järjestelmä toimii. Jokainen napautus vie sinua eteenpäin — ja se näkyy jo nyt.'},
-    25:{kicker:'Virstanpylväs',title:'25 %',sub:'Neljäsosa matkasta suoritettu. Useimmat eivät pääse edes tähän. Sinä olet.'},
-    50:{kicker:'Puoliväli',title:'50 %',sub:'Tässä kohtaa useimmat lopettavat. Sinä et. Puolet on takana — olet jo eri ihminen kuin alussa.'},
-    75:{kicker:'Virstanpylväs',title:'75 %',sub:'Kolme neljäsosaa tehty. Maali on näkyvissä. Älä nyt hellitä.'},
-    100:{kicker:'Tavoite saavutettu',title:'100 %',sub:'Teit sen. Systemaattinen päivittäinen tekeminen voitti.'}
+    10:{kicker:'⚡ Muutoskynnys ylitetty',title:'10 % tehty',sub:'Tässä kohtaa useimmat ovat jo luovuttaneet. Sinä et. Systeemi toimii — ja se näkyy jo numeroissa.'},
+    25:{kicker:'🔥 Neljäsosa matkasta',title:'25 % tehty',sub:'Olet jo pidemmällä kuin 80 % ihmisistä jotka aloittivat saman tavoitteen. Tämä ei ole sattumaa. Se on sinun tekemistäsi.'},
+    50:{kicker:'💥 Puoliväli — tässä monet lopettavat',title:'50 % tehty',sub:'Puolet on takana. Tämä on se hetki johon harvat yltävät. Olet jo eri ihminen kuin alussa — vaikka et ehkä vielä tunne sitä.'},
+    75:{kicker:'🎯 Maali näkyvissä',title:'75 % tehty',sub:'Kolme neljäsosaa suoritettu. Tässä kohtaa keho haluaa hellittää. Älä. Viimeinen neljännes ratkaisee kaiken.'},
+    100:{kicker:'🏆 Tavoite saavutettu',title:'100 % — VALMIS',sub:'Teit sen. Systemaattinen päivittäinen tekeminen voitti epäilyn, laiskuuden ja huonot päivät. Tämä on todiste siitä, kuka olet.'}
 };
 
 const LVL_THRESHOLDS=[0,0,500,1500,3000,5500,9000,14000,21000,30000,42000];
@@ -933,7 +1045,7 @@ function getLevelThreshold(lvl){if(lvl<LVL_THRESHOLDS.length)return LVL_THRESHOL
 function getLevelProgress(xp){const lvl=getLevelForXP(xp),curr=getLevelThreshold(lvl),next=getLevelThreshold(lvl+1);return{pct:Math.min(1,(xp-curr)/(next-curr)),nextAt:next,lvl};}
 const LVL_MSGS=['Systemaattinen tekeminen toimii.','Olet rakentamassa uutta identiteettiä.','Pienet teot, suuret seuraukset.','Kerryttäminen on taito — ja sinulla se on.','Putki rakentaa ihmistä. Tämä on se hetki.','Matka on enemmän kuin maali. Jatka.','Harva pääsee näin pitkälle. Sinä olet.','Jokainen teko jättää jäljen. Tämä on todiste.','Taso on vain numero — tekeminen on totta.','Olet vahvempi kuin viime viikolla.'];
 
-const GOAL_TEMPLATE=()=>({id:Date.now(),goal:'',baseline:'',quote:'',why:'',identity:'',deadline:null,r1:'',r5:'',r20:'',r50:'',v:5000,total:0,days:1,lvl:1,initialEstimate:null,lowestEstimate:null,startDate:null,streak:0,bestStreak:0,lastActivityDate:null,graceDayUsed:null,lastXP:null,lastXPLabel:null,weekLog:{},passedMilestones:[],bestDay:0,bestWeekXP:0,routineCount:{r1:0,r5:0,r20:0,r50:0},recoveryLog:[],customMilestones:[],intentioDate:null,intentioText:'',reflectionDate:null,reflectionText:'',recoveryShown:false,dayNotes:{},dailyGoal:0,mseditorOpen:false,intentioOpen:false,baselineOpen:false,daynoteOpen:false,done:false,weekChallengeIdx:0});
+const GOAL_TEMPLATE=()=>({id:Date.now(),goal:'',baseline:'',quote:'',why:'',identity:'',deadline:null,r1:'',r5:'',r20:'',r50:'',v:5000,total:0,days:1,lvl:1,initialEstimate:null,lowestEstimate:null,startDate:null,streak:0,bestStreak:0,lastActivityDate:null,graceDayUsed:null,lastXP:null,lastXPLabel:null,weekLog:{},passedMilestones:[],bestDay:0,bestWeekXP:0,routineCount:{r1:0,r5:0,r20:0,r50:0},recoveryLog:[],customMilestones:[],intentioDate:null,intentioText:'',reflectionDate:null,reflectionText:'',recoveryShown:false,dayNotes:{},dailyGoal:0,mseditorOpen:false,intentioOpen:false,baselineOpen:false,daynoteOpen:false,mentorOpen:false,mentors:[],statsOpen:false,done:false,weekChallengeIdx:0});
 
 let state={goals:[],activeIdx:0,quote:''};
 let draft={baseline:'',goal:'',quote:'',why:'',identity:''};
@@ -965,6 +1077,8 @@ function migrateGoal(goal){
     if(!goal.mseditorOpen)goal.mseditorOpen=false;
     if(goal.deadline===undefined)goal.deadline=null;
     if(goal.weekChallengeIdx===undefined)goal.weekChallengeIdx=0;
+    if(!goal.mentors)goal.mentors=[];
+    if(goal.mentorOpen===undefined)goal.mentorOpen=false;
     goal.lvl=getLevelForXP(goal.total);
 }
 
@@ -1060,7 +1174,7 @@ function addNewGoal(){
 }
 
 function togglePanel(id){
-    const keyMap={intentio:'intentioOpen',baseline:'baselineOpen',daynote:'daynoteOpen',mseditor:'mseditorOpen'};
+    const keyMap={intentio:'intentioOpen',baseline:'baselineOpen',daynote:'daynoteOpen',mseditor:'mseditorOpen',mentor:'mentorOpen',stats:'statsOpen'};
     const key=keyMap[id]||id+'Open';g()[key]=!g()[key];save();
     document.getElementById(id+'Body').classList.toggle('open',g()[key]);
     document.getElementById(id+'Arrow').classList.toggle('open',g()[key]);
@@ -1068,6 +1182,7 @@ function togglePanel(id){
     if(id==='intentio')updateIntentioPreview();
     if(id==='daynote'&&g()[key])renderDaynotes();
     if(id==='mseditor'&&g()[key])renderCustomMilestones();
+    if(id==='mentor'&&g()[key])renderMentors();
 }
 function initIntentio(){
     const el=document.getElementById('intentioInput');const today=getTodayStr();
@@ -1079,6 +1194,55 @@ function initIntentio(){
 }
 function updateIntentioPreview(){const prev=document.getElementById('intentioPreview');const today=getTodayStr();prev.innerText=(!g().intentioOpen&&g().intentioDate===today&&g().intentioText)?'— '+g().intentioText.slice(0,28)+(g().intentioText.length>28?'…':''):'';}
 function initBaseline(){document.getElementById('baselineText').innerText=g().baseline||'—';document.getElementById('baselineBody').classList.toggle('open',!!g().baselineOpen);document.getElementById('baselineArrow').classList.toggle('open',!!g().baselineOpen);}
+
+function initStats(){
+    document.getElementById('statsBody').classList.toggle('open',!!g().statsOpen);
+    document.getElementById('statsArrow').classList.toggle('open',!!g().statsOpen);
+}
+function initMentor(){
+    document.getElementById('mentorBody').classList.toggle('open',!!g().mentorOpen);
+    document.getElementById('mentorArrow').classList.toggle('open',!!g().mentorOpen);
+    const count=g().mentors?g().mentors.length:0;
+    document.getElementById('mentorPreview').innerText=count>0?`— ${count} henkilö${count>1?'ä':''}`:'';;
+    if(g().mentorOpen)renderMentors();
+}
+function renderMentors(){
+    const list=document.getElementById('mentorList');
+    const mentors=g().mentors||[];
+    if(!mentors.length){list.innerHTML='<div class="mentor-empty">Ei vielä ketään. Kuka tietää enemmän kuin sinä tästä aiheesta?</div>';return;}
+    list.innerHTML=mentors.map((m,i)=>{
+        const initials=(m.name||'?').trim().split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+        return`<div class="mentor-item">
+            <div class="mentor-avatar">${initials}</div>
+            <div class="mentor-info">
+                <div class="mentor-name">${escHtml(m.name)}</div>
+                ${m.role?`<div class="mentor-role">${escHtml(m.role)}</div>`:''}
+                ${m.contact?`<div class="mentor-contact">→ ${escHtml(m.contact)}</div>`:''}
+            </div>
+            <button class="mentor-del" onclick="deleteMentor(${i})" title="Poista">×</button>
+        </div>`;
+    }).join('');
+}
+function addMentor(){
+    const name=document.getElementById('mentorName').value.trim();
+    if(!name){document.getElementById('mentorName').focus();return;}
+    const role=document.getElementById('mentorRole').value.trim();
+    const contact=document.getElementById('mentorContact').value.trim();
+    if(!g().mentors)g().mentors=[];
+    if(g().mentors.length>=8){showToast('Max 8 henkilöä');return;}
+    g().mentors.push({name,role,contact});
+    document.getElementById('mentorName').value='';
+    document.getElementById('mentorRole').value='';
+    document.getElementById('mentorContact').value='';
+    save();renderMentors();
+    document.getElementById('mentorPreview').innerText=`— ${g().mentors.length} henkilö${g().mentors.length>1?'ä':''}`;
+}
+function deleteMentor(idx){
+    if(!g().mentors)return;
+    g().mentors.splice(idx,1);save();renderMentors();
+    const count=g().mentors.length;
+    document.getElementById('mentorPreview').innerText=count>0?`— ${count} henkilö${count>1?'ä':''}`:'' ;
+}
 
 function initDaynote(){
     document.getElementById('daynoteBody').classList.toggle('open',!!g().daynoteOpen);
@@ -1235,17 +1399,33 @@ function start(){
 function render(){
     document.getElementById('viewSetup').style.display='none';document.getElementById('viewGame').style.display='block';
     renderTabs();document.getElementById('txtGoal').innerText=g().goal.toUpperCase();document.getElementById('txtV').innerText=`${g().v.toLocaleString('fi-FI')} XP`;
-    initIntentio();initBaseline();initQuote();initWhy();initIdentity();initDaynote();
+    initIntentio();initBaseline();initQuote();initWhy();initIdentity();initDaynote();initMentor();initStats();
+    const pct=g().v>0?(g().total/g().v)*100:0;updateJar(pct,false);
     updateUI();checkWeeklyReflection();checkRecovery();initCustomMilestones();setTimeout(checkComebackOverlay,1200);
 }
 function getMultiplier(){return 1+(Math.min(g().days,84)-1)/83;}
-function calculateDaysToGoal(){if(g().total>=g().v)return 0;if(!g().total||!g().days)return null;const avg=g().total/g().days;if(avg<=0)return null;return Math.ceil((g().v-g().total)/avg);}
+function getActiveDays(){
+    // Laske päivät joina on tehty jotain weekLogista
+    const entries=Object.values(g().weekLog||{}).filter(v=>v>0);
+    return Math.max(entries.length,1);
+}
+function calculateDaysToGoal(){if(g().total>=g().v)return 0;if(!g().total)return null;const avg=g().total/getActiveDays();if(avg<=0)return null;return Math.ceil((g().v-g().total)/avg);}
 
 function addXP(baseAmt,label,e){
     if(navigator.vibrate)navigator.vibrate(baseAmt===50?[30,15,50]:25);
-    const multi=getMultiplier(),finalAmt=Math.round(baseAmt*multi);
+    playXPSound(baseAmt);
+
+    // ── ENSIMMÄINEN TEKO TÄNÄÄN ──
+    const today=getTodayStr();
+    const isFirstToday=!g().weekLog[today]||g().weekLog[today]===0;
+
+    // ── KRIITTINEN ISKU (1/8 todennäköisyys) ──
+    const isCrit=Math.random()<0.125;
+    const critMult=isCrit?2:1;
+
+    const multi=getMultiplier(),finalAmt=Math.round(baseAmt*multi*critMult);
     g().lastXP=finalAmt;g().lastXPLabel=label;g().total+=finalAmt;
-    const today=getTodayStr();g().weekLog[today]=(g().weekLog[today]||0)+finalAmt;
+    g().weekLog[today]=(g().weekLog[today]||0)+finalAmt;
     const prevBest=g().bestDay;if(g().weekLog[today]>g().bestDay)g().bestDay=g().weekLog[today];
     if(g().lastActivityDate!==today){
         const yest=new Date();yest.setDate(yest.getDate()-1);const twoAgo=new Date();twoAgo.setDate(twoAgo.getDate()-2);const thisWeek=getISOWeekStr();
@@ -1258,14 +1438,55 @@ function addXP(baseAmt,label,e){
     const rkey=baseAmt===1?'r1':baseAmt===5?'r5':baseAmt===20?'r20':'r50';
     if(!g().routineCount)g().routineCount={r1:0,r5:0,r20:0,r50:0};
     g().routineCount[rkey]=(g().routineCount[rkey]||0)+1;
-    const fly=document.createElement('div');fly.className='xp-fly';fly.innerText=`+${finalAmt}`;fly.style.cssText=`left:${e.clientX-20}px;top:${e.clientY-20}px;`;document.body.appendChild(fly);setTimeout(()=>fly.remove(),800);
+    const fly=document.createElement('div');
+    fly.className='xp-fly';
+    fly.innerText=`+${finalAmt}`;
+    if(isCrit){fly.style.color='#C9A84C';fly.style.fontSize='20px';fly.style.fontWeight='400';}
+    fly.style.cssText+=`left:${e.clientX-20}px;top:${e.clientY-20}px;`;
+    document.body.appendChild(fly);setTimeout(()=>fly.remove(),800);
+
+    // Kriittinen isku — kultainen mutta tyylikäs
+    if(isCrit){
+        if(navigator.vibrate)navigator.vibrate([15,10,40]);
+        // Iso kultainen numero
+        const critLbl=document.createElement('div');
+        critLbl.className='crit-fly';
+        critLbl.innerText=`+${finalAmt}`;
+        critLbl.style.cssText=`left:${e.clientX-30}px;top:${e.clientY-40}px;`;
+        document.body.appendChild(critLbl);
+        setTimeout(()=>critLbl.remove(),1300);
+        // Pieni partikkelisuihku — 8 hiukkasta
+        const cols=['#C9A84C','#E8C97A','#B8975A','#00c8f0','#7c5cbf'];
+        for(let i=0;i<8;i++){
+            const p=document.createElement('div');p.className='crit-particle';
+            const angle=(i/8)*Math.PI*2;const dist=35+Math.random()*25;
+            const dur=(0.5+Math.random()*0.3).toFixed(2);
+            p.style.cssText=`width:4px;height:4px;background:${cols[i%cols.length]};left:${e.clientX}px;top:${e.clientY}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist-20}px;--dur:${dur}s;`;
+            document.body.appendChild(p);setTimeout(()=>p.remove(),800);
+        }
+        // Nappi hehkuu kultaisena
+        const btn=e.currentTarget;
+        if(btn){btn.classList.remove('crit-glow');void btn.offsetWidth;btn.classList.add('crit-glow');setTimeout(()=>btn.classList.remove('crit-glow'),700);}
+    }
+
+    // Ensimmäinen teko tänään
+    if(isFirstToday){
+        const ft=document.getElementById('firstToast');
+        ft.classList.add('show');
+        setTimeout(()=>ft.classList.remove('show'),2800);
+    }
     if(baseAmt===50)spawnParticles(e.clientX,e.clientY);
     const btn=e.currentTarget;if(btn){btn.classList.remove('flash');void btn.offsetWidth;btn.classList.add('flash');}
     const newLvl=getLevelForXP(g().total);if(newLvl>g().lvl){g().lvl=newLvl;showLvlPop();}
     if(g().weekLog[today]>prevBest&&prevBest>0){document.getElementById('bestDayVal').innerText=g().weekLog[today]+' XP';document.getElementById('bestDayOverlay').style.display='flex';if(navigator.vibrate)navigator.vibrate([30,20,60]);}
-    checkMilestones();checkCustomMilestones();if(g().total>=g().v)document.getElementById('victoryOverlay').style.display='flex';
+    checkMilestones();checkCustomMilestones();
+    if(g().total>=g().v){
+        explodeJar();
+        setTimeout(()=>document.getElementById('victoryOverlay').style.display='flex',2200);
+    }
     const est=calculateDaysToGoal();if(est!==null){if(g().initialEstimate===null){g().initialEstimate=est;g().lowestEstimate=est;}else if(est<g().lowestEstimate)g().lowestEstimate=est;}
     save();updateUI();
+    const pct=g().v>0?(g().total/g().v)*100:0;updateJar(pct,true);
     document.getElementById('undoMsg').innerText=`${label} · +${finalAmt} XP`;
     document.getElementById('undoBar').classList.add('visible');clearTimeout(window._undoT);window._undoT=setTimeout(()=>document.getElementById('undoBar').classList.remove('visible'),6000);
 }
@@ -1531,7 +1752,8 @@ function copyMentorPrompt(){
     const todayNote=g().dayNotes&&g().dayNotes[today]?g().dayNotes[today]:'';
     const identityLine=g().identity?`· Identiteetti: "${g().identity}"\n`:'';const whyLine=g().why?`· Miksi tämä on tärkeää: "${g().why}"\n`:'';
     const dgLine=g().dailyGoal?`· Päivätavoite: ${todayXP}/${g().dailyGoal} XP\n`:'';
-    const txt=`Olet MUUTOSKONE-järjestelmän sparrauskumppani.\n\nTämänhetkinen datani:\n· Tavoite: ${g().goal}\n${identityLine}${whyLine}· Edistyminen: ${g().total.toLocaleString('fi-FI')} / ${g().v.toLocaleString('fi-FI')} XP (${pct}%)\n· Päivä: ${g().days} | Putki: ${g().streak} pv | Momentum: ${momentum}%\n${dgLine}· Keskitahti: ${avg} XP/pv | Tänään: ${todayXP} XP | Paras pv: ${g().bestDay} XP\n· Kertymäkerroin: ×${getMultiplier().toFixed(2)}\n· Tämän päivän intentio: "${intentioTxt}"${todayNote?'\n· Päivän muistiinpano: "'+todayNote.slice(0,200)+'"':''}${getBaselinePart()}\n\nTärkeää: Tarkista eteneekö käyttäjä oikeaan suuntaan oikeilla rutiineilla. Jos rutiinit näyttävät liian helpolta suhteessa tavoitteeseen (esim. pelkkä venyttely kun tavoitteena on Cooper-testi), nosta tämä esiin.\n\nTyyli: Ole lämmin mutta suora. Fokus eteenpäin.\n\n1. Kerro yksi positiivinen asia datasta. Kysy: mikä tuntuu haastavimmalta?\n2. Anna 2–3 konkreettista ideaa seuraavaan askeleeseen.\n3. Arvioi onko nykyinen tekeminen linjassa tavoitteen kanssa.\n4. Lopeta yhdellä lauseella.\n\nAloita kohdasta 1.`;
+    const mentorLine=(g().mentors&&g().mentors.length)?`· Tunnistetut asiantuntijat: ${g().mentors.map(m=>m.name+(m.role?' ('+m.role+')':'')).join(', ')}\n`:'';
+    const txt=`Olet MUUTOSKONE-järjestelmän sparrauskumppani.\n\nTämänhetkinen datani:\n· Tavoite: ${g().goal}\n${identityLine}${whyLine}· Edistyminen: ${g().total.toLocaleString('fi-FI')} / ${g().v.toLocaleString('fi-FI')} XP (${pct}%)\n· Päivä: ${g().days} | Putki: ${g().streak} pv | Momentum: ${momentum}%\n${dgLine}· Keskitahti: ${avg} XP/pv | Tänään: ${todayXP} XP | Paras pv: ${g().bestDay} XP\n· Kertymäkerroin: ×${getMultiplier().toFixed(2)}\n${mentorLine}· Tämän päivän intentio: "${intentioTxt}"${todayNote?'\n· Päivän muistiinpano: "'+todayNote.slice(0,200)+'"':''}${getBaselinePart()}\n\nTärkeää: Tarkista eteneekö käyttäjä oikeaan suuntaan oikeilla rutiineilla. Jos rutiinit näyttävät liian helpolta suhteessa tavoitteeseen (esim. pelkkä venyttely kun tavoitteena on Cooper-testi), nosta tämä esiin.${(g().mentors&&g().mentors.length)?'\n\nAsiantuntijat: Jos käyttäjä ei ole vielä ottanut yhteyttä listatuille asiantuntijoille, kysy siitä suoraan — mitä estää?':''}\n\nTyyli: Ole lämmin mutta suora. Fokus eteenpäin.\n\n1. Kerro yksi positiivinen asia datasta. Kysy: mikä tuntuu haastavimmalta?\n2. Anna 2–3 konkreettista ideaa seuraavaan askeleeseen.\n3. Arvioi onko nykyinen tekeminen linjassa tavoitteen kanssa.\n4. Lopeta yhdellä lauseella.\n\nAloita kohdasta 1.`;
     navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyMentorBtn');b.innerText='Kopioitu';setTimeout(()=>{b.innerText='Kopioi sparrauskehote';},2200);});
 }
 
@@ -1565,7 +1787,7 @@ function closeDiffGuide(){document.getElementById('diffGuideOverlay').classList.
 function selectDiffTier(el,val){document.querySelectorAll('.dg-tier').forEach(t=>t.classList.remove('selected'));el.classList.add('selected');_diffSelected=val;document.getElementById('diffGuideSelectBtn').style.display='block';}
 function applyDiffTier(){if(!_diffSelected)return;const sel=_diffCtx==='setup'?document.getElementById('inV'):document.getElementById('ngV');if(sel)sel.value=_diffSelected;closeDiffGuide();}
 
-function updateForecast(){const dateEl=document.getElementById('forecastDate');const paceEl=document.getElementById('forecastPace');if(!dateEl||!paceEl)return;if(g().total>=g().v){dateEl.innerText='Tavoite saavutettu';paceEl.innerText='';return;}const avg=g().days>0?g().total/g().days:0;if(avg<=0){dateEl.innerText='Lisää dataa';paceEl.innerText='';return;}const daysLeft=Math.ceil((g().v-g().total)/avg);const arrival=new Date();arrival.setDate(arrival.getDate()+daysLeft);dateEl.innerText=arrival.toLocaleDateString('fi-FI',{day:'numeric',month:'long',year:'numeric'});paceEl.innerText=Math.round(avg)+' XP/pv';}
+function updateForecast(){const dateEl=document.getElementById('forecastDate');const paceEl=document.getElementById('forecastPace');if(!dateEl||!paceEl)return;if(g().total>=g().v){dateEl.innerText='Tavoite saavutettu';paceEl.innerText='';return;}const activeDays=getActiveDays();const avg=g().total/activeDays;if(avg<=0){dateEl.innerText='Lisää dataa';paceEl.innerText='';return;}const daysLeft=Math.ceil((g().v-g().total)/avg);const arrival=new Date();arrival.setDate(arrival.getDate()+daysLeft);dateEl.innerText=arrival.toLocaleDateString('fi-FI',{day:'numeric',month:'long',year:'numeric'});paceEl.innerText=Math.round(avg)+' XP/pv';}
 
 function calcHealth(){
     const avg=g().days>0?g().total/g().days:0;const today=getTodayStr();const todayXP=g().weekLog[today]||0;
@@ -1624,6 +1846,168 @@ function openGuide(key){const GUIDE_CONTENTS={streak:{title:'Aktiivisuusputki',b
 function escQ(s){return(s||'').replace(/'/g,"\\'");}
 function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
 function save(){try{localStorage.setItem('mk_v11',JSON.stringify(state));}catch(e){}}
+
+/* ── SOUND ENGINE ── */
+let _audioCtx=null;
+function getAudioCtx(){if(!_audioCtx)_audioCtx=new(window.AudioContext||window.webkitAudioContext)();return _audioCtx;}
+function playXPSound(baseAmt){
+    try{
+        const ctx=getAudioCtx();
+        const gain=ctx.createGain();gain.connect(ctx.destination);
+        const freqs=baseAmt===1?[440,554]:baseAmt===5?[523,659,784]:baseAmt===20?[659,830,988,1109]:[784,988,1244,1480,1760];
+        const dur=baseAmt===1?0.08:baseAmt===5?0.12:baseAmt===20?0.18:0.28;
+        freqs.forEach((freq,i)=>{
+            const osc=ctx.createOscillator();const g2=ctx.createGain();
+            osc.connect(g2);g2.connect(gain);
+            osc.type=baseAmt>=20?'sine':'triangle';
+            osc.frequency.setValueAtTime(freq,ctx.currentTime+i*dur*0.55);
+            const vol=baseAmt===1?0.06:baseAmt===5?0.07:baseAmt===20?0.08:0.09;
+            g2.gain.setValueAtTime(0,ctx.currentTime+i*dur*0.55);
+            g2.gain.linearRampToValueAtTime(vol,ctx.currentTime+i*dur*0.55+0.015);
+            g2.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+i*dur*0.55+dur);
+            osc.start(ctx.currentTime+i*dur*0.55);osc.stop(ctx.currentTime+i*dur*0.55+dur+0.05);
+        });
+        // master fade
+        gain.gain.setValueAtTime(1,ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+freqs.length*dur*0.55+dur+0.1);
+    }catch(e){}
+}
+
+/* ── JAR UPDATE ── */
+function dropIntoJar(pct){
+    const svg=document.getElementById('jarSvg');
+    if(!svg)return;
+    const jarTop=14,jarBot=50,jarH=36;
+    const fillH=Math.min(pct/100,1)*jarH;
+    const fillY=jarBot-fillH;
+    // Pisara tippuu kannen alta alas nestepinnan tasolle
+    const dropDist=fillY-10; // matka kannen alapuolelta nestepintaan
+    const cols=['rgba(77,204,228,0.85)','rgba(124,92,191,0.8)','rgba(0,200,240,0.9)'];
+    const col=cols[Math.floor(Math.random()*cols.length)];
+    const cx=12+Math.random()*20; // satunnainen x purkin sisällä
+    const drop=document.createElementNS('http://www.w3.org/2000/svg','ellipse');
+    drop.setAttribute('cx',cx);
+    drop.setAttribute('cy','12');
+    drop.setAttribute('rx','2.5');
+    drop.setAttribute('ry','3.5');
+    drop.setAttribute('fill',col);
+    drop.setAttribute('clip-path','url(#jarClip)');
+    drop.style.setProperty('--drop-dist',`${Math.max(dropDist,4)}px`);
+    drop.style.setProperty('--drop-dur','0.45s');
+    drop.classList.add('jar-drop');
+    svg.appendChild(drop);
+    setTimeout(()=>drop.remove(),500);
+}
+
+function updateJar(pct,justAdded){
+    const wrap=document.getElementById('jarWrap');
+    const liq=document.getElementById('jarLiquid');
+    const ripple=document.getElementById('jarRipple');
+    const lbl=document.getElementById('jarLabel');
+    if(!wrap||!liq)return;
+    const jarTop=14,jarBot=50,jarH=36;
+    const fillH=Math.min(pct/100,1)*jarH;
+    const fillY=jarBot-fillH;
+    liq.setAttribute('y',fillY);
+    liq.setAttribute('height',fillH);
+    if(ripple){ripple.setAttribute('cy',fillY);}
+    const fillEl=document.getElementById('jarLiquid');
+    if(pct>=100){fillEl.setAttribute('fill','url(#liqGradFull)');wrap.classList.add('glowing');}
+    else{fillEl.setAttribute('fill','url(#liqGrad)');if(pct<95)wrap.classList.remove('glowing');}
+    if(lbl)lbl.innerText=pct>=100?'TÄYNNÄ!':Math.round(pct)+'%';
+    if(pct>0)wrap.classList.add('active'); else wrap.classList.remove('active');
+    if(justAdded){
+        // Pisara tippuu
+        dropIntoJar(pct);
+        // Ripple nestepinnalla
+        wrap.classList.remove('just-added');void wrap.offsetWidth;
+        wrap.classList.add('just-added');
+        setTimeout(()=>wrap.classList.remove('just-added'),700);
+    }
+}
+function explodeJar(){
+    const wrap=document.getElementById('jarWrap');
+    const svg=document.getElementById('jarSvg');
+    if(!wrap||!svg)return;
+
+    // 1. Täytä purkki kokonaan ensin
+    updateJar(100,false);
+
+    // 2. Suurenna sama purkki ruudun keskelle CSS-transformilla
+    const rect=svg.getBoundingClientRect();
+    const scaleX=(window.innerWidth*0.55)/rect.width;
+    const scaleY=(window.innerWidth*0.55)/rect.height;
+    const scale=Math.min(scaleX,scaleY);
+    const targetX=window.innerWidth/2-(rect.left+rect.width/2);
+    const targetY=window.innerHeight/2-(rect.top+rect.height/2);
+
+    svg.style.transition='transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';
+    svg.style.transformOrigin='center center';
+    svg.style.transform=`translate(${targetX}px,${targetY}px) scale(${scale})`;
+    svg.style.zIndex='8500';
+    svg.style.position='relative';
+    wrap.style.overflow='visible';
+    wrap.style.zIndex='8500';
+    wrap.style.position='relative';
+
+    if(navigator.vibrate)navigator.vibrate([20,10,60,10,100]);
+
+    setTimeout(()=>{
+        // 3. Shake
+        svg.style.transition='transform 0.05s ease-in-out';
+        let shakes=0;
+        const shakeInt=setInterval(()=>{
+            const off=(Math.random()-0.5)*14;
+            svg.style.transform=`translate(${targetX+off}px,${targetY}px) scale(${scale})`;
+            if(++shakes>6){
+                clearInterval(shakeInt);
+
+                // 4. Kansi lentää ylös — animoidaan SVG lid-elementtejä
+                const lid1=svg.querySelector('rect:last-child');
+                const lid2=svg.querySelectorAll('rect')[svg.querySelectorAll('rect').length-2];
+                [lid1,lid2].forEach(el=>{if(el){el.style.transition='transform 0.6s cubic-bezier(0.22,1,0.36,1)';el.style.transformOrigin='center';el.style.transform='translateY(-80px) rotate(-15deg)';}});
+
+                // 5. Purkki paisuu ja räjähtää
+                setTimeout(()=>{
+                    svg.style.transition='transform 0.15s ease-out';
+                    svg.style.transform=`translate(${targetX}px,${targetY}px) scale(${scale*1.25})`;
+                    setTimeout(()=>{
+                        svg.style.transition='transform 0.4s ease-in, opacity 0.4s ease-in';
+                        svg.style.transform=`translate(${targetX}px,${targetY}px) scale(${scale*0.1})`;
+                        svg.style.opacity='0';
+
+                        // 6. Roiskeet lähtevät purkin sijainnista
+                        const cx=window.innerWidth/2, cy=window.innerHeight/2;
+                        const splashCols=['#4dcce4','#7c5cbf','#00c8f0','#a78bfa','#22c55e','#C9A84C'];
+                        for(let i=0;i<22;i++){
+                            const s=document.createElement('div');s.className='jar-splash';
+                            const angle=(i/22)*Math.PI*2;
+                            const dist=70+Math.random()*130;
+                            const size=5+Math.random()*10;
+                            const dur=(0.5+Math.random()*0.5).toFixed(2);
+                            s.style.cssText=`width:${size}px;height:${size}px;background:${splashCols[i%splashCols.length]};left:${cx}px;top:${cy}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist-50}px;--dur:${dur}s;border-radius:50%;`;
+                            document.body.appendChild(s);setTimeout(()=>s.remove(),1100);
+                        }
+
+                        // 7. Palauta purkki normaaliksi victoryä varten
+                        setTimeout(()=>{
+                            svg.style.transition='none';
+                            svg.style.transform='';
+                            svg.style.opacity='1';
+                            svg.style.zIndex='';
+                            svg.style.position='';
+                            wrap.style.overflow='';
+                            wrap.style.zIndex='';
+                            wrap.style.position='';
+                            const lbl=document.getElementById('jarLabel');
+                            if(lbl)lbl.innerText='VALMIS!';
+                        },500);
+                    },150);
+                },200);
+            }
+        },60);
+    },500);
+}
 function exportData(){const a=document.createElement('a');a.href='data:text/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(state));a.download='muutoskone_v11.json';a.click();}
 function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.parse(e.target.result);if(p.goals){state=p;}else{state.goals=[p];state.activeIdx=0;}state.goals.forEach(migrateGoal);save();render();}catch(err){alert('Tiedoston lukeminen epäonnistui.');}};r.readAsText(ev.target.files[0]);}
 </script>
