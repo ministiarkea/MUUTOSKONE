@@ -2009,7 +2009,18 @@ function explodeJar(){
         },60);
     },500);
 }
-function exportData(){const a=document.createElement('a');a.href='data:text/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(state));a.download='muutoskone_v11.json';a.click();}
+function exportData(){
+    const json=JSON.stringify(state,null,2);
+    const blob=new Blob([json],{type:'application/json'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    a.download='muutoskone_varmuuskopio_'+getTodayStr()+'.json';
+    a.style.display='none';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},1000);
+}
 function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.parse(e.target.result);if(p.goals){state=p;}else{state.goals=[p];state.activeIdx=0;}state.goals.forEach(migrateGoal);save();render();}catch(err){alert('Tiedoston lukeminen epäonnistui.');}};r.readAsText(ev.target.files[0]);}
 </script>
 </body>
