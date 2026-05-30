@@ -836,6 +836,7 @@
         <div class="bar-track"><div class="bar-fill" id="barXP"></div></div>
         <!-- tilastot löytyvät Tilastot-välilehdestä alla -->
     </div>
+    </div>
 
     <!-- DAILY XP GOAL -->
     <div class="daily-goal-bar" id="dailyGoalBar">
@@ -1615,7 +1616,7 @@ function copyNewGoalPrompt(){
 
 JÄRJESTELMÄN LOGIIKKA:
 · Vaikeuskertoimet: 1 000 XP (Uusi tapa) / 5 000 XP (Merkittävä muutos) / 10 000 XP (Elämänmuutos) / 100 000 XP (Mestari)
-· Rutiinit: 1 XP (mikroteko 1–10 min) / 5 XP (harppaus 15–30 min) / 20 XP (panostus 45–90 min) / 50 XP (uroteko 2–4 h)
+· Rutiinit — VAIN nämä neljä arvoa (älä ehdota muita kuten 10, 15 tai 25 XP): 1 XP (mikroteko 1–10 min) / 5 XP (harppaus 15–30 min) / 20 XP (panostus 45–90 min) / 50 XP (uroteko 2–4 h)
 · Kertymäkerroin kasvaa ×1.0 → ×2.0 päiville 1–84. Pitkäjänteisyys nopeuttaa matkaa konkreettisesti.
 
 KÄYTTÄJÄN SYÖTTÄMÄT PARAMETRIT:
@@ -1626,11 +1627,11 @@ TEHTÄVÄSI — aloita lyhyellä arviolla:
 2. Vaikeuskerroin: Onko se oikein mitoitettu suhteessa tavoitteeseen? Perustele lyhyesti tai ehdota muutosta.
 3. Lähtötilanne: Onko se kuvattu faktoina vai adjektiiveina? Jos epämääräinen tai puuttuu, pyydä tarkennusta.
 4. Identiteetti ja miksi: Jos puuttuvat, kysy vain toinen — se joka tuntuu tärkeämmältä tässä tilanteessa.
-5. Rutiinit: Ovatko ne linjassa tavoitteen kanssa? Puuttuuko jokin taso? Ovatko ne liian helpot tai liian vaativat?
+5. Rutiinit: Ovatko ne linjassa tavoitteen kanssa? Käytä ehdotuksissa AINOASTAAN XP-arvoja 1, 5, 20 tai 50 — ei muita.
 
 Kysy sitten yksi tärkein puuttuva tai epäselvä asia. Kun kaikki on kunnossa, tuota:
 · Perusteltu vaikeuskerroin (vahvista tai korjaa)
-· Täydennetty rutiinikirjasto kaikille neljälle tasolle
+· Täydennetty rutiinikirjasto kaikille neljälle tasolle (VAIN 1 XP / 5 XP / 20 XP / 50 XP — ei muita arvoja)
 · Realistinen aikajana (tavoitepäivään tai oma suositus)
 · Kriittisin yksittäinen muuttuja, joka ratkaisee onnistumisen
 
@@ -1669,7 +1670,7 @@ function copySetupAiPrompt(){
 
 JÄRJESTELMÄN LOGIIKKA:
 · Vaikeuskertoimet: 1 000 XP (Uusi tapa) / 5 000 XP (Merkittävä muutos) / 10 000 XP (Elämänmuutos) / 100 000 XP (Mestari)
-· Rutiinit: 1 XP (mikroteko 1–10 min) / 5 XP (harppaus 15–30 min) / 20 XP (panostus 45–90 min) / 50 XP (uroteko 2–4 h)
+· Rutiinit — VAIN nämä neljä arvoa (älä ehdota muita kuten 10, 15 tai 25 XP): 1 XP (mikroteko 1–10 min) / 5 XP (harppaus 15–30 min) / 20 XP (panostus 45–90 min) / 50 XP (uroteko 2–4 h)
 · Kertymäkerroin kasvaa ×1.0 → ×2.0 päiville 1–84. Pitkäjänteisyys nopeuttaa matkaa konkreettisesti.
 
 KÄYTTÄJÄN SYÖTTÄMÄT PARAMETRIT:
@@ -1680,11 +1681,11 @@ TEHTÄVÄSI — aloita lyhyellä arviolla:
 2. Vaikeuskerroin: Onko se oikein mitoitettu suhteessa tavoitteeseen? Perustele lyhyesti tai ehdota muutosta.
 3. Lähtötilanne: Onko se kuvattu faktoina vai adjektiiveina? Jos epämääräinen tai puuttuu, pyydä tarkennusta.
 4. Identiteetti ja miksi: Jos puuttuvat, kysy vain toinen — se joka tuntuu tärkeämmältä tässä tilanteessa.
-5. Rutiinit: Ovatko ne linjassa tavoitteen kanssa? Puuttuuko jokin taso? Ovatko ne liian helpot tai liian vaativat?
+5. Rutiinit: Ovatko ne linjassa tavoitteen kanssa? Käytä ehdotuksissa AINOASTAAN XP-arvoja 1, 5, 20 tai 50 — ei muita.
 
 Kysy sitten yksi tärkein puuttuva tai epäselvä asia. Kun kaikki on kunnossa, tuota:
 · Perusteltu vaikeuskerroin (vahvista tai korjaa)
-· Täydennetty rutiinikirjasto kaikille neljälle tasolle
+· Täydennetty rutiinikirjasto kaikille neljälle tasolle (VAIN 1 XP / 5 XP / 20 XP / 50 XP — ei muita arvoja)
 · Realistinen aikajana (tavoitepäivään tai oma suositus)
 · Kriittisin yksittäinen muuttuja, joka ratkaisee onnistumisen
 
@@ -1718,7 +1719,7 @@ function copyAiPrompt(){
 
 JÄRJESTELMÄN LOGIIKKA:
 · Vaikeuskertoimet: 1 000 XP (Uusi tapa) / 5 000 XP (Merkittävä muutos) / 10 000 XP (Elämänmuutos) / 100 000 XP (Mestari)
-· Rutiinit: 1 XP (mikroteko 1–10 min) / 5 XP (harppaus 15–30 min) / 20 XP (panostus 45–90 min) / 50 XP (uroteko 2–4 h)
+· Rutiinit — VAIN nämä neljä arvoa (älä ehdota muita kuten 10, 15 tai 25 XP): 1 XP (mikroteko 1–10 min) / 5 XP (harppaus 15–30 min) / 20 XP (panostus 45–90 min) / 50 XP (uroteko 2–4 h)
 · Kertymäkerroin kasvaa ×1.0 → ×2.0 päiville 1–84. Pitkäjänteisyys nopeuttaa matkaa konkreettisesti.
 
 KÄYTTÄJÄN SYÖTTÄMÄT PARAMETRIT:
@@ -1729,11 +1730,11 @@ TEHTÄVÄSI — aloita lyhyellä arviolla:
 2. Vaikeuskerroin: Onko se oikein mitoitettu suhteessa tavoitteeseen? Perustele lyhyesti tai ehdota muutosta.
 3. Lähtötilanne: Onko se kuvattu faktoina vai adjektiiveina? Jos epämääräinen tai puuttuu, pyydä tarkennusta.
 4. Identiteetti ja miksi: Jos puuttuvat, kysy vain toinen — se joka tuntuu tärkeämmältä tässä tilanteessa.
-5. Rutiinit: Ovatko ne linjassa tavoitteen kanssa? Puuttuuko jokin taso? Ovatko ne liian helpot tai liian vaativat?
+5. Rutiinit: Ovatko ne linjassa tavoitteen kanssa? Käytä ehdotuksissa AINOASTAAN XP-arvoja 1, 5, 20 tai 50 — ei muita.
 
 Kysy sitten yksi tärkein puuttuva tai epäselvä asia. Kun kaikki on kunnossa, tuota:
 · Perusteltu vaikeuskerroin (vahvista tai korjaa)
-· Täydennetty rutiinikirjasto kaikille neljälle tasolle
+· Täydennetty rutiinikirjasto kaikille neljälle tasolle (VAIN 1 XP / 5 XP / 20 XP / 50 XP — ei muita arvoja)
 · Realistinen aikajana (tavoitepäivään tai oma suositus)
 · Kriittisin yksittäinen muuttuja, joka ratkaisee onnistumisen
 
@@ -1752,7 +1753,8 @@ function copyMentorPrompt(){
     const identityLine=g().identity?`· Identiteetti: "${g().identity}"\n`:'';const whyLine=g().why?`· Miksi tämä on tärkeää: "${g().why}"\n`:'';
     const dgLine=g().dailyGoal?`· Päivätavoite: ${todayXP}/${g().dailyGoal} XP\n`:'';
     const mentorLine=(g().mentors&&g().mentors.length)?`· Tunnistetut asiantuntijat: ${g().mentors.map(m=>m.name+(m.role?' ('+m.role+')':'')).join(', ')}\n`:'';
-    const txt=`Olet MUUTOSKONE-järjestelmän sparrauskumppani.\n\nTämänhetkinen datani:\n· Tavoite: ${g().goal}\n${identityLine}${whyLine}· Edistyminen: ${g().total.toLocaleString('fi-FI')} / ${g().v.toLocaleString('fi-FI')} XP (${pct}%)\n· Päivä: ${g().days} | Putki: ${g().streak} pv | Momentum: ${momentum}%\n${dgLine}· Keskitahti: ${avg} XP/pv | Tänään: ${todayXP} XP | Paras pv: ${g().bestDay} XP\n· Kertymäkerroin: ×${getMultiplier().toFixed(2)}\n${mentorLine}· Tämän päivän intentio: "${intentioTxt}"${todayNote?'\n· Päivän muistiinpano: "'+todayNote.slice(0,200)+'"':''}${getBaselinePart()}\n\nTärkeää: Tarkista eteneekö käyttäjä oikeaan suuntaan oikeilla rutiineilla. Jos rutiinit näyttävät liian helpolta suhteessa tavoitteeseen (esim. pelkkä venyttely kun tavoitteena on Cooper-testi), nosta tämä esiin.${(g().mentors&&g().mentors.length)?'\n\nAsiantuntijat: Jos käyttäjä ei ole vielä ottanut yhteyttä listatuille asiantuntijoille, kysy siitä suoraan — mitä estää?':''}\n\nTyyli: Ole lämmin mutta suora. Fokus eteenpäin.\n\n1. Kerro yksi positiivinen asia datasta. Kysy: mikä tuntuu haastavimmalta?\n2. Anna 2–3 konkreettista ideaa seuraavaan askeleeseen.\n3. Arvioi onko nykyinen tekeminen linjassa tavoitteen kanssa.\n4. Lopeta yhdellä lauseella.\n\nAloita kohdasta 1.`;
+    const rutiiniLista=`· 1 XP = ${g().r1||'Mikrotehtävä'} (1–10 min)\n· 5 XP = ${g().r5||'Harppaus'} (15–30 min)\n· 20 XP = ${g().r20||'Panostus'} (45–90 min)\n· 50 XP = ${g().r50||'Uroteko'} (2–4 h)`;
+    const txt=`Olet MUUTOSKONE-järjestelmän sparrauskumppani.\n\nJÄRJESTELMÄN LOGIIKKA — EHDOTON:\nMuutoskoneessa on VAIN NELJÄ XP-tasoa. Älä koskaan ehdota muita XP-arvoja kuin näitä:\n· 1 XP = Mikrotehtävä (1–10 min) — pienin mahdollinen teko\n· 5 XP = Harppaus (15–30 min) — päivittäinen perussuoritus\n· 20 XP = Panostus (45–90 min) — merkittävä sessio\n· 50 XP = Uroteko (2–4 h) — maksimaalinen suoritus\nEI 10 XP. EI 15 XP. EI 25 XP. EI muita arvoja. Ainoastaan 1, 5, 20 tai 50 XP.\n\nTämän käyttäjän rutiinit juuri nyt:\n${rutiiniLista}\n\nTämänhetkinen data:\n· Tavoite: ${g().goal}\n${identityLine}${whyLine}· Edistyminen: ${g().total.toLocaleString('fi-FI')} / ${g().v.toLocaleString('fi-FI')} XP (${pct}%)\n· Päivä: ${g().days} | Putki: ${g().streak} pv | Momentum: ${momentum}%\n${dgLine}· Keskitahti: ${avg} XP/pv | Tänään: ${todayXP} XP | Paras pv: ${g().bestDay} XP\n· Kertymäkerroin: ×${getMultiplier().toFixed(2)}\n${mentorLine}· Tämän päivän intentio: "${intentioTxt}"${todayNote?'\n· Päivän muistiinpano: "'+todayNote.slice(0,200)+'"':''}${getBaselinePart()}\n\nTärkeää: Jos ehdotat uusia tai muutettuja rutiineja, käytä AINOASTAAN XP-arvoja 1, 5, 20 tai 50. Jos rutiinit näyttävät liian helpolta suhteessa tavoitteeseen, ehdota korvaavia rutiineja samoilla XP-arvoilla — älä luo uusia XP-tasoja.${(g().mentors&&g().mentors.length)?'\n\nAsiantuntijat: Jos käyttäjä ei ole vielä ottanut yhteyttä listatuille asiantuntijoille, kysy siitä suoraan — mitä estää?':''}\n\nTyyli: Ole lämmin mutta suora. Fokus eteenpäin.\n\n1. Kerro yksi positiivinen asia datasta. Kysy: mikä tuntuu haastavimmalta?\n2. Anna 2–3 konkreettista ideaa seuraavaan askeleeseen — käytä vain XP-arvoja 1, 5, 20 tai 50.\n3. Arvioi onko nykyinen tekeminen linjassa tavoitteen kanssa.\n4. Lopeta yhdellä lauseella.\n\nAloita kohdasta 1.`;
     navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyMentorBtn');b.innerText='Kopioitu';setTimeout(()=>{b.innerText='Kopioi sparrauskehote';},2200);});
 }
 
