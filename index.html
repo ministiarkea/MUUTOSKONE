@@ -736,6 +736,7 @@
         <h1 class="neon-logo">Muutoskone</h1>
         <div class="sub-logo">Strateginen muutostyökalu</div>
     </div>
+    <div style="text-align:center;font-size:12px;color:var(--text-3);line-height:1.6;margin:-12px 0 18px;padding:0 14px;">Vain <span style="color:var(--text-2);">tavoite</span>, <span style="color:var(--text-2);">vaikeuskerroin</span> ja <span style="color:var(--text-2);">rutiinit</span> ovat pakollisia. Loput voit täyttää myöhemmin — tai antaa Strategia-apurin auttaa.</div>
     <div class="card"><div class="lbl"><span class="lbl-dot"></span>Tavoite <button class="guide-btn-cyan" onclick="openSetupGuide('tavoite')">?</button></div><input type="text" id="inGoal" placeholder="Mitä haluat saavuttaa?"></div>
     <div class="card"><div class="lbl"><span class="lbl-dot"></span>Vaikeuskerroin <button class="guide-btn-cyan" onclick="openDiffGuide('setup')">?</button></div>
         <select id="inV"><option value="1000">1 000 XP — Uusi tapa</option><option value="5000" selected>5 000 XP — Merkittävä muutos</option><option value="10000">10 000 XP — Elämänmuutos</option><option value="100000">100 000 XP — Mestari</option></select>
@@ -2009,18 +2010,7 @@ function explodeJar(){
         },60);
     },500);
 }
-function exportData(){
-    const json=JSON.stringify(state,null,2);
-    const blob=new Blob([json],{type:'application/json'});
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');
-    a.href=url;
-    a.download='muutoskone_varmuuskopio_'+getTodayStr()+'.json';
-    a.style.display='none';
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},1000);
-}
+function exportData(){const a=document.createElement('a');a.href='data:text/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(state));a.download='muutoskone_v11.json';a.click();}
 function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.parse(e.target.result);if(p.goals){state=p;}else{state.goals=[p];state.activeIdx=0;}state.goals.forEach(migrateGoal);save();render();}catch(err){alert('Tiedoston lukeminen epäonnistui.');}};r.readAsText(ev.target.files[0]);}
 </script>
 </body>
