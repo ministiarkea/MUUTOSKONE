@@ -420,12 +420,12 @@
             --cyan:#0a93b3; --purple:#6b4ea8;
         }
         :root[data-theme="light"] body{
-            background-image:radial-gradient(ellipse 70% 40% at 50% -10%,rgba(124,92,191,0.10),transparent),
-            radial-gradient(ellipse 50% 30% at 90% 90%,rgba(0,200,240,0.07),transparent);
+            background-image:radial-gradient(ellipse 95% 55% at 50% -8%,rgba(124,92,191,0.20),transparent 72%),
+            radial-gradient(ellipse 78% 50% at 92% 96%,rgba(0,200,240,0.15),transparent 72%),
+            radial-gradient(ellipse 60% 45% at 6% 55%,rgba(124,92,191,0.09),transparent 72%);
         }
         :root[data-theme="light"] select option{background:#ffffff;color:#1e1e2a;}
         :root[data-theme="light"] .rbtn::after{background:#000;}
-        :root[data-theme="light"] .ob-body .hl-purple{color:#6b4ea8;}
         :root[data-theme="light"] .grace-reminder{color:rgba(102,74,160,0.95);}
         /* Purkin lasi: teematietoinen, näkyy myös vaaleassa */
         .jar-glass{fill:rgba(var(--w),0.04);stroke:rgba(var(--w),0.14);}
@@ -434,9 +434,29 @@
         :root[data-theme="light"] .jar-glass{stroke:rgba(var(--w),0.26);}
         :root[data-theme="light"] .jar-lid{stroke:rgba(var(--w),0.24);}
         :root[data-theme="light"] .jar-lid-top{stroke:rgba(var(--w),0.22);}
-        /* Vaaleassa: popup-/ohjelaatikot (mm. tavoite-esimerkit) luettaviksi */
+        /* Vaaleassa: sisältö-/ohjelaatikot valkoisiksi ja luettaviksi */
         :root[data-theme="light"] .sg-card,
-        :root[data-theme="light"] [style*="#111120"]{background:#ffffff !important;border-color:rgba(var(--w),0.12) !important;}
+        :root[data-theme="light"] [style*="#111120"],
+        :root[data-theme="light"] [style*="#0e0e1f"]{background:#ffffff !important;border-color:rgba(34,34,48,0.12) !important;--w:34,34,48;}
+        /* Koko ruudun "hetki"-ikkunat pysyvat tummina, mutta teksti luettavana */
+        :root[data-theme="light"] #comebackOverlay,
+        :root[data-theme="light"] #shareOverlay,
+        :root[data-theme="light"] #diffGuideOverlay,
+        :root[data-theme="light"] #lvlOverlay,
+        :root[data-theme="light"] #victoryOverlay,
+        :root[data-theme="light"] #milestoneOverlay,
+        :root[data-theme="light"] #bestDayOverlay,
+        :root[data-theme="light"] #newGoalOverlay,
+        :root[data-theme="light"] #reflectionOverlay,
+        :root[data-theme="light"] #recoveryOverlay,
+        :root[data-theme="light"] #onboardingOverlay{
+            --w:255,255,255;
+            --text-1:rgba(255,255,255,0.93);--text-2:rgba(255,255,255,0.62);--text-3:rgba(255,255,255,0.38);
+            --surface:rgba(255,255,255,0.042);--surface-2:rgba(255,255,255,0.07);
+            --border:rgba(255,255,255,0.07);--border-2:rgba(255,255,255,0.11);
+            --grad-text:linear-gradient(135deg,#b09fe0 0%,#4dcce4 100%);
+            --cyan:#00c8f0;--purple:#7c5cbf;
+        }
 
         /* ===== TEEMANVAIHTONAPPI (aurinko / kuu) ===== */
         .theme-toggle{position:fixed;top:16px;right:16px;z-index:60;width:42px;height:42px;border-radius:50%;
@@ -452,7 +472,7 @@
         :root[data-theme="light"] .theme-toggle .icon-sun{opacity:0;transform:rotate(80deg) scale(.4);}
         :root[data-theme="light"] .theme-toggle .icon-moon{opacity:1;transform:rotate(0) scale(1);}
         .theme-toggle .sun-rays{transform-origin:12px 12px;animation:mkSunSpin 30s linear infinite;}
-        .theme-toggle .sun-core{filter:drop-shadow(0 0 3px rgba(255,184,77,.75));}
+        .theme-toggle .sun-core{filter:drop-shadow(0 0 3px rgba(255,255,255,.7));}
         @keyframes mkSunSpin{to{transform:rotate(360deg);}}
         @media (prefers-reduced-motion:reduce){.theme-toggle .sun-rays{animation:none;}}
     </style>
@@ -461,9 +481,9 @@
 <button class="theme-toggle" onclick="mkToggleTheme()" aria-label="Vaihda vaalea tai tumma tila" title="Vaihda teema">
   <svg class="icon-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true">
     <defs><radialGradient id="mkSunG" cx="50%" cy="45%" r="55%">
-      <stop offset="0%" stop-color="#ffe7a8"/><stop offset="60%" stop-color="#ffc24d"/><stop offset="100%" stop-color="#ffab2e"/>
+      <stop offset="0%" stop-color="#ffffff"/><stop offset="65%" stop-color="#f3f6ff"/><stop offset="100%" stop-color="#dde4f3"/>
     </radialGradient></defs>
-    <g class="sun-rays" stroke="#ffc868" stroke-width="1.7" stroke-linecap="round">
+    <g class="sun-rays" stroke="#ffffff" stroke-width="1.7" stroke-linecap="round">
       <line x1="12" y1="1.8" x2="12" y2="4.4"/><line x1="12" y1="19.6" x2="12" y2="22.2"/>
       <line x1="1.8" y1="12" x2="4.4" y2="12"/><line x1="19.6" y1="12" x2="22.2" y2="12"/>
       <line x1="4.7" y1="4.7" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.3" y2="19.3"/>
@@ -473,9 +493,9 @@
   </svg>
   <svg class="icon-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
     <defs><linearGradient id="mkMoonG" x1="4" y1="3" x2="20" y2="21" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#d7ddff"/><stop offset="100%" stop-color="#9aa6dc"/>
+      <stop offset="0%" stop-color="#3b3b54"/><stop offset="100%" stop-color="#222230"/>
     </linearGradient></defs>
-    <path d="M20.5 15A8 8 0 1 1 9 3.5 6.5 6.5 0 0 0 20.5 15Z" fill="url(#mkMoonG)"/>
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="url(#mkMoonG)"/>
   </svg>
 </button>
 <script>
@@ -1020,9 +1040,9 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
         <div style="font-size:11px;color:var(--text-2);margin-bottom:10px;line-height:1.6;">Kuka on jo tehnyt sen, mitä sinä tavoittelet? Valmentaja, asiantuntija tai joku jonka voi tavoittaa ja pyytää neuvoa.</div>
         <div class="mentor-list" id="mentorList"></div>
         <div class="mentor-add-form" id="mentorForm">
-            <input class="mentor-field" id="mentorName" type="text" placeholder="Nimi — esim. Mari Turpela" maxlength="60">
+            <input class="mentor-field" id="mentorName" type="text" placeholder="Nimi — esim. Mari" maxlength="60">
             <input class="mentor-field" id="mentorRole" type="text" placeholder="Miksi juuri tämä? — esim. valmentaa lisäpainoleuanvetoa" maxlength="100">
-            <input class="mentor-field" id="mentorContact" type="text" placeholder="Miten tavoitan? — esim. @mariturpela / kuntosali" maxlength="100">
+            <input class="mentor-field" id="mentorContact" type="text" placeholder="Miten tavoitan? — esim. @mari / kuntosali" maxlength="100">
             <button class="mentor-add-btn" onclick="addMentor()">+ Lisää henkilö</button>
         </div>
     </div>
