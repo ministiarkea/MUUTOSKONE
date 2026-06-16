@@ -125,6 +125,15 @@
         .sb-item{text-align:center;} .sb-val{font-size:14px;font-weight:300;color:var(--text-1);}
         .sb-lbl{font-size:8px;color:var(--text-3);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
         .daily-goal-bar{background:rgba(var(--w),0.025);border:1px solid var(--border);border-radius:12px;padding:11px 14px;margin-bottom:9px;}
+        .focus-timer{display:flex;align-items:center;gap:9px;background:rgba(var(--w),0.025);border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin-bottom:9px;cursor:pointer;user-select:none;transition:border-color .2s,background .2s;}
+        .focus-timer .ft-icon{font-size:15px;line-height:1;}
+        .focus-timer .ft-label{font-size:11px;color:var(--text-2);letter-spacing:.5px;}
+        .focus-timer .ft-time{margin-left:auto;font-size:15px;font-weight:300;color:var(--cyan);font-variant-numeric:tabular-nums;letter-spacing:1px;}
+        .focus-timer.running{border-color:var(--cyan-line);background:rgba(0,200,240,0.05);}
+        .focus-timer.done{border-color:rgba(34,197,94,0.4);background:rgba(34,197,94,0.07);}
+        .focus-timer.done .ft-label,.focus-timer.done .ft-time{color:rgba(34,197,94,0.95);}
+        .timer-preset{flex:1;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text-1);padding:14px 0;border-radius:10px;font-size:13px;font-weight:300;cursor:pointer;font-family:inherit;transition:border-color .2s;}
+        .timer-preset:active{border-color:var(--cyan-line);}
         .dg-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
         .dg-label{font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;}
         .dg-vals{font-size:11px;color:var(--text-2);}
@@ -685,6 +694,32 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
     </div>
 </div>
 
+<!-- FOKUSAJASTIN OVERLAY -->
+<div id="timerOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:7000;align-items:flex-end;justify-content:center;">
+    <div style="background:#111120;border:1px solid rgba(255,255,255,0.11);border-radius:20px 20px 0 0;padding:24px 22px 40px;max-width:430px;width:100%;">
+        <div style="font-size:9px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:8px;">Fokusajastin</div>
+        <div style="font-size:12px;color:var(--text-3);margin-bottom:18px;line-height:1.6;">Valitse aika ja keskity yhteen rutiiniin. Ajastin jatkaa oikein, vaikka poistuisit hetkeksi.</div>
+        <div id="timerRunningView" style="display:none;text-align:center;margin-bottom:18px;">
+            <div id="timerBig" style="font-size:46px;font-weight:200;color:var(--cyan);font-variant-numeric:tabular-nums;letter-spacing:2px;">00:00</div>
+        </div>
+        <div id="timerPresetView">
+            <div style="display:flex;gap:8px;margin-bottom:8px;">
+                <button onclick="startTimer(10)" class="timer-preset">10 min</button>
+                <button onclick="startTimer(25)" class="timer-preset">25 min</button>
+                <button onclick="startTimer(60)" class="timer-preset">60 min</button>
+            </div>
+            <div style="display:flex;gap:8px;">
+                <input id="timerCustom" type="number" min="1" max="600" placeholder="oma aika (min)" style="flex:2;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:13px;color:var(--text-1);font-size:15px;outline:none;font-family:inherit;text-align:center;">
+                <button onclick="startCustomTimer()" style="flex:1;background:transparent;border:1px solid var(--cyan-line);color:var(--text-1);padding:13px;border-radius:10px;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Aloita</button>
+            </div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:16px;">
+            <button onclick="closeTimer()" style="flex:1;background:transparent;border:1px solid var(--border);color:var(--text-2);padding:14px;border-radius:12px;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Sulje</button>
+            <button id="timerStopBtn" onclick="stopTimer()" style="display:none;flex:2;background:transparent;border:1px solid rgba(249,115,22,0.4);color:rgba(249,115,22,0.9);padding:14px;border-radius:12px;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Pysäytä ajastin</button>
+        </div>
+    </div>
+</div>
+
 <!-- SHARE OVERLAY -->
 <div id="shareOverlay">
     <div class="share-canvas-wrap"><canvas id="shareCanvas" width="680" height="400"></canvas></div>
@@ -940,6 +975,13 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
         <div class="dg-track"><div class="dg-fill" id="dgFill" style="width:0%"></div></div>
     </div>
 
+    <!-- FOKUSAJASTIN -->
+    <div class="focus-timer" id="focusTimer" onclick="openTimer()">
+        <span class="ft-icon" id="ftIcon">⏱</span>
+        <span class="ft-label" id="ftLabel">Fokusajastin</span>
+        <span class="ft-time" id="ftTime"></span>
+    </div>
+
     <!-- RUTIININAPIT -->
     <div class="routine-grid" id="taskList"></div>
 
@@ -1182,9 +1224,33 @@ window.onload=()=>{
     if(state.goals.length>0){checkDayRollover(false);render();setTimeout(checkSparraReminder,2000);}
     else{initSetupPage();showOnboarding();}
     startDayChecker();
+    resumeTimer();
+    document.addEventListener('visibilitychange',onTimerVisibility);
     window.addEventListener('online',()=>document.getElementById('offlineBadge').style.display='none');
     window.addEventListener('offline',()=>document.getElementById('offlineBadge').style.display='block');
 };
+
+/* ===== FOKUSAJASTIN (aikaleimapohjainen) ===== */
+let _timerInt=null;
+function _timerEnd(){try{const v=localStorage.getItem('mk_timer');return v?parseInt(v):0;}catch(e){return 0;}}
+function _setTimerEnd(t){try{if(t)localStorage.setItem('mk_timer',String(t));else localStorage.removeItem('mk_timer');}catch(e){}}
+function fmtTimer(ms){if(ms<0)ms=0;const tot=Math.round(ms/1000);const m=Math.floor(tot/60),sec=tot%60;return (m<10?'0':'')+m+':'+(sec<10?'0':'')+sec;}
+function ensureAudio(){try{const c=getAudioCtx();if(c&&c.state==='suspended')c.resume();}catch(e){}}
+function playChime(){try{ensureAudio();const c=getAudioCtx();if(!c)return;const t0=c.currentTime;[880,1108.73,1318.51].forEach((f,i)=>{const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=f;const st=t0+i*0.2;g.gain.setValueAtTime(0,st);g.gain.linearRampToValueAtTime(0.2,st+0.02);g.gain.exponentialRampToValueAtTime(0.001,st+0.45);o.connect(g);g.connect(c.destination);o.start(st);o.stop(st+0.5);});}catch(e){}}
+function openTimer(){renderTimerOverlay();document.getElementById('timerOverlay').style.display='flex';}
+function closeTimer(){document.getElementById('timerOverlay').style.display='none';}
+function renderTimerOverlay(){const end=_timerEnd(),running=end>Date.now();document.getElementById('timerRunningView').style.display=running?'block':'none';document.getElementById('timerPresetView').style.display=running?'none':'block';document.getElementById('timerStopBtn').style.display=running?'block':'none';if(running)document.getElementById('timerBig').innerText=fmtTimer(end-Date.now());}
+function startTimer(min){ensureAudio();_setTimerEnd(Date.now()+min*60000);startTick();updateTimerChip();closeTimer();}
+function startCustomTimer(){const v=parseInt(document.getElementById('timerCustom').value);if(isNaN(v)||v<1){document.getElementById('timerCustom').focus();return;}startTimer(Math.min(v,600));}
+function stopTimer(){_setTimerEnd(0);stopTick();updateTimerChip();closeTimer();}
+function startTick(){stopTick();_timerInt=setInterval(tickTimer,1000);tickTimer();}
+function stopTick(){if(_timerInt){clearInterval(_timerInt);_timerInt=null;}}
+function tickTimer(){const end=_timerEnd();if(!end){stopTick();updateTimerChip();return;}const rem=end-Date.now();if(rem<=0){finishTimer();return;}updateTimerChip();const ov=document.getElementById('timerOverlay');if(ov&&ov.style.display!=='none')document.getElementById('timerBig').innerText=fmtTimer(rem);}
+function updateTimerChip(){const chip=document.getElementById('focusTimer');if(!chip)return;const end=_timerEnd(),rem=end-Date.now();if(end&&rem>0){chip.classList.add('running');chip.classList.remove('done');document.getElementById('ftIcon').innerText='⏱';document.getElementById('ftLabel').innerText='Fokus käynnissä';document.getElementById('ftTime').innerText=fmtTimer(rem);}else if(!chip.classList.contains('done')){resetTimerChip();}}
+function resetTimerChip(){const chip=document.getElementById('focusTimer');if(!chip)return;chip.classList.remove('running','done');document.getElementById('ftIcon').innerText='⏱';document.getElementById('ftLabel').innerText='Fokusajastin';document.getElementById('ftTime').innerText='';}
+function finishTimer(){_setTimerEnd(0);stopTick();playChime();try{if(navigator.vibrate)navigator.vibrate([200,100,200]);}catch(e){}const chip=document.getElementById('focusTimer');if(chip){chip.classList.remove('running');chip.classList.add('done');document.getElementById('ftIcon').innerText='✓';document.getElementById('ftLabel').innerText='Aika täynnä!';document.getElementById('ftTime').innerText='✓';}const ov=document.getElementById('timerOverlay');if(ov&&ov.style.display!=='none')renderTimerOverlay();setTimeout(()=>{if(_timerEnd()<=Date.now())resetTimerChip();},6000);}
+function resumeTimer(){const end=_timerEnd();if(end>Date.now()){startTick();updateTimerChip();}else if(end){_setTimerEnd(0);}}
+function onTimerVisibility(){if(document.hidden)return;const end=_timerEnd();if(end>Date.now()){if(!_timerInt)startTick();updateTimerChip();const ov=document.getElementById('timerOverlay');if(ov&&ov.style.display!=='none')document.getElementById('timerBig').innerText=fmtTimer(end-Date.now());}else if(end){finishTimer();}}
 
 function installPWA(){
     const iconHref=(document.getElementById('appleIcon')||{}).href||'';
