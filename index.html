@@ -1751,6 +1751,47 @@ function openIdentityGuide(){document.getElementById('identityGuideOverlay').sty
 function closeIdentityGuide(){document.getElementById('identityGuideOverlay').style.display='none';}
 
 function getBaselinePart(){const bl=state.goals.length>0?g().baseline:draft.baseline;return bl?`\n\nLähtötilanne:\n"${bl}"`:''}
+function mkStrategyPrompt(sit,params){
+    return `Olet MUUTOSKONE-järjestelmän strateginen suunnittelija. Käyttäjä on ${sit}. Tehtäväsi on ensin arvioida, mitä on jo syötetty, mitä puuttuu tai on epäselvää, ja sitten auttaa täydentämään, yksi asia kerrallaan.
+
+JÄRJESTELMÄN LOGIIKKA:
+· Vaikeuskertoimet, valitse tavoitteelle oikea taso:
+  – 1 000 XP, Uusi tapa (pieni muutos): yksittäisen tottumuksen vakiinnuttaminen tai rutiinin luominen. Esim. 10 000 askelta päivässä, meditaation aloittaminen, päivittäinen lukeminen, säännöllinen liikuntatottumus.
+  – 5 000 XP, Merkittävä muutos (selkeä tulos): selkeä, mitattava tulos, joka vaatii pitkäjänteistä työtä. Esim. 10 kg painonpudotus, uuden kielen perusteet, kirjan ensimmäinen versio, sivubisneksen käynnistäminen (ensimmäinen laskutus).
+  – 10 000 XP, Elämänmuutos (identiteettitason muutos): vaatii pitkäjänteistä, systemaattista työtä. Esim. alanvaihto ja uusi ura, yrityksen perustaminen, tutkinnon suorittaminen, nouseminen kilpaurheilutasolle.
+  – 100 000 XP, Mestari: perustuu Malcolm Gladwellin 10 000 tunnin sääntöön. Esim. ammattiurheilija, konserttipianisti, huippuasiantuntija alallasi.
+· Rutiinit, VAIN nämä neljä arvoa (älä ehdota muita kuten 10, 15 tai 25 XP): 1 XP (mikroteko 1–10 min) / 5 XP (harppaus 15–30 min) / 20 XP (panostus 45–90 min) / 50 XP (uroteko 2–4 h)
+· Anna jokaiselle rutiinille lyhyt, yhden sanan nimi sovelluksen kenttään (esim. Pitch, Klippi, Striimi, Batch), MUTTA selitä jokainen rutiini käyttäjälle kattavasti ja konkreettisesti: mitä tehdään, miten ja miksi se vie kohti tavoitetta, jotta sen on mahdollisimman helppo toteuttaa.
+· Kertymäkerroin kasvaa ×1.0 → ×2.0 päiville 1–84. Pitkäjänteisyys nopeuttaa matkaa konkreettisesti.
+· Yleisin syy luovuttaa: rutiinia ei ole ankkuroitu tiettyyn aikaan tai paikkaan, jolloin tavoite jää muun elämän varjoon (esim. "treenikertoja ei ole merkitty kalenteriin, joten salille lähtö jää muiden asioiden jalkoihin"). Suunnitelman on torjuttava tämä: jokaisella avainrutiinilla on konkreettinen hetki ja paikka, ja se merkitään kalenteriin.
+· Osatavoite (valinnainen): Jos 5 000 tai 10 000 XP:n tavoite tuntuu heti liian isolta, sen voi pilkkoa pienempiin osatavoitteisiin. Jokainen osatavoite ajetaan omana muutoskoneenaan: oma vaikeuskerroin, omat rutiinit, oma tavoitepäivä. Käyttäjä saavuttaa pienemmän tavoitteen kokonaan, tuntee oikean valmiiksi saamisen, ja jatkaa sitten seuraavaan. Tämä EI ole sama kuin virstanpylväät (ne ovat edistymismerkkejä yhden tavoitteen sisällä), vaan tapa tuntea onnistumista useammin. Iso visio säilyy, osatavoite on askel sinne.
+
+KÄYTTÄJÄN SYÖTTÄMÄT PARAMETRIT:
+${params}
+
+TEHTÄVÄSI, aloita lyhyellä arviolla:
+1. Tavoite: Onko se riittävän konkreettinen ja mitattava? Voiko kuka tahansa ulkopuolinen sanoa sekunnilleen milloin se on saavutettu? Jos ei, ehdota tarkennusta.
+2. Vaikeuskerroin: Onko se oikein mitoitettu suhteessa tavoitteeseen? Perustele lyhyesti tai ehdota muutosta.
+3. Lähtötilanne: Onko se kuvattu faktoina vai adjektiiveina? Jos epämääräinen tai puuttuu, pyydä tarkennusta.
+4. Identiteetti ja miksi: Jos puuttuvat, kysy vain toinen, se joka tuntuu tärkeämmältä tässä tilanteessa.
+5. Rutiinit: Ovatko ne linjassa tavoitteen kanssa ja ankkuroitu tiettyyn aikaan/paikkaan? Käytä ehdotuksissa AINOASTAAN XP-arvoja 1, 5, 20 tai 50, ei muita. Nimeä jokainen rutiini yhdellä sanalla, mutta selitä se kattavasti.
+6. Mittakaava: Jos tavoite on 5 000 XP tai suurempi ja lähtötilanne on kaukana maalista, arvioi tuntuuko koko matka heti liian isolta. Jos voi tuntua, tarjoa käyttäjälle mahdollisuutta aloittaa pienemmällä osatavoitteella, jonka voi saavuttaa kokonaan ensin. Tee tästä selkeästi valinnainen: iso tavoite säilyy, jos käyttäjä haluaa mennä suoraan siihen.
+
+Kysy sitten yksi tärkein puuttuva tai epäselvä asia. Kun kaikki on kunnossa, tuota:
+· Perusteltu vaikeuskerroin (vahvista tai korjaa)
+· Täydennetty rutiinikirjasto kaikille neljälle tasolle (VAIN 1 XP / 5 XP / 20 XP / 50 XP, ei muita arvoja; jokaisella rutiinilla yhden sanan nimi + kattava selitys)
+· Realistinen aikajana (tavoitepäivään tai oma suositus)
+· Ankkurointi: milloin ja missä kukin avainrutiini tehdään ja miten se merkitään kalenteriin, jotta tavoite ei jää muun elämän varjoon
+· Kriittisin yksittäinen muuttuja, joka ratkaisee onnistumisen
+· Jos tarjosit osatavoitteita ja käyttäjä haluaa aloittaa pienemmällä: 1–2 konkreettista osatavoitetta järjestyksessä, jokaiselle oma vaikeuskerroin (1 000 tai 5 000 XP), oma mitattava lopputulos ja oma tavoitepäivä, niin että ensimmäinen on täysin saavutettavissa ja rakentaa suoraan kohti isoa tavoitetta. Kerro selvästi, että käyttäjä voi ajaa osatavoitteen omana muutoskoneenaan ja siirtyä isoon tavoitteeseen sen jälkeen.
+
+Älä tuota lopputulosta, ennen kuin:
+· Tavoite on konkreettinen
+· Miksi on selkeä yhdellä lauseella
+· Lähtötilanne on mitattavissa
+
+Tyyli: Suora ja lämmin. Ei turhia kierroksia. Aloita arviolla.`;
+}
 function copyNewGoalPrompt(){
     const goal=document.getElementById('ngGoal').value.trim();
     const why=document.getElementById('ngWhy').value.trim();
@@ -1773,42 +1814,7 @@ function copyNewGoalPrompt(){
     const rutiinit=[r1?`1 XP: ${r1}`:'',r5?`5 XP: ${r5}`:'',r20?`20 XP: ${r20}`:'',r50?`50 XP: ${r50}`:''].filter(Boolean);
     params.push(rutiinit.length?`Rutiinit:\n${rutiinit.map(r=>'  · '+r).join('\n')}`:`Rutiinit: EI ASETETTU`);
 
-    const txt=`Olet MUUTOSKONE-järjestelmän strateginen suunnittelija. Käyttäjä on täyttänyt uuden tavoitteen parametrit. Tehtäväsi on ensin arvioida, mitä on jo syötetty, mitä puuttuu tai on epäselvää, ja sitten auttaa täydentämään, yksi asia kerrallaan.
-
-JÄRJESTELMÄN LOGIIKKA:
-· Vaikeuskertoimet, valitse tavoitteelle oikea taso:
-  – 1 000 XP, Uusi tapa (pieni muutos): yksittäisen tottumuksen vakiinnuttaminen tai rutiinin luominen. Esim. 10 000 askelta päivässä, meditaation aloittaminen, päivittäinen lukeminen, säännöllinen liikuntatottumus.
-  – 5 000 XP, Merkittävä muutos (selkeä tulos): selkeä, mitattava tulos, joka vaatii pitkäjänteistä työtä. Esim. 10 kg painonpudotus, uuden kielen perusteet, kirjan ensimmäinen versio, sivubisneksen käynnistäminen (ensimmäinen laskutus).
-  – 10 000 XP, Elämänmuutos (identiteettitason muutos): vaatii pitkäjänteistä, systemaattista työtä. Esim. alanvaihto ja uusi ura, yrityksen perustaminen, tutkinnon suorittaminen, nouseminen kilpaurheilutasolle.
-  – 100 000 XP, Mestari: perustuu Malcolm Gladwellin 10 000 tunnin sääntöön. Esim. ammattiurheilija, konserttipianisti, huippuasiantuntija alallasi.
-· Rutiinit, VAIN nämä neljä arvoa (älä ehdota muita kuten 10, 15 tai 25 XP): 1 XP (mikroteko 1–10 min) / 5 XP (harppaus 15–30 min) / 20 XP (panostus 45–90 min) / 50 XP (uroteko 2–4 h)
-· Anna jokaiselle rutiinille lyhyt, yhden sanan nimi sovelluksen kenttään (esim. Pitch, Klippi, Striimi, Batch), MUTTA selitä jokainen rutiini käyttäjälle kattavasti ja konkreettisesti: mitä tehdään, miten ja miksi se vie kohti tavoitetta, jotta sen on mahdollisimman helppo toteuttaa.
-· Kertymäkerroin kasvaa ×1.0 → ×2.0 päiville 1–84. Pitkäjänteisyys nopeuttaa matkaa konkreettisesti.
-· Yleisin syy luovuttaa: rutiinia ei ole ankkuroitu tiettyyn aikaan tai paikkaan, jolloin tavoite jää muun elämän varjoon (esim. "treenikertoja ei ole merkitty kalenteriin, joten salille lähtö jää muiden asioiden jalkoihin"). Suunnitelman on torjuttava tämä: jokaisella avainrutiinilla on konkreettinen hetki ja paikka, ja se merkitään kalenteriin.
-
-KÄYTTÄJÄN SYÖTTÄMÄT PARAMETRIT:
-${params.join('\n')}
-
-TEHTÄVÄSI, aloita lyhyellä arviolla:
-1. Tavoite: Onko se riittävän konkreettinen ja mitattava? Voiko kuka tahansa ulkopuolinen sanoa sekunnilleen milloin se on saavutettu? Jos ei, ehdota tarkennusta.
-2. Vaikeuskerroin: Onko se oikein mitoitettu suhteessa tavoitteeseen? Perustele lyhyesti tai ehdota muutosta.
-3. Lähtötilanne: Onko se kuvattu faktoina vai adjektiiveina? Jos epämääräinen tai puuttuu, pyydä tarkennusta.
-4. Identiteetti ja miksi: Jos puuttuvat, kysy vain toinen, se joka tuntuu tärkeämmältä tässä tilanteessa.
-5. Rutiinit: Ovatko ne linjassa tavoitteen kanssa ja ankkuroitu tiettyyn aikaan/paikkaan? Käytä ehdotuksissa AINOASTAAN XP-arvoja 1, 5, 20 tai 50, ei muita. Nimeä jokainen rutiini yhdellä sanalla, mutta selitä se kattavasti.
-
-Kysy sitten yksi tärkein puuttuva tai epäselvä asia. Kun kaikki on kunnossa, tuota:
-· Perusteltu vaikeuskerroin (vahvista tai korjaa)
-· Täydennetty rutiinikirjasto kaikille neljälle tasolle (VAIN 1 XP / 5 XP / 20 XP / 50 XP, ei muita arvoja; jokaisella rutiinilla yhden sanan nimi + kattava selitys)
-· Realistinen aikajana (tavoitepäivään tai oma suositus)
-· Ankkurointi: milloin ja missä kukin avainrutiini tehdään ja miten se merkitään kalenteriin, jotta tavoite ei jää muun elämän varjoon
-· Kriittisin yksittäinen muuttuja, joka ratkaisee onnistumisen
-
-Älä tuota lopputulosta, ennen kuin:
-· Tavoite on konkreettinen
-· Miksi on selkeä yhdellä lauseella
-· Lähtötilanne on mitattavissa
-
-Tyyli: Suora ja lämmin. Ei turhia kierroksia. Aloita arviolla.`;
+    const txt=mkStrategyPrompt('täyttänyt uuden tavoitteen parametrit', params.join('\n'));
     navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyNgAiBtn');b.innerText='Kopioitu';setTimeout(()=>{b.innerText='Kopioi strategiakehote tälle tavoitteelle';},2200);});
 }
 function copySetupAiPrompt(){
@@ -1834,42 +1840,7 @@ function copySetupAiPrompt(){
     const rutiinit=[r1?`1 XP: ${r1}`:'',r5?`5 XP: ${r5}`:'',r20?`20 XP: ${r20}`:'',r50?`50 XP: ${r50}`:''].filter(Boolean);
     params.push(rutiinit.length?`Rutiinit:\n${rutiinit.map(r=>'  · '+r).join('\n')}`:`Rutiinit: EI ASETETTU`);
 
-    const txt=`Olet MUUTOSKONE-järjestelmän strateginen suunnittelija. Käyttäjä on täyttänyt parametrit ennen muutoskoneen käynnistystä. Tehtäväsi on ensin arvioida, mitä on jo syötetty, mitä puuttuu tai on epäselvää, ja sitten auttaa täydentämään, yksi asia kerrallaan.
-
-JÄRJESTELMÄN LOGIIKKA:
-· Vaikeuskertoimet, valitse tavoitteelle oikea taso:
-  – 1 000 XP, Uusi tapa (pieni muutos): yksittäisen tottumuksen vakiinnuttaminen tai rutiinin luominen. Esim. 10 000 askelta päivässä, meditaation aloittaminen, päivittäinen lukeminen, säännöllinen liikuntatottumus.
-  – 5 000 XP, Merkittävä muutos (selkeä tulos): selkeä, mitattava tulos, joka vaatii pitkäjänteistä työtä. Esim. 10 kg painonpudotus, uuden kielen perusteet, kirjan ensimmäinen versio, sivubisneksen käynnistäminen (ensimmäinen laskutus).
-  – 10 000 XP, Elämänmuutos (identiteettitason muutos): vaatii pitkäjänteistä, systemaattista työtä. Esim. alanvaihto ja uusi ura, yrityksen perustaminen, tutkinnon suorittaminen, nouseminen kilpaurheilutasolle.
-  – 100 000 XP, Mestari: perustuu Malcolm Gladwellin 10 000 tunnin sääntöön. Esim. ammattiurheilija, konserttipianisti, huippuasiantuntija alallasi.
-· Rutiinit, VAIN nämä neljä arvoa (älä ehdota muita kuten 10, 15 tai 25 XP): 1 XP (mikroteko 1–10 min) / 5 XP (harppaus 15–30 min) / 20 XP (panostus 45–90 min) / 50 XP (uroteko 2–4 h)
-· Anna jokaiselle rutiinille lyhyt, yhden sanan nimi sovelluksen kenttään (esim. Pitch, Klippi, Striimi, Batch), MUTTA selitä jokainen rutiini käyttäjälle kattavasti ja konkreettisesti: mitä tehdään, miten ja miksi se vie kohti tavoitetta, jotta sen on mahdollisimman helppo toteuttaa.
-· Kertymäkerroin kasvaa ×1.0 → ×2.0 päiville 1–84. Pitkäjänteisyys nopeuttaa matkaa konkreettisesti.
-· Yleisin syy luovuttaa: rutiinia ei ole ankkuroitu tiettyyn aikaan tai paikkaan, jolloin tavoite jää muun elämän varjoon (esim. "treenikertoja ei ole merkitty kalenteriin, joten salille lähtö jää muiden asioiden jalkoihin"). Suunnitelman on torjuttava tämä: jokaisella avainrutiinilla on konkreettinen hetki ja paikka, ja se merkitään kalenteriin.
-
-KÄYTTÄJÄN SYÖTTÄMÄT PARAMETRIT:
-${params.join('\n')}
-
-TEHTÄVÄSI, aloita lyhyellä arviolla:
-1. Tavoite: Onko se riittävän konkreettinen ja mitattava? Voiko kuka tahansa ulkopuolinen sanoa sekunnilleen milloin se on saavutettu? Jos ei, ehdota tarkennusta.
-2. Vaikeuskerroin: Onko se oikein mitoitettu suhteessa tavoitteeseen? Perustele lyhyesti tai ehdota muutosta.
-3. Lähtötilanne: Onko se kuvattu faktoina vai adjektiiveina? Jos epämääräinen tai puuttuu, pyydä tarkennusta.
-4. Identiteetti ja miksi: Jos puuttuvat, kysy vain toinen, se joka tuntuu tärkeämmältä tässä tilanteessa.
-5. Rutiinit: Ovatko ne linjassa tavoitteen kanssa ja ankkuroitu tiettyyn aikaan/paikkaan? Käytä ehdotuksissa AINOASTAAN XP-arvoja 1, 5, 20 tai 50, ei muita. Nimeä jokainen rutiini yhdellä sanalla, mutta selitä se kattavasti.
-
-Kysy sitten yksi tärkein puuttuva tai epäselvä asia. Kun kaikki on kunnossa, tuota:
-· Perusteltu vaikeuskerroin (vahvista tai korjaa)
-· Täydennetty rutiinikirjasto kaikille neljälle tasolle (VAIN 1 XP / 5 XP / 20 XP / 50 XP, ei muita arvoja; jokaisella rutiinilla yhden sanan nimi + kattava selitys)
-· Realistinen aikajana (tavoitepäivään tai oma suositus)
-· Ankkurointi: milloin ja missä kukin avainrutiini tehdään ja miten se merkitään kalenteriin, jotta tavoite ei jää muun elämän varjoon
-· Kriittisin yksittäinen muuttuja, joka ratkaisee onnistumisen
-
-Älä tuota lopputulosta, ennen kuin:
-· Tavoite on konkreettinen
-· Miksi on selkeä yhdellä lauseella
-· Lähtötilanne on mitattavissa
-
-Tyyli: Suora ja lämmin. Ei turhia kierroksia. Aloita arviolla.`;
+    const txt=mkStrategyPrompt('täyttänyt parametrit ennen muutoskoneen käynnistystä', params.join('\n'));
     navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyAiBtn');b.innerText='Kopioitu';setTimeout(()=>{b.innerText='Kopioi strategiakehote';},2200);});
 }
 function copyAiPrompt(){
@@ -1890,42 +1861,7 @@ function copyAiPrompt(){
     const rutiinit=[r1?`1 XP: ${r1}`:'',r5?`5 XP: ${r5}`:'',r20?`20 XP: ${r20}`:'',r50?`50 XP: ${r50}`:''].filter(Boolean);
     params.push(rutiinit.length?`Rutiinit:\n${rutiinit.map(r=>'  · '+r).join('\n')}`:`Rutiinit: EI ASETETTU`);
 
-    const txt=`Olet MUUTOSKONE-järjestelmän strateginen suunnittelija. Käyttäjä on jo käynnistänyt muutoskoneen. Tehtäväsi on ensin arvioida, mitä on jo syötetty, mitä puuttuu tai on epäselvää, ja sitten auttaa täydentämään, yksi asia kerrallaan.
-
-JÄRJESTELMÄN LOGIIKKA:
-· Vaikeuskertoimet, valitse tavoitteelle oikea taso:
-  – 1 000 XP, Uusi tapa (pieni muutos): yksittäisen tottumuksen vakiinnuttaminen tai rutiinin luominen. Esim. 10 000 askelta päivässä, meditaation aloittaminen, päivittäinen lukeminen, säännöllinen liikuntatottumus.
-  – 5 000 XP, Merkittävä muutos (selkeä tulos): selkeä, mitattava tulos, joka vaatii pitkäjänteistä työtä. Esim. 10 kg painonpudotus, uuden kielen perusteet, kirjan ensimmäinen versio, sivubisneksen käynnistäminen (ensimmäinen laskutus).
-  – 10 000 XP, Elämänmuutos (identiteettitason muutos): vaatii pitkäjänteistä, systemaattista työtä. Esim. alanvaihto ja uusi ura, yrityksen perustaminen, tutkinnon suorittaminen, nouseminen kilpaurheilutasolle.
-  – 100 000 XP, Mestari: perustuu Malcolm Gladwellin 10 000 tunnin sääntöön. Esim. ammattiurheilija, konserttipianisti, huippuasiantuntija alallasi.
-· Rutiinit, VAIN nämä neljä arvoa (älä ehdota muita kuten 10, 15 tai 25 XP): 1 XP (mikroteko 1–10 min) / 5 XP (harppaus 15–30 min) / 20 XP (panostus 45–90 min) / 50 XP (uroteko 2–4 h)
-· Anna jokaiselle rutiinille lyhyt, yhden sanan nimi sovelluksen kenttään (esim. Pitch, Klippi, Striimi, Batch), MUTTA selitä jokainen rutiini käyttäjälle kattavasti ja konkreettisesti: mitä tehdään, miten ja miksi se vie kohti tavoitetta, jotta sen on mahdollisimman helppo toteuttaa.
-· Kertymäkerroin kasvaa ×1.0 → ×2.0 päiville 1–84. Pitkäjänteisyys nopeuttaa matkaa konkreettisesti.
-· Yleisin syy luovuttaa: rutiinia ei ole ankkuroitu tiettyyn aikaan tai paikkaan, jolloin tavoite jää muun elämän varjoon (esim. "treenikertoja ei ole merkitty kalenteriin, joten salille lähtö jää muiden asioiden jalkoihin"). Suunnitelman on torjuttava tämä: jokaisella avainrutiinilla on konkreettinen hetki ja paikka, ja se merkitään kalenteriin.
-
-KÄYTTÄJÄN SYÖTTÄMÄT PARAMETRIT:
-${params.join('\n')}
-
-TEHTÄVÄSI, aloita lyhyellä arviolla:
-1. Tavoite: Onko se riittävän konkreettinen ja mitattava? Voiko kuka tahansa ulkopuolinen sanoa sekunnilleen milloin se on saavutettu? Jos ei, ehdota tarkennusta.
-2. Vaikeuskerroin: Onko se oikein mitoitettu suhteessa tavoitteeseen? Perustele lyhyesti tai ehdota muutosta.
-3. Lähtötilanne: Onko se kuvattu faktoina vai adjektiiveina? Jos epämääräinen tai puuttuu, pyydä tarkennusta.
-4. Identiteetti ja miksi: Jos puuttuvat, kysy vain toinen, se joka tuntuu tärkeämmältä tässä tilanteessa.
-5. Rutiinit: Ovatko ne linjassa tavoitteen kanssa ja ankkuroitu tiettyyn aikaan/paikkaan? Käytä ehdotuksissa AINOASTAAN XP-arvoja 1, 5, 20 tai 50, ei muita. Nimeä jokainen rutiini yhdellä sanalla, mutta selitä se kattavasti.
-
-Kysy sitten yksi tärkein puuttuva tai epäselvä asia. Kun kaikki on kunnossa, tuota:
-· Perusteltu vaikeuskerroin (vahvista tai korjaa)
-· Täydennetty rutiinikirjasto kaikille neljälle tasolle (VAIN 1 XP / 5 XP / 20 XP / 50 XP, ei muita arvoja; jokaisella rutiinilla yhden sanan nimi + kattava selitys)
-· Realistinen aikajana (tavoitepäivään tai oma suositus)
-· Ankkurointi: milloin ja missä kukin avainrutiini tehdään ja miten se merkitään kalenteriin, jotta tavoite ei jää muun elämän varjoon
-· Kriittisin yksittäinen muuttuja, joka ratkaisee onnistumisen
-
-Älä tuota lopputulosta, ennen kuin:
-· Tavoite on konkreettinen
-· Miksi on selkeä yhdellä lauseella
-· Lähtötilanne on mitattavissa
-
-Tyyli: Suora ja lämmin. Ei turhia kierroksia. Aloita arviolla.`;
+    const txt=mkStrategyPrompt('jo käynnistänyt muutoskoneen', params.join('\n'));
     navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyAiBtn');b.innerText='Kopioitu';setTimeout(()=>{b.innerText='Kopioi strategiakehote';},2200);});
 }
 function copyMentorPrompt(){
@@ -1936,7 +1872,7 @@ function copyMentorPrompt(){
     const dgLine=g().dailyGoal?`· Päivätavoite: ${todayXP}/${g().dailyGoal} XP\n`:'';
     const mentorLine=(g().mentors&&g().mentors.length)?`· Tunnistetut asiantuntijat: ${g().mentors.map(m=>m.name+(m.role?' ('+m.role+')':'')).join(', ')}\n`:'';
     const rutiiniLista=`· 1 XP = ${g().r1||'Mikrotehtävä'} (1–10 min)\n· 5 XP = ${g().r5||'Harppaus'} (15–30 min)\n· 20 XP = ${g().r20||'Panostus'} (45–90 min)\n· 50 XP = ${g().r50||'Uroteko'} (2–4 h)`;
-    const txt=`Olet MUUTOSKONE-järjestelmän sparrauskumppani.\n\nJÄRJESTELMÄN LOGIIKKA, EHDOTON:\nMuutoskoneessa on VAIN NELJÄ XP-tasoa. Älä koskaan ehdota muita XP-arvoja kuin näitä:\n· 1 XP = Mikrotehtävä (1–10 min), pienin mahdollinen teko\n· 5 XP = Harppaus (15–30 min), päivittäinen perussuoritus\n· 20 XP = Panostus (45–90 min), merkittävä jakso\n· 50 XP = Uroteko (2–4 h), maksimaalinen suoritus\nEI 10 XP. EI 15 XP. EI 25 XP. EI muita arvoja. Ainoastaan 1, 5, 20 tai 50 XP.\n\nVAIKEUSKERROIN, auta tarvittaessa tarkistamaan, vastaako käyttäjän valitsema vaikeuskerroin tavoitteen laajuutta. Jos ei, sano se suoraan ja ehdota oikeaa tasoa:\n· 1 000 XP, Uusi tapa (pieni muutos): yksittäisen tottumuksen vakiinnuttaminen tai rutiinin luominen. Esim. 10 000 askelta/pv, meditaation aloittaminen, päivittäinen lukeminen, säännöllinen liikuntatottumus.\n· 5 000 XP, Merkittävä muutos (selkeä tulos): selkeä, mitattava tulos, joka vaatii pitkäjänteistä työtä. Esim. 10 kg painonpudotus, uuden kielen perusteet, kirjan ensimmäinen versio, sivubisneksen käynnistäminen (ensimmäinen laskutus).\n· 10 000 XP, Elämänmuutos (identiteettitason muutos): vaatii pitkäjänteistä, systemaattista työtä. Esim. alanvaihto ja uusi ura, yrityksen perustaminen, tutkinnon suorittaminen, nouseminen kilpaurheilutasolle.\n· 100 000 XP, Mestari: perustuu Malcolm Gladwellin 10 000 tunnin sääntöön. Esim. ammattiurheilija, konserttipianisti, huippuasiantuntija alallasi.\n\nTämän käyttäjän rutiinit juuri nyt:\n${rutiiniLista}\n\nTämänhetkinen data:\n· Tavoite: ${g().goal}\n${identityLine}${whyLine}· Edistyminen: ${g().total.toLocaleString('fi-FI')} / ${g().v.toLocaleString('fi-FI')} XP (${pct}%)\n· Päivä: ${g().days} | Putki: ${g().streak} pv | Vauhti: ${momentum}%\n${dgLine}· Keskitahti: ${avg} XP/pv | Tänään: ${todayXP} XP | Paras pv: ${g().bestDay} XP\n· Kertymäkerroin: ×${getMultiplier().toFixed(2)}\n${mentorLine}· Tämän päivän intentio: "${intentioTxt}"${todayNote?'\n· Päivän muistiinpano: "'+todayNote.slice(0,200)+'"':''}${getBaselinePart()}\n\nTärkeää: Jos ehdotat uusia tai muutettuja rutiineja, käytä AINOASTAAN XP-arvoja 1, 5, 20 tai 50. Jos rutiinit näyttävät liian helpolta suhteessa tavoitteeseen, ehdota korvaavia rutiineja samoilla XP-arvoilla, älä luo uusia XP-tasoja.${(g().mentors&&g().mentors.length)?'\n\nAsiantuntijat: Jos käyttäjä ei ole vielä ottanut yhteyttä listatuille asiantuntijoille, kysy siitä suoraan, mitä estää?':''}\n\nTyyli: Ole lämmin mutta suora. Katse eteenpäin.\n\n1. Kerro yksi positiivinen asia datasta. Kysy: mikä tuntuu haastavimmalta?\n2. Anna 2–3 konkreettista ideaa seuraavaan askeleeseen, käytä vain XP-arvoja 1, 5, 20 tai 50.\n3. Arvioi onko nykyinen tekeminen linjassa tavoitteen kanssa.\n4. Lopeta yhdellä lauseella.\n\nAloita kohdasta 1.`;
+    const txt=`Olet MUUTOSKONE-järjestelmän sparrauskumppani.\n\nJÄRJESTELMÄN LOGIIKKA, EHDOTON:\nMuutoskoneessa on VAIN NELJÄ XP-tasoa. Älä koskaan ehdota muita XP-arvoja kuin näitä:\n· 1 XP = Mikrotehtävä (1–10 min), pienin mahdollinen teko\n· 5 XP = Harppaus (15–30 min), päivittäinen perussuoritus\n· 20 XP = Panostus (45–90 min), merkittävä jakso\n· 50 XP = Uroteko (2–4 h), maksimaalinen suoritus\nEI 10 XP. EI 15 XP. EI 25 XP. EI muita arvoja. Ainoastaan 1, 5, 20 tai 50 XP.\n\nVAIKEUSKERROIN, auta tarvittaessa tarkistamaan, vastaako käyttäjän valitsema vaikeuskerroin tavoitteen laajuutta. Jos ei, sano se suoraan ja ehdota oikeaa tasoa:\n· 1 000 XP, Uusi tapa (pieni muutos): yksittäisen tottumuksen vakiinnuttaminen tai rutiinin luominen. Esim. 10 000 askelta/pv, meditaation aloittaminen, päivittäinen lukeminen, säännöllinen liikuntatottumus.\n· 5 000 XP, Merkittävä muutos (selkeä tulos): selkeä, mitattava tulos, joka vaatii pitkäjänteistä työtä. Esim. 10 kg painonpudotus, uuden kielen perusteet, kirjan ensimmäinen versio, sivubisneksen käynnistäminen (ensimmäinen laskutus).\n· 10 000 XP, Elämänmuutos (identiteettitason muutos): vaatii pitkäjänteistä, systemaattista työtä. Esim. alanvaihto ja uusi ura, yrityksen perustaminen, tutkinnon suorittaminen, nouseminen kilpaurheilutasolle.\n· 100 000 XP, Mestari: perustuu Malcolm Gladwellin 10 000 tunnin sääntöön. Esim. ammattiurheilija, konserttipianisti, huippuasiantuntija alallasi.\n\nOSATAVOITE, valinnainen: Jos käyttäjä kokee tavoitteen liian isoksi tai vauhti hiipuu, ison tavoitteen voi pilkkoa pienempään osatavoitteeseen, jonka käyttäjä ajaa omana muutoskoneenaan (oma vaikeuskerroin, omat rutiinit, oma tavoitepäivä), saavuttaa kokonaan ja tuntee oikean onnistumisen ennen seuraavaan siirtymistä. Tämä EI ole sama kuin virstanpylväät, jotka ovat edistymismerkkejä yhden tavoitteen sisällä. Iso visio säilyy.\n\nTämän käyttäjän rutiinit juuri nyt:\n${rutiiniLista}\n\nTämänhetkinen data:\n· Tavoite: ${g().goal}\n${identityLine}${whyLine}· Edistyminen: ${g().total.toLocaleString('fi-FI')} / ${g().v.toLocaleString('fi-FI')} XP (${pct}%)\n· Päivä: ${g().days} | Putki: ${g().streak} pv | Vauhti: ${momentum}%\n${dgLine}· Keskitahti: ${avg} XP/pv | Tänään: ${todayXP} XP | Paras pv: ${g().bestDay} XP\n· Kertymäkerroin: ×${getMultiplier().toFixed(2)}\n${mentorLine}· Tämän päivän intentio: "${intentioTxt}"${todayNote?'\n· Päivän muistiinpano: "'+todayNote.slice(0,200)+'"':''}${getBaselinePart()}\n\nTärkeää: Jos ehdotat uusia tai muutettuja rutiineja, käytä AINOASTAAN XP-arvoja 1, 5, 20 tai 50. Jos rutiinit näyttävät liian helpolta suhteessa tavoitteeseen, ehdota korvaavia rutiineja samoilla XP-arvoilla, älä luo uusia XP-tasoja.${(g().mentors&&g().mentors.length)?'\n\nAsiantuntijat: Jos käyttäjä ei ole vielä ottanut yhteyttä listatuille asiantuntijoille, kysy siitä suoraan, mitä estää?':''}\n\nTyyli: Ole lämmin mutta suora. Katse eteenpäin.\n\n1. Kerro yksi positiivinen asia datasta. Kysy: mikä tuntuu haastavimmalta?\n2. Anna 2–3 konkreettista ideaa seuraavaan askeleeseen, käytä vain XP-arvoja 1, 5, 20 tai 50.\n3. Arvioi onko nykyinen tekeminen linjassa tavoitteen kanssa.\n4. Jos vauhti on hiipunut tai käyttäjä kokee tavoitteen liian isoksi, tarjoa mahdollisuutta pilkkoa se pienempään osatavoitteeseen, jonka voi saavuttaa kokonaan ja tuntea onnistumisen. Tee tästä valinnainen, iso tavoite säilyy. Tämä ei ole sama kuin virstanpylväät.\n5. Lopeta yhdellä lauseella.\n\nAloita kohdasta 1.`;
     navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyMentorBtn');b.innerText='Kopioitu';setTimeout(()=>{b.innerText='Kopioi sparrauskehote';},2200);});
 }
 
