@@ -332,7 +332,7 @@
         .goal-header{display:flex;justify-content:space-between;align-items:center;margin:26px 0 10px;padding-bottom:12px;border-bottom:1px solid var(--border);}
         .goal-name{font-size:11px;font-weight:500;color:var(--text-1);letter-spacing:2px;text-transform:uppercase;max-width:70%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
         .goal-target{font-size:10px;color:var(--text-2);letter-spacing:1px;}
-        #lvlOverlay,#victoryOverlay,#milestoneOverlay,#bestDayOverlay,#newGoalOverlay,#reflectionOverlay,#recoveryOverlay,#onboardingOverlay{position:fixed;inset:0;z-index:5000;display:none;flex-direction:column;align-items:center;justify-content:center;background:rgba(7,7,13,0.96);backdrop-filter:blur(24px);text-align:center;padding:40px;}
+        #lvlOverlay,#victoryOverlay,#milestoneOverlay,#bestDayOverlay,#newGoalOverlay,#reflectionOverlay,#recoveryOverlay,#onboardingOverlay,#firstActOverlay{position:fixed;inset:0;z-index:5000;display:none;flex-direction:column;align-items:center;justify-content:center;background:rgba(7,7,13,0.96);backdrop-filter:blur(24px);text-align:center;padding:40px;}
         .ov-kicker{font-size:9px;letter-spacing:5px;color:var(--cyan);font-weight:600;text-transform:uppercase;margin-bottom:14px;}
         .ov-title{font-size:2.5rem;font-weight:200;letter-spacing:-1px;margin-bottom:10px;color:var(--text-1);}
         .ov-sub{font-size:14px;font-weight:300;color:var(--text-2);margin-bottom:30px;line-height:1.65;}
@@ -458,7 +458,8 @@
         :root[data-theme="light"] #newGoalOverlay,
         :root[data-theme="light"] #reflectionOverlay,
         :root[data-theme="light"] #recoveryOverlay,
-        :root[data-theme="light"] #onboardingOverlay{
+        :root[data-theme="light"] #onboardingOverlay,
+        :root[data-theme="light"] #firstActOverlay{
             --w:255,255,255;
             --text-1:rgba(255,255,255,0.93);--text-2:rgba(255,255,255,0.62);--text-3:rgba(255,255,255,0.38);
             --surface:rgba(255,255,255,0.042);--surface-2:rgba(255,255,255,0.07);
@@ -606,6 +607,18 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
     </div>
     <button class="btn-primary" onclick="saveRecovery()" style="max-width:240px;margin:0 auto;">Aloitan tänään uudelleen</button>
     <button onclick="skipRecovery()" style="margin-top:12px;background:transparent;border:none;color:var(--text-3);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Ohita</button>
+</div>
+
+<div id="firstActOverlay" style="z-index:5600;">
+    <div class="ov-kicker" style="color:var(--cyan);">Kone käy</div>
+    <div class="ov-title" style="font-size:1.8rem;">Tee ensimmäinen teko nyt.</div>
+    <div style="font-size:13px;color:var(--text-2);line-height:1.7;max-width:320px;margin:14px auto 22px;">Tärkein hetki on tämä. Älä sulje konetta ennen kuin olet tehnyt ensimmäisen mikroteon: se vie 1–10 minuuttia ja käynnistää liikkeen. Ensimmäinen XP on todiste siitä, että muutos alkoi tänään.</div>
+    <div style="background:rgba(0,200,240,0.06);border:1px solid rgba(0,200,240,0.2);border-radius:12px;padding:14px 20px;margin:0 auto 26px;max-width:320px;">
+        <div style="font-size:9px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:5px;">Sinun mikrotekosi</div>
+        <div id="faRoutine" style="font-size:15px;color:var(--text-1);font-weight:500;"></div>
+    </div>
+    <button class="btn-primary" onclick="firstActDone(event)" style="max-width:260px;margin:0 auto 12px;">Tein sen · kirjaa +1 XP</button>
+    <button onclick="closeFirstAct()" style="background:transparent;border:none;color:var(--text-3);font-size:11px;letter-spacing:1px;cursor:pointer;font-family:inherit;padding:8px;">Teen sen myöhemmin</button>
 </div>
 <div id="reflectionOverlay">
     <div class="ov-kicker" style="color:var(--purple);">Maanantai-reflektio</div>
@@ -1338,6 +1351,7 @@ function addNewGoal(){
     ng.id=Date.now();
     state.goals.push(ng);state.activeIdx=state.goals.length-1;
     closeNewGoal();save();render();
+    setTimeout(showFirstAct,600);
 }
 
 function togglePanel(id){
@@ -1547,6 +1561,9 @@ function getLastWeekXP(){const now=new Date();now.setHours(0,0,0,0);let total=0;
 function saveReflection(){g().reflectionDate=getISOWeekStr();g().reflectionText=document.getElementById('reflectionInput').value.trim();save();document.getElementById('reflectionOverlay').style.display='none';}
 function skipReflection(){g().reflectionDate=getISOWeekStr();save();document.getElementById('reflectionOverlay').style.display='none';}
 
+function showFirstAct(){document.getElementById('faRoutine').innerText=g().r1;document.getElementById('firstActOverlay').style.display='flex';}
+function closeFirstAct(){document.getElementById('firstActOverlay').style.display='none';}
+function firstActDone(e){closeFirstAct();addXP(1,g().r1,e);}
 function start(){
     const ng=GOAL_TEMPLATE();
     ng.goal=document.getElementById('inGoal').value.trim()||draft.goal||'Muutos';
@@ -1562,6 +1579,7 @@ function start(){
     ng.deadline=document.getElementById('inDeadline').value||null;
     ng.startDate=getTodayStr();
     state.goals=[ng];state.activeIdx=0;state.quote=ng.quote;save();render();
+    setTimeout(showFirstAct,600);
 }
 function render(){
     document.getElementById('viewSetup').style.display='none';document.getElementById('viewGame').style.display='block';
