@@ -1604,11 +1604,10 @@ function addXP(baseAmt,label,e){
     const today=getTodayStr();
     const isFirstToday=!g().weekLog[today]||g().weekLog[today]===0;
 
-    // ── KRIITTINEN ISKU (1/8 todennäköisyys) ──
+    // ── KULTAINEN VÄLÄHDYS (1/8 todennäköisyys, pelkkä juhlistus, ei vaikuta XP:hen) ──
     const isCrit=Math.random()<0.125;
-    const critMult=isCrit?2:1;
 
-    const multi=getMultiplier(),finalAmt=Math.round(baseAmt*multi*critMult);
+    const multi=getMultiplier(),finalAmt=Math.round(baseAmt*multi);
     g().lastXP=finalAmt;g().lastXPLabel=label;g().total+=finalAmt;
     g().weekLog[today]=(g().weekLog[today]||0)+finalAmt;
     const prevBest=g().bestDay;if(g().weekLog[today]>g().bestDay)g().bestDay=g().weekLog[today];
