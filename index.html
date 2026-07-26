@@ -552,12 +552,12 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
         <div class="ob-slide" data-slide="5">
             <div class="ob-icon ob-icon-stats"></div>
             <div class="ob-title">Reflektio juurruttaa muutoksen</div>
-            <div class="ob-body"><strong>Päivän intentio</strong>, kirjoita aamulla mitä teet tänään.<br><br><strong>Muistiinpanot</strong>, "mitä opin tänään?" Tallentuu päiväkohtaisesti.<br><br><strong>Sparrauskumppani</strong>, tekoäly tarkistaa etenetkö oikeaan suuntaan oikeilla rutiineilla.</div>
+            <div class="ob-body"><strong>Päivän aikomus</strong>, kirjoita aamulla mitä teet tänään.<br><br><strong>Muistiinpanot</strong>, "mitä opin tänään?" Tallentuu päiväkohtaisesti.<br><br><strong>Sparrauskumppani</strong>, tekoäly tarkistaa etenetkö oikeaan suuntaan oikeilla rutiineilla.</div>
         </div>
         <div class="ob-slide" data-slide="6">
             <div class="ob-icon ob-icon-start"></div>
             <div class="ob-title">Olet valmis.</div>
-            <div class="ob-body">Kaikki data tallentuu <strong>vain omalle laitteellesi</strong>. Ei rekisteröitymistä, ei pilveä, ei mainoksia.<br><br>Täytä tavoite, identiteetti ja rutiinit. Strategia-apuri auttaa jos olet epävarma.<br><br><span class="hl-green">Ensimmäinen teko on tärkein.</span></div>
+            <div class="ob-body">Kaikki data tallentuu <strong>vain omalle laitteellesi</strong>. Ei rekisteröitymistä, ei pilveä, ei mainoksia.<br><br>Täytä tavoite ja rutiinit, muu syvenee matkalla. Strategia-apuri auttaa jos olet epävarma.<br><br><span class="hl-green">Ensimmäinen teko on tärkein.</span></div>
         </div>
     </div>
     <div class="ob-nav">
@@ -660,6 +660,42 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
         <div class="ng-label" style="margin-bottom:6px;">Epävarma parametreista?</div>
         <p class="ng-ai-hint">Kopioi kehote, avaa <a href="https://gemini.google.com" target="_blank">Gemini</a> ja anna tekoälyn kalibroida ne.</p>
         <button class="btn-ai" id="copyNgAiBtn" onclick="copyNewGoalPrompt()">Kopioi strategiakehote tälle tavoitteelle</button>
+    </div>
+</div>
+
+<!-- SYVENNÄ MUUTOSTASI -->
+<div id="deepenOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:7000;align-items:flex-end;justify-content:center;">
+    <div style="background:#111120;border:1px solid rgba(255,255,255,0.11);border-radius:20px 20px 0 0;padding:24px 22px 40px;max-width:430px;width:100%;max-height:92vh;overflow-y:auto;scrollbar-width:none;">
+        <div style="font-size:9px;color:var(--purple);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:8px;">Syvennä muutostasi</div>
+        <div style="font-size:12px;color:var(--text-2);line-height:1.65;margin-bottom:18px;">Nämä kaksi ovat vapaaehtoisia, mutta tutkitusti tehokkaimpia yksittäisiä keinoja pysyä matkassa. Vastauksesi näkyvät pelisivulla muistutuksena joka päivä.</div>
+        <div style="margin-bottom:14px;"><div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;font-weight:600;">Identiteetti <button class="guide-btn-purple" onclick="openIdentityGuide()">?</button></div><input id="dpIdentity" type="text" placeholder="Olen jo… (esim. Olen juoksija)" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text-1);font-size:14px;font-weight:300;outline:none;width:100%;font-family:inherit;"><div style="font-size:10px;color:var(--text-3);margin-top:6px;line-height:1.5;">Muutos alkaa identiteetistä. Kirjoita se henkilö, joksi olet jo tulossa.</div></div>
+        <div style="margin-bottom:20px;"><div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;font-weight:600;">Miksi tämä on tärkeää? <button class="guide-btn-purple" onclick="openSetupGuide('miksi')">?</button></div><textarea id="dpWhy" rows="3" placeholder="Kysy itseltäsi miksi 3–5 kertaa. Viimeinen vastaus on todellinen syy." style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text-1);font-size:13px;font-weight:300;outline:none;width:100%;font-family:inherit;resize:none;line-height:1.5;"></textarea></div>
+        <div style="display:flex;gap:8px;">
+            <button onclick="closeDeepen()" style="flex:1;background:transparent;border:1px solid var(--border);color:var(--text-2);padding:14px;border-radius:12px;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Myöhemmin</button>
+            <button onclick="saveDeepen()" style="flex:2;background:transparent;border:1px solid var(--cyan-line);color:var(--text-1);padding:14px;border-radius:12px;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;">Tallenna</button>
+        </div>
+    </div>
+</div>
+
+<!-- PÄIVÄKIRJA -->
+<div id="diaryOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:7000;align-items:flex-end;justify-content:center;">
+    <div style="background:#111120;border:1px solid rgba(255,255,255,0.11);border-radius:20px 20px 0 0;padding:24px 22px 40px;max-width:430px;width:100%;max-height:92vh;overflow-y:auto;scrollbar-width:none;">
+        <div style="font-size:9px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:18px;">Päiväkirja</div>
+        <div style="margin-bottom:22px;">
+            <div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;font-weight:600;">Päivän aikomus <button class="guide-btn-cyan" onclick="openStatGuide('aikomus')">?</button></div>
+            <div style="font-size:10px;color:var(--text-2);letter-spacing:1px;margin-bottom:8px;">Tänään aion</div>
+            <textarea id="intentioInput" rows="2" placeholder="Kirjoita yksi konkreettinen asia, jonka teet tänään…" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text-1);font-size:13px;font-weight:300;outline:none;width:100%;font-family:inherit;resize:none;line-height:1.5;"></textarea>
+            <div class="toggle-saved" id="intentioSaved">Tallennettu</div>
+        </div>
+        <div style="margin-bottom:20px;">
+            <div style="font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;font-weight:600;">Päivän muistiinpanot <button class="guide-btn-purple" onclick="openStatGuide('paivakirja')">?</button></div>
+            <div class="daynote-grid" id="daynoteGrid" style="margin-bottom:10px;"></div>
+            <div class="daynote-input-row">
+                <textarea class="daynote-textarea" id="daynoteInput" rows="2" placeholder="Mitä opin tänään? Mikä toimi?"></textarea>
+                <button class="daynote-save" onclick="saveDaynote()">Tallenna</button>
+            </div>
+        </div>
+        <button class="btn-primary" onclick="closeDiary()" style="margin-top:0;">Valmis</button>
     </div>
 </div>
 
@@ -891,12 +927,6 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
         <div class="xp-row"><span class="xp-tag">20 XP</span><input type="text" id="inR20" placeholder="Panostus, 45–90 min"></div>
         <div class="xp-row"><span class="xp-tag">50 XP</span><input type="text" id="inR50" placeholder="Uroteko, 2–4 h"></div>
     </div>
-    <div class="card" style="background:linear-gradient(135deg,rgba(124,92,191,0.07),rgba(0,200,240,0.02));border-color:rgba(124,92,191,0.22);">
-        <div class="lbl"><span class="lbl-dot" style="background:var(--purple);"></span>Identiteetti <span style="color:var(--text-3);font-size:9px;font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span> <button class="guide-btn-purple" onclick="openIdentityGuide()">?</button></div>
-        <input type="text" id="inIdentity" placeholder="Olen jo… (esim. Olen juoksija / Olen kirjoittaja)">
-        <div style="font-size:10px;color:var(--text-3);margin-top:8px;line-height:1.5;">Muutos alkaa identiteetistä. Kirjoita se henkilö, joksi olet jo tulossa.</div>
-    </div>
-    <div class="card"><div class="lbl"><span class="lbl-dot"></span>Miksi tämä on tärkeää? <span style="color:var(--text-3);font-size:9px;font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span><button class="guide-btn-purple" onclick="openSetupGuide('miksi')">?</button></div><textarea id="inWhy" rows="2" placeholder="Kysy itseltäsi miksi 3–5 kertaa. Viimeinen vastaus on todellinen syy."></textarea></div>
     <div class="card"><div class="lbl"><span class="lbl-dot"></span>Tavoitepäivä <span style="color:var(--text-3);font-size:9px;font-weight:300;text-transform:none;letter-spacing:0;">(valinnainen)</span><button class="guide-btn-cyan" onclick="openSetupGuide('tavoitepaiva')">?</button></div>
         <input type="date" id="inDeadline" style="color-scheme:dark;">
         <div style="font-size:10px;color:var(--text-3);margin-top:6px;line-height:1.5;">Muutoskone laskee tarvittavan päivätahdin automaattisesti.</div>
@@ -1008,10 +1038,10 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
     <!-- UNDO -->
     <div class="undo-bar" id="undoBar"><span class="undo-msg" id="undoMsg"></span><button class="btn-undo" onclick="undoXP()">Peruuta</button></div>
 
-    <!-- IDENTITY NUDGE -->
-    <div id="identityNudge" style="display:none;background:rgba(124,92,191,0.06);border:1px solid rgba(124,92,191,0.2);border-radius:12px;padding:12px 16px;margin-bottom:9px;cursor:pointer;" onclick="openEditGoalOverlay()">
-        <div style="font-size:8px;color:var(--purple);letter-spacing:2.5px;text-transform:uppercase;font-weight:600;margin-bottom:4px;">Vinkki</div>
-        <div style="font-size:12px;color:var(--text-2);line-height:1.6;">Lisää identiteettisi, se on tehokkain yksittäinen muutos. <span style="color:var(--purple);">Napauta →</span></div>
+    <!-- SYVENNÄ MUUTOSTASI -->
+    <div id="identityNudge" style="display:none;background:linear-gradient(135deg,rgba(124,92,191,0.09),rgba(0,200,240,0.03));border:1px solid rgba(124,92,191,0.25);border-radius:12px;padding:13px 16px;margin-bottom:9px;cursor:pointer;" onclick="openDeepen()">
+        <div style="font-size:8px;color:var(--purple);letter-spacing:2.5px;text-transform:uppercase;font-weight:600;margin-bottom:4px;">Lisäteho · 2 min</div>
+        <div style="font-size:12px;color:var(--text-2);line-height:1.6;"><strong style="color:var(--text-1);font-weight:500;">Syvennä muutostasi.</strong> Kaksi kysymystä, jotka moninkertaistavat sinnikkyytesi vaikeina päivinä. <span style="color:var(--purple);">Avaa →</span></div>
     </div>
 
     <!-- DEADLINE COUNTDOWN -->
@@ -1038,13 +1068,13 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
     </div>
     <div style="margin-bottom:9px;">
         <div class="health-bar">
-            <div class="health-label" onclick="openStatGuide('kunto')" style="cursor:pointer;">Kunto <button class="stat-help-btn">?</button></div>
+            <div class="health-label" onclick="openStatGuide('kunto')" style="cursor:pointer;">Kunto <button class="stat-help-btn">?</button><div style="font-size:8px;color:var(--text-3);letter-spacing:0.5px;text-transform:none;margin-top:2px;opacity:0.8;">tekemisen säännöllisyys</div></div>
             <div style="flex:1;"><div class="health-track"><div class="health-fill" id="healthFill"></div></div><div class="health-tip" id="healthTip"></div></div>
             <div class="health-val" id="healthVal">—</div>
         </div>
     </div>
     <div class="momentum-bar">
-        <div class="momentum-label" onclick="openStatGuide('vauhti')" style="cursor:pointer;">Vauhti <button class="stat-help-btn">?</button></div>
+        <div class="momentum-label" onclick="openStatGuide('vauhti')" style="cursor:pointer;">Vauhti <button class="stat-help-btn">?</button><div style="font-size:8px;color:var(--text-3);letter-spacing:0.5px;text-transform:none;margin-top:2px;opacity:0.8;">kiihtyykö vai hiipuuko?</div></div>
         <div class="momentum-track"><div class="momentum-fill" id="momentumFill"></div></div>
         <div class="momentum-val" id="momentumVal">—</div>
     </div>
@@ -1059,28 +1089,10 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
         <textarea class="quote-edit" id="quoteEdit" rows="2" placeholder="Kirjoita oma motivaatiolauseesi…"></textarea>
     </div>
 
-    <!-- INTENTIO -->
-    <div class="toggle-row" onclick="togglePanel('intentio')">
-        <div class="toggle-row-lbl"><span class="lbl-dot"></span>Päivän intentio<span class="toggle-preview" id="intentioPreview"></span></div>
-        <span class="toggle-arrow" id="intentioArrow">▾</span>
-    </div>
-    <div class="toggle-body" id="intentioBody">
-        <div style="font-size:10px;color:var(--text-2);letter-spacing:1px;margin-bottom:8px;">Tänään aion</div>
-        <textarea id="intentioInput" rows="2" placeholder="Kirjoita yksi konkreettinen asia, jonka teet tänään…"></textarea>
-        <div class="toggle-saved" id="intentioSaved">Tallennettu</div>
-    </div>
-
-    <!-- DAY NOTES -->
-    <div class="toggle-row" onclick="togglePanel('daynote')">
-        <div class="toggle-row-lbl"><span class="lbl-dot"></span>Päivän muistiinpanot<span class="toggle-preview" id="daynotePreview"></span></div>
-        <span class="toggle-arrow" id="daynoteArrow">▾</span>
-    </div>
-    <div class="toggle-body daynote-body" id="daynoteBody">
-        <div class="daynote-grid" id="daynoteGrid"></div>
-        <div class="daynote-input-row">
-            <textarea class="daynote-textarea" id="daynoteInput" rows="2" placeholder="Mitä opin tänään? Mikä toimi?"></textarea>
-            <button class="daynote-save" onclick="saveDaynote()">Tallenna</button>
-        </div>
+    <!-- PÄIVÄKIRJA -->
+    <div class="toggle-row" onclick="openDiary()">
+        <div class="toggle-row-lbl"><span class="lbl-dot"></span>Päiväkirja<span class="toggle-preview" id="diaryPreview"></span></div>
+        <span class="toggle-arrow">→</span>
     </div>
 
     <!-- BASELINE -->
@@ -1289,12 +1301,8 @@ function initSetupPage(){
     if(draft.goal)document.getElementById('inGoal').value=draft.goal;
     if(draft.baseline)document.getElementById('inBaseline').value=draft.baseline;
     if(draft.quote)document.getElementById('inQuote').value=draft.quote;
-    if(draft.why)document.getElementById('inWhy').value=draft.why;
-    if(draft.identity)document.getElementById('inIdentity').value=draft.identity;
     document.getElementById('inGoal').addEventListener('input',e=>{draft.goal=e.target.value;saveDraft();});
     document.getElementById('inQuote').addEventListener('input',e=>{draft.quote=e.target.value;saveDraft();});
-    document.getElementById('inWhy').addEventListener('input',e=>{draft.why=e.target.value;saveDraft();});
-    document.getElementById('inIdentity').addEventListener('input',e=>{draft.identity=e.target.value;saveDraft();});
     document.getElementById('inBaseline').addEventListener('input',e=>{draft.baseline=e.target.value;saveDraft();const el=document.getElementById('baselineAutosave');el.classList.add('show');clearTimeout(window._bsT);window._bsT=setTimeout(()=>el.classList.remove('show'),1500);});
 }
 function saveDraft(){try{localStorage.setItem('mk_draft',JSON.stringify(draft));}catch(e){}}
@@ -1355,25 +1363,28 @@ function addNewGoal(){
 }
 
 function togglePanel(id){
-    const keyMap={intentio:'intentioOpen',baseline:'baselineOpen',daynote:'daynoteOpen',mseditor:'mseditorOpen',mentor:'mentorOpen',stats:'statsOpen'};
+    const keyMap={baseline:'baselineOpen',mseditor:'mseditorOpen',mentor:'mentorOpen',stats:'statsOpen'};
     const key=keyMap[id]||id+'Open';g()[key]=!g()[key];save();
     document.getElementById(id+'Body').classList.toggle('open',g()[key]);
     document.getElementById(id+'Arrow').classList.toggle('open',g()[key]);
-    if(id==='intentio'&&g()[key])document.getElementById('intentioInput').focus();
-    if(id==='intentio')updateIntentioPreview();
-    if(id==='daynote'&&g()[key])renderDaynotes();
     if(id==='mseditor'&&g()[key])renderCustomMilestones();
     if(id==='mentor'&&g()[key])renderMentors();
 }
+function openDiary(){
+    const el=document.getElementById('intentioInput');const today=getTodayStr();
+    el.value=(g().intentioDate===today&&g().intentioText)?g().intentioText:'';
+    renderDaynotes();
+    document.getElementById('diaryOverlay').style.display='flex';
+    if(!el.value)setTimeout(()=>el.focus(),150);
+}
+function closeDiary(){document.getElementById('diaryOverlay').style.display='none';updateIntentioPreview();}
 function initIntentio(){
     const el=document.getElementById('intentioInput');const today=getTodayStr();
     el.value=(g().intentioDate===today&&g().intentioText)?g().intentioText:'';
-    document.getElementById('intentioBody').classList.toggle('open',!!g().intentioOpen);
-    document.getElementById('intentioArrow').classList.toggle('open',!!g().intentioOpen);
     updateIntentioPreview();el.oninput=null;
     el.addEventListener('input',()=>{g().intentioText=el.value;g().intentioDate=getTodayStr();save();updateIntentioPreview();const s=document.getElementById('intentioSaved');s.classList.add('show');clearTimeout(window._iT);window._iT=setTimeout(()=>s.classList.remove('show'),1600);});
 }
-function updateIntentioPreview(){const prev=document.getElementById('intentioPreview');const today=getTodayStr();prev.innerText=(!g().intentioOpen&&g().intentioDate===today&&g().intentioText)?''+g().intentioText.slice(0,28)+(g().intentioText.length>28?'…':''):'';}
+function updateIntentioPreview(){const prev=document.getElementById('diaryPreview');if(!prev)return;const today=getTodayStr();if(g().intentioDate===today&&g().intentioText){prev.innerText=''+g().intentioText.slice(0,28)+(g().intentioText.length>28?'…':'');}else{prev.innerText='kirjoita päivän aikomus';}}
 function initBaseline(){document.getElementById('baselineText').innerText=g().baseline||'—';document.getElementById('baselineBody').classList.toggle('open',!!g().baselineOpen);document.getElementById('baselineArrow').classList.toggle('open',!!g().baselineOpen);}
 
 function initStats(){
@@ -1425,13 +1436,7 @@ function deleteMentor(idx){
     document.getElementById('mentorPreview').innerText=count>0?`${count} henkilö${count>1?'ä':''}`:'' ;
 }
 
-function initDaynote(){
-    document.getElementById('daynoteBody').classList.toggle('open',!!g().daynoteOpen);
-    document.getElementById('daynoteArrow').classList.toggle('open',!!g().daynoteOpen);
-    const todayNote=g().dayNotes[getTodayStr()];
-    document.getElementById('daynotePreview').innerText=(!g().daynoteOpen&&todayNote)?''+todayNote.slice(0,22)+'…':'';
-    if(g().daynoteOpen)renderDaynotes();
-}
+function initDaynote(){updateIntentioPreview();}
 function renderDaynotes(){
     const grid=document.getElementById('daynoteGrid');const notes=g().dayNotes||{};
     const keys=Object.keys(notes).sort().reverse().slice(0,14);
@@ -1443,7 +1448,7 @@ function saveDaynote(){
     if(!g().dayNotes)g().dayNotes={};const today=getTodayStr();
     g().dayNotes[today]=(g().dayNotes[today]?g().dayNotes[today]+'\n\n':'')+txt;
     document.getElementById('daynoteInput').value='';save();renderDaynotes();
-    document.getElementById('daynotePreview').innerText=''+g().dayNotes[today].slice(0,22)+'…';showToast('Muistiinpano tallennettu');
+    showToast('Muistiinpano tallennettu');
 }
 
 function initIdentity(){
@@ -1567,8 +1572,8 @@ function firstActDone(e){closeFirstAct();addXP(1,g().r1,e);}
 function start(){
     const ng=GOAL_TEMPLATE();
     ng.goal=document.getElementById('inGoal').value.trim()||draft.goal||'Muutos';
-    ng.identity=document.getElementById('inIdentity').value.trim()||draft.identity||'';
-    ng.why=document.getElementById('inWhy').value.trim()||draft.why||'';
+    ng.identity=draft.identity||'';
+    ng.why=draft.why||'';
     ng.baseline=document.getElementById('inBaseline').value.trim()||draft.baseline||'';
     ng.quote=document.getElementById('inQuote').value.trim()||draft.quote||'';
     ng.r1=document.getElementById('inR1').value.trim()||'Mikrotehtävä';
@@ -1724,9 +1729,12 @@ function closeVictory(){document.getElementById('victoryOverlay').style.display=
 function resetCurrentGoal(){if(state.goals.length===1){if(confirm('Nollataan kaikki data?')){try{localStorage.removeItem('mk_v11');localStorage.removeItem('mk_draft');}catch(e){}location.reload();}}else{if(confirm(`Poistetaan tavoite "${g().goal}"?`)){state.goals.splice(state.activeIdx,1);state.activeIdx=Math.max(0,state.activeIdx-1);save();render();}}}
 
 function updateDeadlineBar(){const bar=document.getElementById('deadlineBar');if(!bar)return;if(!g().deadline){bar.style.display='none';return;}const today=new Date();today.setHours(0,0,0,0);const dl=new Date(g().deadline);dl.setHours(0,0,0,0);const daysLeft=Math.ceil((dl-today)/86400000);if(daysLeft<0){bar.style.display='none';return;}bar.style.display='block';const opts={day:'numeric',month:'short',year:'numeric'};document.getElementById('deadlineDate').innerText=dl.toLocaleDateString('fi-FI',opts)+' ('+daysLeft+' pv)';const remaining=Math.max(0,g().v-g().total);document.getElementById('deadlineRequired').innerText=daysLeft>0?Math.ceil(remaining/daysLeft)+' XP/pv':'Tänään!';}
-function updateIdentityNudge(){const el=document.getElementById('identityNudge');if(!el)return;el.style.display=(!g().identity&&g().total>0&&g().days>2)?'block':'none';}
+function updateIdentityNudge(){const el=document.getElementById('identityNudge');if(!el)return;el.style.display=(!g().identity||!g().why)?'block':'none';}
+function openDeepen(){document.getElementById('dpIdentity').value=g().identity||'';document.getElementById('dpWhy').value=g().why||'';document.getElementById('deepenOverlay').style.display='flex';}
+function closeDeepen(){document.getElementById('deepenOverlay').style.display='none';}
+function saveDeepen(){g().identity=document.getElementById('dpIdentity').value.trim();g().why=document.getElementById('dpWhy').value.trim();save();closeDeepen();initIdentity();initWhy();updateIdentityNudge();if(g().identity||g().why)showToast('Tallennettu');}
 
-const WEEK_CHALLENGES=['Tee ainakin {r1} joka ikinen päivä, älä jätä yhtäkään välistä. 7/7.','Tee vähintään yksi {r20} tällä viikolla. Varaa aika kalenteriin heti nyt.','Kokeile {r1} eri kellonaikaan kuin normaalisti. Löydä parempi hetki.','Kirjoita päivittäin intentio ennen kuin aloitat tekemisen.','Tee {r5} kolme kertaa ennen klo 10. Aamutekeminen muuttaa koko päivän.','Jaa edistymisesi jollekin tällä viikolla. Vastuullisuus kaksinkertaistaa tulokset.','Varaa joka ilta 5 min: mitä tein tänään? Kirjoita muistiinpano.','Yhdistä {r1} jo olemassa olevaan tottumukseen, kahviin, ruokailuun tai hampaiden pesuun.','Tee {r1} heti kun heräät, ennen puhelimen katsomista.','Viikon tavoite: {weekXP} XP. Jaa se seitsemälle päivälle.','Tee {r20} ja kirjoita sen jälkeen yksi lause: mitä opin?','Kokeile "ei nollapäiviä" -sääntöä. Pienikin {r1} on voitto.','Tee {r50}, tai suunnittele milloin teet sen ensi viikolla.','Vie {r5} ulkotiloihin tai eri ympäristöön. Uusi ympäristö, uusi energia.','Tee {r1} välittömästi kun olet lukenut tämän. Lämmittelyä ei tarvita.','Arvioi: mikä rutiini on helpoin? Tuplaa se tällä viikolla.','Palkitse itsesi viikon lopussa jos keräät {weekXP} XP. Päätä palkinnoista nyt.','Tee {r1} ääneen: sano ennen aloittamista "Olen {identity}" ja aloita.','Kolmen päivän kokeilu: tee {r5} samaan aikaan joka päivä, huomaat eron.','Tällä viikolla ei selityksiä. Tee. Kirjaa. Toista.'];
+const WEEK_CHALLENGES=['Tee ainakin {r1} joka ikinen päivä, älä jätä yhtäkään välistä. 7/7.','Tee vähintään yksi {r20} tällä viikolla. Varaa aika kalenteriin heti nyt.','Kokeile {r1} eri kellonaikaan kuin normaalisti. Löydä parempi hetki.','Kirjoita päivittäin päivän aikomus ennen kuin aloitat tekemisen.','Tee {r5} kolme kertaa ennen klo 10. Aamutekeminen muuttaa koko päivän.','Jaa edistymisesi jollekin tällä viikolla. Vastuullisuus kaksinkertaistaa tulokset.','Varaa joka ilta 5 min: mitä tein tänään? Kirjoita muistiinpano.','Yhdistä {r1} jo olemassa olevaan tottumukseen, kahviin, ruokailuun tai hampaiden pesuun.','Tee {r1} heti kun heräät, ennen puhelimen katsomista.','Viikon tavoite: {weekXP} XP. Jaa se seitsemälle päivälle.','Tee {r20} ja kirjoita sen jälkeen yksi lause: mitä opin?','Kokeile "ei nollapäiviä" -sääntöä. Pienikin {r1} on voitto.','Tee {r50}, tai suunnittele milloin teet sen ensi viikolla.','Vie {r5} ulkotiloihin tai eri ympäristöön. Uusi ympäristö, uusi energia.','Tee {r1} välittömästi kun olet lukenut tämän. Lämmittelyä ei tarvita.','Arvioi: mikä rutiini on helpoin? Tuplaa se tällä viikolla.','Palkitse itsesi viikon lopussa jos keräät {weekXP} XP. Päätä palkinnoista nyt.','Tee {r1} ääneen: sano ennen aloittamista "Olen {identity}" ja aloita.','Kolmen päivän kokeilu: tee {r5} samaan aikaan joka päivä, huomaat eron.','Tällä viikolla ei selityksiä. Tee. Kirjaa. Toista.'];
 function getSmartWeekChallenge(){if(!g())return null;const goal=(g().goal||'').toLowerCase();const pct=g().v>0?(g().total/g().v)*100:0;if(pct<10)return'Tämä on alku. Tee {r1} vähintään 5 kertaa tällä viikolla.';if(g().streak<3&&g().days>7)return`Putkesi on lyhyt. Haaste: rakenna 5 päivän putki. Edes {r1} joka päivä riittää.`;if(g().streak>=14)return`Putkesi on ${g().streak} päivää. Kokeile tällä viikolla {r50}.`;if(goal.includes('juoks')||goal.includes('liiku')||goal.includes('treeni'))return'Liikuntatavoite: tee {r5} ulkona, vaihtele reittiä tai kellonaikaa.';if(goal.includes('kirj')||goal.includes('lue'))return'Kirjoittaminen: tee {r1} joka päivä samassa paikassa ja samaan aikaan.';if(goal.includes('laih')||goal.includes('paino'))return'Ruokavaliohaaste: dokumentoi kolmena päivänä mitä syöt.';if(goal.includes('kiel')||goal.includes('englan'))return'Kielenoppiminen: tee {r1} joka päivä, mieluiten ääneen.';if(goal.includes('bisnes')||goal.includes('yritys'))return'Yrittäjyyshaaste: tee yksi konkreettinen asiakaskontakti tai julkaisu tällä viikolla.';return null;}
 function orList(s){if(!s)return s;var p=String(s).split(',').map(function(x){return x.trim();}).filter(Boolean);if(p.length<2)return s;return p.slice(0,-1).join(', ')+' tai '+p[p.length-1];}
 function getWeekChallengeText(){if(!g())return'';const weekXP=Math.max(20,Math.round((g().total/Math.max(g().days,1))*7));const seed=(g().weekChallengeIdx||0);let txt=WEEK_CHALLENGES[seed%WEEK_CHALLENGES.length];return txt.replace(/{r1}/g,orList(g().r1)||'mikrotehtävä').replace(/{r5}/g,orList(g().r5)||'harppaus').replace(/{r20}/g,orList(g().r20)||'panostus').replace(/{r50}/g,orList(g().r50)||'uroteko').replace(/{weekXP}/g,weekXP).replace(/{identity}/g,g().identity||'muutoksen tekijä');}
@@ -1778,7 +1786,7 @@ function openIdentityGuide(){document.getElementById('identityGuideOverlay').sty
 function closeIdentityGuide(){document.getElementById('identityGuideOverlay').style.display='none';}
 
 function getBaselinePart(){const bl=state.goals.length>0?g().baseline:draft.baseline;return bl?`\n\nLähtötilanne:\n"${bl}"`:''}
-function mkStrategyPrompt(sit,params){
+function mkStrategyPrompt(sit,params,skipIdentityWhy){
     return `Olet MUUTOSKONE-järjestelmän strateginen suunnittelija. Käyttäjä on ${sit}. Tehtäväsi on ensin arvioida, mitä on jo syötetty, mitä puuttuu tai on epäselvää, ja sitten auttaa täydentämään, yksi asia kerrallaan.
 
 JÄRJESTELMÄN LOGIIKKA:
@@ -1800,9 +1808,8 @@ TEHTÄVÄSI, aloita lyhyellä arviolla:
 1. Tavoite: Onko se riittävän konkreettinen ja mitattava? Voiko kuka tahansa ulkopuolinen sanoa sekunnilleen milloin se on saavutettu? Jos ei, ehdota tarkennusta.
 2. Vaikeuskerroin: Onko se oikein mitoitettu suhteessa tavoitteeseen? Perustele lyhyesti tai ehdota muutosta.
 3. Lähtötilanne: Onko se kuvattu faktoina vai adjektiiveina? Jos epämääräinen tai puuttuu, pyydä tarkennusta.
-4. Identiteetti ja miksi: Jos puuttuvat, kysy vain toinen, se joka tuntuu tärkeämmältä tässä tilanteessa.
-5. Rutiinit: Ovatko ne linjassa tavoitteen kanssa ja ankkuroitu tiettyyn aikaan/paikkaan? Käytä ehdotuksissa AINOASTAAN XP-arvoja 1, 5, 20 tai 50, ei muita. Nimeä jokainen rutiini yhdellä sanalla, mutta selitä se kattavasti.
-6. Mittakaava: Jos tavoite on 5 000 XP tai suurempi ja lähtötilanne on kaukana maalista, arvioi tuntuuko koko matka heti liian isolta. Jos voi tuntua, tarjoa käyttäjälle mahdollisuutta aloittaa pienemmällä osatavoitteella, jonka voi saavuttaa kokonaan ensin. Tee tästä selkeästi valinnainen: iso tavoite säilyy, jos käyttäjä haluaa mennä suoraan siihen.
+${skipIdentityWhy?'':'4. Identiteetti ja miksi: Jos puuttuvat, kysy vain toinen, se joka tuntuu tärkeämmältä tässä tilanteessa.\n'}${skipIdentityWhy?'4':'5'}. Rutiinit: Ovatko ne linjassa tavoitteen kanssa ja ankkuroitu tiettyyn aikaan/paikkaan? Käytä ehdotuksissa AINOASTAAN XP-arvoja 1, 5, 20 tai 50, ei muita. Nimeä jokainen rutiini yhdellä sanalla, mutta selitä se kattavasti.
+${skipIdentityWhy?'5':'6'}. Mittakaava: Jos tavoite on 5 000 XP tai suurempi ja lähtötilanne on kaukana maalista, arvioi tuntuuko koko matka heti liian isolta. Jos voi tuntua, tarjoa käyttäjälle mahdollisuutta aloittaa pienemmällä osatavoitteella, jonka voi saavuttaa kokonaan ensin. Tee tästä selkeästi valinnainen: iso tavoite säilyy, jos käyttäjä haluaa mennä suoraan siihen.
 
 Kysy sitten yksi tärkein puuttuva tai epäselvä asia. Kun kaikki on kunnossa, tuota:
 · Perusteltu vaikeuskerroin (vahvista tai korjaa)
@@ -1814,8 +1821,7 @@ Kysy sitten yksi tärkein puuttuva tai epäselvä asia. Kun kaikki on kunnossa, 
 
 Älä tuota lopputulosta, ennen kuin:
 · Tavoite on konkreettinen
-· Miksi on selkeä yhdellä lauseella
-· Lähtötilanne on mitattavissa
+${skipIdentityWhy?'':'· Miksi on selkeä yhdellä lauseella\n'}· Lähtötilanne on mitattavissa
 
 Tyyli: Suora ja lämmin. Ei turhia kierroksia. Aloita arviolla.`;
 }
@@ -1846,9 +1852,7 @@ function copyNewGoalPrompt(){
 }
 function copySetupAiPrompt(){
     const goal=document.getElementById('inGoal').value.trim();
-    const why=document.getElementById('inWhy').value.trim();
     const baseline=document.getElementById('inBaseline').value.trim();
-    const identity=document.getElementById('inIdentity').value.trim();
     const v=parseInt(document.getElementById('inV').value)||5000;
     const r1=document.getElementById('inR1').value.trim();
     const r5=document.getElementById('inR5').value.trim();
@@ -1861,13 +1865,11 @@ function copySetupAiPrompt(){
     params.push(`Tavoite: ${goal?'"'+goal+'"':'EI ASETETTU'}`);
     params.push(`Vaikeuskerroin: ${v.toLocaleString('fi-FI')} XP, ${tierName}`);
     params.push(`Lähtötilanne: ${baseline?'"'+baseline+'"':'EI ASETETTU'}`);
-    if(identity) params.push(`Identiteetti: "${identity}"`);
-    if(why) params.push(`Miksi: "${why}"`);
     if(deadline) params.push(`Tavoitepäivä: ${deadline}`);
     const rutiinit=[r1?`1 XP: ${r1}`:'',r5?`5 XP: ${r5}`:'',r20?`20 XP: ${r20}`:'',r50?`50 XP: ${r50}`:''].filter(Boolean);
     params.push(rutiinit.length?`Rutiinit:\n${rutiinit.map(r=>'  · '+r).join('\n')}`:`Rutiinit: EI ASETETTU`);
 
-    const txt=mkStrategyPrompt('täyttänyt parametrit ennen muutoskoneen käynnistystä', params.join('\n'));
+    const txt=mkStrategyPrompt('täyttänyt parametrit ennen muutoskoneen käynnistystä', params.join('\n'), true);
     navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyAiBtn');b.innerText='Kopioitu';setTimeout(()=>{b.innerText='Kopioi strategiakehote';},2200);});
 }
 function copyAiPrompt(){
@@ -1899,7 +1901,7 @@ function copyMentorPrompt(){
     const dgLine=g().dailyGoal?`· Päivätavoite: ${todayXP}/${g().dailyGoal} XP\n`:'';
     const mentorLine=(g().mentors&&g().mentors.length)?`· Tunnistetut asiantuntijat: ${g().mentors.map(m=>m.name+(m.role?' ('+m.role+')':'')).join(', ')}\n`:'';
     const rutiiniLista=`· 1 XP = ${g().r1||'Mikrotehtävä'} (1–10 min)\n· 5 XP = ${g().r5||'Harppaus'} (15–30 min)\n· 20 XP = ${g().r20||'Panostus'} (45–90 min)\n· 50 XP = ${g().r50||'Uroteko'} (2–4 h)`;
-    const txt=`Olet MUUTOSKONE-järjestelmän sparrauskumppani.\n\nJÄRJESTELMÄN LOGIIKKA, EHDOTON:\nMuutoskoneessa on VAIN NELJÄ XP-tasoa. Älä koskaan ehdota muita XP-arvoja kuin näitä:\n· 1 XP = Mikrotehtävä (1–10 min), pienin mahdollinen teko\n· 5 XP = Harppaus (15–30 min), päivittäinen perussuoritus\n· 20 XP = Panostus (45–90 min), merkittävä jakso\n· 50 XP = Uroteko (2–4 h), maksimaalinen suoritus\nEI 10 XP. EI 15 XP. EI 25 XP. EI muita arvoja. Ainoastaan 1, 5, 20 tai 50 XP.\n\nVAIKEUSKERROIN, auta tarvittaessa tarkistamaan, vastaako käyttäjän valitsema vaikeuskerroin tavoitteen laajuutta. Jos ei, sano se suoraan ja ehdota oikeaa tasoa:\n· 1 000 XP, Uusi tapa (pieni muutos): yksittäisen tottumuksen vakiinnuttaminen tai rutiinin luominen. Esim. 10 000 askelta/pv, meditaation aloittaminen, päivittäinen lukeminen, säännöllinen liikuntatottumus.\n· 5 000 XP, Merkittävä muutos (selkeä tulos): selkeä, mitattava tulos, joka vaatii pitkäjänteistä työtä. Esim. 10 kg painonpudotus, uuden kielen perusteet, kirjan ensimmäinen versio, sivubisneksen käynnistäminen (ensimmäinen laskutus).\n· 10 000 XP, Elämänmuutos (identiteettitason muutos): vaatii pitkäjänteistä, systemaattista työtä. Esim. alanvaihto ja uusi ura, yrityksen perustaminen, tutkinnon suorittaminen, nouseminen kilpaurheilutasolle.\n· 100 000 XP, Mestari: perustuu Malcolm Gladwellin 10 000 tunnin sääntöön. Esim. ammattiurheilija, konserttipianisti, huippuasiantuntija alallasi.\n\nOSATAVOITE, valinnainen: Jos käyttäjä kokee tavoitteen liian isoksi tai vauhti hiipuu, ison tavoitteen voi pilkkoa pienempään osatavoitteeseen, jonka käyttäjä ajaa omana muutoskoneenaan (oma vaikeuskerroin, omat rutiinit, oma tavoitepäivä), saavuttaa kokonaan ja tuntee oikean onnistumisen ennen seuraavaan siirtymistä. Tämä EI ole sama kuin virstanpylväät, jotka ovat edistymismerkkejä yhden tavoitteen sisällä. Iso visio säilyy.\n\nTämän käyttäjän rutiinit juuri nyt:\n${rutiiniLista}\n\nTämänhetkinen data:\n· Tavoite: ${g().goal}\n${identityLine}${whyLine}· Edistyminen: ${g().total.toLocaleString('fi-FI')} / ${g().v.toLocaleString('fi-FI')} XP (${pct}%)\n· Päivä: ${g().days} | Putki: ${g().streak} pv | Vauhti: ${momentum}%\n${dgLine}· Keskitahti: ${avg} XP/pv | Tänään: ${todayXP} XP | Paras pv: ${g().bestDay} XP\n· Kertymäkerroin: ×${getMultiplier().toFixed(2)}\n${mentorLine}· Tämän päivän intentio: "${intentioTxt}"${todayNote?'\n· Päivän muistiinpano: "'+todayNote.slice(0,200)+'"':''}${getBaselinePart()}\n\nTärkeää: Jos ehdotat uusia tai muutettuja rutiineja, käytä AINOASTAAN XP-arvoja 1, 5, 20 tai 50. Jos rutiinit näyttävät liian helpolta suhteessa tavoitteeseen, ehdota korvaavia rutiineja samoilla XP-arvoilla, älä luo uusia XP-tasoja.${(g().mentors&&g().mentors.length)?'\n\nAsiantuntijat: Jos käyttäjä ei ole vielä ottanut yhteyttä listatuille asiantuntijoille, kysy siitä suoraan, mitä estää?':''}\n\nTyyli: Ole lämmin mutta suora. Katse eteenpäin.\n\n1. Kerro yksi positiivinen asia datasta. Kysy: mikä tuntuu haastavimmalta?\n2. Anna 2–3 konkreettista ideaa seuraavaan askeleeseen, käytä vain XP-arvoja 1, 5, 20 tai 50.\n3. Arvioi onko nykyinen tekeminen linjassa tavoitteen kanssa.\n4. Jos vauhti on hiipunut tai käyttäjä kokee tavoitteen liian isoksi, tarjoa mahdollisuutta pilkkoa se pienempään osatavoitteeseen, jonka voi saavuttaa kokonaan ja tuntea onnistumisen. Tee tästä valinnainen, iso tavoite säilyy. Tämä ei ole sama kuin virstanpylväät.\n5. Lopeta yhdellä lauseella.\n\nAloita kohdasta 1.`;
+    const txt=`Olet MUUTOSKONE-järjestelmän sparrauskumppani.\n\nJÄRJESTELMÄN LOGIIKKA, EHDOTON:\nMuutoskoneessa on VAIN NELJÄ XP-tasoa. Älä koskaan ehdota muita XP-arvoja kuin näitä:\n· 1 XP = Mikrotehtävä (1–10 min), pienin mahdollinen teko\n· 5 XP = Harppaus (15–30 min), päivittäinen perussuoritus\n· 20 XP = Panostus (45–90 min), merkittävä jakso\n· 50 XP = Uroteko (2–4 h), maksimaalinen suoritus\nEI 10 XP. EI 15 XP. EI 25 XP. EI muita arvoja. Ainoastaan 1, 5, 20 tai 50 XP.\n\nVAIKEUSKERROIN, auta tarvittaessa tarkistamaan, vastaako käyttäjän valitsema vaikeuskerroin tavoitteen laajuutta. Jos ei, sano se suoraan ja ehdota oikeaa tasoa:\n· 1 000 XP, Uusi tapa (pieni muutos): yksittäisen tottumuksen vakiinnuttaminen tai rutiinin luominen. Esim. 10 000 askelta/pv, meditaation aloittaminen, päivittäinen lukeminen, säännöllinen liikuntatottumus.\n· 5 000 XP, Merkittävä muutos (selkeä tulos): selkeä, mitattava tulos, joka vaatii pitkäjänteistä työtä. Esim. 10 kg painonpudotus, uuden kielen perusteet, kirjan ensimmäinen versio, sivubisneksen käynnistäminen (ensimmäinen laskutus).\n· 10 000 XP, Elämänmuutos (identiteettitason muutos): vaatii pitkäjänteistä, systemaattista työtä. Esim. alanvaihto ja uusi ura, yrityksen perustaminen, tutkinnon suorittaminen, nouseminen kilpaurheilutasolle.\n· 100 000 XP, Mestari: perustuu Malcolm Gladwellin 10 000 tunnin sääntöön. Esim. ammattiurheilija, konserttipianisti, huippuasiantuntija alallasi.\n\nOSATAVOITE, valinnainen: Jos käyttäjä kokee tavoitteen liian isoksi tai vauhti hiipuu, ison tavoitteen voi pilkkoa pienempään osatavoitteeseen, jonka käyttäjä ajaa omana muutoskoneenaan (oma vaikeuskerroin, omat rutiinit, oma tavoitepäivä), saavuttaa kokonaan ja tuntee oikean onnistumisen ennen seuraavaan siirtymistä. Tämä EI ole sama kuin virstanpylväät, jotka ovat edistymismerkkejä yhden tavoitteen sisällä. Iso visio säilyy.\n\nTämän käyttäjän rutiinit juuri nyt:\n${rutiiniLista}\n\nTämänhetkinen data:\n· Tavoite: ${g().goal}\n${identityLine}${whyLine}· Edistyminen: ${g().total.toLocaleString('fi-FI')} / ${g().v.toLocaleString('fi-FI')} XP (${pct}%)\n· Päivä: ${g().days} | Putki: ${g().streak} pv | Vauhti: ${momentum}%\n${dgLine}· Keskitahti: ${avg} XP/pv | Tänään: ${todayXP} XP | Paras pv: ${g().bestDay} XP\n· Kertymäkerroin: ×${getMultiplier().toFixed(2)}\n${mentorLine}· Tämän päivän aikomus: "${intentioTxt}"${todayNote?'\n· Päivän muistiinpano: "'+todayNote.slice(0,200)+'"':''}${getBaselinePart()}\n\nTärkeää: Jos ehdotat uusia tai muutettuja rutiineja, käytä AINOASTAAN XP-arvoja 1, 5, 20 tai 50. Jos rutiinit näyttävät liian helpolta suhteessa tavoitteeseen, ehdota korvaavia rutiineja samoilla XP-arvoilla, älä luo uusia XP-tasoja.${(g().mentors&&g().mentors.length)?'\n\nAsiantuntijat: Jos käyttäjä ei ole vielä ottanut yhteyttä listatuille asiantuntijoille, kysy siitä suoraan, mitä estää?':''}\n\nTyyli: Ole lämmin mutta suora. Katse eteenpäin.\n\n1. Kerro yksi positiivinen asia datasta. Kysy: mikä tuntuu haastavimmalta?\n2. Anna 2–3 konkreettista ideaa seuraavaan askeleeseen, käytä vain XP-arvoja 1, 5, 20 tai 50.\n3. Arvioi onko nykyinen tekeminen linjassa tavoitteen kanssa.\n4. Jos vauhti on hiipunut tai käyttäjä kokee tavoitteen liian isoksi, tarjoa mahdollisuutta pilkkoa se pienempään osatavoitteeseen, jonka voi saavuttaa kokonaan ja tuntea onnistumisen. Tee tästä valinnainen, iso tavoite säilyy. Tämä ei ole sama kuin virstanpylväät.\n5. Lopeta yhdellä lauseella.\n\nAloita kohdasta 1.`;
     navigator.clipboard.writeText(txt).then(()=>{const b=document.getElementById('copyMentorBtn');b.innerText='Kopioitu';setTimeout(()=>{b.innerText='Kopioi sparrauskehote';},2200);});
 }
 
@@ -1971,11 +1973,13 @@ const STAT_DATA={
     weekXP:{title:'Tällä viikolla',fn:()=>({val:document.getElementById('statWeekXP').innerText+' XP',body:'Tämän viikon (ma–su) kertyneet XP:t.'})},
     streak:{title:'Aktiivisuusputki',fn:()=>({val:document.getElementById('streakNum').innerText+' pv',body:'Peräkkäiset päivät joina olet tehnyt vähintään yhden rutiinin. Kerran viikossa armopäivä sallitaan, putki ei katkea.'})},
     mult:{title:'Kertymäkerroin',fn:()=>({val:document.getElementById('multNum').innerText,body:'Kasvaa lineaarisesti päivästä 1 (×1.00) päivään 84 (×2.00). Sen jälkeen pysyy ×2.00. Jokainen rutiini on arvokkaampi mitä pidempään olet jatkanut.'})},
-    kunto:{title:'Kunto-indeksi',fn:()=>({val:document.getElementById('healthVal').innerText,body:'Yhdistää neljä asiaa: päivätahti (35%), putki (25%), viikkoaktiivisuus (25%) ja reflektiot (15%). 80+ = loistava, 60+ = hyvä, alle 40 = tarvitsee huomiota.'})},
-    vauhti:{title:'Vauhti',fn:()=>({val:document.getElementById('momentumVal').innerText,body:'Onko tekemisesi kiihtymässä vai hiipumassa? Laskee 3 viime päivän XP:n suhteessa pitkän aikavälin keskiarvoon. Yli 75% = kiihtyvä vauhti. Jos vauhti hiipuu, älä lopeta kokonaan: pienikin mikroteko pitää koneen käynnissä.'})},
+    kunto:{title:'Kunto',fn:()=>({val:document.getElementById('healthVal').innerText,body:'Kunto kertoo yhdellä luvulla (0–100), kuinka hyvässä iskussa muutoskoneesi on juuri nyt. Se yhdistää neljä asiaa: teitkö tänään jotain, kuinka pitkä putkesi on, kuinka monena päivänä viikossa olet ollut aktiivinen ja kirjoititko aikomuksen tai reflektion. 80+ = loistava, 60+ = hyvä, alle 40 = tarvitsee huomiota. Palkin alla lukee aina vinkki, mitä kannattaa tehdä seuraavaksi.'})},
+    vauhti:{title:'Vauhti',fn:()=>({val:document.getElementById('momentumVal').innerText,body:'Vauhti vastaa kysymykseen: onko tekemiseni kiihtymässä vai hiipumassa? Se vertaa kolmen viime päivän tekemistäsi koko matkasi keskitasoon. Korkea lukema = teet nyt enemmän kuin yleensä, vauhti kiihtyy. Matala = tahti on hiipunut. Jos vauhti hiipuu, älä lopeta kokonaan: pienikin 1 XP:n mikroteko pitää koneen käynnissä.'})},
     forecast:{title:'Etenemisennuste',fn:()=>({val:document.getElementById('forecastDate').innerText,body:'Arvioitu maalipäivä nykyisellä tahdilla. Kertymäkerroin nopeuttaa matkaa, todellisuudessa voi olla aiemmin maalissa.'})},
     dailygoal:{title:'Päivittäinen XP-tavoite',fn:()=>({val:document.getElementById('dgCurrent').innerText+' / '+document.getElementById('dgTarget').innerText+' XP',body:'Oma asettamasi päivätavoite. Rutiininapin alla oleva palkki näyttää kuinka lähellä olet.'})},
     viikkohaaste:{title:'Viikkohaaste',fn:()=>({val:'',body:'Henkilökohtainen haaste joka viikko, perustuu tavoitteeseesi ja rutiineihisi. ↺-napista saat uuden haasteen.'})},
+    aikomus:{title:'Miksi kirjoittaa päivän aikomus?',fn:()=>({val:'',body:'Aikomus on aamulla kirjoitettu lause siitä, mitä teet tänään. Tutkimusten mukaan ihmiset, jotka päättävät etukäteen mitä, milloin ja missä he tekevät (ns. toteutusaikomus), toteuttavat aikeensa jopa 2–3 kertaa todennäköisemmin kuin ne, jotka luottavat pelkkään motivaatioon. Yksi konkreettinen lause riittää: "Tänään aion juosta 20 min heti töiden jälkeen." Aivosi alkavat etsiä hetkeä toteuttaa se.'})},
+    paivakirja:{title:'Miksi kirjoittaa muistiinpanoja?',fn:()=>({val:'',body:'Lyhyt iltamerkintä ("Mitä opin? Mikä toimi?") juurruttaa muutoksen: reflektointi auttaa huomaamaan, mikä oikeasti vie eteenpäin ja mikä ei. Se myös tekee edistymisen näkyväksi, huonona päivänä voit lukea, kuinka pitkälle olet jo tullut. Yksi lause päivässä riittää. Muistiinpanot tallentuvat päiväkohtaisesti ja kulkevat mukana Sparrauskumppanin kehotteessa.'})},
 };
 function openStatGuide(key){const data=STAT_DATA[key];if(!data)return;const{val,body}=data.fn?data.fn():(data);document.getElementById('sgTitle').innerText=data.title||key;document.getElementById('sgVal').innerText=val||'';document.getElementById('sgBody').innerText=body||'';document.getElementById('statGuideOverlay').classList.add('show');}
 function closeStatGuide(){document.getElementById('statGuideOverlay').classList.remove('show');}
