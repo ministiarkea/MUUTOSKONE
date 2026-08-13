@@ -1,6 +1,6 @@
 # Muutoskone
 
-Strateginen muutostyökalu. Kerää XP:tä päivittäisillä rutiineilla, kasvata niittyä ja täytä hunajapurkki.
+Strateginen muutostyökalu. Kerää XP:tä päivittäisillä rutiineilla, kasvata niittyä ja täytä purkki.
 
 Kaikki data tallentuu vain omalle laitteelle. Ei tiliä, ei pilveä, ei seurantaa.
 
@@ -52,7 +52,7 @@ Ilman tätä selain tarjoilee vanhaa välimuistiversiota etkä näe muutoksiasi.
 
 ## Mitä sovelluksessa on
 
-**XP ja purkki.** Rutiinit tuottavat XP:tä (1 / 5 / 20 / 50). Jokainen XP kerrotaan kertymäkertoimella, joka kasvaa päivästä 1 päivään 84 välillä ×1.00 → ×2.00. Hunajapurkki näyttää matkan tavoitteeseen.
+**XP ja purkki.** Rutiinit tuottavat XP:tä (1 / 5 / 20 / 50). Jokainen XP kerrotaan kertymäkertoimella, joka kasvaa päivästä 1 päivään 84 välillä ×1.00 → ×2.00. Purkki näyttää matkan tavoitteeseen, ja sen syaani-violetti on niityn oma väri: mesi kantaa kukkien sävyn.
 
 **Niitty.** Jokainen kuitattu rutiini istuttaa kukan. Laji määräytyy XP-tason mukaan ja pysyy samana:
 
@@ -63,7 +63,7 @@ Ilman tätä selain tarjoilee vanhaa välimuistiversiota etkä näe muutoksiasi.
 
 Niitty ei koskaan kuihdu. Kukat vain kertyvät.
 
-**Mehiläiset.** Määrä seuraa kertymäkerrointa: päivänä 1 yksi, päivänä 84 parvi. Kun kuittaat rutiinin, mehiläinen käy uudella kukalla ja vie sadon purkkiin.
+**Mehiläiset.** Määrä seuraa kertymäkerrointa: päivänä 1 yksi, päivänä 84 parvi. Kun kuittaat rutiinin, mehiläinen käy uudella kukalla ja vie sadon purkkiin. Niitty sijaitsee heti rutiininappien alla, jotta uusi kukka ilmestyy siihen mihin katse jo osuu.
 
 **Ajastin.** Kasvi kasvaa jakson ajan sekä ajastinpalkissa että hyppyikkunassa, ja puhkeaa lopuksi kukkaan.
 
@@ -83,5 +83,7 @@ Hyödyllisiä kohtia lohkon sisällä:
 - `drawHead` — yksittäisten lajien piirto
 - `beeCount` — mehiläisten määrän kaava
 - `SWAYMAX` — kuinka monella kukalla tuulen huojutus vielä on päällä
+
+Niityn korkeus säädetään `resize()`-funktion rivillä `H=Math.max(168,Math.min(288,Math.round(w*0.56)))`.
 
 Purkin värit ovat SVG-gradienteissa `liqGrad` (täyttyvä) ja `liqGradFull` (täysi).

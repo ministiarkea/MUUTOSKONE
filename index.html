@@ -76,9 +76,9 @@
         /* ── JAR ANIMATION ── */
         .jar-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;margin-left:8px;}
         .jar-svg{width:44px;height:56px;filter:drop-shadow(0 0 6px rgba(0,200,240,0.0));transition:filter 0.6s ease;}
-        .jar-wrap.glowing .jar-svg{filter:drop-shadow(0 0 11px rgba(251,191,36,0.5));}
+        .jar-wrap.glowing .jar-svg{filter:drop-shadow(0 0 10px rgba(0,200,240,0.45));}
         .jar-label{font-size:8px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;transition:color 0.6s;}
-        .jar-wrap.glowing .jar-label{color:#f2b134;}
+        .jar-wrap.glowing .jar-label{color:var(--cyan);}
         .jar-liquid{transition:height 1.2s cubic-bezier(0.34,1.56,0.64,1),y 1.2s cubic-bezier(0.34,1.56,0.64,1),fill 1.2s ease;}
         .jar-bubble{animation:jarBubble 2.4s ease-in-out infinite;opacity:0;transition:opacity 0.8s;}
         .jar-wrap.active .jar-bubble{opacity:0.7;}
@@ -488,8 +488,8 @@
         /* ── NIITTY ── */
         .meadow-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px 18px 12px;margin-bottom:9px;}
         .meadow-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
-        .meadow-box{position:relative;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#080810 0%,#0a1210 55%,#0b1a13 100%);}
-        [data-theme="light"] .meadow-box{background:linear-gradient(180deg,#eef2f2 0%,#e4ede5 55%,#dae9dd 100%);}
+        .meadow-box{position:relative;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#07070f 0%,#0a1014 38%,#0a1511 68%,#0b1c14 100%);}
+        [data-theme="light"] .meadow-box{background:linear-gradient(180deg,#e3ebe9 0%,#d8e6dc 38%,#cbdfd0 68%,#bcd6c3 100%);}
         #meadowCanvas{display:block;width:100%;}
         .meadow-legend{display:grid;grid-template-columns:1fr 1fr;gap:5px 10px;margin-top:10px;}
         .mdl{display:flex;align-items:center;gap:5px;font-size:8.5px;color:var(--text-3);letter-spacing:.3px;}
@@ -999,12 +999,12 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
                     <defs>
                         <clipPath id="jarClip"><rect x="5" y="14" width="34" height="36" rx="7"/></clipPath>
                         <linearGradient id="liqGrad" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#f2c74a"/>
-                            <stop offset="100%" stop-color="#cf7d1a"/>
+                            <stop offset="0%" stop-color="#4dcce4"/>
+                            <stop offset="100%" stop-color="#7c5cbf"/>
                         </linearGradient>
                         <linearGradient id="liqGradFull" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#ffeab4"/>
-                            <stop offset="100%" stop-color="#eeae35"/>
+                            <stop offset="0%" stop-color="#22c55e"/>
+                            <stop offset="100%" stop-color="#00c8f0"/>
                         </linearGradient>
                     </defs>
                     <rect class="jar-glass" x="5" y="14" width="34" height="36" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
@@ -1055,6 +1055,22 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
 
     <!-- UNDO -->
     <div class="undo-bar" id="undoBar"><span class="undo-msg" id="undoMsg"></span><button class="btn-undo" onclick="undoXP()">Peruuta</button></div>
+
+    <!-- NIITTY -->
+    <div class="meadow-card" id="meadowCard">
+        <div class="meadow-header">
+            <div class="lbl" style="margin-bottom:0;"><span class="lbl-dot"></span>Niitty</div>
+            <div style="font-size:9px;color:var(--text-3);"><span id="meadowFlowers" style="color:var(--text-2);">—</span> kukkaa · <span id="meadowBees" style="color:var(--text-2);">—</span> mehiläistä</div>
+        </div>
+        <div class="meadow-box"><canvas id="meadowCanvas"></canvas></div>
+        <div class="meadow-legend">
+            <span class="mdl"><i style="background:hsl(340,58%,74%)"></i><b>1 XP</b> ketoneilikka, kissankello</span>
+            <span class="mdl"><i style="background:hsl(218,62%,60%)"></i><b>5 XP</b> päivänkakkara, ruiskaunokki</span>
+            <span class="mdl"><i style="background:hsl(320,44%,62%)"></i><b>20 XP</b> ahdekaunokki, nurmikaunokki</span>
+            <span class="mdl"><i style="background:hsl(288,46%,64%)"></i><b>50 XP</b> maarianohdake</span>
+        </div>
+        <div class="meadow-note">Jokainen kuitattu rutiini istuttaa kukan. Mehiläiset ovat kertymäkerroin: mitä pidempään jatkat, sitä useampi kerää satoa purkkiin.</div>
+    </div>
 
     <!-- SYVENNÄ MUUTOSTASI -->
     <div id="identityNudge" style="display:none;background:linear-gradient(135deg,rgba(124,92,191,0.09),rgba(0,200,240,0.03));border:1px solid rgba(124,92,191,0.25);border-radius:12px;padding:13px 16px;margin-bottom:9px;cursor:pointer;" onclick="openDeepen()">
@@ -1137,22 +1153,6 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
             <input class="mentor-field" id="mentorContact" type="text" placeholder="Miten tavoitan? esim. @mari / kuntosali" maxlength="100">
             <button class="mentor-add-btn" onclick="addMentor()">+ Lisää henkilö</button>
         </div>
-    </div>
-
-    <!-- NIITTY -->
-    <div class="meadow-card" id="meadowCard">
-        <div class="meadow-header">
-            <div class="lbl" style="margin-bottom:0;"><span class="lbl-dot"></span>Niitty</div>
-            <div style="font-size:9px;color:var(--text-3);"><span id="meadowFlowers" style="color:var(--text-2);">—</span> kukkaa · <span id="meadowBees" style="color:var(--text-2);">—</span> mehiläistä</div>
-        </div>
-        <div class="meadow-box"><canvas id="meadowCanvas"></canvas></div>
-        <div class="meadow-legend">
-            <span class="mdl"><i style="background:hsl(340,58%,74%)"></i><b>1 XP</b> ketoneilikka, kissankello</span>
-            <span class="mdl"><i style="background:hsl(218,62%,60%)"></i><b>5 XP</b> päivänkakkara, ruiskaunokki</span>
-            <span class="mdl"><i style="background:hsl(320,44%,62%)"></i><b>20 XP</b> ahdekaunokki, nurmikaunokki</span>
-            <span class="mdl"><i style="background:hsl(288,46%,64%)"></i><b>50 XP</b> maarianohdake</span>
-        </div>
-        <div class="meadow-note">Jokainen kuitattu rutiini istuttaa kukan. Mehiläiset ovat kertymäkerroin: mitä pidempään jatkat, sitä useampi kerää satoa purkkiin.</div>
     </div>
 
     <!-- HEAT MAP -->
@@ -2066,7 +2066,7 @@ function dropIntoJar(pct){
     const fillY=jarBot-fillH;
     // Pisara tippuu kannen alta alas nestepinnan tasolle
     const dropDist=fillY-10; // matka kannen alapuolelta nestepintaan
-    const cols=['rgba(245,197,66,0.88)','rgba(224,152,40,0.85)','rgba(255,214,110,0.9)'];
+    const cols=['rgba(77,204,228,0.85)','rgba(124,92,191,0.8)','rgba(0,200,240,0.9)'];
     const col=cols[Math.floor(Math.random()*cols.length)];
     const cx=12+Math.random()*20; // satunnainen x purkin sisällä
     const drop=document.createElementNS('http://www.w3.org/2000/svg','ellipse');
@@ -2232,7 +2232,7 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
             hh:0.60+hash(i,4)*0.55, sp:T.sp[Math.floor(hash(i,9)*T.sp.length)],
             ph:hash(i,11)*6.28, tint:(hash(i,12)-0.5)*14, al:0.82+hash(i,13)*0.18};
   }
-  function pos(f){ return [f.x*W, H*(0.36+f.d*0.58), 0.48+f.d*0.72]; }
+  function pos(f){ return [f.x*W, H*(0.26+f.d*0.68), 0.42+f.d*0.80]; }
 
   function beeCount(){
     if(!goal()) return 1;
@@ -2266,7 +2266,14 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
   function drawHead(c,sp,x,y,R,al,tint,gr){
     var A=al*gr;
     if(sp==='paivankakkara'){
-      petals(c,x,y,14,R*2.0,R*0.30,0.4,'hsla(48,16%,93%,'+(A*0.92)+')');
+      if(light()){
+        var lq,lz2;
+        c.strokeStyle='hsla(150,14%,52%,'+(A*0.55)+')'; c.lineWidth=Math.max(0.4,R*0.10);
+        for(lq=0;lq<14;lq++){ lz2=0.4+lq/14*Math.PI*2;
+          c.save(); c.translate(x,y); c.rotate(lz2);
+          c.beginPath(); c.ellipse(0,-R*1.0,R*0.30,R*1.0,0,0,7); c.stroke(); c.restore(); }
+      }
+      petals(c,x,y,14,R*2.0,R*0.30,0.4,light()?'hsla(48,22%,99%,'+A+')':'hsla(48,16%,93%,'+(A*0.92)+')');
       c.fillStyle='hsla(48,88%,58%,'+A+')'; c.beginPath(); c.arc(x,y,R*0.52,0,7); c.fill();
       c.fillStyle='hsla(40,70%,44%,'+(A*0.5)+')'; c.beginPath(); c.arc(x-R*0.12,y+R*0.12,R*0.22,0,7); c.fill();
     } else if(sp==='ruiskaunokki'){
@@ -2327,7 +2334,7 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
   function drawFlower(c,f,grow,ph){
     var p=pos(f),x=p[0],y=p[1],sc=p[2],T=TIER[f.k]||TIER.a;
     var gr=grow===undefined?1:grow;
-    var Hh=H*0.150*f.hh*sc*gr, R=T.r*sc*gr*0.92, dim=(0.40+f.d*0.60)*f.al;
+    var Hh=H*0.135*f.hh*sc*gr, R=T.r*sc*gr*0.92, dim=(0.40+f.d*0.60)*f.al;
     var lean=f.lean + (ph?Math.sin(ph+f.ph)*0.10*(0.4+f.d):0);
     var lz=light();
     c.strokeStyle=lz?'hsla(140,26%,'+(34+f.d*10)+'%,'+(dim*0.8)+')':'hsla(145,30%,'+(22+f.d*14)+'%,'+(dim*0.85)+')';
@@ -2342,9 +2349,9 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
   }
 
   function drawGrass(c){
-    var n=Math.round(W/5.5),i,x,y,h2,ln,lz=light();
+    var n=Math.round(W/4.6),i,x,y,h2,ln,lz=light();
     for(i=0;i<n;i++){
-      x=hash(i,21)*W; y=H*(0.38+hash(i,22)*0.60); h2=H*(0.05+hash(i,23)*0.09);
+      x=hash(i,21)*W; y=H*(0.30+hash(i,22)*0.66); h2=H*(0.042+hash(i,23)*0.075);
       ln=(hash(i,24)-0.5)*h2*0.9;
       c.strokeStyle=lz?'hsla(130,24%,44%,'+(0.10+hash(i,25)*0.12)+')':'hsla(140,28%,'+(24+hash(i,26)*16)+'%,'+(0.14+hash(i,25)*0.18)+')';
       c.lineWidth=0.7; c.lineCap='round';
@@ -2362,6 +2369,10 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
       statCv.width=Math.round(W*dpr); statCv.height=Math.round(H*dpr);
     }
     statCtx.setTransform(dpr,0,0,dpr,0,0); statCtx.clearRect(0,0,W,H);
+    var hz=statCtx.createRadialGradient(W*0.5,H*0.30,1,W*0.5,H*0.30,W*0.72);
+    if(light()){ hz.addColorStop(0,'rgba(255,252,225,.20)'); hz.addColorStop(1,'rgba(255,252,235,0)'); }
+    else { hz.addColorStop(0,'rgba(70,110,120,.16)'); hz.addColorStop(1,'rgba(70,110,120,0)'); }
+    statCtx.fillStyle=hz; statCtx.fillRect(0,0,W,H);
     drawGrass(statCtx);
     var skip={},k;
     for(k=0;k<growing.length;k++) skip[growing[k].f.i]=1;
@@ -2386,10 +2397,16 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
       drawFlower(ctx,gw.f,e,canSway?swayT:0);
       if(a>=1){ growing.splice(i,1); statKey=''; }
     }
+    for(i=0;i<18;i++){
+      var pd=hash(i,31), px=((hash(i,32)*W)+now/(24000/(0.4+pd))*W)%W;
+      var py=H*(0.16+hash(i,33)*0.62)+Math.sin(now/2600+pd*9)*H*0.035;
+      ctx.fillStyle='rgba(214,232,222,'+(0.05+pd*0.11)+')';
+      ctx.beginPath(); ctx.arc(px,py,0.6+pd*0.8,0,7); ctx.fill();
+    }
     for(i=0;i<bees.length;i++){
       var b=bees[i],tx,ty;
       if(b.mode==='toFlower'||b.mode==='toJar'){tx=b.tx;ty=b.ty;}
-      else{tx=W*0.5+Math.sin(now/2700+b.ph)*W*0.38; ty=H*0.66+Math.cos(now/2200+b.ph)*H*0.22;}
+      else{tx=W*0.5+Math.sin(now/2700+b.ph)*W*0.38; ty=H*0.58+Math.cos(now/2200+b.ph)*H*0.28;}
       b.vx+=(tx-b.x)*0.0018; b.vy+=(ty-b.y)*0.0018; b.vx*=0.952; b.vy*=0.952;
       b.x+=b.vx+Math.sin(now/140+b.ph)*0.30; b.y+=b.vy+Math.cos(now/125+b.ph)*0.30;
       if(b.mode!=='wander'&&Math.hypot(tx-b.x,ty-b.y)<9){
@@ -2409,7 +2426,7 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
     cv=document.getElementById('meadowCanvas'); if(!cv) return;
     var box=cv.parentElement, w=box?box.clientWidth:0; if(!w) return;
     var dpr=Math.min(window.devicePixelRatio||1,2);
-    W=w; H=Math.max(124,Math.min(172,Math.round(w*0.36)));
+    W=w; H=Math.max(168,Math.min(288,Math.round(w*0.56)));
     cv.style.height=H+'px'; cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
     ctx=cv.getContext('2d'); statKey='';
   }
