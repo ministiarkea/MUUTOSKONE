@@ -61,6 +61,14 @@ Ilman tätä selain tarjoilee vanhaa välimuistiversiota etkä näe muutoksiasi.
 - 20 XP — ahdekaunokki, nurmikaunokki
 - 50 XP — maarianohdake
 
+Kukka **aukeaa vähitellen** nupusta terälehti kerrallaan, ei ilmesty kerralla valmiina.
+
+Kortin yläreunassa näkyvät **tänään kukkineet** yksittäisinä ruutuina. Uusin niistä aukeaa silmiesi edessä, kun kuittaat rutiinin.
+
+**Napauta mitä tahansa kukkaa** — niityllä tai päivän riviltä — niin näet sen lajin, mistä rutiinista se syntyi, milloin se on tehty ja monesko kukka se on niitylläsi. Kukka aukeaa ikkunassa alusta uudelleen.
+
+Ikkunan viimeinen rivi on tarkoituksella tällainen: *"Ilman tätä yhtä niitty olisi pienempi. Jokaisella niistä on merkitystä."* Yksittäistä tekoa ei vähätellä rakennuspalikaksi — se on korvaamaton, ja niin on jokainen muukin.
+
 Niitty ei koskaan kuihdu. Kukat vain kertyvät.
 
 **Mehiläiset.** Määrä seuraa kertymäkerrointa: päivänä 1 yksi, päivänä 84 parvi. Kun kuittaat rutiinin, mehiläinen käy uudella kukalla ja vie sadon purkkiin. Niitty sijaitsee heti rutiininappien alla, jotta uusi kukka ilmestyy siihen mihin katse jo osuu.
@@ -83,6 +91,10 @@ Hyödyllisiä kohtia lohkon sisällä:
 - `drawHead` — yksittäisten lajien piirto
 - `beeCount` — mehiläisten määrän kaava
 - `SWAYMAX` — kuinka monella kukalla tuulen huojutus vielä on päällä
+- `drawOne` — yksittäisen kukan muotokuva päivän riville ja kukkaikkunaan
+- `mkFlowerInfo` — kukan napautus ja sen tietoikkuna
+
+Kukkien aikaleimat tallentuvat taulukkoon `fts`, joka kulkee `flog`-merkkijonon rinnalla. Ennen tätä istutetut kukat säilyvät, mutta niiltä puuttuu päivämäärä.
 
 Niityn korkeus säädetään `resize()`-funktion rivillä `H=Math.max(168,Math.min(288,Math.round(w*0.56)))`.
 
