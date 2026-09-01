@@ -1,6 +1,6 @@
 /* Muutoskone - offline-välimuisti.
    Nosta versionumeroa aina kun päivität index.html:n, muuten selain tarjoilee vanhaa. */
-const C = 'muutoskone-v16';
+const C = 'muutoskone-v17';
 const FILES = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './icon-maskable.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', e => {

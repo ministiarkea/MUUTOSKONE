@@ -83,13 +83,20 @@ Voimakkuutta säädetään lisäosalohkon rivillä `var GRACE=4, RAMP=10, FLOOR=
 
 ### Sateen kokeileminen
 
-Sadetta ei näe ilman kuivunutta niittyä, joten testaamista varten on selainkonsolista ajettava apufunktio:
+Sadetta ei näe ilman kuivunutta niittyä, joten testaamista varten on kaksi tapaa.
 
-```js
-mkTestDrought(20)
-```
+**Puhelimella tai millä tahansa laitteella:** paina niittyä pohjaan noin sekunnin ajan.
 
-Se siirtää viimeisen aktiivisuuspäivän 20 päivän taakse ja piirtää niityn uudelleen. Kuittaa sen jälkeen mikä tahansa rutiini, niin sade alkaa. Konsolin saa auki työpöytäselaimessa näppäimellä F12.
+- Jos niitty on tuore, se kuivatetaan 20 päivän verran.
+- Jos niitty on kuiva, sade käynnistyy heti.
+
+Painamalla pitkään kahdesti peräkkäin näet siis koko kaaren milloin tahansa. Lyhyt napautus avaa edelleen kukan tiedot, joten toiminnot eivät osu toisiinsa.
+
+**Työpöytäselaimen konsolista** (F12) sama onnistuu komennolla `mkTestDrought(20)`, jonka jälkeen kuitataan mikä tahansa rutiini.
+
+### Versionumero
+
+Niittyosion versio näkyy niittykortin alareunassa harmaana, esimerkiksi `v17`. Jos numero ei vastaa uusinta, selain tarjoilee vanhaa välimuistiversiota: nosta `sw.js`:n versiota, lataa tiedostot uudelleen GitHubiin ja päivitä sivu.
 
 **Mehiläiset.** Määrä seuraa kertymäkerrointa: päivänä 1 yksi, päivänä 84 parvi. Kun kuittaat rutiinin, mehiläinen käy uudella kukalla ja vie sadon purkkiin. Niitty sijaitsee heti rutiininappien alla, jotta uusi kukka ilmestyy siihen mihin katse jo osuu.
 

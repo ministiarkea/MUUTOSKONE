@@ -1076,14 +1076,14 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
             <div class="today-lbl">Tänään kukkineet</div>
             <div class="today-blooms" id="todayBlooms"></div>
         </div>
-        <div class="meadow-box"><canvas id="meadowCanvas" onclick="mkMeadowTap(event)"></canvas></div>
+        <div class="meadow-box"><canvas id="meadowCanvas" onclick="mkMeadowTap(event)" onpointerdown="mkMeadowPress(event)" onpointerup="mkMeadowRelease(event)" onpointerleave="mkMeadowRelease(event)" oncontextmenu="return false"></canvas></div>
         <div class="meadow-legend">
             <span class="mdl"><i style="background:hsl(340,58%,74%)"></i><b>1 XP</b> ketoneilikka, kissankello</span>
             <span class="mdl"><i style="background:hsl(218,62%,60%)"></i><b>5 XP</b> päivänkakkara, ruiskaunokki</span>
             <span class="mdl"><i style="background:hsl(320,44%,62%)"></i><b>20 XP</b> ahdekaunokki, nurmikaunokki</span>
             <span class="mdl"><i style="background:hsl(288,46%,64%)"></i><b>50 XP</b> maarianohdake</span>
         </div>
-        <div class="meadow-note">Jokainen kuitattu rutiini istuttaa kukan. Napauta kukkaa, niin näet mistä rutiinista ja milloin se on syntynyt. Mehiläiset ovat kertymäkerroin: mitä pidempään jatkat, sitä useampi kerää satoa purkkiin.</div>
+        <div class="meadow-note">Jokainen kuitattu rutiini istuttaa kukan. Napauta kukkaa, niin näet mistä rutiinista ja milloin se on syntynyt. Mehiläiset ovat kertymäkerroin: mitä pidempään jatkat, sitä useampi kerää satoa purkkiin. <span id="meadowVer" style="opacity:.45"></span></div>
     </div>
 
     <!-- SYVENNÄ MUUTOSTASI -->
@@ -2225,6 +2225,7 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
   var cv,ctx,W=0,H=148,statCv,statCtx,statKey='',bees=[],growing=[],raf=null,visible=true,onScreen=true;
   var sway=true, lastStatic=0, swayT=0;
   var GRACE=4, RAMP=10, FLOOR=0.42, RAIN_MS=5200;
+  var NIITTYV='17';
   var revive=null;
   function dryRaw(){
     var go=goal(); if(!go||!go.lastActivityDate) return 0;
@@ -2530,6 +2531,7 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
     syncBees();
     var fe=document.getElementById('meadowFlowers'), be=document.getElementById('meadowBees');
     if(fe) fe.innerText=flog().length; if(be) be.innerText=bees.length;
+    var vn=document.getElementById('meadowVer'); if(vn) vn.innerText='v'+NIITTYV;
     var dn=document.getElementById('meadowDry'), d0=dryRaw();
     if(dn){
       if(d0>0.12){ dn.style.display=''; dn.innerText = d0>0.6?'Niitty odottaa sadetta':'Niitty kaipaa vettä'; }
@@ -2666,7 +2668,28 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
     statKey=''; window.renderMeadow();
     return 'Niitty kuivatettu '+(days||20)+' paivan verran. Kuittaa nyt yksi rutiini.';
   };
+  var lpT=null, lpFired=false;
+  function lpStart(){
+    lpFired=false; clearTimeout(lpT);
+    lpT=setTimeout(function(){
+      lpFired=true;
+      var go=goal(); if(!go) return;
+      if(dryRaw()>0.02){
+        revive={t:performance.now(),from:dryRaw()}; statKey='';
+        go.lastActivityDate=getTodayStr();
+        if(typeof save==='function') save();
+        if(typeof showToast==='function') showToast('Sade käynnistetty');
+      } else {
+        window.mkTestDrought(20);
+        if(typeof showToast==='function') showToast('Niitty kuivatettu — paina uudelleen pitkään');
+      }
+    },650);
+  }
+  function lpEnd(){ clearTimeout(lpT); }
+  window.mkMeadowPress=function(ev){ lpStart(); };
+  window.mkMeadowRelease=function(ev){ lpEnd(); };
   window.mkMeadowTap=function(ev){
+    if(lpFired){ lpFired=false; return; }
     var cv=document.getElementById('meadowCanvas'); if(!cv||!hitmap.length) return;
     var r=cv.getBoundingClientRect();
     var mx2=(ev.clientX!==undefined?ev.clientX:0)-r.left, my2=(ev.clientY!==undefined?ev.clientY:0)-r.top;
