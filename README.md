@@ -69,7 +69,27 @@ Kortin yläreunassa näkyvät **tänään kukkineet** yksittäisinä ruutuina. U
 
 Ikkunan viimeinen rivi on tarkoituksella tällainen: *"Ilman tätä yhtä niitty olisi pienempi. Jokaisella niistä on merkitystä."* Yksittäistä tekoa ei vähätellä rakennuspalikaksi — se on korvaamaton, ja niin on jokainen muukin.
 
-Niitty ei koskaan kuihdu. Kukat vain kertyvät.
+**Kastelu.** Niitty muistaa myös nykyhetken. Neljä päivää on armonaikaa eikä silloin tapahdu mitään. Sen jälkeen kukat alkavat sulkeutua hitaasti, heinät notkahtavat ja värit vaimenevat — pysähtyen pohjaan noin kahden viikon kohdalla. Kortissa lukee *"Niitty kaipaa vettä"* ja pidemmällä *"Niitty odottaa sadetta"*.
+
+**Yksi mikrotehtävä kastelee koko niityn kerralla.** Ei kolmea päivää putkeen, ei asteittaista toipumista.
+
+Kastelu kestää **runsaat viisi sekuntia** ja etenee tarinana: ensin alkaa sataa — pisarat viiruina ruudun poikki, roiskerenkaat maassa, koko niitty saa vaalean vesikalvon. Vasta sitten kukat alkavat kohota ja avautua, yksi kerrallaan syvyysjärjestyksessä. Lopuksi sade ohenee ja lakkaa, ja jäljelle jää täydessä kukassa oleva niitty.
+
+Paluun palkinto on tarkoituksella suurin yksittäinen hetki koko sovelluksessa.
+
+Mitään ei menetetä. Kukat, XP ja tilastot pysyvät koskemattomina — vain niityn ilme muuttuu. Kukat eivät kuihdu eivätkä katoa, ne sulkeutuvat kuten oikeatkin kukat yöllä ja sateen alla.
+
+Voimakkuutta säädetään lisäosalohkon rivillä `var GRACE=4, RAMP=10, FLOOR=0.42, RAIN_MS=5200;` — armonaika päivinä, kuivumisen kesto päivinä, syvin sulkeutuminen ja sateen kesto millisekunteina.
+
+### Sateen kokeileminen
+
+Sadetta ei näe ilman kuivunutta niittyä, joten testaamista varten on selainkonsolista ajettava apufunktio:
+
+```js
+mkTestDrought(20)
+```
+
+Se siirtää viimeisen aktiivisuuspäivän 20 päivän taakse ja piirtää niityn uudelleen. Kuittaa sen jälkeen mikä tahansa rutiini, niin sade alkaa. Konsolin saa auki työpöytäselaimessa näppäimellä F12.
 
 **Mehiläiset.** Määrä seuraa kertymäkerrointa: päivänä 1 yksi, päivänä 84 parvi. Kun kuittaat rutiinin, mehiläinen käy uudella kukalla ja vie sadon purkkiin. Niitty sijaitsee heti rutiininappien alla, jotta uusi kukka ilmestyy siihen mihin katse jo osuu.
 

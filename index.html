@@ -504,6 +504,7 @@
         .tbloom:hover{border-color:rgba(0,200,240,0.35);}
         .tbloom canvas{display:block;width:100%;height:74px;}
         .tbloom span{display:block;font-size:8px;color:var(--text-3);letter-spacing:.5px;padding:0 0 5px;font-weight:600;}
+        #meadowDry{display:block;margin-top:3px;letter-spacing:.3px;}
         .meadow-note{font-size:9px;color:var(--text-3);line-height:1.55;margin-top:9px;text-align:center;}
         .timer-plant-wrap{width:104px;height:118px;margin:0 auto 4px;}
         #timerPlant{display:block;width:100%;height:100%;}
@@ -1069,7 +1070,7 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
     <div class="meadow-card" id="meadowCard">
         <div class="meadow-header">
             <div class="lbl" style="margin-bottom:0;"><span class="lbl-dot"></span>Niitty</div>
-            <div style="font-size:9px;color:var(--text-3);"><span id="meadowFlowers" style="color:var(--text-2);">—</span> kukkaa · <span id="meadowBees" style="color:var(--text-2);">—</span> mehiläistä</div>
+            <div style="font-size:9px;color:var(--text-3);text-align:right;"><span id="meadowFlowers" style="color:var(--text-2);">—</span> kukkaa · <span id="meadowBees" style="color:var(--text-2);">—</span> mehiläistä<span id="meadowDry" style="display:none;color:#d8a24a;font-weight:600;">—</span></div>
         </div>
         <div class="today-wrap" id="todayWrap" style="display:none">
             <div class="today-lbl">Tänään kukkineet</div>
@@ -2223,6 +2224,51 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
   var MAXDRAW=420, SWAYMAX=260;
   var cv,ctx,W=0,H=148,statCv,statCtx,statKey='',bees=[],growing=[],raf=null,visible=true,onScreen=true;
   var sway=true, lastStatic=0, swayT=0;
+  var GRACE=4, RAMP=10, FLOOR=0.42, RAIN_MS=5200;
+  var revive=null;
+  function dryRaw(){
+    var go=goal(); if(!go||!go.lastActivityDate) return 0;
+    var a=new Date(go.lastActivityDate+'T00:00:00'), b=new Date(getTodayStr()+'T00:00:00');
+    if(isNaN(a.getTime())||isNaN(b.getTime())) return 0;
+    var diff=Math.round((b-a)/864e5);
+    if(diff<=GRACE) return 0;
+    return Math.max(0,Math.min(1,(diff-GRACE)/RAMP));
+  }
+  function dry(){
+    if(revive){
+      var e=Math.min(1,(performance.now()-revive.t)/RAIN_MS);
+      if(e>=1){ revive=null; return dryRaw(); }
+      var k=Math.max(0,Math.min(1,(e-0.16)/0.64));
+      return revive.from*Math.pow(1-k,2.2);
+    }
+    return dryRaw();
+  }
+  function drawRain(c,now){
+    if(!revive) return;
+    var e=Math.min(1,(now-revive.t)/RAIN_MS);
+    var inten=e<0.10?(e/0.10):(e>0.70?Math.max(0,1-(e-0.70)/0.30):1);
+    if(inten<=0.01) return;
+    var i,rs,rx,ry,len,t2=now*0.001;
+    c.fillStyle='rgba(150,200,235,'+(0.055*inten)+')'; c.fillRect(0,0,W,H);
+    for(i=0;i<64;i++){
+      rs=hash(i,51);
+      rx=(hash(i,52)*W - t2*26*(0.5+rs*0.4)) % (W+50); if(rx<-25) rx+=W+50;
+      ry=((t2*(300+rs*260)) + hash(i,53)*H*3) % (H+40) - 20;
+      len=7+rs*13;
+      c.strokeStyle='rgba(196,228,248,'+((0.12+rs*0.26)*inten)+')';
+      c.lineWidth=0.75+rs*0.55; c.lineCap='round';
+      c.beginPath(); c.moveTo(rx,ry); c.lineTo(rx-2.4,ry+len); c.stroke();
+    }
+    for(i=0;i<14;i++){
+      rs=hash(i,54);
+      var cyc=((t2*1.5+rs*3)%1.6)/1.6;
+      if(cyc>0.85) continue;
+      var sx=hash(i,55)*W, sy=H*(0.55+hash(i,56)*0.42);
+      var rr=1.5+cyc*11;
+      c.strokeStyle='rgba(200,232,250,'+((1-cyc)*0.26*inten)+')'; c.lineWidth=0.8;
+      c.beginPath(); c.ellipse(sx,sy,rr,rr*0.32,0,0,7); c.stroke();
+    }
+  }
   try{ sway=!window.matchMedia||!window.matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
 
   function hash(i,salt){var x=(i*2654435761+salt*40503)>>>0;x^=x>>>15;x=Math.imul(x,2246822507);x^=x>>>13;return (x>>>0)/4294967296;}
@@ -2288,7 +2334,7 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
     var A=al*gr;
     op=(op===undefined)?1:Math.max(0,Math.min(1,op));
     var OP=.10+.90*op, CL=1-op;
-    if(CL>.02){
+    if(CL>.45){
       c.fillStyle='hsla(112,30%,'+(30+op*10)+'%,'+(A*(.55+CL*.45))+')';
       c.beginPath(); c.ellipse(x,y,R*(.42+CL*.30),R*(.52+CL*.42),0,0,7); c.fill();
     }
@@ -2358,13 +2404,14 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
     }
   }
 
-  function drawFlower(c,f,grow,ph){
+  function drawFlower(c,f,grow,ph,dv){
     var p=pos(f),x=p[0],y=p[1],sc=p[2],T=TIER[f.k]||TIER.a;
     var gr=grow===undefined?1:grow;
-    var Hh=H*0.135*f.hh*sc*gr, R=T.r*sc*gr*0.92, dim=(0.40+f.d*0.60)*f.al;
-    var lean=f.lean + (ph?Math.sin(ph+f.ph)*0.10*(0.4+f.d):0);
+    var dd=dv||0;
+    var Hh=H*0.135*f.hh*sc*gr*(1-0.14*dd), R=T.r*sc*gr*0.92, dim=(0.40+f.d*0.60)*f.al*(1-0.16*dd);
+    var lean=f.lean*(1+0.75*dd) + (ph?Math.sin(ph+f.ph)*0.10*(0.4+f.d)*(1-0.45*dd):0);
     var lz=light();
-    c.strokeStyle=lz?'hsla(140,26%,'+(34+f.d*10)+'%,'+(dim*0.8)+')':'hsla(145,30%,'+(22+f.d*14)+'%,'+(dim*0.85)+')';
+    c.strokeStyle=lz?'hsla('+(140-dd*34)+','+(26-dd*11)+'%,'+(34+f.d*10)+'%,'+(dim*0.8)+')':'hsla('+(145-dd*36)+','+(30-dd*13)+'%,'+(22+f.d*14)+'%,'+(dim*0.85)+')';
     c.lineWidth=Math.max(0.55,0.82*sc); c.lineCap='round';
     c.beginPath(); c.moveTo(x,y);
     c.quadraticCurveTo(x+lean*Hh*0.45,y-Hh*0.62,x+lean*Hh,y-Hh); c.stroke();
@@ -2372,22 +2419,30 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
       c.beginPath(); c.moveTo(x+lean*Hh*0.35,y-Hh*0.46);
       c.quadraticCurveTo(x+lean*Hh*0.35+4.5*sc,y-Hh*0.60,x+lean*Hh*0.35+6.5*sc,y-Hh*0.44); c.stroke();
     }
-    drawHead(c,f.sp,x+lean*Hh,y-Hh,R,dim,f.tint,gr,gr);
+    var hx=x+lean*Hh, hy=y-Hh;
+    if(dd>0.02){
+      var nod=dd*0.62*(f.lean>=0?1:-1);
+      c.save(); c.translate(hx,hy); c.rotate(nod); c.translate(-hx,-hy);
+      drawHead(c,f.sp,hx,hy,R,dim,f.tint,gr,gr*(1-FLOOR*dd));
+      c.restore();
+    } else drawHead(c,f.sp,hx,hy,R,dim,f.tint,gr,gr);
   }
 
-  function drawGrass(c){
+  function drawGrass(c,dd){
+    dd=dd||0;
     var n=Math.round(W/4.6),i,x,y,h2,ln,lz=light();
     for(i=0;i<n;i++){
       x=hash(i,21)*W; y=H*(0.30+hash(i,22)*0.66); h2=H*(0.042+hash(i,23)*0.075);
-      ln=(hash(i,24)-0.5)*h2*0.9;
-      c.strokeStyle=lz?'hsla(130,24%,44%,'+(0.10+hash(i,25)*0.12)+')':'hsla(140,28%,'+(24+hash(i,26)*16)+'%,'+(0.14+hash(i,25)*0.18)+')';
+      ln=(hash(i,24)-0.5)*h2*0.9*(1+1.2*dd); h2*=(1-0.24*dd);
+      c.strokeStyle=lz?'hsla('+(130-dd*26)+','+(24-dd*5)+'%,44%,'+(0.10+hash(i,25)*0.12)+')':'hsla('+(140-dd*28)+','+(28-dd*7)+'%,'+(24+hash(i,26)*16)+'%,'+(0.14+hash(i,25)*0.18)+')';
       c.lineWidth=0.7; c.lineCap='round';
       c.beginPath(); c.moveTo(x,y); c.quadraticCurveTo(x+ln*0.4,y-h2*0.6,x+ln,y-h2); c.stroke();
     }
   }
 
   var hitmap=[];
-  function buildStatic(ph){
+  function buildStatic(ph,dd){
+    dd=dd||0;
     var s=flog(), n=s.length, start=Math.max(0,n-MAXDRAW), list=[],i;
     for(i=start;i<n;i++) list.push(flowerAt(i,s.charAt(i)));
     list.sort(function(a,b){return a.d-b.d;});
@@ -2401,25 +2456,26 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
     if(light()){ hz.addColorStop(0,'rgba(255,252,225,.20)'); hz.addColorStop(1,'rgba(255,252,235,0)'); }
     else { hz.addColorStop(0,'rgba(70,110,120,.16)'); hz.addColorStop(1,'rgba(70,110,120,0)'); }
     statCtx.fillStyle=hz; statCtx.fillRect(0,0,W,H);
-    drawGrass(statCtx);
+    drawGrass(statCtx,dd);
     var skip={},k;
     for(k=0;k<growing.length;k++) skip[growing[k].f.i]=1;
     hitmap=[];
     for(i=0;i<list.length;i++){
-      if(!skip[list[i].i]) drawFlower(statCtx,list[i],1,ph);
+      if(!skip[list[i].i]) drawFlower(statCtx,list[i],1,ph,dd);
       var hp=pos(list[i]), hH=H*0.135*list[i].hh*hp[2];
       hitmap.push({x:hp[0]+list[i].lean*hH, y:hp[1]-hH, i:list[i].i});
     }
-    statKey=n+'|'+W+'|'+H+'|'+(light()?'l':'d')+'|'+growing.length;
+    statKey=n+'|'+W+'|'+H+'|'+(light()?'l':'d')+'|'+growing.length+'|'+Math.round(dd*24);
   }
 
   function draw(now){
     if(!ctx||!W) return;
-    var s=flog(), key=s.length+'|'+W+'|'+H+'|'+(light()?'l':'d')+'|'+growing.length;
+    var dd=dry();
+    var s=flog(), key=s.length+'|'+W+'|'+H+'|'+(light()?'l':'d')+'|'+growing.length+'|'+Math.round(dd*24);
     var canSway=sway && s.length<=SWAYMAX;
     if(canSway) swayT=now/1750;
-    if(key!==statKey) buildStatic(canSway?swayT:0);
-    else if(canSway && now-lastStatic>190){ buildStatic(swayT); lastStatic=now; }
+    if(key!==statKey) buildStatic(canSway?swayT:0,dd);
+    else if((canSway||revive) && now-lastStatic>190){ buildStatic(canSway?swayT:0,dd); lastStatic=now; }
     var dpr=Math.min(window.devicePixelRatio||1,2);
     ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,W,H);
     ctx.drawImage(statCv,0,0,W,H);
@@ -2427,9 +2483,10 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
     for(i=growing.length-1;i>=0;i--){
       gw=growing[i];
       var a=Math.min(1,(now-gw.t)/1100), e=1-Math.pow(1-a,3);
-      drawFlower(ctx,gw.f,e,canSway?swayT:0);
+      drawFlower(ctx,gw.f,e,canSway?swayT:0,dd);
       if(a>=1){ growing.splice(i,1); statKey=''; }
     }
+    drawRain(ctx,now);
     for(i=0;i<18;i++){
       var pd=hash(i,31), px=((hash(i,32)*W)+now/(24000/(0.4+pd))*W)%W;
       var py=H*(0.16+hash(i,33)*0.62)+Math.sin(now/2600+pd*9)*H*0.035;
@@ -2446,7 +2503,8 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
         if(b.mode==='toFlower'){b.mode='toJar';b.tx=W+22;b.ty=-18;}
         else{b.mode='wander';b.x=Math.random()*W;b.y=H*0.95;b.vx=0;b.vy=0;}
       }
-      ctx.fillStyle='rgba(251,191,36,'+(b.mode==='toJar'?0.22:0.09)+')';
+      if(i>0&&dd>0.5&&(i/bees.length)>(1-dd*0.7)) continue;
+      ctx.fillStyle='rgba(251,191,36,'+((b.mode==='toJar'?0.22:0.09)*(1-0.3*dd))+')';
       ctx.beginPath(); ctx.arc(b.x,b.y,b.mode==='toJar'?3.4:2.5,0,7); ctx.fill();
       ctx.fillStyle=light()?'rgba(180,120,15,.9)':'rgba(253,214,120,.92)';
       ctx.beginPath(); ctx.ellipse(b.x,b.y,1.5,1.0,Math.atan2(b.vy,b.vx),0,7); ctx.fill();
@@ -2472,6 +2530,11 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
     syncBees();
     var fe=document.getElementById('meadowFlowers'), be=document.getElementById('meadowBees');
     if(fe) fe.innerText=flog().length; if(be) be.innerText=bees.length;
+    var dn=document.getElementById('meadowDry'), d0=dryRaw();
+    if(dn){
+      if(d0>0.12){ dn.style.display=''; dn.innerText = d0>0.6?'Niitty odottaa sadetta':'Niitty kaipaa vettä'; }
+      else dn.style.display='none';
+    }
     renderToday();
     if(!raf) loop();
   };
@@ -2595,6 +2658,14 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
     })();
   };
   window.mkCloseFlower=function(){ var ov=document.getElementById('mkFlowerOverlay'); if(ov) ov.style.display='none'; };
+  window.mkTestDrought=function(days){
+    var go=goal(); if(!go) return 'ei tavoitetta';
+    var d=new Date(); d.setDate(d.getDate()-(days||20));
+    go.lastActivityDate=getDateStr(d);
+    if(typeof save==='function') save();
+    statKey=''; window.renderMeadow();
+    return 'Niitty kuivatettu '+(days||20)+' paivan verran. Kuittaa nyt yksi rutiini.';
+  };
   window.mkMeadowTap=function(ev){
     var cv=document.getElementById('meadowCanvas'); if(!cv||!hitmap.length) return;
     var r=cv.getBoundingClientRect();
@@ -2678,6 +2749,26 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
     var orig=window[name]; if(typeof orig!=='function') return;
     window[name]=function(){ var r=orig.apply(this,arguments); try{after.apply(this,arguments);}catch(e){} return r; };
   }
+  function wrapPre(name,before){
+    var orig=window[name]; if(typeof orig!=='function') return;
+    window[name]=function(){ try{before.apply(this,arguments);}catch(e){} return orig.apply(this,arguments); };
+  }
+  wrapPre('addXP',function(){
+    var d0=dryRaw();
+    if(d0>0.02){
+      revive={t:performance.now(),from:d0}; statKey='';
+      onScreen=true;
+      try{
+        var card=document.getElementById('meadowCard');
+        if(card&&card.getBoundingClientRect){
+          var r=card.getBoundingClientRect();
+          var vh=window.innerHeight||document.documentElement.clientHeight;
+          if(r.top<0||r.bottom>vh) card.scrollIntoView({behavior:'smooth',block:'center'});
+        }
+      }catch(e){}
+      if(typeof showToast==='function') setTimeout(function(){showToast('Niitty sai sadetta');},350);
+    }
+  });
   wrap('addXP',function(baseAmt){ window.mkPlantFlower(baseAmt); });
   wrap('undoXP',function(){ window.mkUnplantFlower(); });
   wrap('updateUI',function(){ window.renderMeadow(); });
@@ -2685,7 +2776,10 @@ function importData(ev){const r=new FileReader();r.onload=e=>{try{const p=JSON.p
   wrap('renderTimerOverlay',function(){ plant('timerPlant',false); });
   wrap('updateTimerChip',function(){ plant('ftPlant',true); });
 
-  document.addEventListener('visibilitychange',function(){ visible=!document.hidden; });
+  document.addEventListener('visibilitychange',function(){
+    visible=!document.hidden;
+    if(visible&&revive) revive.t=performance.now()-Math.min(RAIN_MS*0.15,performance.now()-revive.t);
+  });
   window.addEventListener('resize',function(){ resize(); statKey=''; });
   document.addEventListener('DOMContentLoaded',start);
   if(document.readyState!=='loading') setTimeout(start,0);
