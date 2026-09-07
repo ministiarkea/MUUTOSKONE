@@ -545,7 +545,7 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
         <div class="ob-slide active" data-slide="0">
             <div class="ob-icon ob-icon-bolt"></div>
             <div class="ob-title">Tervetuloa Muutoskoneeseen</div>
-            <div class="ob-body">Muutoskone on henkilökohtainen työkalu, joka perustuu <strong>XP:n keräämiseen</strong>, samaan logiikkaan kuin videopeleissä, mutta sovellettuna oikeisiin tavoitteisiin.<br><br>Keräät XP:tä pienillä päivittäisillä rutiineilla. Muutos on väistämätön. Voit toteuttaa tällä koneella minkä tavoitteen tahansa.</div>
+            <div class="ob-body">Muutoskone on henkilökohtainen työkalu, joka perustuu <strong>XP:n keräämiseen</strong>, samaan logiikkaan kuin videopeleissä, mutta sovellettuna oikeisiin tavoitteisiin.<br><br>Keräät XP:tä pienillä päivittäisillä rutiineilla ja näin muutos on väistämätön. Voit toteuttaa tällä koneella minkä tavoitteen tahansa.</div>
         </div>
         <div class="ob-slide" data-slide="1">
             <div class="ob-icon ob-icon-xp"></div>
@@ -638,7 +638,7 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
 <div id="firstActOverlay" style="z-index:5600;">
     <div class="ov-kicker" style="color:var(--cyan);">Kone käy</div>
     <div class="ov-title" style="font-size:1.8rem;">Tee ensimmäinen teko nyt.</div>
-    <div style="font-size:13px;color:var(--text-2);line-height:1.7;max-width:320px;margin:14px auto 22px;">Tärkein hetki on tämä. Älä sulje konetta ennen kuin olet tehnyt ensimmäisen mikroteon: se vie 1–10 minuuttia ja käynnistää liikkeen. Ensimmäinen XP on todiste siitä, että muutos alkoi tänään.</div>
+    <div style="font-size:13px;color:var(--text-2);line-height:1.7;max-width:320px;margin:14px auto 22px;">Tämä on tärkein hetki! Älä sulje konetta ennen kuin olet tehnyt ensimmäisen mikroteon: se vie 1–10 minuuttia ja käynnistää liikkeen kohti tavoitettasi. Ensimmäinen XP on todiste siitä, että muutos alkoi tänään!</div>
     <div style="background:rgba(0,200,240,0.06);border:1px solid rgba(0,200,240,0.2);border-radius:12px;padding:14px 20px;margin:0 auto 26px;max-width:320px;">
         <div style="font-size:9px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:5px;">Sinun mikrotekosi</div>
         <div id="faRoutine" style="font-size:15px;color:var(--text-1);font-weight:500;"></div>
@@ -1061,6 +1061,7 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
     </div>
 
     <!-- RUTIININAPIT -->
+    <div class="lbl" style="margin-bottom:8px;cursor:pointer;" onclick="openStatGuide('rutiinit')"><span class="lbl-dot"></span>Rutiinit <button class="stat-help-btn">?</button></div>
     <div class="routine-grid" id="taskList"></div>
 
     <!-- UNDO -->
@@ -1114,18 +1115,7 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
         <div><div class="forecast-label" onclick="openStatGuide('forecast')" style="cursor:pointer;">Etenemisennuste <button class="stat-help-btn">?</button></div><div class="forecast-date" id="forecastDate">—</div></div>
         <div style="text-align:right;"><div class="forecast-label">Tahdilla</div><div class="forecast-val" id="forecastPace">—</div></div>
     </div>
-    <div style="margin-bottom:9px;">
-        <div class="health-bar">
-            <div class="health-label" onclick="openStatGuide('kunto')" style="cursor:pointer;">Kunto <button class="stat-help-btn">?</button><div style="font-size:8px;color:var(--text-3);letter-spacing:0.5px;text-transform:none;margin-top:2px;opacity:0.8;">tekemisen säännöllisyys</div></div>
-            <div style="flex:1;"><div class="health-track"><div class="health-fill" id="healthFill"></div></div><div class="health-tip" id="healthTip"></div></div>
-            <div class="health-val" id="healthVal">—</div>
-        </div>
-    </div>
-    <div class="momentum-bar">
-        <div class="momentum-label" onclick="openStatGuide('vauhti')" style="cursor:pointer;">Vauhti <button class="stat-help-btn">?</button><div style="font-size:8px;color:var(--text-3);letter-spacing:0.5px;text-transform:none;margin-top:2px;opacity:0.8;">kiihtyykö vai hiipuuko?</div></div>
-        <div class="momentum-track"><div class="momentum-fill" id="momentumFill"></div></div>
-        <div class="momentum-val" id="momentumVal">—</div>
-    </div>
+    <!-- Kunto- ja Vauhti-mittarit poistettu 7.9.2026 -->
 
     <div class="signal-card" id="signalCard"><span class="signal-icon" id="signalIcon"></span><span id="signalText"></span></div>
     <div class="grace-reminder" id="graceReminder"></div>
@@ -1224,7 +1214,7 @@ function mkToggleTheme(){var r=document.documentElement;var cur=r.getAttribute('
 
     <div class="section-lbl">Sparrauskumppani</div>
     <div class="card card-accent">
-        <p class="ai-desc">Tarvitsetko ideoita tai lisäpotkua? Kopioi kehote Geminille, datasi on mukana valmiiksi. Sinä päätät, mitä tietoja jaat.</p>
+        <p class="ai-desc">Tarvitsetko ideoita tai lisäpotkua? Kopioi kehote Geminille tai muulle tekoälylle, datasi on mukana valmiiksi. Sinä päätät, mitä tietoja jaat.</p>
         <ol class="ai-steps"><li>Kopioi kehote alta.</li><li>Avaa <a href="https://gemini.google.com" target="_blank">Gemini</a> ja liitä se.</li><li>Vastaa kysymyksiin yksi kerrallaan.</li></ol>
         <button class="btn-ai" id="copyMentorBtn" onclick="copyMentorPrompt()">Kopioi sparrauskehote</button>
     </div>
@@ -1535,6 +1525,7 @@ function calcMomentum(){
 }
 function updateMomentum(){
     const score=calcMomentum();const fill=document.getElementById('momentumFill');const val=document.getElementById('momentumVal');
+    if(!fill||!val)return;
     fill.style.width=score+'%';
     let color;if(score>=75){color='#22c55e';}else if(score>=45){color='var(--cyan)';}else if(score>=20){color='var(--orange)';}else{color='rgba(220,60,60,0.6)';}
     fill.style.background=color;val.style.color=color;val.innerText=score+'%';
@@ -1796,7 +1787,7 @@ const SG={
         tip:'Jos et tiedä mitä tavoitella, kysy itseltäsi: mitä tekisit, jos et voisi epäonnistua eikä kukaan katsoisi? Mikä toisten elämässä tekee sinut hieman kateelliseksi? Ne tunteet osoittavat usein suoraan kohti sitä, mitä oikeasti haluat.'},
     lahtotilanne:{k:'Valinnainen, suositeltava',t:'Lähtötilanne',
         b:['Kirjoita tähän kenttään raa\'an rehellisesti, missä olet juuri nyt. Se ei ole itsekritiikkiä vaan datan keruuta.','Radikaali rehellisyys kannattaa. Mitä tarkemmin kuvaat nykyisen tilanteesi, sitä paremmin pystyt määrittelemään tarvittavat rutiinit.','Älä käytä adjektiiveja, käytä faktoja. Älä sano olevasi "huonossa kunnossa", sano, ettet ole juossut metriäkään kolmeen vuoteen.'],
-        e:['Paino 88 kg, hengästyn kolmannessa kerroksessa. Viimeinen urheilusuoritus 14 kk sitten.','Espanjan taitotaso: 0. En ymmärrä sanaakaan, enkä tiedä mistä aloittaa.','Sivutulot: 0 €. Idea on paperilla, mutta pelko estää ottamasta yhteyttä asiakkaaseen.'],
+        e:['Paino 88 kg, arki menee lähes kokonaan istuen. Viimeisestä urheilusuorituksesta 14 kk.','Espanjan taitotaso: 0. En ymmärrä sanaakaan, enkä tiedä mistä aloittaa.','Sivutulot: 0 €. Idea on paperilla, mutta pelko estää ottamasta yhteyttä asiakkaaseen.'],
         tip:'Kirjoita tämä teksti tulevaisuuden itseäsi varten. Kuukausien päästä palaat tähän tekstiin ja näet, kuinka kaukana takanasi lähtöpiste jo on. Kone tarvitsee dataa, ei selityksiä.'},
     miksi:{k:'Valinnainen – voimakas',t:'Miksi tämä on tärkeää?',
         b:['Perimmäinen syy muutokselle eli se, miksi haluat muutosta, auttaa sut vaikeidenkin hetkien yli. Se on kuin tukipilari silloin, kun ympärillä tuulee kovaa ja kaikki ei mene ihan niin kuin oletit.','Motivaatio vaihtelee päivittäin. Joskus energiaa riittää, toisinaan taas kaikki tuntuu raskaalta. Jos nojaat vain motivaatioon, muutoskone pysähtyy ensimmäiseen haasteeseen. "Miksi" on peruskallio – se ei muutu tunteiden mukana.','Simon Sinekin mukaan melkein kaikki tietää mitä he haluavat saada aikaan. Iso osa tietää myös, miten tavoitteeseen päästään, mutta vain harva pystyy sanoon selkeesti, miksi he tekevät sitä, mitä tekevät. "Miksi" ei tarkoita tuloksia, kuten rahan ansaitsemista tai laihtumista. Se on tarkoitus, syy tekemiselle ja uskomus kaiken takana. Se on vastaus, joka saa sinut nousemaan sängystä aamuisin.'],
@@ -1804,11 +1795,11 @@ const SG={
         chain:{goal:'Haluan perustaa oman yrityksen.',steps:['Jotta voin tehdä työtä, jota oikeasti rakastan.','Jotta voin auttaa asiakkaitani juuri niin kuin itse näen parhaaksi.','Jotta saan päättää itse työaikani ja -tapani.','Jotta minulla on enemmän aikaa läheisilleni.','Jotta lapseni näkevät, että omannäköisen elämän voi rakentaa itse.']},
         tip:'Kysy itseltäsi "miksi?" 3–10 kertaa peräkkäin. Kun olet väsynyt, stressaantunut tai epävarma, paluu tähän vastaukseen muistuttaa sinua siitä, miksi olet käynnistänyt muutoskoneen.'},
     tavoitepaiva:{k:'Valinnainen, tehokas',t:'Tavoitepäivä',
-        b:['Aseta päivämäärä johon mennessä haluat saavuttaa tavoitteesi.','Tavoitepäivä laskee automaattisesti tarvittavan päivittäisen XP-tahdin ja näyttää sen pelisivulla laskurina.'],
-        e:['Maraton ensi toukokuussa: 6 kk deadline.','Kirja valmiina ennen syntymäpäivää.','Kielikoe syyskuussa.'],
+        b:['Aseta päivämäärä johon mennessä haluat saavuttaa tavoitteesi.','Tavoitepäivä laskee automaattisesti päivittäisen tarvittavan XP-määrän ja näyttää sen pelisivulla laskurina.'],
+        e:['Maraton ensi toukokuussa, tavoitepäivä 13.5.','Kirja valmiina ennen syntymäpäivää, tavoitepäivä 1.8.','Kielikoe syksyllä, tavoitepäivä 25.9.'],
         tip:'Voit muuttaa tavoitepäivää koska tahansa. Aseta realistinen, mutta älä jätä liian löysää.'},
     rutiinit:{k:'Kenttä 3',t:'Rutiinit',
-        b:['Rutiinit ovat pieniä, päivittäisiä tekoja, joilla liikutat muutoskonetta kohti toteutunutta tavoitetta. Tavoitteet koostuvat sadoista tai tuhansista pienistä päivittäisistä rutiineista.','Aina kun teet jonkin rutiinin, paina nappia! Joka painallus kerryttää XP:tä ja pitää koneen käynnissä.','1 XP, Mikroteko (1–10 min): Pienin mahdollinen teko. Vaikka olisit väsynyt tai kiireinen, tee edes tämä, se pitää koneen käynnissä. 5 XP, Harppaus (15–30 min): Tällä rakennetaan jo kestävä ja varma muutos. 20 XP, Panostus (45–90 min): Tee tämä, kun sinulla on virtaa ja aikaa keskittyä. 50 XP, Uroteko (2–4 h): Intensiivinen syvätyöskentely tai maksimaalinen suoritus.','Päätä jokaiselle rutiinille milloin ja missä teet sen. Ne, jotka suunnittelevat etukäteen milloin ja miten toimivat, tarttuvat rutiiniin selvästi useammin kuin ne, jotka jättävät sen motivaation varaan. Voit myös pinota uuden rutiinin jo olemassa olevan perään: kun olen keittänyt aamukahvin, teen heti [rutiini].','Jos et tiedä mistä aloittaa, käännä ajattelu: millainen ihminen saavuttaisi tämän tavoitteen? Mitä hän tekisi säännöllisesti? Rakenna rutiinit vahvistamaan juuri niitä puolia itsessäsi.'],
+        b:['Rutiinit ovat pieniä, päivittäisiä tekoja, joilla liikutat muutoskonetta kohti toteutunutta tavoitetta. Tavoitteet koostuvat sadoista tai tuhansista pienistä päivittäisistä rutiineista.','Aina kun teet jonkin rutiinin, paina nappia! Joka painallus kerryttää XP:tä ja pitää koneen käynnissä.','1 XP, Mikroteko (1–10 min): Pienin mahdollinen teko. Vaikka olisit väsynyt tai kiireinen, tee edes tämä, se pitää koneen käynnissä. 5 XP, Harppaus (15–30 min): Tällä rakennetaan jo kestävä ja varma muutos. 20 XP, Panostus (45–90 min): Tee tämä, kun sinulla on virtaa ja aikaa keskittyä. 50 XP, Uroteko (2–4 h): Intensiivinen syvätyöskentely tai maksimaalinen suoritus.','Päätä jokaiselle rutiinille milloin ja missä teet sen. Tutkimusten mukaan ne, jotka suunnittelevat etukäteen milloin ja miten toimivat, tarttuvat rutiiniin selvästi useammin kuin ne, jotka jättävät sen motivaation varaan. Voit myös pinota uuden rutiinin jo olemassa olevan perään, jolloin se saattaa olla helpompaa: kun olen keittänyt aamukahvin, teen heti [rutiini].','Jos et tiedä mistä aloittaa, käännä ajattelu: millainen ihminen saavuttaisi tämän tavoitteen? Mitä hän tekisi säännöllisesti? Rakenna rutiinit vahvistamaan juuri niitä puolia itsessäsi.'],
         e:['1 XP: Venyttely, vedenjuonti | 5 XP: Kävelylenkki 20 min | 20 XP: Tunnin kuntosalitreeni | 50 XP: Pitkä kestävyysharjoitus','1 XP: Lue 5 sivua | 5 XP: Kirjoita 500 sanaa | 20 XP: Kirjoitussessio 1,5 h | 50 XP: Intensiivinen kirjoituspäivä'],
         tip:'Anna rutiineille selkeät nimet, jotta muistat mitä sinun pitää tehdä. Jos et tiedä mitkä rutiinit vievät kohti tavoitteesi saavuttamista, Strategia-apuri ehdottaa valmiit rutiinit tavoitteesi perusteella.'},
     motivaatio:{k:'Valinnainen',t:'Oma motivaatiolause',
@@ -2019,12 +2010,11 @@ const STAT_DATA={
     best:{title:'Paras päivä',fn:()=>({val:document.getElementById('statBest').innerText+' XP',body:'Korkein yhden päivän XP-kertymäsi. Katso kuinka kaukana olet tästä tänään, se on konkreettinen tavoite.'})},
     bestStreak:{title:'Paras putki',fn:()=>({val:document.getElementById('statBestStreak').innerText,body:'Pisin peräkkäisten aktiivisten päivien jakso. Armopäivä (1/vk) ei katkaise putkea.'})},
     weekXP:{title:'Tällä viikolla',fn:()=>({val:document.getElementById('statWeekXP').innerText+' XP',body:'Tämän viikon (ma–su) kertyneet XP:t.'})},
-    streak:{title:'Aktiivisuusputki',fn:()=>({val:document.getElementById('streakNum').innerText+' pv',body:'Peräkkäiset päivät joina olet tehnyt vähintään yhden rutiinin. Kerran viikossa armopäivä sallitaan, putki ei katkea.'})},
-    mult:{title:'Kertymäkerroin',fn:()=>({val:document.getElementById('multNum').innerText,body:'Kasvaa lineaarisesti päivästä 1 (×1.00) päivään 84 (×2.00). Sen jälkeen pysyy ×2.00. Jokainen rutiini on arvokkaampi mitä pidempään olet jatkanut.'})},
-    kunto:{title:'Kunto',fn:()=>({val:document.getElementById('healthVal').innerText,body:'Kunto kertoo yhdellä luvulla (0–100), kuinka hyvässä iskussa muutoskoneesi on juuri nyt. Se yhdistää neljä asiaa: teitkö tänään jotain, kuinka pitkä putkesi on, kuinka monena päivänä viikossa olet ollut aktiivinen ja kirjoititko aikomuksen tai reflektion. 80+ = loistava, 60+ = hyvä, alle 40 = tarvitsee huomiota. Palkin alla lukee aina vinkki, mitä kannattaa tehdä seuraavaksi.'})},
-    vauhti:{title:'Vauhti',fn:()=>({val:document.getElementById('momentumVal').innerText,body:'Vauhti vastaa kysymykseen: onko tekemiseni kiihtymässä vai hiipumassa? Se vertaa kolmen viime päivän tekemistäsi koko matkasi keskitasoon. Korkea lukema = teet nyt enemmän kuin yleensä, vauhti kiihtyy. Matala = tahti on hiipunut. Jos vauhti hiipuu, älä lopeta kokonaan: pienikin 1 XP:n mikroteko pitää koneen käynnissä.'})},
-    forecast:{title:'Etenemisennuste',fn:()=>({val:document.getElementById('forecastDate').innerText,body:'Arvioitu maalipäivä nykyisellä tahdilla. Kertymäkerroin nopeuttaa matkaa, todellisuudessa voi olla aiemmin maalissa.'})},
-    dailygoal:{title:'Päivittäinen XP-tavoite',fn:()=>({val:document.getElementById('dgCurrent').innerText+' / '+document.getElementById('dgTarget').innerText+' XP',body:'Oma asettamasi päivätavoite. Rutiininapin alla oleva palkki näyttää kuinka lähellä olet.'})},
+    streak:{title:'Aktiivisuusputki',fn:()=>({val:document.getElementById('streakNum').innerText+' pv',body:'Peräkkäiset päivät joina olet tehnyt vähintään yhden rutiinin. Kerran viikossa armopäivä sallitaan, älä katkaise putkea.'})},
+    mult:{title:'Kertymäkerroin',fn:()=>({val:document.getElementById('multNum').innerText,body:'Kasvaa lineaarisesti päivästä 1 (×1.00) päivään 84 (×2.00). Sen jälkeen pysyy ×2.00. Jokainen rutiini on arvokkaampi mitä pidempään jatkat.'})},
+    forecast:{title:'Etenemisennuste',fn:()=>({val:document.getElementById('forecastDate').innerText,body:'Arvioitu maali nykyisellä tahdilla. Kertymäkerroin nopeuttaa matkaa, todellisuudessa voi olla hieman aiemmin maalissa.'})},
+    dailygoal:{title:'Päivittäinen XP-tavoite',fn:()=>({val:document.getElementById('dgCurrent').innerText+' / '+document.getElementById('dgTarget').innerText+' XP',body:'Oma asettamasi päivätavoite.'})},
+    rutiinit:{title:'Rutiinit',fn:()=>({val:'',body:'Rutiinit ovat ne pienet, toistuvat teot, jotka vievät sinua kohti tavoitettasi. Kuittaa rutiini napista aina kun teet sen, niin XP kertyy. Napin XP-arvo kertoo teon koon: 1 XP mikroteko (1–10 min), 5 XP harppaus (15–30 min), 20 XP panostus (45–90 min), 50 XP uroteko (2–4 h). Väsyneenäkin kannattaa tehdä edes se pienin, se pitää koneen käynnissä ja putken ehjänä.'})},
     viikkohaaste:{title:'Viikkohaaste',fn:()=>({val:'',body:'Henkilökohtainen haaste joka viikko, perustuu tavoitteeseesi ja rutiineihisi. ↺-napista saat uuden haasteen.'})},
     aikomus:{title:'Miksi kirjoittaa päivän aikomus?',fn:()=>({val:'',body:'Aikomus on aamulla kirjoitettu lause siitä, mitä teet tänään. Tutkimusten mukaan ihmiset, jotka päättävät etukäteen mitä, milloin ja missä he tekevät (ns. toteutusaikomus), toteuttavat aikeensa jopa 2–3 kertaa todennäköisemmin kuin ne, jotka luottavat pelkkään motivaatioon. Yksi konkreettinen lause riittää: "Tänään aion juosta 20 min heti töiden jälkeen." Aivosi alkavat etsiä hetkeä toteuttaa se.'})},
     paivakirja:{title:'Miksi kirjoittaa muistiinpanoja?',fn:()=>({val:'',body:'Lyhyt iltamerkintä ("Mitä opin? Mikä toimi?") juurruttaa muutoksen: reflektointi auttaa huomaamaan, mikä oikeasti vie eteenpäin ja mikä ei. Se myös tekee edistymisen näkyväksi, huonona päivänä voit lukea, kuinka pitkälle olet jo tullut. Yksi lause päivässä riittää. Muistiinpanot tallentuvat päiväkohtaisesti ja kulkevat mukana Sparrauskumppanin kehotteessa.'})},
